@@ -33,7 +33,12 @@ As a user…
 - [ ] I can enter a transaction from the "today" lock screen widget.
 - [ ] I can enter a transaction using Siri. (not sure if Siri allows this other than dictation).
 
+## Mock App: 
+[Mock app](https://popapp.in/w/projects/564e42c4ceac464d0cbc65a3/preview) built with [Pop](https://popapp.in).
+
 ## Wireframes
+![Today](mocks/day.jpg)  ![Week](mocks/week.jpg)  ![Budget](mocks/budget.jpg)
+![Transaction List](mocks/list.jpg)  ![Transaction Entry](mocks/new.jpg)
 
 ## Data Model Entities and properties
 We're still defining how we will persist data (Rails api, Sparse, icloud).
