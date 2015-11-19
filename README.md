@@ -1,6 +1,6 @@
 # Per Diem
 
-A daily finance tracking app. Per Diem helps you budget your spending based on time and spending goals. Set a goal for how much you'd like to spend in a given time period, then enter each transaction you make or future estimated transactions. Per Diem will tell you at a glance how much you can spend safely each day (based on the total budget, how much you've already spent, and any future transactions). 
+A daily finance tracking app. Per Diem helps you budget your spending based on time and spending goals. Set a goal for how much you'd like to spend in a given time period, then enter each transaction you make or future estimated transactions. Per Diem will tell you at a glance how much you can spend safely each day (based on the total budget, how much you've already spent, days remaining in timeframe, and any future transactions). 
 
 ## User Stories
 
