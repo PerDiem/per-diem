@@ -8,19 +8,18 @@ Daily Finance App
 
 As a user...
 
-- [ ] I can create an account, login, and logout. (using touch ID?)
-- [ ] I can edit my account details (name, contact info, password).
+- [ ] I can login using touch ID
 - [ ] I can input, edit, and delete transactions (past and future) in my local currency.
-- [ ] I can view all previous transactions and sort/filter by category, date, payee, payment method, or timeframe. Can view totals of selected transactions.
-- [ ] I can create, edit, and delete categories.
-- [ ] I can create, edit, and delete budgets based on a category or multiple categories and a timeframe. Can specify savings and spending goals.
 - [ ] I can view the amount spent within the timeframe and daily "Per Diem" amount. (also for each budget).
     - [ ] Per Diem = (budget - (spent + futures)) / remaining days
+- [ ] I can view all previous transactions and sort/filter by category, date, payee, payment method, or timeframe. Can view totals of selected transactions.
+- [ ] I can view, create, edit, and delete categories.
+- [ ] I can view, create, edit, and delete budgets based on a category or multiple categories and a timeframe. 
+- [ ] I can specify savings and spending goals.
 - [ ] I can confirm, edit, or delete ‘future’ transactions if their date is today or in the past.
 
 **Optionals**
 As a user…
-
 - [ ] I can invite others to my ‘organization’ or budgets.
 - [ ] I can get push notifications if any ‘future’ transactions are not confirmed or deleted (based on time of day).
 - [ ] I can get push notifications for transactions entered/edited by other members of my group.
@@ -32,11 +31,9 @@ As a user…
 - [ ] I can add comments to transactions (chat back and forth) with other group members.
 - [ ] I can enter a transaction from the "today" lock screen widget.
 - [ ] I can enter a transaction using Siri. (not sure if Siri allows this other than dictation).
+- [ ] I can create an account and edit my details
 
-## Mock App: 
-[Mock app](https://popapp.in/w/projects/564e42c4ceac464d0cbc65a3/preview) built with [Pop](https://popapp.in).
-
-## Wireframes
+## [Mock app](https://popapp.in/w/projects/564e42c4ceac464d0cbc65a3/preview) & Wireframes:
 ![Today](mocks/day.jpg)  ![Week](mocks/week.jpg)  ![Budget](mocks/budget.jpg)
 ![Transaction List](mocks/list.jpg)  ![Transaction Entry](mocks/new.jpg)
 
