@@ -25,7 +25,6 @@
 		BFE4324E1C0028F800809F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4324D1C0028F800809F7E /* User.m */; };
 		BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432511C0033FB00809F7E /* LoginViewController.m */; };
 		BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE432521C0033FB00809F7E /* LoginViewController.xib */; };
-		BFE432561C00356600809F7E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE432551C00356600809F7E /* Default-568h@2x.png */; };
 		BFE432591C0039BB00809F7E /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432581C0039BB00809F7E /* Transaction.m */; };
 		BFE4325C1C003D4700809F7E /* Budget.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4325B1C003D4700809F7E /* Budget.m */; };
 		BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4325E1C003DA300809F7E /* PDCategory.m */; };
@@ -64,7 +63,6 @@
 		BFE432501C0033FB00809F7E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Controllers/LoginViewController.h; sourceTree = "<group>"; };
 		BFE432511C0033FB00809F7E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Controllers/LoginViewController.m; sourceTree = "<group>"; };
 		BFE432521C0033FB00809F7E /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Controllers/LoginViewController.xib; sourceTree = "<group>"; };
-		BFE432551C00356600809F7E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BFE432571C0039BB00809F7E /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Transaction.h; path = models/Transaction.h; sourceTree = "<group>"; };
 		BFE432581C0039BB00809F7E /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Transaction.m; path = models/Transaction.m; sourceTree = "<group>"; };
 		BFE4325A1C003D4700809F7E /* Budget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Budget.h; path = models/Budget.h; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 		8E9DA2B81BF561690016ECC2 = {
 			isa = PBXGroup;
 			children = (
-				BFE432551C00356600809F7E /* Default-568h@2x.png */,
 				8E9DA2C31BF561690016ECC2 /* PerDiem */,
 				8E9DA2C21BF561690016ECC2 /* Products */,
 				CC6448EB566111310242B66D /* Pods */,
@@ -255,7 +252,6 @@
 				4AEB60DB1C010A6600679DAF /* DayViewController.xib in Resources */,
 				8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */,
 				8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */,
-				BFE432561C00356600809F7E /* Default-568h@2x.png in Resources */,
 				4AEB60E51C010AA800679DAF /* TransactionsViewController.xib in Resources */,
 				4AEB60EA1C010AF600679DAF /* MonthViewController.xib in Resources */,
 			);
