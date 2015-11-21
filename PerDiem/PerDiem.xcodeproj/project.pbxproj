@@ -23,6 +23,7 @@
 		8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DA2C81BF561690016ECC2 /* AppDelegate.m */; };
 		8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D01BF561690016ECC2 /* Assets.xcassets */; };
 		8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D21BF561690016ECC2 /* LaunchScreen.storyboard */; };
+		BF6D073E1C010E5A00B61276 /* TransactionList.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D073D1C010E5A00B61276 /* TransactionList.m */; };
 		BFE4324E1C0028F800809F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4324D1C0028F800809F7E /* User.m */; };
 		BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432511C0033FB00809F7E /* LoginViewController.m */; };
 		BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE432521C0033FB00809F7E /* LoginViewController.xib */; };
@@ -61,6 +62,8 @@
 		8E9DA2D01BF561690016ECC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E9DA2D31BF561690016ECC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9DA2D51BF561690016ECC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF6D073C1C010E5A00B61276 /* TransactionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransactionList.h; path = models/TransactionList.h; sourceTree = "<group>"; };
+		BF6D073D1C010E5A00B61276 /* TransactionList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransactionList.m; path = models/TransactionList.m; sourceTree = "<group>"; };
 		BFE4324C1C0028F800809F7E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = models/User.h; sourceTree = "<group>"; };
 		BFE4324D1C0028F800809F7E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = models/User.m; sourceTree = "<group>"; };
 		BFE432501C0033FB00809F7E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Controllers/LoginViewController.h; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				BFE4325E1C003DA300809F7E /* PDCategory.m */,
 				BFE432601C006A6D00809F7E /* Organization.h */,
 				BFE432611C006A6D00809F7E /* Organization.m */,
+				BF6D073C1C010E5A00B61276 /* TransactionList.h */,
+				BF6D073D1C010E5A00B61276 /* TransactionList.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				4AA1AB3F1C012EDF00BF3604 /* TabBarViewController.m in Sources */,
 				8E9DA2C61BF561690016ECC2 /* main.m in Sources */,
 				4AEB60E91C010AF600679DAF /* MonthViewController.m in Sources */,
+				BF6D073E1C010E5A00B61276 /* TransactionList.m in Sources */,
 				BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */,
 				4AEB60E41C010AA800679DAF /* TransactionsViewController.m in Sources */,
 			);
