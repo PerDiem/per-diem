@@ -8,10 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		2F566DFF78A2F30D6AEA35ED /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57758C4476CA8CEE304D8C89 /* libPods.a */; };
+		4AA1AB3F1C012EDF00BF3604 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */; };
+		4AEB60D01C01086100679DAF /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60CE1C01086100679DAF /* TabBarController.m */; };
+		4AEB60DA1C010A6600679DAF /* DayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60D81C010A6600679DAF /* DayViewController.m */; };
+		4AEB60DB1C010A6600679DAF /* DayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB60D91C010A6600679DAF /* DayViewController.xib */; };
+		4AEB60DF1C010A7400679DAF /* BudgetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60DD1C010A7400679DAF /* BudgetsViewController.m */; };
+		4AEB60E01C010A7400679DAF /* BudgetsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB60DE1C010A7400679DAF /* BudgetsViewController.xib */; };
+		4AEB60E41C010AA800679DAF /* TransactionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60E21C010AA800679DAF /* TransactionsViewController.m */; };
+		4AEB60E51C010AA800679DAF /* TransactionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB60E31C010AA800679DAF /* TransactionsViewController.xib */; };
+		4AEB60E91C010AF600679DAF /* MonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60E71C010AF600679DAF /* MonthViewController.m */; };
+		4AEB60EA1C010AF600679DAF /* MonthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB60E81C010AF600679DAF /* MonthViewController.xib */; };
+		4AEB60EE1C01186800679DAF /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60EC1C01186800679DAF /* NavigationViewController.m */; };
 		8E9DA2C61BF561690016ECC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DA2C51BF561690016ECC2 /* main.m */; };
 		8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DA2C81BF561690016ECC2 /* AppDelegate.m */; };
-		8E9DA2CC1BF561690016ECC2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DA2CB1BF561690016ECC2 /* ViewController.m */; };
-		8E9DA2CF1BF561690016ECC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2CD1BF561690016ECC2 /* Main.storyboard */; };
 		8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D01BF561690016ECC2 /* Assets.xcassets */; };
 		8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D21BF561690016ECC2 /* LaunchScreen.storyboard */; };
 		BFE4324E1C0028F800809F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4324D1C0028F800809F7E /* User.m */; };
@@ -24,6 +33,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4AA1AB3D1C012EDF00BF3604 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarViewController.h; path = Controllers/TabBarViewController.h; sourceTree = "<group>"; };
+		4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarViewController.m; path = Controllers/TabBarViewController.m; sourceTree = "<group>"; };
+		4AEB60CD1C01086100679DAF /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarController.h; path = Controllers/TabBarController.h; sourceTree = "<group>"; };
+		4AEB60CE1C01086100679DAF /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarController.m; path = Controllers/TabBarController.m; sourceTree = "<group>"; };
+		4AEB60D71C010A6600679DAF /* DayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayViewController.h; path = Controllers/DayViewController.h; sourceTree = "<group>"; };
+		4AEB60D81C010A6600679DAF /* DayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DayViewController.m; path = Controllers/DayViewController.m; sourceTree = "<group>"; };
+		4AEB60D91C010A6600679DAF /* DayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DayViewController.xib; path = Controllers/DayViewController.xib; sourceTree = "<group>"; };
+		4AEB60DC1C010A7400679DAF /* BudgetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BudgetsViewController.h; path = Controllers/BudgetsViewController.h; sourceTree = "<group>"; };
+		4AEB60DD1C010A7400679DAF /* BudgetsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BudgetsViewController.m; path = Controllers/BudgetsViewController.m; sourceTree = "<group>"; };
+		4AEB60DE1C010A7400679DAF /* BudgetsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BudgetsViewController.xib; path = Controllers/BudgetsViewController.xib; sourceTree = "<group>"; };
+		4AEB60E11C010AA800679DAF /* TransactionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransactionsViewController.h; path = Controllers/TransactionsViewController.h; sourceTree = "<group>"; };
+		4AEB60E21C010AA800679DAF /* TransactionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransactionsViewController.m; path = Controllers/TransactionsViewController.m; sourceTree = "<group>"; };
+		4AEB60E31C010AA800679DAF /* TransactionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TransactionsViewController.xib; path = Controllers/TransactionsViewController.xib; sourceTree = "<group>"; };
+		4AEB60E61C010AF600679DAF /* MonthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MonthViewController.h; path = Controllers/MonthViewController.h; sourceTree = "<group>"; };
+		4AEB60E71C010AF600679DAF /* MonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MonthViewController.m; path = Controllers/MonthViewController.m; sourceTree = "<group>"; };
+		4AEB60E81C010AF600679DAF /* MonthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MonthViewController.xib; path = Controllers/MonthViewController.xib; sourceTree = "<group>"; };
+		4AEB60EB1C01186800679DAF /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavigationViewController.h; path = Controllers/NavigationViewController.h; sourceTree = "<group>"; };
+		4AEB60EC1C01186800679DAF /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavigationViewController.m; path = Controllers/NavigationViewController.m; sourceTree = "<group>"; };
 		55F7737C83DD7B11920DD92A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		57758C4476CA8CEE304D8C89 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		71F1C22EBB40723904EA25D0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -31,9 +58,6 @@
 		8E9DA2C51BF561690016ECC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8E9DA2C71BF561690016ECC2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8E9DA2C81BF561690016ECC2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8E9DA2CA1BF561690016ECC2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8E9DA2CB1BF561690016ECC2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		8E9DA2CE1BF561690016ECC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E9DA2D01BF561690016ECC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E9DA2D31BF561690016ECC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9DA2D51BF561690016ECC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,9 +121,6 @@
 				BFE4324B1C00276100809F7E /* Models */,
 				8E9DA2C71BF561690016ECC2 /* AppDelegate.h */,
 				8E9DA2C81BF561690016ECC2 /* AppDelegate.m */,
-				8E9DA2CA1BF561690016ECC2 /* ViewController.h */,
-				8E9DA2CB1BF561690016ECC2 /* ViewController.m */,
-				8E9DA2CD1BF561690016ECC2 /* Main.storyboard */,
 				8E9DA2D01BF561690016ECC2 /* Assets.xcassets */,
 				8E9DA2D21BF561690016ECC2 /* LaunchScreen.storyboard */,
 				8E9DA2D51BF561690016ECC2 /* Info.plist */,
@@ -139,6 +160,24 @@
 				BFE432501C0033FB00809F7E /* LoginViewController.h */,
 				BFE432511C0033FB00809F7E /* LoginViewController.m */,
 				BFE432521C0033FB00809F7E /* LoginViewController.xib */,
+				4AEB60CD1C01086100679DAF /* TabBarController.h */,
+				4AEB60CE1C01086100679DAF /* TabBarController.m */,
+				4AEB60D71C010A6600679DAF /* DayViewController.h */,
+				4AEB60D81C010A6600679DAF /* DayViewController.m */,
+				4AEB60D91C010A6600679DAF /* DayViewController.xib */,
+				4AEB60DC1C010A7400679DAF /* BudgetsViewController.h */,
+				4AEB60DD1C010A7400679DAF /* BudgetsViewController.m */,
+				4AEB60DE1C010A7400679DAF /* BudgetsViewController.xib */,
+				4AEB60E11C010AA800679DAF /* TransactionsViewController.h */,
+				4AEB60E21C010AA800679DAF /* TransactionsViewController.m */,
+				4AEB60E31C010AA800679DAF /* TransactionsViewController.xib */,
+				4AEB60E61C010AF600679DAF /* MonthViewController.h */,
+				4AEB60E71C010AF600679DAF /* MonthViewController.m */,
+				4AEB60E81C010AF600679DAF /* MonthViewController.xib */,
+				4AEB60EB1C01186800679DAF /* NavigationViewController.h */,
+				4AEB60EC1C01186800679DAF /* NavigationViewController.m */,
+				4AA1AB3D1C012EDF00BF3604 /* TabBarViewController.h */,
+				4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -214,9 +253,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */,
+				4AEB60E01C010A7400679DAF /* BudgetsViewController.xib in Resources */,
+				4AEB60DB1C010A6600679DAF /* DayViewController.xib in Resources */,
 				8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */,
 				8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */,
-				8E9DA2CF1BF561690016ECC2 /* Main.storyboard in Resources */,
+				4AEB60E51C010AA800679DAF /* TransactionsViewController.xib in Resources */,
+				4AEB60EA1C010AF600679DAF /* MonthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,27 +319,25 @@
 			files = (
 				BFE432591C0039BB00809F7E /* Transaction.m in Sources */,
 				BFE4324E1C0028F800809F7E /* User.m in Sources */,
+				4AEB60EE1C01186800679DAF /* NavigationViewController.m in Sources */,
 				BFE4325C1C003D4700809F7E /* Budget.m in Sources */,
 				BFE432621C006A6D00809F7E /* Organization.m in Sources */,
+				4AEB60DA1C010A6600679DAF /* DayViewController.m in Sources */,
 				BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */,
-				8E9DA2CC1BF561690016ECC2 /* ViewController.m in Sources */,
 				8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */,
+				4AEB60DF1C010A7400679DAF /* BudgetsViewController.m in Sources */,
+				4AEB60D01C01086100679DAF /* TabBarController.m in Sources */,
+				4AA1AB3F1C012EDF00BF3604 /* TabBarViewController.m in Sources */,
 				8E9DA2C61BF561690016ECC2 /* main.m in Sources */,
+				4AEB60E91C010AF600679DAF /* MonthViewController.m in Sources */,
 				BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */,
+				4AEB60E41C010AA800679DAF /* TransactionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8E9DA2CD1BF561690016ECC2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8E9DA2CE1BF561690016ECC2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8E9DA2D21BF561690016ECC2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
