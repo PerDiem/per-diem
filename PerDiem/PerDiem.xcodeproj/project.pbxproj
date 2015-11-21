@@ -15,6 +15,13 @@
 		8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D01BF561690016ECC2 /* Assets.xcassets */; };
 		8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D21BF561690016ECC2 /* LaunchScreen.storyboard */; };
 		BFE4324E1C0028F800809F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4324D1C0028F800809F7E /* User.m */; };
+		BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432511C0033FB00809F7E /* LoginViewController.m */; };
+		BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE432521C0033FB00809F7E /* LoginViewController.xib */; };
+		BFE432561C00356600809F7E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE432551C00356600809F7E /* Default-568h@2x.png */; };
+		BFE432591C0039BB00809F7E /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432581C0039BB00809F7E /* Transaction.m */; };
+		BFE4325C1C003D4700809F7E /* Budget.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4325B1C003D4700809F7E /* Budget.m */; };
+		BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4325E1C003DA300809F7E /* PDCategory.m */; };
+		BFE432621C006A6D00809F7E /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432611C006A6D00809F7E /* Organization.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +40,18 @@
 		8E9DA2D51BF561690016ECC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFE4324C1C0028F800809F7E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = models/User.h; sourceTree = "<group>"; };
 		BFE4324D1C0028F800809F7E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = models/User.m; sourceTree = "<group>"; };
+		BFE432501C0033FB00809F7E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Controllers/LoginViewController.h; sourceTree = "<group>"; };
+		BFE432511C0033FB00809F7E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Controllers/LoginViewController.m; sourceTree = "<group>"; };
+		BFE432521C0033FB00809F7E /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Controllers/LoginViewController.xib; sourceTree = "<group>"; };
+		BFE432551C00356600809F7E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		BFE432571C0039BB00809F7E /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Transaction.h; path = models/Transaction.h; sourceTree = "<group>"; };
+		BFE432581C0039BB00809F7E /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Transaction.m; path = models/Transaction.m; sourceTree = "<group>"; };
+		BFE4325A1C003D4700809F7E /* Budget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Budget.h; path = models/Budget.h; sourceTree = "<group>"; };
+		BFE4325B1C003D4700809F7E /* Budget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Budget.m; path = models/Budget.m; sourceTree = "<group>"; };
+		BFE4325D1C003DA300809F7E /* PDCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDCategory.h; path = models/PDCategory.h; sourceTree = "<group>"; };
+		BFE4325E1C003DA300809F7E /* PDCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDCategory.m; path = models/PDCategory.m; sourceTree = "<group>"; };
+		BFE432601C006A6D00809F7E /* Organization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Organization.h; path = models/Organization.h; sourceTree = "<group>"; };
+		BFE432611C006A6D00809F7E /* Organization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Organization.m; path = models/Organization.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +77,7 @@
 		8E9DA2B81BF561690016ECC2 = {
 			isa = PBXGroup;
 			children = (
+				BFE432551C00356600809F7E /* Default-568h@2x.png */,
 				8E9DA2C31BF561690016ECC2 /* PerDiem */,
 				8E9DA2C21BF561690016ECC2 /* Products */,
 				CC6448EB566111310242B66D /* Pods */,
@@ -76,6 +96,7 @@
 		8E9DA2C31BF561690016ECC2 /* PerDiem */ = {
 			isa = PBXGroup;
 			children = (
+				BFE4324F1C00338F00809F7E /* Controllers */,
 				BFE4324B1C00276100809F7E /* Models */,
 				8E9DA2C71BF561690016ECC2 /* AppDelegate.h */,
 				8E9DA2C81BF561690016ECC2 /* AppDelegate.m */,
@@ -104,8 +125,26 @@
 			children = (
 				BFE4324C1C0028F800809F7E /* User.h */,
 				BFE4324D1C0028F800809F7E /* User.m */,
+				BFE432571C0039BB00809F7E /* Transaction.h */,
+				BFE432581C0039BB00809F7E /* Transaction.m */,
+				BFE4325A1C003D4700809F7E /* Budget.h */,
+				BFE4325B1C003D4700809F7E /* Budget.m */,
+				BFE4325D1C003DA300809F7E /* PDCategory.h */,
+				BFE4325E1C003DA300809F7E /* PDCategory.m */,
+				BFE432601C006A6D00809F7E /* Organization.h */,
+				BFE432611C006A6D00809F7E /* Organization.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		BFE4324F1C00338F00809F7E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BFE432501C0033FB00809F7E /* LoginViewController.h */,
+				BFE432511C0033FB00809F7E /* LoginViewController.m */,
+				BFE432521C0033FB00809F7E /* LoginViewController.xib */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		CC6448EB566111310242B66D /* Pods */ = {
@@ -136,7 +175,7 @@
 			dependencies = (
 			);
 			name = PerDiem;
-			productName = "Per Diem";
+			productName = PerDiem;
 			productReference = 8E9DA2C11BF561690016ECC2 /* PerDiem.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -147,7 +186,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = "Per Diem";
+				ORGANIZATIONNAME = PerDiem;
 				TargetAttributes = {
 					8E9DA2C01BF561690016ECC2 = {
 						CreatedOnToolsVersion = 7.1;
@@ -178,8 +217,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */,
 				8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */,
 				8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */,
+				BFE432561C00356600809F7E /* Default-568h@2x.png in Resources */,
 				8E9DA2CF1BF561690016ECC2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,10 +280,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFE432591C0039BB00809F7E /* Transaction.m in Sources */,
 				BFE4324E1C0028F800809F7E /* User.m in Sources */,
+				BFE4325C1C003D4700809F7E /* Budget.m in Sources */,
+				BFE432621C006A6D00809F7E /* Organization.m in Sources */,
+				BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */,
 				8E9DA2CC1BF561690016ECC2 /* ViewController.m in Sources */,
 				8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */,
 				8E9DA2C61BF561690016ECC2 /* main.m in Sources */,
+				BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +401,7 @@
 			baseConfigurationReference = 55F7737C83DD7B11920DD92A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "$(SRCROOT)/PerDiem/Info.plist";
+				INFOPLIST_FILE = PerDiem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.perdiem.Per-Diem";
 				PRODUCT_NAME = PerDiem;
@@ -367,7 +413,7 @@
 			baseConfigurationReference = 71F1C22EBB40723904EA25D0 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "$(SRCROOT)/PerDiem/Info.plist";
+				INFOPLIST_FILE = PerDiem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.perdiem.Per-Diem";
 				PRODUCT_NAME = PerDiem;
