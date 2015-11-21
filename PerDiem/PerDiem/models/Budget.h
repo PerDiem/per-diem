@@ -8,6 +8,12 @@
 
 #import <Parse/Parse.h>
 
+@class Organization;
+
 @interface Budget : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
+
+@property (nonatomic, strong) NSNumber *amount;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) Organization *organization;
 @end

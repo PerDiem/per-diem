@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import "LoginViewController.h"
 #import "User.h"
-
+#import "Transaction.h"
 
 @interface AppDelegate ()
 

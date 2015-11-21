@@ -21,6 +21,7 @@
 		BFE432591C0039BB00809F7E /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432581C0039BB00809F7E /* Transaction.m */; };
 		BFE4325C1C003D4700809F7E /* Budget.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4325B1C003D4700809F7E /* Budget.m */; };
 		BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4325E1C003DA300809F7E /* PDCategory.m */; };
+		BFE432621C006A6D00809F7E /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432611C006A6D00809F7E /* Organization.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		BFE4325B1C003D4700809F7E /* Budget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Budget.m; path = models/Budget.m; sourceTree = "<group>"; };
 		BFE4325D1C003DA300809F7E /* PDCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDCategory.h; path = models/PDCategory.h; sourceTree = "<group>"; };
 		BFE4325E1C003DA300809F7E /* PDCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDCategory.m; path = models/PDCategory.m; sourceTree = "<group>"; };
+		BFE432601C006A6D00809F7E /* Organization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Organization.h; path = models/Organization.h; sourceTree = "<group>"; };
+		BFE432611C006A6D00809F7E /* Organization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Organization.m; path = models/Organization.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				BFE4325B1C003D4700809F7E /* Budget.m */,
 				BFE4325D1C003DA300809F7E /* PDCategory.h */,
 				BFE4325E1C003DA300809F7E /* PDCategory.m */,
+				BFE432601C006A6D00809F7E /* Organization.h */,
+				BFE432611C006A6D00809F7E /* Organization.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				BFE432591C0039BB00809F7E /* Transaction.m in Sources */,
 				BFE4324E1C0028F800809F7E /* User.m in Sources */,
 				BFE4325C1C003D4700809F7E /* Budget.m in Sources */,
+				BFE432621C006A6D00809F7E /* Organization.m in Sources */,
 				BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */,
 				8E9DA2CC1BF561690016ECC2 /* ViewController.m in Sources */,
 				8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */,

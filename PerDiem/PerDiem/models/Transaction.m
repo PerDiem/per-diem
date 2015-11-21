@@ -7,8 +7,12 @@
 //
 
 #import "Transaction.h"
+#import "User.h"
+#import "Budget.h"
+#import "Organization.h"
 
 @implementation Transaction
+@dynamic amount, transactionDate, summary, user, budget, organization;
 
 + (void)load {
     [self registerSubclass];

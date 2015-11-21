@@ -9,6 +9,8 @@
 #import "PDCategory.h"
 
 @implementation PDCategory
+@dynamic name;
+
 + (void)load {
     [self registerSubclass];
 }

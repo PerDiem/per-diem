@@ -7,11 +7,13 @@
 //
 
 #import "User.h"
+#import "Organization.h"
 
 @interface User ()
 @end
 
 @implementation User
+@dynamic username, email, organization;
 
 + (void)load {
     [self registerSubclass];
