@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TabBarViewController.h"
 
-@interface BudgetsViewController : UIViewController
+@interface BudgetsViewController : TabBarViewController
 
 @end

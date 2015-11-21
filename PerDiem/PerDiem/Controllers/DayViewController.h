@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TabBarViewController.h"
 
-@interface DayViewController : UIViewController
+@interface DayViewController : TabBarViewController
 
 @end

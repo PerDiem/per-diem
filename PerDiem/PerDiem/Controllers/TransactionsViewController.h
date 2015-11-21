@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TabBarViewController.h"
 
-@interface TransactionsViewController : UIViewController
+@interface TransactionsViewController : TabBarViewController
 
 @end

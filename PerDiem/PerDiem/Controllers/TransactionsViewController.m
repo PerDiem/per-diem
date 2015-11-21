@@ -14,10 +14,18 @@
 
 @implementation TransactionsViewController
 
+
+#pragma mark - UIViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Transactions";
-    self.tabBarItem.image = [UIImage imageNamed:@"transactions"];
+}
+
+
+#pragma mark - TabBarViewController
+
+- (void)setupUI {
+    [self setupBarItemWithTitle:@"Transactions" imageNamed:@"transactions"];
 }
 
 @end

@@ -14,10 +14,18 @@
 
 @implementation DayViewController
 
+
+#pragma mark - UIViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Today";
-    self.tabBarItem.image = [UIImage imageNamed:@"calendar"];
+}
+
+
+#pragma mark - TabBarViewController
+
+- (void)setupUI {
+    [self setupBarItemWithTitle:@"Today" imageNamed:@"calendar"];
 }
 
 @end

@@ -14,10 +14,18 @@
 
 @implementation BudgetsViewController
 
+
+#pragma mark - UIViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Budgets";
-    self.tabBarItem.image = [UIImage imageNamed:@"budgets"];
+}
+
+
+#pragma mark - TabBarViewController
+
+- (void)setupUI {
+    [self setupBarItemWithTitle:@"Budgets" imageNamed:@"budgets"];
 }
 
 @end

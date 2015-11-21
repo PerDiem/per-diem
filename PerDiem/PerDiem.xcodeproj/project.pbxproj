@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F566DFF78A2F30D6AEA35ED /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57758C4476CA8CEE304D8C89 /* libPods.a */; };
+		4AA1AB3F1C012EDF00BF3604 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */; };
 		4AEB60D01C01086100679DAF /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60CE1C01086100679DAF /* TabBarController.m */; };
 		4AEB60DA1C010A6600679DAF /* DayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60D81C010A6600679DAF /* DayViewController.m */; };
 		4AEB60DB1C010A6600679DAF /* DayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB60D91C010A6600679DAF /* DayViewController.xib */; };
@@ -32,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4AA1AB3D1C012EDF00BF3604 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarViewController.h; path = Controllers/TabBarViewController.h; sourceTree = "<group>"; };
+		4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarViewController.m; path = Controllers/TabBarViewController.m; sourceTree = "<group>"; };
 		4AEB60CD1C01086100679DAF /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarController.h; path = Controllers/TabBarController.h; sourceTree = "<group>"; };
 		4AEB60CE1C01086100679DAF /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarController.m; path = Controllers/TabBarController.m; sourceTree = "<group>"; };
 		4AEB60D71C010A6600679DAF /* DayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayViewController.h; path = Controllers/DayViewController.h; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 				4AEB60E81C010AF600679DAF /* MonthViewController.xib */,
 				4AEB60EB1C01186800679DAF /* NavigationViewController.h */,
 				4AEB60EC1C01186800679DAF /* NavigationViewController.m */,
+				4AA1AB3D1C012EDF00BF3604 /* TabBarViewController.h */,
+				4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */,
 				4AEB60DF1C010A7400679DAF /* BudgetsViewController.m in Sources */,
 				4AEB60D01C01086100679DAF /* TabBarController.m in Sources */,
+				4AA1AB3F1C012EDF00BF3604 /* TabBarViewController.m in Sources */,
 				8E9DA2C61BF561690016ECC2 /* main.m in Sources */,
 				4AEB60E91C010AF600679DAF /* MonthViewController.m in Sources */,
 				BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */,
