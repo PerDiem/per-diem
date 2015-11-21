@@ -108,9 +108,8 @@
 				8E9DA2D51BF561690016ECC2 /* Info.plist */,
 				8E9DA2C41BF561690016ECC2 /* Supporting Files */,
 			);
-			name = PerDiem;
-			path = "/Users/frojas/Courses/iOS/per-diem/PerDiem/PerDiem";
-			sourceTree = "<absolute>";
+			path = PerDiem;
+			sourceTree = SOURCE_ROOT;
 		};
 		8E9DA2C41BF561690016ECC2 /* Supporting Files */ = {
 			isa = PBXGroup;
