@@ -355,7 +355,7 @@
 			baseConfigurationReference = 55F7737C83DD7B11920DD92A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Per Diem/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/PerDiem/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.perdiem.Per-Diem";
 				PRODUCT_NAME = PerDiem;
@@ -367,7 +367,7 @@
 			baseConfigurationReference = 71F1C22EBB40723904EA25D0 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Per Diem/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/PerDiem/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.perdiem.Per-Diem";
 				PRODUCT_NAME = PerDiem;
