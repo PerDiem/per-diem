@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+#import "LoginViewController.h"
+#import "User.h"
+
 
 @interface AppDelegate ()
 
@@ -16,7 +20,23 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Parse setApplicationId:@"8oKuq2b2uWdqI7AL7ETaBSrtzJRdjm1YXVClcyCO"
+                  clientKey:@"iU3wcznuXqJ8NfsLegZqx1L1G2PgtYRey1Gl3qEm"];
+
+//    [User logOut];
+    User *currentUser = [User currentUser];
+
+    if (currentUser) {
+        NSLog(@"I'm logged in");
+    } else {
+        self.window.rootViewController = [[LoginViewController alloc] init];
+    }
+    [self.window makeKeyAndVisible];
+
     return YES;
+}
+
+- (void) signup {
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
