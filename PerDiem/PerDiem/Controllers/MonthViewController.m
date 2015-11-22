@@ -10,9 +10,14 @@
 
 @interface MonthViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *label;
+
 @end
 
 @implementation MonthViewController
+
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
