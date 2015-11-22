@@ -1,5 +1,5 @@
 //
-//  DayViewController.h
+//  CalendarViewController.h
 //  PerDiem
 //
 //  Created by Florent Bonomo on 11/21/15.
@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "TabBarViewController.h"
 
-@interface DayViewController : TabBarViewController
-
-@property (nonatomic, assign) NSUInteger indexNumber;
+@interface CalendarViewController : TabBarViewController
 
 @end

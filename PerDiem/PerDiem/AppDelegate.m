@@ -11,7 +11,7 @@
 #import "LoginViewController.h"
 #import "NavigationViewController.h"
 #import "BudgetsViewController.h"
-#import "DayViewController.h"
+#import "CalendarViewController.h"
 #import "TransactionsViewController.h"
 #import "TabBarController.h"
 #import "User.h"
@@ -36,9 +36,9 @@
         BudgetsViewController *vc1 = [[BudgetsViewController alloc] initWithNibName:@"BudgetsViewController" bundle:nil];
         [nvc1 setViewControllers:@[vc1]];
         
-        // Day
+        // Calendar
         NavigationViewController *nvc2 = [[NavigationViewController alloc] init];
-        DayViewController *vc2 = [[DayViewController alloc] initWithNibName:@"DayViewController" bundle:nil];
+        CalendarViewController *vc2 = [[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil];
         [nvc2 setViewControllers:@[vc2]];
         
         // Transactions
