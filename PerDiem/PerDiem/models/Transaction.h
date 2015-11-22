@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, strong) NSDate *transactionDate;
 @property (nonatomic, strong) NSString *summary;
+@property (nonatomic, strong) NSString *note;
 
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) Budget *budget;

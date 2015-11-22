@@ -7,6 +7,7 @@
 //
 
 #import "BudgetsViewController.h"
+#import "TransactionFormViewController.h"
 
 @interface BudgetsViewController ()
 
@@ -19,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self setupNavBar];
 }
 
 
@@ -26,6 +29,17 @@
 
 - (void)setupUI {
     [self setupBarItemWithImageNamed:@"budgets"];
+}
+
+#pragma mark - NavBar Controller
+
+- (void) setupNavBar {
+    UIBarButtonItem *transactionButtom = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction" style:UIBarButtonItemStylePlain target:self action:@selector(onNewtransaction)];
+
+    self.navigationItem.rightBarButtonItem = transactionButtom;
+}
+- (void) onNewtransaction {
+    [self.navigationController pushViewController:[[TransactionFormViewController alloc] init] animated:YES];
 }
 
 @end
