@@ -29,6 +29,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Prevent content being pushed by navigation controller
+    // http://stackoverflow.com/a/19989136/237637
+    self.automaticallyAdjustsScrollViewInsets = false;
+    
     MonthsViewController *months = [[MonthsViewController alloc] initWithNibName:@"MonthsViewController" bundle:nil];
     WeeksViewController *weeks = [[WeeksViewController alloc] initWithNibName:@"WeeksViewController" bundle:nil];
     DaysViewController *days = [[DaysViewController alloc] initWithNibName:@"DaysViewController" bundle:nil];
