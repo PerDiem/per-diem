@@ -1,5 +1,5 @@
 //
-//  MonthViewController.h
+//  MonthsViewController.h
 //  PerDiem
 //
 //  Created by Florent Bonomo on 11/21/15.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CalendarSubSubViewController.h"
+#import "CalendarSubViewController.h"
 
-@interface MonthViewController : CalendarSubSubViewController
+@interface MonthsViewController : CalendarSubViewController
 
 @end

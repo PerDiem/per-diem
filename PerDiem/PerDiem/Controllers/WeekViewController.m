@@ -1,20 +1,20 @@
 //
-//  MonthViewController.m
+//  WeekViewController.m
 //  PerDiem
 //
 //  Created by Florent Bonomo on 11/21/15.
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
-#import "MonthViewController.h"
+#import "WeekViewController.h"
 
-@interface MonthViewController ()
+@interface WeekViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end
 
-@implementation MonthViewController
+@implementation WeekViewController
 
 
 #pragma mark - UIViewController

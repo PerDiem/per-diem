@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TabBarViewController.h"
+#import "CalendarSubSubViewController.h"
 
-@interface DayViewController : TabBarViewController
+@interface DayViewController : CalendarSubSubViewController
 
 @end

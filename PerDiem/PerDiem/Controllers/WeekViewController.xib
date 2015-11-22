@@ -5,9 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MonthViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeekViewController">
             <connections>
-                <outlet property="label" destination="ZTL-vs-gBt" id="Jd1-1p-M4S"/>
+                <outlet property="label" destination="y7m-PN-xSa" id="ejW-VD-TnR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,8 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTL-vs-gBt">
-                    <rect key="frame" x="135" y="273" width="50" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7m-PN-xSa">
+                    <rect key="frame" x="139" y="273" width="43" height="21"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -25,10 +25,10 @@
                 </label>
             </subviews>
             <animations/>
-            <color key="backgroundColor" red="0.10734703650000001" green="0.00066504108440000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="ZTL-vs-gBt" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="cNL-Sh-3Wo"/>
-                <constraint firstItem="ZTL-vs-gBt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="edK-Lj-wDH"/>
+                <constraint firstItem="y7m-PN-xSa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="61f-iW-L5m"/>
+                <constraint firstItem="y7m-PN-xSa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Rxk-Ze-Qae"/>
             </constraints>
             <point key="canvasLocation" x="251" y="393"/>
         </view>

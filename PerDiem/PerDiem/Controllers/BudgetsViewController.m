@@ -28,7 +28,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithTitle:@"Budgets" imageNamed:@"budgets"];
+    [self setupBarItemWithImageNamed:@"budgets"];
 }
 
 #pragma mark - NavBar Controller

@@ -11,7 +11,7 @@
 #import "LoginViewController.h"
 #import "NavigationViewController.h"
 #import "BudgetsViewController.h"
-#import "DayViewController.h"
+#import "CalendarViewController.h"
 #import "TransactionsViewController.h"
 #import "TransactionFormViewController.h"
 #import "TabBarController.h"
@@ -32,18 +32,16 @@
 
 //    [User logOut];
     if ([User currentUser]) {
-        
         // Budgets
         NavigationViewController *nvc1 = [[NavigationViewController alloc] init];
         BudgetsViewController *vc1 = [[BudgetsViewController alloc] initWithNibName:@"BudgetsViewController" bundle:nil];
         [nvc1 setViewControllers:@[vc1]];
 
-
-        // Day
+        // Calendar
         NavigationViewController *nvc2 = [[NavigationViewController alloc] init];
-        DayViewController *vc2 = [[DayViewController alloc] initWithNibName:@"DayViewController" bundle:nil];
+        CalendarViewController *vc2 = [[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil];
         [nvc2 setViewControllers:@[vc2]];
-        
+
         // Transactions
         NavigationViewController *nvc3 = [[NavigationViewController alloc] init];
         TransactionsViewController *vc3 = [[TransactionsViewController alloc] initWithNibName:@"TransactionsViewController" bundle:nil];
@@ -56,9 +54,9 @@
 
         TabBarController *tbc = [[TabBarController alloc] init];
         tbc.viewControllers = @[nvc1, nvc2, nvc3];
-        
+
         self.window.rootViewController = tbc;
-        
+
     } else {
         self.window.rootViewController = [[LoginViewController alloc] init];
     }

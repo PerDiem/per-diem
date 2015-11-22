@@ -10,6 +10,8 @@
 
 @interface DayViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *label;
+
 @end
 
 @implementation DayViewController
@@ -19,13 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-}
-
-
-#pragma mark - TabBarViewController
-
-- (void)setupUI {
-    [self setupBarItemWithTitle:@"Today" imageNamed:@"calendar"];
 }
 
 @end
