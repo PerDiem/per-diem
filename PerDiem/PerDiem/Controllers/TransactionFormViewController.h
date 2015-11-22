@@ -8,6 +8,10 @@
 
 #import "XLFormViewController.h"
 
+@class Transaction;
+
 @interface TransactionFormViewController : XLFormViewController
+
+-(id) initWithTransaction: (Transaction*) transaction;
 
 @end
