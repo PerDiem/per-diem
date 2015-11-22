@@ -134,7 +134,8 @@ NSString *const kBudget = @"selectorPush";
     self.transaction.note = values[kDescription];
     self.transaction.transactionDate = values[kDate];
     [self.transaction saveInBackground];
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
 }
 
