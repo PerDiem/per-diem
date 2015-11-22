@@ -31,7 +31,6 @@
                                                                         options:nil];
     
     self.selectedController = [self viewControllerWithDate:self.date];
-    self.pageController.dataSource = self;
     self.pageController.delegate = self;
     [self.pageController.view setFrame:self.view.bounds];
     [self.pageController setViewControllers:@[self.selectedController]
@@ -40,6 +39,13 @@
     [self addChildViewController:self.pageController];
     [self.view addSubview:self.pageController.view];
     [self.pageController didMoveToParentViewController:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    // Clear cacheed controllers (that probably need their `date` to reflect the current state).
+    // http://stackoverflow.com/a/21624169/237637
+    self.pageController.dataSource = nil;
+    self.pageController.dataSource = self;
 }
 
 
