@@ -10,7 +10,7 @@
 
 @interface DayViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *dayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end
 
@@ -21,15 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.dayLabel.text = [NSString stringWithFormat:@"Day %lu", (unsigned long)self.indexNumber];
-}
-
-
-#pragma mark - TabBarViewController
-
-- (void)setupUI {
-    [self setupBarItemWithImageNamed:@"calendar"];
 }
 
 @end

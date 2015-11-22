@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DayViewController">
             <connections>
-                <outlet property="dayLabel" destination="SWe-Uk-Haf" id="7Ny-PN-o6A"/>
+                <outlet property="label" destination="SWe-Uk-Haf" id="i3b-xL-nmV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

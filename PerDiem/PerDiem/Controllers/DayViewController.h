@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TabBarViewController.h"
+#import "CalendarSubSubViewController.h"
 
-@interface DayViewController : TabBarViewController
-
-@property (nonatomic, assign) NSUInteger indexNumber;
+@interface DayViewController : CalendarSubSubViewController
 
 @end
