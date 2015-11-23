@@ -11,6 +11,7 @@
 @class User;
 @class Budget;
 @class Organization;
+@class PaymentType;
 
 @interface Transaction : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
@@ -22,6 +23,7 @@
 
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) Budget *budget;
+@property (nonatomic, strong) PaymentType *paymentType;
 @property (nonatomic, strong) Organization *organization;
 
 @end

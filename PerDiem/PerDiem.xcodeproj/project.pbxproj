@@ -36,6 +36,7 @@
 		4AF678281C025F1800DFB75E /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF678271C025F1800DFB75E /* KeychainWrapper.m */; };
 		8E42F45F1C0242FE00AE2E37 /* TransactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E42F45D1C0242FD00AE2E37 /* TransactionCell.m */; };
 		8E42F4601C0242FE00AE2E37 /* TransactionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E42F45E1C0242FE00AE2E37 /* TransactionCell.xib */; };
+		8E63679A1C029BDF0086CD54 /* PaymentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6367991C029BDF0086CD54 /* PaymentType.m */; };
 		8E9DA2C61BF561690016ECC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DA2C51BF561690016ECC2 /* main.m */; };
 		8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DA2C81BF561690016ECC2 /* AppDelegate.m */; };
 		8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D01BF561690016ECC2 /* Assets.xcassets */; };
@@ -99,6 +100,8 @@
 		8E42F45C1C0242FD00AE2E37 /* TransactionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionCell.h; sourceTree = "<group>"; };
 		8E42F45D1C0242FD00AE2E37 /* TransactionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionCell.m; sourceTree = "<group>"; };
 		8E42F45E1C0242FE00AE2E37 /* TransactionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionCell.xib; sourceTree = "<group>"; };
+		8E6367981C029BDF0086CD54 /* PaymentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentType.h; sourceTree = "<group>"; };
+		8E6367991C029BDF0086CD54 /* PaymentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentType.m; sourceTree = "<group>"; };
 		8E9DA2C11BF561690016ECC2 /* PerDiem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerDiem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9DA2C51BF561690016ECC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8E9DA2C71BF561690016ECC2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -250,6 +253,8 @@
 				BFE432581C0039BB00809F7E /* Transaction.m */,
 				BFE4325A1C003D4700809F7E /* Budget.h */,
 				BFE4325B1C003D4700809F7E /* Budget.m */,
+				8E6367981C029BDF0086CD54 /* PaymentType.h */,
+				8E6367991C029BDF0086CD54 /* PaymentType.m */,
 				BFE4325D1C003DA300809F7E /* PDCategory.h */,
 				BFE4325E1C003DA300809F7E /* PDCategory.m */,
 				BFE432601C006A6D00809F7E /* Organization.h */,
@@ -447,6 +452,7 @@
 				8E9DA2C61BF561690016ECC2 /* main.m in Sources */,
 				4AA1AB461C01374100BF3604 /* CalendarViewController.m in Sources */,
 				4AEB60E91C010AF600679DAF /* MonthViewController.m in Sources */,
+				8E63679A1C029BDF0086CD54 /* PaymentType.m in Sources */,
 				BF6D073E1C010E5A00B61276 /* TransactionList.m in Sources */,
 				4AA1AB561C01553500BF3604 /* WeeksViewController.m in Sources */,
 				4AA1AB5B1C01555000BF3604 /* MonthsViewController.m in Sources */,

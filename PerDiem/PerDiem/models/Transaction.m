@@ -12,7 +12,7 @@
 #import "Organization.h"
 
 @implementation Transaction
-@dynamic amount, transactionDate, summary, note, user, budget, organization;
+@dynamic amount, transactionDate, summary, note, user, budget,  paymentType, organization;
 
 + (void)load {
     [self registerSubclass];

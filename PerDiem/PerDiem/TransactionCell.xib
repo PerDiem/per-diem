@@ -93,6 +93,13 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="amountLabel" destination="ecd-fb-q2V" id="jcH-ay-ghk"/>
+                <outlet property="budgetLabel" destination="TeZ-bM-a4P" id="Qxb-cX-jKe"/>
+                <outlet property="dateLabel" destination="YjF-hc-tcd" id="32W-sM-PYz"/>
+                <outlet property="paymentTypeLabel" destination="Y9g-Xo-cxE" id="BdG-F2-F2Q"/>
+                <outlet property="summaryLabel" destination="BsF-1q-ird" id="NGv-Wh-eHg"/>
+            </connections>
             <point key="canvasLocation" x="448" y="475"/>
         </tableViewCell>
     </objects>
