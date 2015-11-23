@@ -34,6 +34,8 @@
 		4AEB60EA1C010AF600679DAF /* MonthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB60E81C010AF600679DAF /* MonthViewController.xib */; };
 		4AEB60EE1C01186800679DAF /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60EC1C01186800679DAF /* NavigationViewController.m */; };
 		4AF678281C025F1800DFB75E /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF678271C025F1800DFB75E /* KeychainWrapper.m */; };
+		8E42F45F1C0242FE00AE2E37 /* TransactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E42F45D1C0242FD00AE2E37 /* TransactionCell.m */; };
+		8E42F4601C0242FE00AE2E37 /* TransactionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E42F45E1C0242FE00AE2E37 /* TransactionCell.xib */; };
 		8E9DA2C61BF561690016ECC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DA2C51BF561690016ECC2 /* main.m */; };
 		8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DA2C81BF561690016ECC2 /* AppDelegate.m */; };
 		8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D01BF561690016ECC2 /* Assets.xcassets */; };
@@ -94,6 +96,9 @@
 		55F7737C83DD7B11920DD92A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		57758C4476CA8CEE304D8C89 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		71F1C22EBB40723904EA25D0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8E42F45C1C0242FD00AE2E37 /* TransactionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionCell.h; sourceTree = "<group>"; };
+		8E42F45D1C0242FD00AE2E37 /* TransactionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionCell.m; sourceTree = "<group>"; };
+		8E42F45E1C0242FE00AE2E37 /* TransactionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionCell.xib; sourceTree = "<group>"; };
 		8E9DA2C11BF561690016ECC2 /* PerDiem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerDiem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9DA2C51BF561690016ECC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8E9DA2C71BF561690016ECC2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -183,6 +188,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8E42F4561C02427300AE2E37 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E42F45C1C0242FD00AE2E37 /* TransactionCell.h */,
+				8E42F45D1C0242FD00AE2E37 /* TransactionCell.m */,
+				8E42F45E1C0242FE00AE2E37 /* TransactionCell.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		8E9DA2B81BF561690016ECC2 = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +221,7 @@
 			children = (
 				4AF678251C025F0500DFB75E /* Helpers */,
 				BFE4324F1C00338F00809F7E /* Controllers */,
+				8E42F4561C02427300AE2E37 /* Views */,
 				BFE4324B1C00276100809F7E /* Models */,
 				8E9DA2C71BF561690016ECC2 /* AppDelegate.h */,
 				8E9DA2C81BF561690016ECC2 /* AppDelegate.m */,
@@ -348,6 +364,7 @@
 				8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */,
 				4AA1AB571C01553500BF3604 /* WeeksViewController.xib in Resources */,
 				4AA1AB471C01374100BF3604 /* CalendarViewController.xib in Resources */,
+				8E42F4601C0242FE00AE2E37 /* TransactionCell.xib in Resources */,
 				8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */,
 				4AA1AB5C1C01555000BF3604 /* MonthsViewController.xib in Resources */,
 				4AEB60E51C010AA800679DAF /* TransactionsViewController.xib in Resources */,
@@ -433,6 +450,7 @@
 				BF6D073E1C010E5A00B61276 /* TransactionList.m in Sources */,
 				4AA1AB561C01553500BF3604 /* WeeksViewController.m in Sources */,
 				4AA1AB5B1C01555000BF3604 /* MonthsViewController.m in Sources */,
+				8E42F45F1C0242FE00AE2E37 /* TransactionCell.m in Sources */,
 				BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */,
 				4AEB60E41C010AA800679DAF /* TransactionsViewController.m in Sources */,
 				4AF678281C025F1800DFB75E /* KeychainWrapper.m in Sources */,
