@@ -37,6 +37,7 @@
         }
     }];
 }
+
 +(void) transactionsWithinPeriod: (DTTimePeriod*) timePeriod completion: (void (^)(TransactionList *transactions, NSError *error)) completion {
 
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];

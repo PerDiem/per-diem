@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *paymentTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
+@property (strong, nonatomic) NSNumberFormatter *amountFormatter;
 
 @end
 
@@ -30,19 +31,27 @@
 
     self.dateLabel.text = [self formatDate:self.transaction.transactionDate];
     self.budgetLabel.text = self.transaction.budget.name;
-    self.paymentTypeLabel.text = self.transaction.paymentType.name;
-    self.summaryLabel.text = self.transaction.summary;
 
-    // @TODO - make common currency formatter method to be used throughout app.
-    self.amountLabel.text = [NSString stringWithFormat:@"$%.2f", [self.transaction.amount floatValue]];
+    // @todo - this was making the app crash due to the paymentType.name being nil. Revisit.
+    // self.paymentTypeLabel.text = self.transaction.paymentType.name;
+    self.summaryLabel.text = self.transaction.summary;
+    self.amountLabel.text = [self.amountFormatter stringFromNumber:self.transaction.amount];
 }
 
 - (NSString *)formatDate:(NSDate *)date {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"mm/yy"];
+    [formatter setDateFormat:@"MM/dd"];
 
     NSString *stringFromDate = [formatter stringFromDate:date];
     return stringFromDate;
+}
+
+- (NSNumberFormatter *)amountFormatter {
+    if (!_amountFormatter) {
+        _amountFormatter = [[NSNumberFormatter alloc] init];
+        [_amountFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    }
+    return _amountFormatter;
 }
 
 

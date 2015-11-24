@@ -30,10 +30,12 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self setupNavigationBar];
 
-    // @Todo Fetch Transactions
-    // self.transactionList = [[TransactionList alloc] initWithTransactions:@[]];
-
     [self setupTableView];
+
+    [Transaction transactions:^(TransactionList *transactions, NSError *error) {
+        self.transactionList = transactions;
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - Setup methods
@@ -58,12 +60,16 @@
 #pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 50;
+    if (self.transactionList.transactions.count > 0) {
+        return self.transactionList.transactions.count;
+    } else {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
-    // cell.transaction = self.transactionList.transactions[indexPath.row];
+    cell.transaction = self.transactionList.transactions[indexPath.row];
     return cell;
 }
 
