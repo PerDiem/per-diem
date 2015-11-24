@@ -13,7 +13,7 @@
 #import "TransactionList.h"
 
 @implementation Transaction
-@dynamic amount, transactionDate, summary, note, user, budget, organization;
+@dynamic amount, transactionDate, summary, note, user, budget,  paymentType, organization;
 
 + (void)load {
     [self registerSubclass];
@@ -37,6 +37,7 @@
         }
     }];
 }
+
 +(void) transactionsWithinPeriod: (DTTimePeriod*) timePeriod completion: (void (^)(TransactionList *transactions, NSError *error)) completion {
 
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];

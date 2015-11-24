@@ -7,12 +7,15 @@
 //
 
 #import "TransactionsViewController.h"
+#import "Transaction.h"
 #import "TransactionCell.h"
+#import "TransactionList.h"
 
 
 @interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) TransactionList *transactionList;
 @end
 
 @implementation TransactionsViewController
@@ -26,7 +29,13 @@
 
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self setupNavigationBar];
+
     [self setupTableView];
+
+    [Transaction transactions:^(TransactionList *transactions, NSError *error) {
+        self.transactionList = transactions;
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - Setup methods
@@ -51,11 +60,16 @@
 #pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 50;
+    if (self.transactionList.transactions.count > 0) {
+        return self.transactionList.transactions.count;
+    } else {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
+    cell.transaction = self.transactionList.transactions[indexPath.row];
     return cell;
 }
 

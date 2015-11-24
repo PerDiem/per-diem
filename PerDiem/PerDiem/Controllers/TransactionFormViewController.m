@@ -73,11 +73,15 @@ NSString *const kBudget = @"selectorPush";
         if ( options.count > 1) {
             XLFormRowDescriptor * row = [self.form formRowWithTag:kBudget];
             row.selectorOptions = options;
+        } else if (options.count == 1) {
+            budgetRow.value = options[0];
+            [budgetRow setDisabled:@(YES)];
         } else {
-            [row setDisabled:@(YES)];
+            // @todo - Transactions need to have a budget. We should throw an error here or create a default budget when signing up so it can never happen.
+            [budgetRow setDisabled:@(YES)];
         }
 
-        [self reloadFormRow:row];
+        [self reloadFormRow:budgetRow];
     }];
 
     // TODO: Maybe we should put a default budget?

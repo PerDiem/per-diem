@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Transaction.h"
 
 @interface TransactionCell : UITableViewCell
+
+@property (strong, nonatomic) Transaction *transaction;
 
 @end
