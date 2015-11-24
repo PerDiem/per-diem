@@ -18,9 +18,9 @@
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) Organization *organization;
 
--(void) transactions:(void (^)(NSArray *transactions, NSError *error)) completation;
--(void) transactionsWithinPeriod: (DTTimePeriod*) timePeriod completation: (void (^)(NSArray *transactions, NSError *error)) completation;
--(void) transactionsOnDay: (NSDate*) day completation: (void (^)(NSArray *transactions, NSError *error)) completation;
+-(void) transactions:(void (^)(NSArray *transactions, NSError *error)) completion;
+-(void) transactionsWithinPeriod: (DTTimePeriod*) timePeriod completion: (void (^)(NSArray *transactions, NSError *error)) completion;
+-(void) transactionsOnDay: (NSDate*) day completion: (void (^)(NSArray *transactions, NSError *error)) completion;
 
--(void) budgets: (void (^)(NSArray *budgets, NSError *error)) completation;
+-(void) budgets: (void (^)(NSArray *budgets, NSError *error)) completion;
 @end

@@ -29,20 +29,20 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userLoggedOut" object:nil];
 }
 
-- (void)transactions:(void (^)(NSArray *transactions, NSError *error)) completation {
+- (void)transactions:(void (^)(NSArray *transactions, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:self.organization];
     [query includeKey:@"organization"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
-            completation(nil, error);
+            completion(nil, error);
         } else {
-            completation(transactions, nil);
+            completion(transactions, nil);
         }
     }];
 }
 
-- (void)transactionsWithinPeriod: (DTTimePeriod*) timePeriod completation: (void (^)(NSArray *transactions, NSError *error)) completation {
+- (void)transactionsWithinPeriod: (DTTimePeriod*) timePeriod completion: (void (^)(NSArray *transactions, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:self.organization];
     [query includeKey:@"organization"];
@@ -50,31 +50,31 @@
     [query whereKey:@"transactionDate" lessThanOrEqualTo:[timePeriod EndDate]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
-            completation(nil, error);
+            completion(nil, error);
         } else {
-            completation(transactions, nil);
+            completion(transactions, nil);
         }
     }];
 }
 
-- (void)transactionsOnDay: (NSDate*) day completation: (void (^)(NSArray *transactions, NSError *error)) completation {
+- (void)transactionsOnDay: (NSDate*) day completion: (void (^)(NSArray *transactions, NSError *error)) completion {
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *startDate = [calendar startOfDayForDate:day];
     NSDate *endDate = [[startDate dateByAddingDays:1] dateBySubtractingSeconds:1];
 
     DTTimePeriod *timePeriod = [[DTTimePeriod alloc] initWithStartDate:startDate endDate:endDate];
 
-    [self transactionsWithinPeriod:timePeriod completation:completation];
+    [self transactionsWithinPeriod:timePeriod completion:completion];
 }
 
-- (void)budgets: (void (^)(NSArray *budgets, NSError *error)) completation {
+- (void)budgets: (void (^)(NSArray *budgets, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Budget"];
     [query whereKey:@"organization" equalTo:self.organization];
     [query findObjectsInBackgroundWithBlock:^(NSArray *budgets, NSError * _Nullable error) {
         if(error) {
-            completation(nil, error);
+            completion(nil, error);
         } else {
-            completation(budgets, nil);
+            completion(budgets, nil);
         }
     }];
 }

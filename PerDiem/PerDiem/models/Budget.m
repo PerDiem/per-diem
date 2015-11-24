@@ -26,14 +26,14 @@
     return @"Budget";
 }
 
-+(void) budgets:(void (^)(NSArray *budgets, NSError *error)) completation {
++(void) budgets:(void (^)(NSArray *budgets, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Budget"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query findObjectsInBackgroundWithBlock:^(NSArray *budgets, NSError * _Nullable error) {
         if(error) {
-            completation(nil, error);
+            completion(nil, error);
         } else {
-            completation(budgets, nil);
+            completion(budgets, nil);
         }
     }];
 }
@@ -50,19 +50,19 @@
 }
 
 
-+(void) budgetsWithTransaction:(void (^)(NSArray *budgets, NSError *error)) completation {
++(void) budgetsWithTransaction:(void (^)(NSArray *budgets, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
-            completation(nil, error);
+            completion(nil, error);
         } else {
-            completation([self groupTransactions:transactions], nil);
+            completion([self groupTransactions:transactions], nil);
         }
     }];
 }
-+(void) budgetsWithTransactionWithinPeriod: (DTTimePeriod*) timePeriod completation:(void (^)(NSArray *budgets, NSError *error)) completation {
++(void) budgetsWithTransactionWithinPeriod: (DTTimePeriod*) timePeriod completion:(void (^)(NSArray *budgets, NSError *error)) completion {
 
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
@@ -71,16 +71,16 @@
     [query whereKey:@"transactionDate" lessThanOrEqualTo:[timePeriod EndDate]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
-            completation(nil, error);
+            completion(nil, error);
         } else {
-            completation([self groupTransactions:transactions], nil);
+            completion([self groupTransactions:transactions], nil);
         }
     }];
 }
-+(void) budgetsWithTransactionOnDay:(NSDate*) day completation: (void (^)(NSArray *budgets, NSError *error)) completation {
++(void) budgetsWithTransactionOnDay:(NSDate*) day completion: (void (^)(NSArray *budgets, NSError *error)) completion {
 
 }
-+(void) budgetNamedWithTransaction: (NSString*) name completation: (void (^)(NSArray *budgets, NSError *error)) completation {
++(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(NSArray *budgets, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
@@ -90,9 +90,9 @@
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
-            completation(nil, error);
+            completion(nil, error);
         } else {
-            completation([self groupTransactions:transactions], nil);
+            completion([self groupTransactions:transactions], nil);
         }
     }];
 }

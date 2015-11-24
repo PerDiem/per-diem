@@ -16,9 +16,9 @@
 
 @interface Transaction : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
-+ (void) transactions:(void (^)(TransactionList *transactions, NSError *error)) completation;
-+(void) transactionsWithinPeriod: (DTTimePeriod*) timePeriod completation: (void (^)(TransactionList *transactions, NSError *error)) completation;
-+(void) transactionsOnDay: (NSDate*) day completation: (void (^)(TransactionList *transactions, NSError *error)) completation;
++ (void) transactions:(void (^)(TransactionList *transactions, NSError *error)) completion;
++(void) transactionsWithinPeriod: (DTTimePeriod*) timePeriod completion: (void (^)(TransactionList *transactions, NSError *error)) completion;
++(void) transactionsOnDay: (NSDate*) day completion: (void (^)(TransactionList *transactions, NSError *error)) completion;
 
 
 @property (nonatomic, strong) NSNumber *amount;

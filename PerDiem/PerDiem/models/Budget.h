@@ -14,11 +14,11 @@
 @interface Budget : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
 
-+(void) budgets:(void (^)(NSArray *budgets, NSError *error)) completation;
-+(void) budgetsWithTransaction:(void (^)(NSArray *budgets, NSError *error)) completation;
-+(void) budgetsWithTransactionWithinPeriod:(DTTimePeriod*) timePeriod completation:(void (^)(NSArray *budgets, NSError *error)) completation;
-+(void) budgetsWithTransactionOnDay:(NSDate*) day completation: (void (^)(NSArray *budgets, NSError *error)) completation;
-+(void) budgetNamedWithTransaction: (NSString*) name completation: (void (^)(NSArray *budgets, NSError *error)) completation;
++(void) budgets:(void (^)(NSArray *budgets, NSError *error)) completion;
++(void) budgetsWithTransaction:(void (^)(NSArray *budgets, NSError *error)) completion;
++(void) budgetsWithTransactionWithinPeriod:(DTTimePeriod*) timePeriod completion:(void (^)(NSArray *budgets, NSError *error)) completion;
++(void) budgetsWithTransactionOnDay:(NSDate*) day completion: (void (^)(NSArray *budgets, NSError *error)) completion;
++(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(NSArray *budgets, NSError *error)) completion;
 
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, strong) NSString *name;
