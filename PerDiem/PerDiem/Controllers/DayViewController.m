@@ -7,6 +7,7 @@
 //
 
 #import "DayViewController.h"
+#import <DateTools/DateTools.h>
 
 @interface DayViewController ()
 
@@ -21,6 +22,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+
+#pragma mark - Private
+
+- (void)setDate:(NSDate *)date {
+    [super setDate:date];
+
+    NSDate *startOfDay = [[NSCalendar currentCalendar] startOfDayForDate:date];
+    self.timePeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeDay
+                                            startingAt:startOfDay];
+    [[self.timePeriod EndDate] dateBySubtractingSeconds:1];
+}
+
+- (void)updateLabel {
+    self.label.text = [self.date formattedDateWithFormat:@"cccc, LLL d"];
 }
 
 @end

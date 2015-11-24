@@ -16,8 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7m-PN-xSa">
-                    <rect key="frame" x="139" y="273" width="43" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dec 1st to Dec 7th" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7m-PN-xSa">
+                    <rect key="frame" x="90.5" y="100" width="140.5" height="20.5"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -25,10 +25,9 @@
                 </label>
             </subviews>
             <animations/>
-            <color key="backgroundColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="y7m-PN-xSa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="61f-iW-L5m"/>
-                <constraint firstItem="y7m-PN-xSa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Rxk-Ze-Qae"/>
+                <constraint firstItem="y7m-PN-xSa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="YqJ-Nx-QUV"/>
             </constraints>
             <point key="canvasLocation" x="251" y="393"/>
         </view>

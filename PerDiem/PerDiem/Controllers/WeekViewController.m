@@ -23,4 +23,22 @@
     [super viewDidLoad];
 }
 
+
+#pragma mark - Private
+
+- (void)setDate:(NSDate *)date {
+    [super setDate:date];
+    
+    NSDate *startOfDay = [[NSCalendar currentCalendar] startOfDayForDate:date];
+    NSInteger weekStartedDaysAgo = startOfDay.weekday - 1;
+    NSDate *startOfWeek = [startOfDay dateBySubtractingDays:weekStartedDaysAgo];
+    self.timePeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeWeek
+                                            startingAt:startOfWeek];
+    [[self.timePeriod EndDate] dateBySubtractingSeconds:1];
+}
+
+- (void)updateLabel {
+    self.label.text = [NSString stringWithFormat:@"%@ to %@", [[self.timePeriod StartDate] formattedDateWithFormat:@"LLL d"], [[self.timePeriod EndDate] formattedDateWithFormat:@"LLL d"]];
+}
+
 @end
