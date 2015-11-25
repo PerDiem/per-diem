@@ -66,5 +66,9 @@
     [self transactionsWithinPeriod:timePeriod completion:completion];
 }
 
+-(void)deleteTransaction {
+    [self deleteEventually];
+}
+
 
 @end

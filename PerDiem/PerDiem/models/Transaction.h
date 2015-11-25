@@ -20,7 +20,7 @@
 + (void) transactions:(void (^)(TransactionList *transactions, NSError *error)) completion;
 + (void) transactionsWithinPeriod: (DTTimePeriod*) timePeriod completion: (void (^)(TransactionList *transactions, NSError *error)) completion;
 + (void) transactionsOnDay: (NSDate*) day completion: (void (^)(TransactionList *transactions, NSError *error)) completion;
-
+- (void) deleteTransaction;
 
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, strong) NSDate *transactionDate;
