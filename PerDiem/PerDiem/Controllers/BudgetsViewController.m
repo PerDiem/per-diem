@@ -94,12 +94,12 @@
 #pragma mark - NavBar Controller
 
 - (void) setupNavBar {
-    UIBarButtonItem *transactionButtom = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction" style:UIBarButtonItemStylePlain target:self action:@selector(onNewTransaction)];
+    UIBarButtonItem *transactionButton = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction" style:UIBarButtonItemStylePlain target:self action:@selector(onNewTransaction)];
 
-    UIBarButtonItem *budgetButtom = [[UIBarButtonItem alloc] initWithTitle:@"New Budget" style:UIBarButtonItemStylePlain target:self action:@selector(onNewBudget)];
+    UIBarButtonItem *budgetButton = [[UIBarButtonItem alloc] initWithTitle:@"New Budget" style:UIBarButtonItemStylePlain target:self action:@selector(onNewBudget)];
 
-    self.navigationItem.rightBarButtonItem = transactionButtom;
-    self.navigationItem.leftBarButtonItem = budgetButtom;
+    self.navigationItem.rightBarButtonItem = transactionButton;
+    self.navigationItem.leftBarButtonItem = budgetButton;
 }
 - (void) onNewTransaction {
     [self.navigationController pushViewController:[[TransactionFormViewController alloc] init] animated:YES];
