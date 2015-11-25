@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "NSDate+DateTools.h"
+#import <DateTools/DateTools.h>
 
 @interface CalendarSubSubViewController : UIViewController
 
 @property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) DTTimePeriod *timePeriod;
 
 @end

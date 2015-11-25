@@ -32,8 +32,15 @@
     [self updateLabel];
 }
 
+- (void)setTimePeriod:(DTTimePeriod *)timePeriod {
+    _timePeriod = timePeriod;
+    [self updateLabel];
+}
+
 - (void)updateLabel {
-    self.label.text = [NSString stringWithFormat:@"Date: %@", [self.date formattedDateWithStyle:NSDateFormatterShortStyle] ];
+    NSString *from = [[self.timePeriod StartDate] formattedDateWithStyle:NSDateFormatterFullStyle];
+    NSString *to = [[self.timePeriod EndDate] formattedDateWithStyle:NSDateFormatterFullStyle];
+    self.label.text = [NSString stringWithFormat:@"%@ to %@", from, to];
 }
 
 @end
