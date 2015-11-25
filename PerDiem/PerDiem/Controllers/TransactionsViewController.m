@@ -7,10 +7,10 @@
 //
 
 #import "TransactionsViewController.h"
-#import "Transaction.h"
 #import "TransactionCell.h"
+#import "Transaction.h"
 #import "TransactionList.h"
-
+#import "Budget.h"
 
 @interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -27,15 +27,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"All Transactions";
 
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self setupNavigationBar];
-
     [self setupTableView];
 
-    [self fetchTransactions];
-    [self setupRefreshControl];
+    if (self.budget) {
+        self.title = self.budget.name;
+        self.transactionList = self.budget.transactionList;
+    } else {
+        self.title = @"All Transactions";
+        [self fetchTransactions];
+        [self setupRefreshControl];
+    }
 }
 
 #pragma mark - Model Interaction Methods
@@ -50,6 +54,17 @@
         }
         [self.refreshControl endRefreshing];
     }];
+
+}
+
+#pragma mark TransactionViewController public methods
+
+- (id) initWithBudget: (Budget*) budget {
+    self = [super init];
+    if (self) {
+        _budget = budget;
+    }
+    return self;
 }
 
 #pragma mark - Setup methods
