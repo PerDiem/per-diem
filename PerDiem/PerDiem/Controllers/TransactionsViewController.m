@@ -11,6 +11,7 @@
 #import "Transaction.h"
 #import "TransactionList.h"
 #import "Budget.h"
+#import "FiltersFormViewController.h"
 
 @interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -135,7 +136,7 @@
 #pragma mark - User interactions
 
 - (void)onFilters {
-    NSLog(@"Filters Tapped");
+    [self.navigationController pushViewController:[[FiltersFormViewController alloc] init] animated:YES];
 }
 
 #pragma mark - TabBarViewController
