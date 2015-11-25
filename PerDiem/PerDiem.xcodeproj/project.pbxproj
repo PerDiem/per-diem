@@ -43,6 +43,8 @@
 		8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D21BF561690016ECC2 /* LaunchScreen.storyboard */; };
 		BF6D073E1C010E5A00B61276 /* TransactionList.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D073D1C010E5A00B61276 /* TransactionList.m */; };
 		BF6D07411C01332D00B61276 /* TransactionFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D07401C01332D00B61276 /* TransactionFormViewController.m */; };
+		BF8ADB5C1C04CBF500AEEBFE /* BudgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8ADB5A1C04CBF500AEEBFE /* BudgetCell.m */; };
+		BF8ADB5D1C04CBF500AEEBFE /* BudgetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8ADB5B1C04CBF500AEEBFE /* BudgetCell.xib */; };
 		BFE4324E1C0028F800809F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4324D1C0028F800809F7E /* User.m */; };
 		BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432511C0033FB00809F7E /* LoginViewController.m */; };
 		BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE432521C0033FB00809F7E /* LoginViewController.xib */; };
@@ -113,6 +115,9 @@
 		BF6D073D1C010E5A00B61276 /* TransactionList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransactionList.m; path = models/TransactionList.m; sourceTree = "<group>"; };
 		BF6D073F1C01332D00B61276 /* TransactionFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransactionFormViewController.h; path = Controllers/TransactionFormViewController.h; sourceTree = "<group>"; };
 		BF6D07401C01332D00B61276 /* TransactionFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransactionFormViewController.m; path = Controllers/TransactionFormViewController.m; sourceTree = "<group>"; };
+		BF8ADB591C04CBF500AEEBFE /* BudgetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BudgetCell.h; path = Views/BudgetCell.h; sourceTree = "<group>"; };
+		BF8ADB5A1C04CBF500AEEBFE /* BudgetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BudgetCell.m; path = Views/BudgetCell.m; sourceTree = "<group>"; };
+		BF8ADB5B1C04CBF500AEEBFE /* BudgetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BudgetCell.xib; path = Views/BudgetCell.xib; sourceTree = "<group>"; };
 		BFE4324C1C0028F800809F7E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = models/User.h; sourceTree = "<group>"; };
 		BFE4324D1C0028F800809F7E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = models/User.m; sourceTree = "<group>"; };
 		BFE432501C0033FB00809F7E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Controllers/LoginViewController.h; sourceTree = "<group>"; };
@@ -197,6 +202,9 @@
 				8E42F45C1C0242FD00AE2E37 /* TransactionCell.h */,
 				8E42F45D1C0242FD00AE2E37 /* TransactionCell.m */,
 				8E42F45E1C0242FE00AE2E37 /* TransactionCell.xib */,
+				BF8ADB591C04CBF500AEEBFE /* BudgetCell.h */,
+				BF8ADB5A1C04CBF500AEEBFE /* BudgetCell.m */,
+				BF8ADB5B1C04CBF500AEEBFE /* BudgetCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -370,6 +378,7 @@
 				4AA1AB571C01553500BF3604 /* WeeksViewController.xib in Resources */,
 				4AA1AB471C01374100BF3604 /* CalendarViewController.xib in Resources */,
 				8E42F4601C0242FE00AE2E37 /* TransactionCell.xib in Resources */,
+				BF8ADB5D1C04CBF500AEEBFE /* BudgetCell.xib in Resources */,
 				8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */,
 				4AA1AB5C1C01555000BF3604 /* MonthsViewController.xib in Resources */,
 				4AEB60E51C010AA800679DAF /* TransactionsViewController.xib in Resources */,
@@ -435,6 +444,7 @@
 			files = (
 				BF6D07411C01332D00B61276 /* TransactionFormViewController.m in Sources */,
 				4AA1AB651C01559500BF3604 /* CalendarSubViewController.m in Sources */,
+				BF8ADB5C1C04CBF500AEEBFE /* BudgetCell.m in Sources */,
 				BFE432591C0039BB00809F7E /* Transaction.m in Sources */,
 				BFE4324E1C0028F800809F7E /* User.m in Sources */,
 				4AEB60EE1C01186800679DAF /* NavigationViewController.m in Sources */,

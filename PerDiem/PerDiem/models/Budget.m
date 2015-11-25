@@ -49,7 +49,6 @@
     return budgets;
 }
 
-
 +(void) budgetsWithTransaction:(void (^)(NSArray *budgets, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];

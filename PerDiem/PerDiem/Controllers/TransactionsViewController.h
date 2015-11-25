@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "TabBarViewController.h"
 
+@class Budget;
+
 @interface TransactionsViewController : TabBarViewController
+
+- (id) initWithBudget: (Budget*) budget;
+@property (strong, nonatomic) Budget* budget;
 
 @end
