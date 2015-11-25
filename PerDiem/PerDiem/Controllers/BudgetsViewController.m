@@ -8,6 +8,7 @@
 
 #import "BudgetsViewController.h"
 #import "TransactionFormViewController.h"
+#import "BudgetFormViewController.h"
 #import "TransactionsViewController.h"
 #import "BudgetCell.h"
 #import "Budget.h"
@@ -93,12 +94,19 @@
 #pragma mark - NavBar Controller
 
 - (void) setupNavBar {
-    UIBarButtonItem *transactionButtom = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction" style:UIBarButtonItemStylePlain target:self action:@selector(onNewtransaction)];
+    UIBarButtonItem *transactionButton = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction" style:UIBarButtonItemStylePlain target:self action:@selector(onNewTransaction)];
 
-    self.navigationItem.rightBarButtonItem = transactionButtom;
+    UIBarButtonItem *budgetButton = [[UIBarButtonItem alloc] initWithTitle:@"New Budget" style:UIBarButtonItemStylePlain target:self action:@selector(onNewBudget)];
+
+    self.navigationItem.rightBarButtonItem = transactionButton;
+    self.navigationItem.leftBarButtonItem = budgetButton;
 }
-- (void) onNewtransaction {
+- (void) onNewTransaction {
     [self.navigationController pushViewController:[[TransactionFormViewController alloc] init] animated:YES];
+}
+
+- (void) onNewBudget {
+    [self.navigationController pushViewController:[[BudgetFormViewController alloc] init] animated:YES];
 }
 
 @end
