@@ -27,7 +27,6 @@ NSString *const kBudget = @"selectorPush";
 
 @implementation TransactionFormViewController
 
-
 -(id)init
 {
     return [self setup:[Transaction object]];
@@ -43,6 +42,8 @@ NSString *const kBudget = @"selectorPush";
     XLFormSectionDescriptor * section;
     XLFormRowDescriptor * row;
     formDescriptor.assignFirstResponderOnShow = YES;
+
+    self.transaction = transaction;
 
     // Basic Information - Section
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Transaction"];
@@ -108,7 +109,6 @@ NSString *const kBudget = @"selectorPush";
 
     [section addFormRow:row];
 
-    self.transaction = [Transaction object];
     return [super initWithForm:formDescriptor];
 }
 
@@ -139,8 +139,8 @@ NSString *const kBudget = @"selectorPush";
     self.transaction.transactionDate = values[kDate];
     [self.transaction saveInBackground];
 
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
