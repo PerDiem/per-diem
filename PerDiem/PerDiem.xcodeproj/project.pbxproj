@@ -45,6 +45,7 @@
 		BF6D07411C01332D00B61276 /* TransactionFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D07401C01332D00B61276 /* TransactionFormViewController.m */; };
 		BF8ADB5C1C04CBF500AEEBFE /* BudgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8ADB5A1C04CBF500AEEBFE /* BudgetCell.m */; };
 		BF8ADB5D1C04CBF500AEEBFE /* BudgetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8ADB5B1C04CBF500AEEBFE /* BudgetCell.xib */; };
+		BF8ADB651C05712D00AEEBFE /* BudgetFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8ADB641C05712D00AEEBFE /* BudgetFormViewController.m */; };
 		BFE4324E1C0028F800809F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4324D1C0028F800809F7E /* User.m */; };
 		BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432511C0033FB00809F7E /* LoginViewController.m */; };
 		BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE432521C0033FB00809F7E /* LoginViewController.xib */; };
@@ -118,6 +119,8 @@
 		BF8ADB591C04CBF500AEEBFE /* BudgetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BudgetCell.h; path = Views/BudgetCell.h; sourceTree = "<group>"; };
 		BF8ADB5A1C04CBF500AEEBFE /* BudgetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BudgetCell.m; path = Views/BudgetCell.m; sourceTree = "<group>"; };
 		BF8ADB5B1C04CBF500AEEBFE /* BudgetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BudgetCell.xib; path = Views/BudgetCell.xib; sourceTree = "<group>"; };
+		BF8ADB631C05712D00AEEBFE /* BudgetFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BudgetFormViewController.h; path = Controllers/Forms/BudgetFormViewController.h; sourceTree = "<group>"; };
+		BF8ADB641C05712D00AEEBFE /* BudgetFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BudgetFormViewController.m; path = Controllers/Forms/BudgetFormViewController.m; sourceTree = "<group>"; };
 		BFE4324C1C0028F800809F7E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = models/User.h; sourceTree = "<group>"; };
 		BFE4324D1C0028F800809F7E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = models/User.m; sourceTree = "<group>"; };
 		BFE432501C0033FB00809F7E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Controllers/LoginViewController.h; sourceTree = "<group>"; };
@@ -252,6 +255,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BF8ADB621C05711100AEEBFE /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				BF8ADB631C05712D00AEEBFE /* BudgetFormViewController.h */,
+				BF8ADB641C05712D00AEEBFE /* BudgetFormViewController.m */,
+				BF6D073F1C01332D00B61276 /* TransactionFormViewController.h */,
+				BF6D07401C01332D00B61276 /* TransactionFormViewController.m */,
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
 		BFE4324B1C00276100809F7E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +290,7 @@
 		BFE4324F1C00338F00809F7E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BF8ADB621C05711100AEEBFE /* Forms */,
 				4AA1AB521C0149AA00BF3604 /* Calendar */,
 				BFE432501C0033FB00809F7E /* LoginViewController.h */,
 				BFE432511C0033FB00809F7E /* LoginViewController.m */,
@@ -292,8 +307,6 @@
 				4AEB60CE1C01086100679DAF /* TabBarController.m */,
 				4AA1AB3D1C012EDF00BF3604 /* TabBarViewController.h */,
 				4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */,
-				BF6D073F1C01332D00B61276 /* TransactionFormViewController.h */,
-				BF6D07401C01332D00B61276 /* TransactionFormViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -444,6 +457,7 @@
 			files = (
 				BF6D07411C01332D00B61276 /* TransactionFormViewController.m in Sources */,
 				4AA1AB651C01559500BF3604 /* CalendarSubViewController.m in Sources */,
+				BF8ADB651C05712D00AEEBFE /* BudgetFormViewController.m in Sources */,
 				BF8ADB5C1C04CBF500AEEBFE /* BudgetCell.m in Sources */,
 				BFE432591C0039BB00809F7E /* Transaction.m in Sources */,
 				BFE4324E1C0028F800809F7E /* User.m in Sources */,
