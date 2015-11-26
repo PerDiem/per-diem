@@ -41,6 +41,7 @@
 		8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DA2C81BF561690016ECC2 /* AppDelegate.m */; };
 		8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D01BF561690016ECC2 /* Assets.xcassets */; };
 		8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DA2D21BF561690016ECC2 /* LaunchScreen.storyboard */; };
+		8EC0E14C1C06DEEC0004207B /* UIColor+PerDiem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC0E14B1C06DEEC0004207B /* UIColor+PerDiem.m */; };
 		BF6D073E1C010E5A00B61276 /* TransactionList.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D073D1C010E5A00B61276 /* TransactionList.m */; };
 		BF6D07411C01332D00B61276 /* TransactionFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D07401C01332D00B61276 /* TransactionFormViewController.m */; };
 		BF8ADB5C1C04CBF500AEEBFE /* BudgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8ADB5A1C04CBF500AEEBFE /* BudgetCell.m */; };
@@ -112,6 +113,8 @@
 		8E9DA2D01BF561690016ECC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E9DA2D31BF561690016ECC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9DA2D51BF561690016ECC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EC0E14A1C06DEEC0004207B /* UIColor+PerDiem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+PerDiem.h"; path = "Categories/UIColor+PerDiem.h"; sourceTree = "<group>"; };
+		8EC0E14B1C06DEEC0004207B /* UIColor+PerDiem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+PerDiem.m"; path = "Categories/UIColor+PerDiem.m"; sourceTree = "<group>"; };
 		BF6D073C1C010E5A00B61276 /* TransactionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransactionList.h; path = models/TransactionList.h; sourceTree = "<group>"; };
 		BF6D073D1C010E5A00B61276 /* TransactionList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransactionList.m; path = models/TransactionList.m; sourceTree = "<group>"; };
 		BF6D073F1C01332D00B61276 /* TransactionFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransactionFormViewController.h; path = Controllers/TransactionFormViewController.h; sourceTree = "<group>"; };
@@ -233,6 +236,7 @@
 		8E9DA2C31BF561690016ECC2 /* PerDiem */ = {
 			isa = PBXGroup;
 			children = (
+				8EC0E1491C06DED70004207B /* Categories */,
 				4AF678251C025F0500DFB75E /* Helpers */,
 				BFE4324F1C00338F00809F7E /* Controllers */,
 				8E42F4561C02427300AE2E37 /* Views */,
@@ -253,6 +257,15 @@
 				8E9DA2C51BF561690016ECC2 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8EC0E1491C06DED70004207B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8EC0E14A1C06DEEC0004207B /* UIColor+PerDiem.h */,
+				8EC0E14B1C06DEEC0004207B /* UIColor+PerDiem.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		BF8ADB621C05711100AEEBFE /* Forms */ = {
@@ -459,6 +472,7 @@
 				4AA1AB651C01559500BF3604 /* CalendarSubViewController.m in Sources */,
 				BF8ADB651C05712D00AEEBFE /* BudgetFormViewController.m in Sources */,
 				BF8ADB5C1C04CBF500AEEBFE /* BudgetCell.m in Sources */,
+				8EC0E14C1C06DEEC0004207B /* UIColor+PerDiem.m in Sources */,
 				BFE432591C0039BB00809F7E /* Transaction.m in Sources */,
 				BFE4324E1C0028F800809F7E /* User.m in Sources */,
 				4AEB60EE1C01186800679DAF /* NavigationViewController.m in Sources */,

@@ -9,6 +9,7 @@
 #import "TransactionCell.h"
 #import "Budget.h"
 #import "PaymentType.h"
+#import "UIColor+PerDiem.h"
 
 @interface TransactionCell ()
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -36,6 +37,18 @@
     // self.paymentTypeLabel.text = self.transaction.paymentType.name;
     self.summaryLabel.text = self.transaction.summary;
     self.amountLabel.text = [self.amountFormatter stringFromNumber:self.transaction.amount];
+
+    if (self.transaction.future) {
+        [self styleFutureCell];
+    }
+}
+
+- (void)styleFutureCell {
+    self.summaryLabel.font = [UIFont italicSystemFontOfSize:15];
+    self.amountLabel.font = [UIFont italicSystemFontOfSize:15];
+    self.summaryLabel.textColor = [UIColor darkBlueColor];
+    self.amountLabel.textColor = [UIColor darkBlueColor];
+    [self setBackgroundColor:[UIColor lightBlueColorWithAlpha:.3]];
 }
 
 - (NSString *)formatDate:(NSDate *)date {

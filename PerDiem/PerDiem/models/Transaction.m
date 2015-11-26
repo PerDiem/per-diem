@@ -13,7 +13,7 @@
 #import "TransactionList.h"
 
 @implementation Transaction
-@dynamic amount, transactionDate, summary, note, user, budget,  paymentType, organization;
+@dynamic amount, transactionDate, summary, future, note, user, budget,  paymentType, organization;
 
 + (void)load {
     [self registerSubclass];

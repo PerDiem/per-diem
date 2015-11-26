@@ -17,6 +17,7 @@ NSString *const kAmount = @"amount";
 NSString *const kDate = @"transactionDate";
 NSString *const kDescription = @"description";
 NSString *const kBudget = @"selectorPush";
+NSString *const kFuture = @"future";
 
 
 @interface TransactionFormViewController ()
@@ -101,6 +102,11 @@ NSString *const kBudget = @"selectorPush";
 
     [section addFormRow:row];
 
+    // Future
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kFuture rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Future Transaction"];
+    row.required = NO;
+    [section addFormRow: row];
+
     //Description
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kDescription rowType:XLFormRowDescriptorTypeTextView title:@"Description"];
     if (transaction.note) {
@@ -137,6 +143,7 @@ NSString *const kBudget = @"selectorPush";
     }
     self.transaction.note = values[kDescription];
     self.transaction.transactionDate = values[kDate];
+    self.transaction.future = values[kFuture];
     [self.transaction saveInBackground];
 
     [self.navigationController popViewControllerAnimated:YES];
