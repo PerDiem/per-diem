@@ -19,7 +19,7 @@ As a user...
 - [ ] I can specify savings and spending goals. *May not end up being necessary. Wil likely just be part of the budgets*
 - [ ] *I can confirm, edit, or delete ‘future’ transactions if their date is today or in the past.*
 
-Milestone 1 Walkthrough (Required Stories)
+Milestone 1 Walkthrough (Required Stories)  
 ![Video Walkthrough](mocks/per-diem-1.gif)
 
 **Optionals**
