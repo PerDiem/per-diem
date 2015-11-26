@@ -8,15 +8,16 @@ A daily finance tracking app. Per Diem helps you budget your spending based on t
 
 As a user...
 
-- [ ] I can login using touch ID
-- [ ] I can input, edit, and delete transactions (past and future) in my local currency.
-- [ ] I can view the amount spent within the timeframe and daily "Per Diem" amount. (also for each budget).
+*italics* items are not completely finished.
+- [x] I can login using touch ID *(partially done)*
+- [x] I can input, *edit*, and delete transactions (past and future) in *my local currency*.
+- [x] I can view the amount spent within the timeframe and *daily "Per Diem" amount*. (also for each budget).
     - [ ] Per Diem = (budget - (spent + futures)) / remaining days
-- [ ] I can view all previous transactions and sort/filter by category, date, payee, payment method, or timeframe. Can view totals of selected transactions.
-- [ ] I can view, create, edit, and delete categories.
-- [ ] I can view, create, edit, and delete budgets based on a category or multiple categories and a timeframe. 
-- [ ] I can specify savings and spending goals.
-- [ ] I can confirm, edit, or delete ‘future’ transactions if their date is today or in the past.
+- [x] I can view all previous transactions and *sort/filter by category, date, payee, payment method, or timeframe*. *Can view totals of selected transactions*.
+- [ ] I can view, create, edit, and *delete categories. *May not be end up being needed.*
+- [x] I can view, create, *edit, and delete* budgets based on a category or *multiple categories and a timeframe*.
+- [ ] I can specify savings and spending goals. *May not end up being necessary. Wil likely just be part of the budgets*
+- [ ] *I can confirm, edit, or delete ‘future’ transactions if their date is today or in the past.*
 
 **Optionals**
 As a user…
