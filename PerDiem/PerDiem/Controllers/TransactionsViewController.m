@@ -7,12 +7,14 @@
 //
 
 #import "TransactionsViewController.h"
+#import "TransactionFormViewController.h"
 #import "TransactionCell.h"
 #import "Transaction.h"
 #import "TransactionList.h"
 #import "Budget.h"
+#import <SWTableViewCell.h>
 
-@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) TransactionList *transactionList;
@@ -108,28 +110,65 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
     cell.transaction = self.transactionList.transactions[indexPath.row];
+    cell.rightUtilityButtons = [self rightButtons];
+    cell.delegate = self;
     return cell;
 }
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
+                                                title:@"Edit"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"Delete"];
+    return rightUtilityButtons;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete from Parse
-        [self.transactionList.transactions[indexPath.row] deleteTransaction];
+#pragma mark - SWTableViewDelegate
 
-        // Delete from model
-        NSMutableArray *transactions = [self.transactionList.transactions mutableCopy];
-        [transactions removeObjectAtIndex:indexPath.row];
-        self.transactionList.transactions = transactions;
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    switch (index) {
+        case 0:
+        {
+            TransactionFormViewController *vc = [[TransactionFormViewController alloc] initWithTransaction:self.transactionList.transactions[indexPath.row]];
+            vc.delegator = self;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 1:
+        {
+            // Delete from Parse
+            [self.transactionList.transactions[indexPath.row] deleteTransaction];
 
-        // Delete from tableView
-        [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView endUpdates];
+            // Delete from model
+            NSMutableArray *transactions = [self.transactionList.transactions mutableCopy];
+            [transactions removeObjectAtIndex:indexPath.row];
+            self.transactionList.transactions = transactions;
+
+            // Delete from tableView
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
+            break;
+        }
+        default:
+            break;
     }
+}
+
+#pragma mark - TranscationFormActionDelegate
+
+-(void)transactionUpdated:(Transaction *)transaction {
+    [self.tableView beginUpdates];
+
+    NSUInteger index = [self.transactionList.transactions indexOfObject:transaction];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
 }
 
 #pragma mark - User interactions
