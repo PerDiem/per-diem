@@ -14,7 +14,7 @@
 #import "Budget.h"
 #import <SWTableViewCell.h>
 
-@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate>
+@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate>
 
 @property(strong, nonatomic) NSArray* budgets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -110,8 +110,12 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     switch (index) {
         case 0:
-            [self.navigationController pushViewController:[[BudgetFormViewController alloc] initWithBudget:self.budgets[indexPath.row]] animated:YES];
+        {
+            BudgetFormViewController *vc = [[BudgetFormViewController alloc] initWithBudget:self.budgets[indexPath.row]];
+            vc.delegator = self;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
+        }
         case 1:
         {
             // Delete from Parse
@@ -133,6 +137,30 @@
     }
 }
 
+#pragma mark - BudgetFormActionDelegate
+
+-(void)budgetCreated:(Budget*) budget {
+    [self.tableView beginUpdates];
+
+    NSMutableArray *budgets = [self.budgets mutableCopy];
+    [budgets addObject:budget];
+    self.budgets = budgets;
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(budgets.count -1) inSection:0];
+
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+-(void)budgetUpdated:(Budget*) budget {
+    [self.tableView beginUpdates];
+
+    NSUInteger index = [self.budgets indexOfObject:budget];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
 #pragma mark - NavBar Controller
 
 - (void) setupNavBar {
@@ -148,7 +176,9 @@
 }
 
 - (void) onNewBudget {
-    [self.navigationController pushViewController:[[BudgetFormViewController alloc] init] animated:YES];
+    BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
+    vc.delegator = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
