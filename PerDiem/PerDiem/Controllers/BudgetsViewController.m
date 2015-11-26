@@ -18,6 +18,7 @@
 
 @property(strong, nonatomic) NSArray* budgets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -30,25 +31,9 @@
     [super viewDidLoad];
 
     [self setupNavBar];
-
-    [Budget budgets:^(NSArray *budgets, NSError *error) {
-        NSMutableSet *list = [NSMutableSet setWithArray:self.budgets];
-        [list addObjectsFromArray:budgets];
-        self.budgets = [list allObjects];
-        [self.tableView reloadData];
-    }];
-
-    [Budget budgetsWithTransaction:^(NSArray *budgets, NSError *error) {
-        NSSet *oldBudgets = [NSSet setWithArray:self.budgets];
-        NSMutableSet *newBudgets = [NSMutableSet setWithArray:budgets];
-        [newBudgets unionSet:oldBudgets];
-
-        self.budgets = [newBudgets allObjects];
-        [self.tableView reloadData];
-    }];
-
+    [self setupRefreshControl];
     [self setupTableView];
-
+    [self fetchBudgets];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,6 +79,36 @@
 
 - (void)setupUI {
     [self setupBarItemWithImageNamed:@"budgets"];
+}
+
+#pragma mark - Setup
+
+- (void) fetchBudgets {
+    [Budget budgets:^(NSArray *budgets, NSError *error) {
+        NSMutableSet *list = [NSMutableSet setWithArray:self.budgets];
+        [list addObjectsFromArray:budgets];
+        self.budgets = [list allObjects];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
+
+    [Budget budgetsWithTransaction:^(NSArray *budgets, NSError *error) {
+        NSSet *oldBudgets = [NSSet setWithArray:self.budgets];
+        NSMutableSet *newBudgets = [NSMutableSet setWithArray:budgets];
+        [newBudgets unionSet:oldBudgets];
+
+        self.budgets = [newBudgets allObjects];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+- (void)setupRefreshControl {
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self
+                            action:@selector(fetchBudgets)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex: 0];
 }
 
 - (void)setupTableView {
@@ -171,6 +186,8 @@
     self.navigationItem.rightBarButtonItem = transactionButton;
     self.navigationItem.leftBarButtonItem = budgetButton;
 }
+
+#pragma mark Actions
 - (void) onNewTransaction {
     [self.navigationController pushViewController:[[TransactionFormViewController alloc] init] animated:YES];
 }
