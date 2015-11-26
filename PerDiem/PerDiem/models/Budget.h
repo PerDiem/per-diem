@@ -20,6 +20,8 @@
 +(void) budgetsWithTransactionOnDay:(NSDate*) day completion: (void (^)(NSArray *budgets, NSError *error)) completion;
 +(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(NSArray *budgets, NSError *error)) completion;
 
+-(void) deleteBudget;
+
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) Organization *organization;

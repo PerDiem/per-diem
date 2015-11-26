@@ -12,8 +12,9 @@
 #import "TransactionsViewController.h"
 #import "BudgetCell.h"
 #import "Budget.h"
+#import <SWTableViewCell.h>
 
-@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate>
 
 @property(strong, nonatomic) NSArray* budgets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -72,9 +73,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BudgetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BudgetCell"];
     cell.budget = self.budgets[indexPath.row];
+    cell.rightUtilityButtons = [self rightButtons];
+    cell.delegate = self;
     return cell;
 }
 
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
+                                                title:@"Edit"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"Delete"];
+    return rightUtilityButtons;
+}
 
 #pragma mark - TabBarViewController
 
@@ -90,6 +104,34 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
+#pragma mark - SWTableViewDelegate
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    switch (index) {
+        case 0:
+            [self.navigationController pushViewController:[[BudgetFormViewController alloc] initWithBudget:self.budgets[indexPath.row]] animated:YES];
+            break;
+        case 1:
+        {
+            // Delete from Parse
+            [self.budgets[indexPath.row] deleteBudget];
+
+            // Delete from model
+            NSMutableArray *budgets = [self.budgets mutableCopy];
+            [budgets removeObjectAtIndex:indexPath.row];
+            self.budgets = budgets;
+
+            // Delete from tableView
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
+            break;
+        }
+        default:
+            break;
+    }
+}
 
 #pragma mark - NavBar Controller
 

@@ -96,6 +96,10 @@
     }];
 }
 
+-(void) deleteBudget {
+    [self deleteEventually];
+}
+
 - (BOOL)isEqual:(id)object {
     if (object == self) {
         return YES;
