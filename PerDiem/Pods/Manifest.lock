@@ -22,21 +22,38 @@ PODS:
     - AFNetworking/NSURLSession
   - Bolts/Tasks (1.5.0)
   - DateTools (1.7.0)
+  - IRLDocumentScanner (0.1.2)
   - Parse (1.10.0):
     - Bolts/Tasks (~> 1.5)
+  - TesseractOCRiOS (4.0.0)
   - XLForm (3.0.2)
 
 DEPENDENCIES:
   - AFNetworking
   - DateTools
+  - IRLDocumentScanner
   - Parse
+  - TesseractOCRiOS (from `https://github.com/gali8/Tesseract-OCR-iOS.git`, commit
+    `925cce4c3bcb3d1f98e1a53a4c0ba7c9a0fdb6d7`)
   - XLForm
+
+EXTERNAL SOURCES:
+  TesseractOCRiOS:
+    :commit: 925cce4c3bcb3d1f98e1a53a4c0ba7c9a0fdb6d7
+    :git: https://github.com/gali8/Tesseract-OCR-iOS.git
+
+CHECKOUT OPTIONS:
+  TesseractOCRiOS:
+    :commit: 925cce4c3bcb3d1f98e1a53a4c0ba7c9a0fdb6d7
+    :git: https://github.com/gali8/Tesseract-OCR-iOS.git
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
+  IRLDocumentScanner: b452cc6759d557bb37802b3cc779d5388b7d7ebc
   Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
+  TesseractOCRiOS: 729989db3984bb60ba3addb053569b172d48c409
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
-COCOAPODS: 0.39.0
+COCOAPODS: 0.38.2

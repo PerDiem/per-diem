@@ -23,6 +23,10 @@
 		4AA1AB661C01559500BF3604 /* CalendarSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA1AB641C01559500BF3604 /* CalendarSubViewController.xib */; };
 		4AA1AB6A1C0174C100BF3604 /* CalendarSubSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB681C0174C100BF3604 /* CalendarSubSubViewController.m */; };
 		4AA1AB6B1C0174C100BF3604 /* CalendarSubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA1AB691C0174C100BF3604 /* CalendarSubSubViewController.xib */; };
+		4AA46D8A1C09252F00C4B980 /* SnapReceiptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA46D881C09252F00C4B980 /* SnapReceiptViewController.m */; };
+		4AA46D8B1C09252F00C4B980 /* SnapReceiptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA46D891C09252F00C4B980 /* SnapReceiptViewController.xib */; };
+		4AAA3FAD1C092A05004CE620 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA3FAC1C092A05004CE620 /* libz.tbd */; };
+		4AAA3FAF1C092A93004CE620 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 4AAA3FAE1C092A93004CE620 /* tessdata */; };
 		4AEB60D01C01086100679DAF /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60CE1C01086100679DAF /* TabBarController.m */; };
 		4AEB60DA1C010A6600679DAF /* DayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60D81C010A6600679DAF /* DayViewController.m */; };
 		4AEB60DB1C010A6600679DAF /* DayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB60D91C010A6600679DAF /* DayViewController.xib */; };
@@ -80,6 +84,11 @@
 		4AA1AB671C0174C100BF3604 /* CalendarSubSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarSubSubViewController.h; path = Controllers/CalendarSubSubViewController.h; sourceTree = "<group>"; };
 		4AA1AB681C0174C100BF3604 /* CalendarSubSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarSubSubViewController.m; path = Controllers/CalendarSubSubViewController.m; sourceTree = "<group>"; };
 		4AA1AB691C0174C100BF3604 /* CalendarSubSubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarSubSubViewController.xib; path = Controllers/CalendarSubSubViewController.xib; sourceTree = "<group>"; };
+		4AA46D871C09252F00C4B980 /* SnapReceiptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SnapReceiptViewController.h; path = Controllers/SnapReceiptViewController.h; sourceTree = "<group>"; };
+		4AA46D881C09252F00C4B980 /* SnapReceiptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SnapReceiptViewController.m; path = Controllers/SnapReceiptViewController.m; sourceTree = "<group>"; };
+		4AA46D891C09252F00C4B980 /* SnapReceiptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SnapReceiptViewController.xib; path = Controllers/SnapReceiptViewController.xib; sourceTree = "<group>"; };
+		4AAA3FAC1C092A05004CE620 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4AAA3FAE1C092A93004CE620 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = SOURCE_ROOT; };
 		4AEB60CD1C01086100679DAF /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarController.h; path = Controllers/TabBarController.h; sourceTree = "<group>"; };
 		4AEB60CE1C01086100679DAF /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarController.m; path = Controllers/TabBarController.m; sourceTree = "<group>"; };
 		4AEB60D71C010A6600679DAF /* DayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayViewController.h; path = Controllers/DayViewController.h; sourceTree = "<group>"; };
@@ -144,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AAA3FAD1C092A05004CE620 /* libz.tbd in Frameworks */,
 				2F566DFF78A2F30D6AEA35ED /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +207,7 @@
 		808FB1134678BF5A8994412D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4AAA3FAC1C092A05004CE620 /* libz.tbd */,
 				57758C4476CA8CEE304D8C89 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -254,6 +265,7 @@
 		8E9DA2C41BF561690016ECC2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4AAA3FAE1C092A93004CE620 /* tessdata */,
 				8E9DA2C51BF561690016ECC2 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -320,6 +332,9 @@
 				4AEB60CE1C01086100679DAF /* TabBarController.m */,
 				4AA1AB3D1C012EDF00BF3604 /* TabBarViewController.h */,
 				4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */,
+				4AA46D871C09252F00C4B980 /* SnapReceiptViewController.h */,
+				4AA46D881C09252F00C4B980 /* SnapReceiptViewController.m */,
+				4AA46D891C09252F00C4B980 /* SnapReceiptViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -345,7 +360,6 @@
 				8E9DA2BE1BF561690016ECC2 /* Frameworks */,
 				8E9DA2BF1BF561690016ECC2 /* Resources */,
 				47999060A9B6ADB5A75727E4 /* Copy Pods Resources */,
-				E7DAC6E210DAEB7C746180D8 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -400,10 +414,12 @@
 				4AA1AB611C01556100BF3604 /* DaysViewController.xib in Resources */,
 				4AEB60E01C010A7400679DAF /* BudgetsViewController.xib in Resources */,
 				4AEB60DB1C010A6600679DAF /* DayViewController.xib in Resources */,
+				4AA46D8B1C09252F00C4B980 /* SnapReceiptViewController.xib in Resources */,
 				8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */,
 				4AA1AB571C01553500BF3604 /* WeeksViewController.xib in Resources */,
 				4AA1AB471C01374100BF3604 /* CalendarViewController.xib in Resources */,
 				8E42F4601C0242FE00AE2E37 /* TransactionCell.xib in Resources */,
+				4AAA3FAF1C092A93004CE620 /* tessdata in Resources */,
 				BF8ADB5D1C04CBF500AEEBFE /* BudgetCell.xib in Resources */,
 				8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */,
 				4AA1AB5C1C01555000BF3604 /* MonthsViewController.xib in Resources */,
@@ -446,21 +462,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E7DAC6E210DAEB7C746180D8 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -479,6 +480,7 @@
 				BFE4325C1C003D4700809F7E /* Budget.m in Sources */,
 				4AA1AB4B1C0142C000BF3604 /* WeekViewController.m in Sources */,
 				4AA1AB601C01556100BF3604 /* DaysViewController.m in Sources */,
+				4AA46D8A1C09252F00C4B980 /* SnapReceiptViewController.m in Sources */,
 				BFE432621C006A6D00809F7E /* Organization.m in Sources */,
 				4AEB60DA1C010A6600679DAF /* DayViewController.m in Sources */,
 				BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */,

@@ -1,6 +1,8 @@
-platform :ios, '7.0'
+platform :ios, '8.0'
 
 pod 'AFNetworking'
 pod 'Parse'
 pod 'DateTools'
 pod 'XLForm'
+pod 'IRLDocumentScanner'
+pod 'TesseractOCRiOS', :git => 'https://github.com/gali8/Tesseract-OCR-iOS.git', :commit => '925cce4c3bcb3d1f98e1a53a4c0ba7c9a0fdb6d7'
