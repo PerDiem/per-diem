@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SWTableViewCell.h>
 
 @class Budget;
 
-@interface BudgetCell : UITableViewCell
+@interface BudgetCell : SWTableViewCell
 
 @property(strong, nonatomic) Budget *budget;
 

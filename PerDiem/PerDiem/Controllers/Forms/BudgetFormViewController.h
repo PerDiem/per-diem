@@ -10,7 +10,16 @@
 
 @class Budget;
 
+@protocol BudgetFormActionDelegate <NSObject>
+
+@optional
+-(void)budgetCreated:(Budget*) budget;
+-(void)budgetUpdated:(Budget*) budget;
+@end
+
 @interface BudgetFormViewController : XLFormViewController
+
+@property (weak, nonatomic) id<BudgetFormActionDelegate> delegator;
 
 -(id) initWithBudget: (Budget*) budget;
 

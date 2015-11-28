@@ -24,12 +24,14 @@ PODS:
   - DateTools (1.7.0)
   - Parse (1.10.0):
     - Bolts/Tasks (~> 1.5)
+  - SWTableViewCell (0.3.7)
   - XLForm (3.0.2)
 
 DEPENDENCIES:
   - AFNetworking
   - DateTools
   - Parse
+  - SWTableViewCell
   - XLForm
 
 SPEC CHECKSUMS:
@@ -37,6 +39,7 @@ SPEC CHECKSUMS:
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
 COCOAPODS: 0.39.0
