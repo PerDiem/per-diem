@@ -39,7 +39,7 @@
 #pragma mark - Private
 
 - (CalendarSubSubViewController *)viewControllerWithDate:(NSDate *)date {
-    DayViewController *controller = [[DayViewController alloc] initWithNibName:@"DayViewController" bundle:nil];
+    DayViewController *controller = [[DayViewController alloc] initWithNibName:@"CalendarSubSubViewController" bundle:nil];
     controller.date = date;
     return controller;
 }

@@ -18,13 +18,6 @@
 @implementation DayViewController
 
 
-#pragma mark - UIViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-
 #pragma mark - Private
 
 - (void)setDate:(NSDate *)date {

@@ -33,9 +33,9 @@
     // http://stackoverflow.com/a/19989136/237637
     self.automaticallyAdjustsScrollViewInsets = false;
     
-    MonthsViewController *months = [[MonthsViewController alloc] initWithNibName:@"MonthsViewController" bundle:nil];
-    WeeksViewController *weeks = [[WeeksViewController alloc] initWithNibName:@"WeeksViewController" bundle:nil];
-    DaysViewController *days = [[DaysViewController alloc] initWithNibName:@"DaysViewController" bundle:nil];
+    MonthsViewController *months = [[MonthsViewController alloc] initWithNibName:@"CalendarSubViewController" bundle:nil];
+    WeeksViewController *weeks = [[WeeksViewController alloc] initWithNibName:@"CalendarSubViewController" bundle:nil];
+    DaysViewController *days = [[DaysViewController alloc] initWithNibName:@"CalendarSubViewController" bundle:nil];
     months.date = self.date;
     weeks.date = self.date;
     days.date = self.date;

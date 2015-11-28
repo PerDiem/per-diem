@@ -16,13 +16,6 @@
 @implementation MonthsViewController
 
 
-#pragma mark - UIViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-
 #pragma mark - UIPageViewControllerDataSource
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
@@ -39,7 +32,7 @@
 #pragma mark - Private
 
 - (CalendarSubSubViewController *)viewControllerWithDate:(NSDate *)date {
-    MonthViewController *controller = [[MonthViewController alloc] initWithNibName:@"MonthViewController" bundle:nil];
+    MonthViewController *controller = [[MonthViewController alloc] initWithNibName:@"CalendarSubSubViewController" bundle:nil];
     controller.date = date;
     return controller;
 }
