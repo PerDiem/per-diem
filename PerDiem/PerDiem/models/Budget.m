@@ -53,6 +53,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
             completion(nil, error);
@@ -66,6 +67,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     [query whereKey:@"transactionDate" greaterThanOrEqualTo:[timePeriod StartDate]];
     [query whereKey:@"transactionDate" lessThanOrEqualTo:[timePeriod EndDate]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
@@ -83,6 +85,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     PFQuery *innerQuery = [PFQuery queryWithClassName:@"Budget"];
     [innerQuery whereKey:@"name" equalTo:name];
     [query whereKey:@"budget" matchesQuery:innerQuery];

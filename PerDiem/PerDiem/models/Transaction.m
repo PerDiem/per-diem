@@ -28,6 +28,7 @@
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"organization"];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
             completion(nil, error);
@@ -44,6 +45,7 @@
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"organization"];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     [query whereKey:@"transactionDate" greaterThanOrEqualTo:[timePeriod StartDate]];
     [query whereKey:@"transactionDate" lessThanOrEqualTo:[timePeriod EndDate]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
