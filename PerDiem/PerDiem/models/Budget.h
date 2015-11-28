@@ -18,7 +18,7 @@
 +(void) budgetsWithTransaction:(void (^)(NSArray *budgets, NSError *error)) completion;
 +(void) budgetsWithTransactionWithinPeriod:(DTTimePeriod*) timePeriod completion:(void (^)(NSArray *budgets, NSError *error)) completion;
 +(void) budgetsWithTransactionOnDay:(NSDate*) day completion: (void (^)(NSArray *budgets, NSError *error)) completion;
-+(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(NSArray *budgets, NSError *error)) completion;
++(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(Budget *budget, NSError *error)) completion;
 
 -(void) deleteBudget;
 

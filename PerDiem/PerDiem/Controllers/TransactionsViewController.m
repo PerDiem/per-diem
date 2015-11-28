@@ -40,23 +40,35 @@
     } else {
         self.title = @"All Transactions";
         [self fetchTransactions];
-        [self setupRefreshControl];
     }
+    [self setupRefreshControl];
 }
 
 #pragma mark - Model Interaction Methods
 
 - (void)fetchTransactions {
-    [Transaction transactions:^(TransactionList *transactions, NSError *error) {
-        if (transactions) {
-            self.transactionList = transactions;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"Error: %@", error);
-        }
-        [self.refreshControl endRefreshing];
-    }];
+    if (self.budget) {
+        [Budget budgetNamedWithTransaction:self.budget.name completion:^(Budget *budget, NSError *error) {
+            if (budget) {
+                self.transactionList = budget.transactionList;
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"Error: %@", error);
+            }
+            [self.refreshControl endRefreshing];
+        }];
 
+    } else {
+        [Transaction transactions:^(TransactionList *transactions, NSError *error) {
+            if (transactions) {
+                self.transactionList = transactions;
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"Error: %@", error);
+            }
+            [self.refreshControl endRefreshing];
+        }];
+    }
 }
 
 #pragma mark TransactionViewController public methods

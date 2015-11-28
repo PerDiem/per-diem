@@ -81,7 +81,7 @@
 +(void) budgetsWithTransactionOnDay:(NSDate*) day completion: (void (^)(NSArray *budgets, NSError *error)) completion {
 
 }
-+(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(NSArray *budgets, NSError *error)) completion {
++(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(Budget *budget, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
@@ -94,7 +94,13 @@
         if(error) {
             completion(nil, error);
         } else {
-            completion([self groupTransactions:transactions], nil);
+            NSArray *budgets = [self groupTransactions:transactions];
+            if (budgets.count > 0) {
+                completion(budgets[0], nil);
+            } else {
+                //Add some error
+                completion(nil, nil);
+            }
         }
     }];
 }
