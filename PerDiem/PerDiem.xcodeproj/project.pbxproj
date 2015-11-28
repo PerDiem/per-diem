@@ -15,10 +15,10 @@
 		4AA1AB561C01553500BF3604 /* WeeksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB541C01553500BF3604 /* WeeksViewController.m */; };
 		4AA1AB5B1C01555000BF3604 /* MonthsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB591C01555000BF3604 /* MonthsViewController.m */; };
 		4AA1AB601C01556100BF3604 /* DaysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB5E1C01556100BF3604 /* DaysViewController.m */; };
-		4AA1AB651C01559500BF3604 /* CalendarSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB631C01559500BF3604 /* CalendarSubViewController.m */; };
-		4AA1AB661C01559500BF3604 /* CalendarSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA1AB641C01559500BF3604 /* CalendarSubViewController.xib */; };
-		4AA1AB6A1C0174C100BF3604 /* CalendarSubSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB681C0174C100BF3604 /* CalendarSubSubViewController.m */; };
-		4AA1AB6B1C0174C100BF3604 /* CalendarSubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA1AB691C0174C100BF3604 /* CalendarSubSubViewController.xib */; };
+		4AA1AB651C01559500BF3604 /* CalendarPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB631C01559500BF3604 /* CalendarPeriodViewController.m */; };
+		4AA1AB661C01559500BF3604 /* CalendarPeriodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA1AB641C01559500BF3604 /* CalendarPeriodViewController.xib */; };
+		4AA1AB6A1C0174C100BF3604 /* CalendarInnerPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB681C0174C100BF3604 /* CalendarInnerPeriodViewController.m */; };
+		4AA1AB6B1C0174C100BF3604 /* CalendarInnerPeriodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA1AB691C0174C100BF3604 /* CalendarInnerPeriodViewController.xib */; };
 		4AAA3FB61C0944F9004CE620 /* DayViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA3FB41C0944F9004CE620 /* DayViewTableViewCell.m */; };
 		4AAA3FB71C0944F9004CE620 /* DayViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AAA3FB51C0944F9004CE620 /* DayViewTableViewCell.xib */; };
 		4AEB60D01C01086100679DAF /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60CE1C01086100679DAF /* TabBarController.m */; };
@@ -66,12 +66,12 @@
 		4AA1AB591C01555000BF3604 /* MonthsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MonthsViewController.m; path = Controllers/MonthsViewController.m; sourceTree = "<group>"; };
 		4AA1AB5D1C01556100BF3604 /* DaysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaysViewController.h; path = Controllers/DaysViewController.h; sourceTree = "<group>"; };
 		4AA1AB5E1C01556100BF3604 /* DaysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DaysViewController.m; path = Controllers/DaysViewController.m; sourceTree = "<group>"; };
-		4AA1AB621C01559500BF3604 /* CalendarSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarSubViewController.h; path = Controllers/CalendarSubViewController.h; sourceTree = "<group>"; };
-		4AA1AB631C01559500BF3604 /* CalendarSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarSubViewController.m; path = Controllers/CalendarSubViewController.m; sourceTree = "<group>"; };
-		4AA1AB641C01559500BF3604 /* CalendarSubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarSubViewController.xib; path = Controllers/CalendarSubViewController.xib; sourceTree = "<group>"; };
-		4AA1AB671C0174C100BF3604 /* CalendarSubSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarSubSubViewController.h; path = Controllers/CalendarSubSubViewController.h; sourceTree = "<group>"; };
-		4AA1AB681C0174C100BF3604 /* CalendarSubSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarSubSubViewController.m; path = Controllers/CalendarSubSubViewController.m; sourceTree = "<group>"; };
-		4AA1AB691C0174C100BF3604 /* CalendarSubSubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarSubSubViewController.xib; path = Controllers/CalendarSubSubViewController.xib; sourceTree = "<group>"; };
+		4AA1AB621C01559500BF3604 /* CalendarPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarPeriodViewController.h; path = Controllers/CalendarPeriodViewController.h; sourceTree = "<group>"; };
+		4AA1AB631C01559500BF3604 /* CalendarPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarPeriodViewController.m; path = Controllers/CalendarPeriodViewController.m; sourceTree = "<group>"; };
+		4AA1AB641C01559500BF3604 /* CalendarPeriodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarPeriodViewController.xib; path = Controllers/CalendarPeriodViewController.xib; sourceTree = "<group>"; };
+		4AA1AB671C0174C100BF3604 /* CalendarInnerPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarInnerPeriodViewController.h; path = Controllers/CalendarInnerPeriodViewController.h; sourceTree = "<group>"; };
+		4AA1AB681C0174C100BF3604 /* CalendarInnerPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarInnerPeriodViewController.m; path = Controllers/CalendarInnerPeriodViewController.m; sourceTree = "<group>"; };
+		4AA1AB691C0174C100BF3604 /* CalendarInnerPeriodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarInnerPeriodViewController.xib; path = Controllers/CalendarInnerPeriodViewController.xib; sourceTree = "<group>"; };
 		4AAA3FB31C0944F9004CE620 /* DayViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayViewTableViewCell.h; path = Views/DayViewTableViewCell.h; sourceTree = "<group>"; };
 		4AAA3FB41C0944F9004CE620 /* DayViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DayViewTableViewCell.m; path = Views/DayViewTableViewCell.m; sourceTree = "<group>"; };
 		4AAA3FB51C0944F9004CE620 /* DayViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DayViewTableViewCell.xib; path = Views/DayViewTableViewCell.xib; sourceTree = "<group>"; };
@@ -150,26 +150,42 @@
 				4AA1AB431C01374100BF3604 /* CalendarViewController.h */,
 				4AA1AB441C01374100BF3604 /* CalendarViewController.m */,
 				4AA1AB451C01374100BF3604 /* CalendarViewController.xib */,
-				4AA1AB621C01559500BF3604 /* CalendarSubViewController.h */,
-				4AA1AB631C01559500BF3604 /* CalendarSubViewController.m */,
-				4AA1AB641C01559500BF3604 /* CalendarSubViewController.xib */,
-				4AA1AB671C0174C100BF3604 /* CalendarSubSubViewController.h */,
-				4AA1AB681C0174C100BF3604 /* CalendarSubSubViewController.m */,
-				4AA1AB691C0174C100BF3604 /* CalendarSubSubViewController.xib */,
+				4AAA3FB81C0A3652004CE620 /* Period */,
+				4AAA3FB91C0A368C004CE620 /* Inner Period */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
+		4AAA3FB81C0A3652004CE620 /* Period */ = {
+			isa = PBXGroup;
+			children = (
+				4AA1AB621C01559500BF3604 /* CalendarPeriodViewController.h */,
+				4AA1AB631C01559500BF3604 /* CalendarPeriodViewController.m */,
+				4AA1AB641C01559500BF3604 /* CalendarPeriodViewController.xib */,
 				4AA1AB5D1C01556100BF3604 /* DaysViewController.h */,
 				4AA1AB5E1C01556100BF3604 /* DaysViewController.m */,
-				4AEB60D71C010A6600679DAF /* DayViewController.h */,
-				4AEB60D81C010A6600679DAF /* DayViewController.m */,
 				4AA1AB531C01553500BF3604 /* WeeksViewController.h */,
 				4AA1AB541C01553500BF3604 /* WeeksViewController.m */,
-				4AA1AB481C0142C000BF3604 /* WeekViewController.h */,
-				4AA1AB491C0142C000BF3604 /* WeekViewController.m */,
 				4AA1AB581C01555000BF3604 /* MonthsViewController.h */,
 				4AA1AB591C01555000BF3604 /* MonthsViewController.m */,
+			);
+			name = Period;
+			sourceTree = "<group>";
+		};
+		4AAA3FB91C0A368C004CE620 /* Inner Period */ = {
+			isa = PBXGroup;
+			children = (
+				4AA1AB671C0174C100BF3604 /* CalendarInnerPeriodViewController.h */,
+				4AA1AB681C0174C100BF3604 /* CalendarInnerPeriodViewController.m */,
+				4AA1AB691C0174C100BF3604 /* CalendarInnerPeriodViewController.xib */,
+				4AEB60D71C010A6600679DAF /* DayViewController.h */,
+				4AEB60D81C010A6600679DAF /* DayViewController.m */,
+				4AA1AB481C0142C000BF3604 /* WeekViewController.h */,
+				4AA1AB491C0142C000BF3604 /* WeekViewController.m */,
 				4AEB60E61C010AF600679DAF /* MonthViewController.h */,
 				4AEB60E71C010AF600679DAF /* MonthViewController.m */,
 			);
-			name = Calendar;
+			name = "Inner Period";
 			sourceTree = "<group>";
 		};
 		4AF678251C025F0500DFB75E /* Helpers */ = {
@@ -384,7 +400,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AA1AB661C01559500BF3604 /* CalendarSubViewController.xib in Resources */,
+				4AA1AB661C01559500BF3604 /* CalendarPeriodViewController.xib in Resources */,
 				BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */,
 				4AEB60E01C010A7400679DAF /* BudgetsViewController.xib in Resources */,
 				8E9DA2D41BF561690016ECC2 /* LaunchScreen.storyboard in Resources */,
@@ -394,7 +410,7 @@
 				4AAA3FB71C0944F9004CE620 /* DayViewTableViewCell.xib in Resources */,
 				8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */,
 				4AEB60E51C010AA800679DAF /* TransactionsViewController.xib in Resources */,
-				4AA1AB6B1C0174C100BF3604 /* CalendarSubSubViewController.xib in Resources */,
+				4AA1AB6B1C0174C100BF3604 /* CalendarInnerPeriodViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,7 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF6D07411C01332D00B61276 /* TransactionFormViewController.m in Sources */,
-				4AA1AB651C01559500BF3604 /* CalendarSubViewController.m in Sources */,
+				4AA1AB651C01559500BF3604 /* CalendarPeriodViewController.m in Sources */,
 				BF8ADB651C05712D00AEEBFE /* BudgetFormViewController.m in Sources */,
 				BF8ADB5C1C04CBF500AEEBFE /* BudgetCell.m in Sources */,
 				8EC0E14C1C06DEEC0004207B /* UIColor+PerDiem.m in Sources */,
@@ -467,7 +483,7 @@
 				BFE432621C006A6D00809F7E /* Organization.m in Sources */,
 				4AEB60DA1C010A6600679DAF /* DayViewController.m in Sources */,
 				BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */,
-				4AA1AB6A1C0174C100BF3604 /* CalendarSubSubViewController.m in Sources */,
+				4AA1AB6A1C0174C100BF3604 /* CalendarInnerPeriodViewController.m in Sources */,
 				8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */,
 				4AEB60DF1C010A7400679DAF /* BudgetsViewController.m in Sources */,
 				4AAA3FB61C0944F9004CE620 /* DayViewTableViewCell.m in Sources */,

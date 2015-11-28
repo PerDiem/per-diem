@@ -9,11 +9,18 @@
 #import "MonthsViewController.h"
 #import "MonthViewController.h"
 
-@interface MonthsViewController ()
+@interface MonthsViewController () <CalendarInnerPeriodViewControllerDelegate>
 
 @end
 
 @implementation MonthsViewController
+
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
 
 
 #pragma mark - UIPageViewControllerDataSource
@@ -29,11 +36,12 @@
 }
 
 
-#pragma mark - Private
+#pragma mark - Public
 
-- (CalendarSubSubViewController *)viewControllerWithDate:(NSDate *)date {
-    MonthViewController *controller = [[MonthViewController alloc] initWithNibName:@"CalendarSubSubViewController" bundle:nil];
+- (CalendarInnerPeriodViewController *)viewControllerWithDate:(NSDate *)date {
+    MonthViewController *controller = [[MonthViewController alloc] initWithNibName:@"CalendarInnerPeriodViewController" bundle:nil];
     controller.date = date;
+    controller.delegate = self;
     return controller;
 }
 

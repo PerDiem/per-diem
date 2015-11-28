@@ -1,22 +1,22 @@
 //
-//  CalendarSubSubViewController.m
+//  CalendarInnerPeriodViewController.m
 //  PerDiem
 //
 //  Created by Florent Bonomo on 11/21/15.
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
-#import "CalendarSubSubViewController.h"
+#import "CalendarInnerPeriodViewController.h"
 #import "DayViewTableViewCell.h"
 
-@interface CalendarSubSubViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CalendarInnerPeriodViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
-@implementation CalendarSubSubViewController
+@implementation CalendarInnerPeriodViewController
 
 
 #pragma mark - UIViewController
@@ -53,14 +53,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDate *day = [[self.timePeriod StartDate] dateByAddingDays:indexPath.row];
-    DTTimePeriod *period = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeDay
-                                                 startingAt:day];
     DayViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.transactionList = [TransactionList transactionListWithTransactionList:self.transactionList
-                                                              filterWithPeriod:period];
+                                                              filterWithPeriod:[self periodAtIndex:indexPath]];
     cell.budgets = self.budgets;
     return cell;
+}
+
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([self.delegate respondsToSelector:@selector(calendarInnerPeriodViewController:navigateToDay:)]) {
+        [self.delegate calendarInnerPeriodViewController:self
+                                           navigateToDay:[self periodAtIndex:indexPath]];
+    }
 }
 
 
@@ -80,6 +88,12 @@
     NSString *from = [[self.timePeriod StartDate] formattedDateWithStyle:NSDateFormatterFullStyle];
     NSString *to = [[self.timePeriod EndDate] formattedDateWithStyle:NSDateFormatterFullStyle];
     self.label.text = [NSString stringWithFormat:@"%@ to %@", from, to];
+}
+
+- (DTTimePeriod *)periodAtIndex:(NSIndexPath *)indexPath {
+    NSDate *day = [[self.timePeriod StartDate] dateByAddingDays:indexPath.row];
+    return [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeDay
+                                 startingAt:day];
 }
 
 @end

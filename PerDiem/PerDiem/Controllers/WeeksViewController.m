@@ -9,7 +9,7 @@
 #import "WeeksViewController.h"
 #import "WeekViewController.h"
 
-@interface WeeksViewController ()
+@interface WeeksViewController () <CalendarInnerPeriodViewControllerDelegate>
 
 @end
 
@@ -29,11 +29,12 @@
 }
 
 
-#pragma mark - Private
+#pragma mark - Public
 
-- (CalendarSubSubViewController *)viewControllerWithDate:(NSDate *)date {
-    WeekViewController *controller = [[WeekViewController alloc] initWithNibName:@"CalendarSubSubViewController" bundle:nil];
+- (CalendarInnerPeriodViewController *)viewControllerWithDate:(NSDate *)date {
+    WeekViewController *controller = [[WeekViewController alloc] initWithNibName:@"CalendarInnerPeriodViewController" bundle:nil];
     controller.date = date;
+    controller.delegate = self;
     return controller;
 }
 

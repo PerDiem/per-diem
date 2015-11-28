@@ -9,7 +9,7 @@
 #import "DaysViewController.h"
 #import "DayViewController.h"
 
-@interface DaysViewController ()
+@interface DaysViewController () <CalendarInnerPeriodViewControllerDelegate>
 
 @end
 
@@ -36,11 +36,12 @@
 }
 
 
-#pragma mark - Private
+#pragma mark - Public
 
-- (CalendarSubSubViewController *)viewControllerWithDate:(NSDate *)date {
-    DayViewController *controller = [[DayViewController alloc] initWithNibName:@"CalendarSubSubViewController" bundle:nil];
+- (CalendarInnerPeriodViewController *)viewControllerWithDate:(NSDate *)date {
+    DayViewController *controller = [[DayViewController alloc] initWithNibName:@"CalendarInnerPeriodViewController" bundle:nil];
     controller.date = date;
+    controller.delegate = self;
     return controller;
 }
 
