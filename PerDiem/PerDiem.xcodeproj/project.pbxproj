@@ -23,6 +23,8 @@
 		4AA1AB661C01559500BF3604 /* CalendarSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA1AB641C01559500BF3604 /* CalendarSubViewController.xib */; };
 		4AA1AB6A1C0174C100BF3604 /* CalendarSubSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB681C0174C100BF3604 /* CalendarSubSubViewController.m */; };
 		4AA1AB6B1C0174C100BF3604 /* CalendarSubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA1AB691C0174C100BF3604 /* CalendarSubSubViewController.xib */; };
+		4AAA3FB61C0944F9004CE620 /* DayViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA3FB41C0944F9004CE620 /* DayViewTableViewCell.m */; };
+		4AAA3FB71C0944F9004CE620 /* DayViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AAA3FB51C0944F9004CE620 /* DayViewTableViewCell.xib */; };
 		4AEB60D01C01086100679DAF /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60CE1C01086100679DAF /* TabBarController.m */; };
 		4AEB60DA1C010A6600679DAF /* DayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB60D81C010A6600679DAF /* DayViewController.m */; };
 		4AEB60DB1C010A6600679DAF /* DayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB60D91C010A6600679DAF /* DayViewController.xib */; };
@@ -80,6 +82,9 @@
 		4AA1AB671C0174C100BF3604 /* CalendarSubSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarSubSubViewController.h; path = Controllers/CalendarSubSubViewController.h; sourceTree = "<group>"; };
 		4AA1AB681C0174C100BF3604 /* CalendarSubSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarSubSubViewController.m; path = Controllers/CalendarSubSubViewController.m; sourceTree = "<group>"; };
 		4AA1AB691C0174C100BF3604 /* CalendarSubSubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarSubSubViewController.xib; path = Controllers/CalendarSubSubViewController.xib; sourceTree = "<group>"; };
+		4AAA3FB31C0944F9004CE620 /* DayViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayViewTableViewCell.h; path = Views/DayViewTableViewCell.h; sourceTree = "<group>"; };
+		4AAA3FB41C0944F9004CE620 /* DayViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DayViewTableViewCell.m; path = Views/DayViewTableViewCell.m; sourceTree = "<group>"; };
+		4AAA3FB51C0944F9004CE620 /* DayViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DayViewTableViewCell.xib; path = Views/DayViewTableViewCell.xib; sourceTree = "<group>"; };
 		4AEB60CD1C01086100679DAF /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarController.h; path = Controllers/TabBarController.h; sourceTree = "<group>"; };
 		4AEB60CE1C01086100679DAF /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarController.m; path = Controllers/TabBarController.m; sourceTree = "<group>"; };
 		4AEB60D71C010A6600679DAF /* DayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayViewController.h; path = Controllers/DayViewController.h; sourceTree = "<group>"; };
@@ -211,6 +216,9 @@
 				BF8ADB591C04CBF500AEEBFE /* BudgetCell.h */,
 				BF8ADB5A1C04CBF500AEEBFE /* BudgetCell.m */,
 				BF8ADB5B1C04CBF500AEEBFE /* BudgetCell.xib */,
+				4AAA3FB31C0944F9004CE620 /* DayViewTableViewCell.h */,
+				4AAA3FB41C0944F9004CE620 /* DayViewTableViewCell.m */,
+				4AAA3FB51C0944F9004CE620 /* DayViewTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -405,6 +413,7 @@
 				4AA1AB471C01374100BF3604 /* CalendarViewController.xib in Resources */,
 				8E42F4601C0242FE00AE2E37 /* TransactionCell.xib in Resources */,
 				BF8ADB5D1C04CBF500AEEBFE /* BudgetCell.xib in Resources */,
+				4AAA3FB71C0944F9004CE620 /* DayViewTableViewCell.xib in Resources */,
 				8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */,
 				4AA1AB5C1C01555000BF3604 /* MonthsViewController.xib in Resources */,
 				4AEB60E51C010AA800679DAF /* TransactionsViewController.xib in Resources */,
@@ -485,6 +494,7 @@
 				4AA1AB6A1C0174C100BF3604 /* CalendarSubSubViewController.m in Sources */,
 				8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */,
 				4AEB60DF1C010A7400679DAF /* BudgetsViewController.m in Sources */,
+				4AAA3FB61C0944F9004CE620 /* DayViewTableViewCell.m in Sources */,
 				4AEB60D01C01086100679DAF /* TabBarController.m in Sources */,
 				4AA1AB3F1C012EDF00BF3604 /* TabBarViewController.m in Sources */,
 				8E9DA2C61BF561690016ECC2 /* main.m in Sources */,
