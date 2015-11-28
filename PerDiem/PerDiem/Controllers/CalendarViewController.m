@@ -108,14 +108,17 @@
     
     self.selectedController = self.days;
     CalendarInnerPeriodViewController *selectedDayViewController = [self.days viewControllerWithDate:[timePeriod StartDate]];
+
+    void (^completionBlock)(BOOL finished) = ^void(BOOL finished) {
+        [self.pageController setViewControllers:@[self.selectedController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
+    };
     [self.selectedController.pageController setViewControllers:@[selectedDayViewController]
                                                      direction:UIPageViewControllerNavigationDirectionForward
                                                       animated:NO
-                                                    completion:nil];
-    [self.pageController setViewControllers:@[self.selectedController]
-                                  direction:UIPageViewControllerNavigationDirectionForward
-                                   animated:YES
-                                 completion:nil];
+                                                    completion:completionBlock];
 }
 
 - (void)calendarPeriodViewController:(CalendarPeriodViewController *)periodViewController
@@ -123,14 +126,17 @@
                       navigateToWeek:(DTTimePeriod *)timePeriod {
     self.selectedController = self.weeks;
     CalendarInnerPeriodViewController *selectedWeekViewController = [self.weeks viewControllerWithDate:[timePeriod StartDate]];
+
+    void (^completionBlock)(BOOL finished) = ^void(BOOL finished) {
+        [self.pageController setViewControllers:@[self.selectedController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
+    };
     [self.selectedController.pageController setViewControllers:@[selectedWeekViewController]
                                                      direction:UIPageViewControllerNavigationDirectionForward
                                                       animated:NO
-                                                    completion:nil];
-    [self.pageController setViewControllers:@[self.selectedController]
-                                  direction:UIPageViewControllerNavigationDirectionForward
-                                   animated:YES
-                                 completion:nil];
+                                                    completion:completionBlock];
 }
 
 - (void)calendarPeriodViewController:(CalendarPeriodViewController *)periodViewController
@@ -138,14 +144,16 @@
                      navigateToMonth:(DTTimePeriod *)timePeriod {
     self.selectedController = self.months;
     CalendarInnerPeriodViewController *selectedMonthViewController = [self.days viewControllerWithDate:[timePeriod StartDate]];
+    void (^completionBlock)(BOOL finished) = ^void(BOOL finished) {
+        [self.pageController setViewControllers:@[self.selectedController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
+    };
     [self.selectedController.pageController setViewControllers:@[selectedMonthViewController]
                                                      direction:UIPageViewControllerNavigationDirectionForward
                                                       animated:NO
-                                                    completion:nil];
-    [self.pageController setViewControllers:@[self.selectedController]
-                                  direction:UIPageViewControllerNavigationDirectionForward
-                                   animated:YES
-                                 completion:nil];
+                                                    completion:completionBlock];
 }
 
 
