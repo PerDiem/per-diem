@@ -7,12 +7,14 @@
 //
 
 #import "DayViewTableViewCell.h"
+#import "UIColor+PerDiem.h"
 
 @interface DayViewTableViewCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *progressBarView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
-@property (weak, nonatomic) IBOutlet UILabel *label;
-
+@property (weak, nonatomic) IBOutlet UILabel *transactionsAmountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *budgetsAmountLabel;
 @end
 
 @implementation DayViewTableViewCell
@@ -35,32 +37,37 @@
 }
 
 - (void)updateUI {
-    self.label.text = @"";
-    self.widthConstraint.constant = 0;
+    self.transactionsAmountLabel.text = @"";
+    self.budgetsAmountLabel.text = @"";
     
-    if (self.budgets != nil && self.transactionList != nil) {
-        NSNumber *budgetsSum = [NSNumber numberWithInt:0];
+    NSNumberFormatter *amountFormatter = [[NSNumberFormatter alloc] init];
+    [amountFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    
+    NSInteger budgetsSum = 0;
+    NSInteger transactionsSum = 0;
+    
+    if (self.budgets != nil) {
         for (Budget *budget in self.budgets) {
-            budgetsSum = @([budgetsSum integerValue] + [budget.amount integerValue]);
+            budgetsSum = budgetsSum + [budget.amount integerValue];
         }
-        NSNumber *transactionsSum = [NSNumber numberWithInt:0];
-        for (Transaction *transaction in self.transactionList.transactions) {
-            transactionsSum = @([transactionsSum integerValue] + [transaction.amount integerValue]);
-        }
-        
-        NSNumberFormatter *amountFormatter = [[NSNumberFormatter alloc] init];
-        [amountFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-        NSString *budgetsSumString = [amountFormatter stringFromNumber:budgetsSum];
-        NSString *transactionsSumString = [amountFormatter stringFromNumber:transactionsSum];
-        
-        NSInteger budgetUsedPercentage = [transactionsSum integerValue] * 100 / [budgetsSum integerValue];
-        NSInteger pointsPerPercent = self.frame.size.width / 100;
-        if (budgetUsedPercentage > 0) {
-            self.label.text = [NSString stringWithFormat:@"%@ / %@", transactionsSumString, budgetsSumString];
-            self.widthConstraint.constant = budgetUsedPercentage * pointsPerPercent;
-        }
-
+        self.budgetsAmountLabel.text = [amountFormatter stringFromNumber:@(budgetsSum)];
     }
+
+    if (self.transactionList != nil) {
+        for (Transaction *transaction in self.transactionList.transactions) {
+            transactionsSum = transactionsSum + [transaction.amount integerValue];
+        }
+        self.transactionsAmountLabel.text = [amountFormatter stringFromNumber:@(transactionsSum)];
+    }
+    
+    NSInteger budgetUsedPercentage = 0;
+    if (budgetsSum > 0) {
+        budgetUsedPercentage = transactionsSum * 100 / budgetsSum;
+    }
+    
+    self.progressBarView.backgroundColor = [UIColor colorWithBudgetProgress:budgetUsedPercentage];
+    self.contentView.backgroundColor = [UIColor colorWithBudgetProgress:budgetUsedPercentage alpha:.3];
+    self.widthConstraint.constant = budgetUsedPercentage * (self.frame.size.width / 100);
 }
 
 @end

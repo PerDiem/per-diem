@@ -16,38 +16,47 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofS-Gy-9Zf">
-                        <rect key="frame" x="8" y="8" width="150" height="20"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$150 / $200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcU-GS-g3m">
-                                <rect key="frame" x="10" y="0.0" width="130" height="20.5"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="36.5"/>
                         <animations/>
                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="wcU-GS-g3m" firstAttribute="centerY" secondItem="ofS-Gy-9Zf" secondAttribute="centerY" id="16n-7v-P3K"/>
-                            <constraint firstItem="wcU-GS-g3m" firstAttribute="centerX" secondItem="ofS-Gy-9Zf" secondAttribute="centerX" id="2sK-1h-nvs"/>
-                            <constraint firstAttribute="trailing" secondItem="wcU-GS-g3m" secondAttribute="trailing" constant="10" id="BBk-GC-6Dj"/>
-                            <constraint firstAttribute="width" constant="150" id="Io5-hb-DTF"/>
-                            <constraint firstItem="wcU-GS-g3m" firstAttribute="leading" secondItem="ofS-Gy-9Zf" secondAttribute="leading" constant="10" id="Pwo-x2-hcy"/>
-                            <constraint firstAttribute="height" constant="20" id="ZUA-rQ-V8k"/>
+                            <constraint firstAttribute="width" constant="150" id="Cik-WY-won"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$150" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcU-GS-g3m">
+                        <rect key="frame" x="8" y="8" width="39" height="20.5"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$150" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boh-Pw-rfN">
+                        <rect key="frame" x="273" y="8" width="39" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="ofS-Gy-9Zf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="N3f-kH-eFQ"/>
-                    <constraint firstItem="ofS-Gy-9Zf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="PIG-zh-jk6"/>
+                    <constraint firstItem="ofS-Gy-9Zf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Idw-Eu-s2F"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="wcU-GS-g3m" secondAttribute="bottom" id="YWx-pz-MEk"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="boh-Pw-rfN" secondAttribute="bottom" id="Z01-Rm-o8q"/>
+                    <constraint firstItem="ofS-Gy-9Zf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="c5k-p0-enz"/>
+                    <constraint firstItem="boh-Pw-rfN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="dCg-Oe-Slq"/>
+                    <constraint firstItem="wcU-GS-g3m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="jUa-2F-GWS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="boh-Pw-rfN" secondAttribute="trailing" id="p6z-79-bKO"/>
+                    <constraint firstItem="wcU-GS-g3m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="v72-sl-Mbw"/>
+                    <constraint firstAttribute="bottom" secondItem="ofS-Gy-9Zf" secondAttribute="bottom" id="z54-ne-uqg"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>
-                <outlet property="label" destination="wcU-GS-g3m" id="8Ga-35-CIg"/>
-                <outlet property="widthConstraint" destination="Io5-hb-DTF" id="5d0-QY-OQ3"/>
+                <outlet property="budgetsAmountLabel" destination="boh-Pw-rfN" id="OXK-8u-OcJ"/>
+                <outlet property="progressBarView" destination="ofS-Gy-9Zf" id="i39-bD-M2o"/>
+                <outlet property="transactionsAmountLabel" destination="wcU-GS-g3m" id="2hJ-Js-bHh"/>
+                <outlet property="widthConstraint" destination="Cik-WY-won" id="VqZ-LQ-Kn6"/>
             </connections>
             <point key="canvasLocation" x="139" y="260.5"/>
         </tableViewCell>

@@ -20,5 +20,11 @@
 + (UIColor *)lightGreyColorWithAlpha:(CGFloat)alpha;
 + (UIColor *)redHighlightColor;
 + (UIColor *)redHighlightColorWithAlpha:(CGFloat)alpha;
++ (UIColor *)greenHighlightColorWithAlpha:(CGFloat)alpha;
++ (UIColor *)greenHighlightColor;
++ (UIColor *)yellowHighlightColorWithAlpha:(CGFloat)alpha;
++ (UIColor *)yellowHighlightColor;
++ (UIColor *)colorWithBudgetProgress:(CGFloat)budgetProgress alpha:(CGFloat)alpha;
++ (UIColor *)colorWithBudgetProgress:(CGFloat)budgetProgress;
 
 @end

@@ -57,4 +57,35 @@
     return [[self class] redHighlightColorWithAlpha:1];
 }
 
+// Green Highlight
++ (UIColor *)greenHighlightColorWithAlpha:(CGFloat)alpha {
+    return [UIColor colorWithRed:0.36 green:0.72 blue:0.36 alpha:alpha];
+}
++ (UIColor *)greenHighlightColor {
+    return [[self class] greenHighlightColorWithAlpha:1];
+}
+
+// Yellow Highlight
++ (UIColor *)yellowHighlightColorWithAlpha:(CGFloat)alpha {
+    return [UIColor colorWithRed:1.00 green:0.84 blue:0.00 alpha:alpha];
+}
++ (UIColor *)yellowHighlightColor {
+    return [[self class] yellowHighlightColorWithAlpha:1];
+}
+
+// Budget Progress
++ (UIColor *)colorWithBudgetProgress:(CGFloat)budgetProgress alpha:(CGFloat)alpha {
+    UIColor *color = [[self class] greenHighlightColorWithAlpha:alpha];
+    if (budgetProgress >= 60) {
+        color = [[self class] yellowHighlightColorWithAlpha:alpha];
+    }
+    if (budgetProgress >= 100) {
+        color = [[self class] redHighlightColorWithAlpha:alpha];
+    }
+    return color;
+}
++ (UIColor *)colorWithBudgetProgress:(CGFloat)budgetProgress {
+    return [[self class] colorWithBudgetProgress:budgetProgress alpha:1];
+}
+
 @end
