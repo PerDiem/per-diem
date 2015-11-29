@@ -18,13 +18,6 @@
 @implementation DayViewController
 
 
-#pragma mark - UIViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-
 #pragma mark - Private
 
 - (void)setDate:(NSDate *)date {
@@ -38,6 +31,10 @@
 
 - (void)updateLabel {
     self.label.text = [self.date formattedDateWithFormat:@"cccc, LLL d"];
+}
+
+- (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {
+    return @"";
 }
 
 @end
