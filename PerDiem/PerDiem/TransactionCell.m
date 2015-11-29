@@ -33,8 +33,9 @@
     self.dateLabel.text = [self formatDate:self.transaction.transactionDate];
     self.budgetLabel.text = self.transaction.budget.name;
 
-    // @todo - this was making the app crash due to the paymentType.name being nil. Revisit.
-    // self.paymentTypeLabel.text = self.transaction.paymentType.name;
+    if (transaction.paymentType) {
+        self.paymentTypeLabel.text = self.transaction.paymentType.name;
+    }
     self.summaryLabel.text = self.transaction.summary;
     self.amountLabel.text = [self.amountFormatter stringFromNumber:self.transaction.amount];
 

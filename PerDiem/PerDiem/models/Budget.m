@@ -53,6 +53,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
             completion(nil, error);
@@ -66,6 +67,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     [query whereKey:@"transactionDate" greaterThanOrEqualTo:[timePeriod StartDate]];
     [query whereKey:@"transactionDate" lessThanOrEqualTo:[timePeriod EndDate]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
@@ -79,10 +81,11 @@
 +(void) budgetsWithTransactionOnDay:(NSDate*) day completion: (void (^)(NSArray *budgets, NSError *error)) completion {
 
 }
-+(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(NSArray *budgets, NSError *error)) completion {
++(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(Budget *budget, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Transaction"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     PFQuery *innerQuery = [PFQuery queryWithClassName:@"Budget"];
     [innerQuery whereKey:@"name" equalTo:name];
     [query whereKey:@"budget" matchesQuery:innerQuery];
@@ -91,9 +94,19 @@
         if(error) {
             completion(nil, error);
         } else {
-            completion([self groupTransactions:transactions], nil);
+            NSArray *budgets = [self groupTransactions:transactions];
+            if (budgets.count > 0) {
+                completion(budgets[0], nil);
+            } else {
+                //Add some error
+                completion(nil, nil);
+            }
         }
     }];
+}
+
+-(void) deleteBudget {
+    [self deleteEventually];
 }
 
 - (BOOL)isEqual:(id)object {

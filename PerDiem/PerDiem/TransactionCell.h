@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SWTableViewCell.h>
 #import "Transaction.h"
 
-@interface TransactionCell : UITableViewCell
+@interface TransactionCell : SWTableViewCell
 
 @property (strong, nonatomic) Transaction *transaction;
 

@@ -26,6 +26,7 @@ PODS:
   - Parse (1.10.0):
     - Bolts/Tasks (~> 1.5)
   - TesseractOCRiOS (4.0.0)
+  - SWTableViewCell (0.3.7)
   - XLForm (3.0.2)
 
 DEPENDENCIES:
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - Parse
   - TesseractOCRiOS (from `https://github.com/gali8/Tesseract-OCR-iOS.git`, commit
     `925cce4c3bcb3d1f98e1a53a4c0ba7c9a0fdb6d7`)
+  - SWTableViewCell
   - XLForm
 
 EXTERNAL SOURCES:
@@ -54,6 +56,7 @@ SPEC CHECKSUMS:
   IRLDocumentScanner: b452cc6759d557bb37802b3cc779d5388b7d7ebc
   Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
   TesseractOCRiOS: 729989db3984bb60ba3addb053569b172d48c409
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
 COCOAPODS: 0.38.2

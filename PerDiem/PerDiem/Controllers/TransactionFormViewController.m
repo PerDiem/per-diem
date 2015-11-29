@@ -88,7 +88,7 @@ NSString *const kFuture = @"future";
 
     // TODO: Maybe we should put a default budget?
     if (transaction.budget) {
-        row.value = [XLFormOptionsObject formOptionsObjectWithValue:transaction.budget displayText:transaction.budget.name];
+        budgetRow.value = [XLFormOptionsObject formOptionsObjectWithValue:transaction.budget displayText:transaction.budget.name];
     }
     [section addFormRow:budgetRow];
 
@@ -145,6 +145,16 @@ NSString *const kFuture = @"future";
     self.transaction.transactionDate = values[kDate];
     self.transaction.future = values[kFuture];
     [self.transaction saveInBackground];
+
+    if (self.transaction.objectId) {
+        if ([self.delegator respondsToSelector:@selector(transactionUpdated:)]) {
+            [self.delegator transactionUpdated:self.transaction];
+        }
+    } else {
+        if ([self.delegator respondsToSelector:@selector(transactionCreated:)]) {
+            [self.delegator transactionCreated:self.transaction];
+        }
+    }
 
     [self.navigationController popViewControllerAnimated:YES];
 
