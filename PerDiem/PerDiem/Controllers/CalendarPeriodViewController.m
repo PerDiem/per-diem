@@ -86,12 +86,16 @@
 
 - (void)calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
                            navigateToWeek:(DTTimePeriod *)timePeriod {
-    // NOOP
+    if ([self.delegate respondsToSelector:@selector(calendarPeriodViewController:calendarInnerPeriodViewController:navigateToWeek:)]) {
+        [self.delegate calendarPeriodViewController:self
+                  calendarInnerPeriodViewController:controller
+                                     navigateToWeek:timePeriod];
+    }
 }
 
 - (void)calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
                           navigateToMonth:(DTTimePeriod *)timePeriod {
-    // NOOP
+    // NOOP - Might be useful if we need navigation from day / week view to month view somehow. Otherwise trash this.
 }
 
 

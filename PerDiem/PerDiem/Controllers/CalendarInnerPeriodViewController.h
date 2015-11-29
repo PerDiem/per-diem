@@ -34,4 +34,7 @@
 @property (strong, nonatomic) TransactionList *transactionList;
 @property (strong, nonatomic) NSArray<Budget *> *budgets;
 
+- (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period;
+- (DTTimePeriod *)periodAtIndex:(NSIndexPath *)indexPath;
+
 @end

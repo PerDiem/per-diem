@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -23,37 +22,45 @@
                             <constraint firstAttribute="width" constant="150" id="Cik-WY-won"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$150" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcU-GS-g3m">
-                        <rect key="frame" x="8" y="8" width="39" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu. 27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIV-f8-95l">
+                        <rect key="frame" x="18" y="10" width="52" height="18"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$150" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boh-Pw-rfN">
-                        <rect key="frame" x="273" y="8" width="39" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$150 left" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boh-Pw-rfN">
+                        <rect key="frame" x="262" y="18" width="49.5" height="13.5"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$150" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcU-GS-g3m">
+                        <rect key="frame" x="277" y="5" width="35" height="18"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <animations/>
                 <constraints>
+                    <constraint firstItem="OIV-f8-95l" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DNR-GG-HTR"/>
                     <constraint firstItem="ofS-Gy-9Zf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Idw-Eu-s2F"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="wcU-GS-g3m" secondAttribute="bottom" id="YWx-pz-MEk"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="boh-Pw-rfN" secondAttribute="bottom" id="Z01-Rm-o8q"/>
+                    <constraint firstItem="wcU-GS-g3m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="M05-Ud-PJr"/>
+                    <constraint firstItem="OIV-f8-95l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="XYU-oZ-pBe"/>
+                    <constraint firstAttribute="trailing" secondItem="boh-Pw-rfN" secondAttribute="trailing" constant="8" id="bw8-cC-lSE"/>
                     <constraint firstItem="ofS-Gy-9Zf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="c5k-p0-enz"/>
-                    <constraint firstItem="boh-Pw-rfN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="dCg-Oe-Slq"/>
-                    <constraint firstItem="wcU-GS-g3m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="jUa-2F-GWS"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="boh-Pw-rfN" secondAttribute="trailing" id="p6z-79-bKO"/>
-                    <constraint firstItem="wcU-GS-g3m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="v72-sl-Mbw"/>
+                    <constraint firstAttribute="trailing" secondItem="wcU-GS-g3m" secondAttribute="trailing" constant="8" id="p9F-za-9q7"/>
+                    <constraint firstAttribute="bottom" secondItem="boh-Pw-rfN" secondAttribute="bottom" constant="5" id="y99-Ct-zbO"/>
                     <constraint firstAttribute="bottom" secondItem="ofS-Gy-9Zf" secondAttribute="bottom" id="z54-ne-uqg"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>
                 <outlet property="budgetsAmountLabel" destination="boh-Pw-rfN" id="OXK-8u-OcJ"/>
+                <outlet property="mainLabel" destination="OIV-f8-95l" id="kf3-xC-rTu"/>
                 <outlet property="progressBarView" destination="ofS-Gy-9Zf" id="i39-bD-M2o"/>
                 <outlet property="transactionsAmountLabel" destination="wcU-GS-g3m" id="2hJ-Js-bHh"/>
                 <outlet property="widthConstraint" destination="Cik-WY-won" id="VqZ-LQ-Kn6"/>

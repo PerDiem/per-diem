@@ -12,6 +12,7 @@
 
 @interface DayViewTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *mainLabel;
 @property (nonatomic, strong) TransactionList *transactionList;
 @property (nonatomic, strong) NSArray<Budget *> *budgets;
 

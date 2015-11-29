@@ -54,21 +54,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DayViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    DTTimePeriod *period = [self periodAtIndex:indexPath];
+    cell.mainLabel.text = [self innerPeriodLabelWithPeriod:period];
     cell.transactionList = [TransactionList transactionListWithTransactionList:self.transactionList
-                                                              filterWithPeriod:[self periodAtIndex:indexPath]];
+                                                              filterWithPeriod:period];
     cell.budgets = self.budgets;
     return cell;
-}
-
-
-#pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([self.delegate respondsToSelector:@selector(calendarInnerPeriodViewController:navigateToDay:)]) {
-        [self.delegate calendarInnerPeriodViewController:self
-                                           navigateToDay:[self periodAtIndex:indexPath]];
-    }
 }
 
 
@@ -76,11 +67,13 @@
 
 - (void)setDate:(NSDate *)date {
     _date = date;
+    [self.tableView reloadData];
     [self updateLabel];
 }
 
 - (void)setTimePeriod:(DTTimePeriod *)timePeriod {
     _timePeriod = timePeriod;
+    [self.tableView reloadData];
     [self updateLabel];
 }
 
@@ -94,6 +87,10 @@
     NSDate *day = [[self.timePeriod StartDate] dateByAddingDays:indexPath.row];
     return [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeDay
                                  startingAt:day];
+}
+
+- (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {
+    return @"";
 }
 
 @end

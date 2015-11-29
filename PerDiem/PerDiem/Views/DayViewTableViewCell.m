@@ -50,7 +50,8 @@
         for (Budget *budget in self.budgets) {
             budgetsSum = budgetsSum + [budget.amount integerValue];
         }
-        self.budgetsAmountLabel.text = [amountFormatter stringFromNumber:@(budgetsSum)];
+        NSString *budgetAmountString = [amountFormatter stringFromNumber:@(budgetsSum)];
+        self.budgetsAmountLabel.text = [NSString stringWithFormat:@"%@ total", budgetAmountString];
     }
 
     if (self.transactionList != nil) {
@@ -65,8 +66,8 @@
         budgetUsedPercentage = transactionsSum * 100 / budgetsSum;
     }
     
-    self.progressBarView.backgroundColor = [UIColor colorWithBudgetProgress:budgetUsedPercentage];
-    self.contentView.backgroundColor = [UIColor colorWithBudgetProgress:budgetUsedPercentage alpha:.3];
+    self.progressBarView.backgroundColor = [UIColor colorWithBudgetProgress:budgetUsedPercentage alpha:.3];
+    self.contentView.backgroundColor = [UIColor colorWithBudgetProgress:budgetUsedPercentage alpha:.1];
     self.widthConstraint.constant = budgetUsedPercentage * (self.frame.size.width / 100);
 }
 

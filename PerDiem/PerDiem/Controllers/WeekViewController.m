@@ -22,6 +22,18 @@
 
 @implementation WeekViewController
 
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([self.delegate respondsToSelector:@selector(calendarInnerPeriodViewController:navigateToDay:)]) {
+        [self.delegate calendarInnerPeriodViewController:self
+                                           navigateToDay:[self periodAtIndex:indexPath]];
+    }
+}
+
+
 #pragma mark - Private
 
 - (void)setDate:(NSDate *)date {
@@ -37,6 +49,10 @@
 
 - (void)updateLabel {
     self.label.text = [NSString stringWithFormat:@"%@ to %@", [[self.timePeriod StartDate] formattedDateWithFormat:@"LLL d"], [[self.timePeriod EndDate] formattedDateWithFormat:@"LLL d"]];
+}
+
+- (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {
+    return [[period StartDate] formattedDateWithFormat:@"ccc d"];
 }
 
 @end

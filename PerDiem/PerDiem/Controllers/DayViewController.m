@@ -33,4 +33,8 @@
     self.label.text = [self.date formattedDateWithFormat:@"cccc, LLL d"];
 }
 
+- (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {
+    return @"";
+}
+
 @end
