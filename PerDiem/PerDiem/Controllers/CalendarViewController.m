@@ -56,6 +56,11 @@
     [self addChildViewController:self.pageController];
     [self.view addSubview:self.pageController.view];
     [self.pageController didMoveToParentViewController:self];
+    
+    
+    UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(onTodayButton)];
+    
+    self.navigationItem.leftBarButtonItem = todayButton;
 }
 
 
@@ -165,6 +170,22 @@
         _date = [[NSDate alloc] init];
     }
     return _date;
+}
+
+- (void)onTodayButton {
+    self.selectedController = self.days;
+    CalendarInnerPeriodViewController *selectedDayViewController = [self.days viewControllerWithDate:[[NSDate alloc] init]];
+    
+    void (^completionBlock)(BOOL finished) = ^void(BOOL finished) {
+        [self.pageController setViewControllers:@[self.selectedController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
+    };
+    [self.selectedController.pageController setViewControllers:@[selectedDayViewController]
+                                                     direction:UIPageViewControllerNavigationDirectionForward
+                                                      animated:NO
+                                                    completion:completionBlock];
 }
 
 @end
