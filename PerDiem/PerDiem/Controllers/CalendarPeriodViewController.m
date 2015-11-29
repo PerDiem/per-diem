@@ -1,24 +1,22 @@
 //
-//  CalendarSubViewController.m
+//  CalendarPeriodViewController.m
 //  PerDiem
 //
 //  Created by Florent Bonomo on 11/21/15.
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
-#import "CalendarSubViewController.h"
+#import "CalendarPeriodViewController.h"
 #import "MonthViewController.h"
 #import "WeekViewController.h"
 #import "DayViewController.h"
 #import "NSDate+DateTools.h"
 
-@interface CalendarSubViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
-
-@property (strong, nonatomic) UIPageViewController *pageController;
+@interface CalendarPeriodViewController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate, CalendarInnerPeriodViewControllerDelegate>
 
 @end
 
-@implementation CalendarSubViewController
+@implementation CalendarPeriodViewController
 
 
 #pragma mark - UIViewController
@@ -42,7 +40,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    // Clear cacheed controllers (that probably need their `date` to reflect the current state).
+    // Clear cached controllers (that probably need their `date` to reflect the current state).
     // http://stackoverflow.com/a/21624169/237637
     self.pageController.dataSource = nil;
     self.pageController.dataSource = self;
@@ -63,7 +61,8 @@
 #pragma mark - UIPageViewControllerDelegate
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
-    self.pendingController = (CalendarSubSubViewController *)pendingViewControllers[0];
+    self.pendingController = (CalendarInnerPeriodViewController *)pendingViewControllers[0];
+    self.pendingController.delegate = self;
     
 }
 
@@ -73,9 +72,36 @@
 }
 
 
-#pragma mark - Private
+#pragma mark - CalendarInnerPeriodViewControllerDelegate
 
-- (CalendarSubSubViewController *)viewControllerWithDate:(NSDate *)date {
+- (void)calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
+                            navigateToDay:(DTTimePeriod *)timePeriod {
+    
+    if ([self.delegate respondsToSelector:@selector(calendarPeriodViewController:calendarInnerPeriodViewController:navigateToDay:)]) {
+        [self.delegate calendarPeriodViewController:self
+                  calendarInnerPeriodViewController:controller
+                                      navigateToDay:timePeriod];
+    }
+}
+
+- (void)calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
+                           navigateToWeek:(DTTimePeriod *)timePeriod {
+    if ([self.delegate respondsToSelector:@selector(calendarPeriodViewController:calendarInnerPeriodViewController:navigateToWeek:)]) {
+        [self.delegate calendarPeriodViewController:self
+                  calendarInnerPeriodViewController:controller
+                                     navigateToWeek:timePeriod];
+    }
+}
+
+- (void)calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
+                          navigateToMonth:(DTTimePeriod *)timePeriod {
+    // NOOP - Might be useful if we need navigation from day / week view to month view somehow. Otherwise trash this.
+}
+
+
+#pragma mark - Public
+
+- (CalendarInnerPeriodViewController *)viewControllerWithDate:(NSDate *)date {
     return nil;
 }
 

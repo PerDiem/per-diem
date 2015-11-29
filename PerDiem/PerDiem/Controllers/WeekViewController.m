@@ -7,20 +7,30 @@
 //
 
 #import "WeekViewController.h"
+#import "NSDate+DateTools.h"
+#import "Budget.h"
+#import "Transaction.h"
+#import "TransactionList.h"
+#import "DayViewTableViewCell.h"
 
 @interface WeekViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation WeekViewController
 
 
-#pragma mark - UIViewController
+#pragma mark - UITableViewDelegate
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([self.delegate respondsToSelector:@selector(calendarInnerPeriodViewController:navigateToDay:)]) {
+        [self.delegate calendarInnerPeriodViewController:self
+                                           navigateToDay:[self periodAtIndex:indexPath]];
+    }
 }
 
 
@@ -39,6 +49,10 @@
 
 - (void)updateLabel {
     self.label.text = [NSString stringWithFormat:@"%@ to %@", [[self.timePeriod StartDate] formattedDateWithFormat:@"LLL d"], [[self.timePeriod EndDate] formattedDateWithFormat:@"LLL d"]];
+}
+
+- (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {
+    return [[period StartDate] formattedDateWithFormat:@"ccc d"];
 }
 
 @end
