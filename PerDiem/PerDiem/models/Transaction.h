@@ -24,7 +24,7 @@
 
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, strong) NSDate *transactionDate;
-@property (nonatomic, assign) BOOL future;
+@property (nonatomic, strong) NSNumber *future;
 @property (nonatomic, strong) NSString *summary;
 @property (nonatomic, strong) NSString *note;
 

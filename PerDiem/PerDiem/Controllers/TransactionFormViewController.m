@@ -105,6 +105,11 @@ NSString *const kFuture = @"future";
     // Future
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kFuture rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Future Transaction"];
     row.required = NO;
+    if (transaction.future) {
+        row.value = transaction.future;
+    } else {
+        row.value = @0;
+    }
     [section addFormRow: row];
 
     //Description
@@ -120,7 +125,9 @@ NSString *const kFuture = @"future";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    if ([self isModal]) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
 
 }
@@ -144,7 +151,7 @@ NSString *const kFuture = @"future";
     }
     self.transaction.note = values[kDescription];
     self.transaction.transactionDate = values[kDate];
-    self.transaction.future = values[kFuture];
+    self.transaction.future = [NSNumber numberWithBool:(![values[kFuture] isEqual: @0])];
     [self.transaction saveInBackground];
 
     if (self.transaction.objectId) {
@@ -160,6 +167,20 @@ NSString *const kFuture = @"future";
     [self.navigationController dismissViewControllerAnimated:YES
                                                   completion:nil];
 
+}
+
+// http://stackoverflow.com/questions/23620276/check-if-view-controller-is-presented-modally-or-pushed-on-a-navigation-stack
+- (BOOL)isModal {
+    if([self presentingViewController])
+        return YES;
+    if([[self presentingViewController] presentedViewController] == self)
+        return YES;
+    if([[[self navigationController] presentingViewController] presentedViewController] == [self navigationController])
+        return YES;
+    if([[[self tabBarController] presentingViewController] isKindOfClass:[UITabBarController class]])
+        return YES;
+
+    return NO;
 }
 
 - (void)cancelPressed:(UIBarButtonItem *)button {
