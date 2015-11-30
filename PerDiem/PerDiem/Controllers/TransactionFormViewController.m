@@ -120,11 +120,12 @@ NSString *const kFuture = @"future";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
 
 }
--(void)savePressed:(UIBarButtonItem * __unused)button
-{
+
+- (void)savePressed:(UIBarButtonItem *)button {
     NSArray * validationErrors = [self formValidationErrors];
     if (validationErrors.count > 0){
         [self showFormValidationError:[validationErrors firstObject]];
@@ -156,8 +157,14 @@ NSString *const kFuture = @"future";
         }
     }
 
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES
+                                                  completion:nil];
 
+}
+
+- (void)cancelPressed:(UIBarButtonItem *)button {
+    [self.navigationController dismissViewControllerAnimated:YES
+                                                  completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
