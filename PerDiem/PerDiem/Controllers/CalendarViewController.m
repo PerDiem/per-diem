@@ -7,17 +7,21 @@
 //
 
 #import "CalendarViewController.h"
+#import "NavigationViewController.h"
 #import "MonthsViewController.h"
 #import "WeeksViewController.h"
 #import "DaysViewController.h"
+#import "AddButtonView.h"
+#import "TransactionFormViewController.h"
 
-@interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, CalendarPeriodViewControllerDelegate>
+@interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, CalendarPeriodViewControllerDelegate, AddTransactionButtonDelegate>
 
 @property (strong, nonatomic) MonthsViewController *months;
 @property (strong, nonatomic) WeeksViewController *weeks;
 @property (strong, nonatomic) DaysViewController *days;
 @property (strong, nonatomic) UIPageViewController *pageController;
 @property (strong, nonatomic) NSArray *controllers;
+@property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
 
 @end
 
@@ -61,6 +65,9 @@
     UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(onTodayButton)];
     
     self.navigationItem.leftBarButtonItem = todayButton;
+    
+    self.addButtonView.delegate = self;
+    [self.view bringSubviewToFront:self.addButtonView];
 }
 
 
@@ -162,6 +169,15 @@
 }
 
 
+#pragma mark - AddTransactionButtonDelegate
+
+- (void)addButtonView:(UIView *)view onButtonTap:(UIButton *)button {
+    TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                           completion:nil];
+}
 
 #pragma mark - Private
 
