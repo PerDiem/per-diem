@@ -9,6 +9,7 @@
 #import "TransactionsViewController.h"
 #import "TransactionFormViewController.h"
 #import "TransactionCell.h"
+#import "BudgetCell.h"
 #import "Transaction.h"
 #import "TransactionList.h"
 #import "Budget.h"
@@ -88,7 +89,8 @@
     self.tableView.delegate = self;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     [self.tableView registerNib:[UINib nibWithNibName:@"TransactionCell" bundle:nil] forCellReuseIdentifier:@"transactionCell"];
-    self.tableView.estimatedRowHeight = 60;
+    [self.tableView registerNib:[UINib nibWithNibName:@"BudgetCell" bundle:nil] forCellReuseIdentifier:@"budgetCell"];
+    self.tableView.estimatedRowHeight = 80;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
@@ -112,19 +114,31 @@
 #pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.transactionList.transactions.count > 0) {
-        return self.transactionList.transactions.count;
-    } else {
-        return 0;
+
+    int count = 0;
+    count += self.transactionList.transactions.count;
+    if (self.budget) {
+        count++;
     }
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
-    cell.transaction = self.transactionList.transactions[indexPath.row];
-    cell.rightUtilityButtons = [self rightButtons];
-    cell.delegate = self;
-    return cell;
+    if (indexPath.row == 0 && self.budget) {
+        BudgetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"budgetCell"];
+        cell.budget = self.budget;
+        return cell;
+    } else {
+        TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
+        if (self.budget) {
+            cell.transaction = self.transactionList.transactions[indexPath.row - 1];
+        } else {
+            cell.transaction = self.transactionList.transactions[indexPath.row];
+        }
+        cell.rightUtilityButtons = [self rightButtons];
+        cell.delegate = self;
+        return cell;
+    }
 }
 - (NSArray *)rightButtons
 {
