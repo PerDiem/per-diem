@@ -61,6 +61,15 @@
     return [[M13ProgressViewMetroDot alloc] init];
 }
 
+- (id)copy
+{
+    id copy = [[[self class] alloc] init];
+    if (copy) {
+        [copy setup];
+    }
+    return copy;
+}
+
 - (void)setup
 {
     _highlighted = NO;
@@ -118,7 +127,7 @@
     NSTimer *animationTimer;
     UIBezierPath *animationPath;
     NSMutableArray *dots;
-    
+
     CGFloat circleSize;
 }
 
@@ -164,6 +173,7 @@
     _failureColor = [UIColor colorWithRed:249.0f/255.0f green:37.0f/255.0f blue:0 alpha:1];
     _metroDot = [[M13ProgressViewMetroDotPolygon alloc] init];
 }
+
 
 #pragma mark Properties
 
@@ -270,11 +280,11 @@
             [self showProgress];
             return;
         }
-        
+
         //Set progress
         [super setProgress:_animationFromValue + dt * (_animationToValue - _animationFromValue) animated:YES];
         [self showProgress];
-        
+
     });
 }
 
@@ -311,12 +321,12 @@
 -(void)beginAnimating
 {
     if (!animating){
-        
+
         animating = YES;
-        
+
         currentNumberOfDots = 0;
         dots = [[NSMutableArray alloc] init];
-        
+
         //add circles
         animationTimer = [NSTimer scheduledTimerWithTimeInterval: 0.20 target: self
                                                      selector: @selector(createCircle) userInfo: nil repeats: YES];
@@ -326,7 +336,7 @@
 -(void)createCircle
 {
     if (currentNumberOfDots<_numberOfDots){
-        
+
         currentNumberOfDots ++;
         CGRect f;
         if (_animationShape != M13ProgressViewMetroAnimationShapeLine) {
@@ -338,14 +348,14 @@
         dotLayer.frame = f;
         [self.layer addSublayer:dotLayer];
         [dots addObject:dotLayer];
-        
+
         CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
         animation.duration = self.animationDuration;
         animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.15f :0.60f :0.85f :0.4f];
         [animation setCalculationMode:kCAAnimationPaced];
         animation.path = animationPath.CGPath;
         animation.repeatCount = HUGE_VALF;
-        
+
         if (_animationShape != M13ProgressViewMetroAnimationShapeLine) {
             //No delay needed
             [dotLayer addAnimation:animation forKey:@"metroAnimation"];
@@ -358,8 +368,8 @@
             group.repeatCount = HUGE_VALF;
             [dotLayer addAnimation:group forKey:@"metroAnimation"];
         }
-        
-        
+
+
     } else {
         [animationTimer invalidate];
     }

@@ -3,11 +3,11 @@
 //  M13ProgressView
 //
 /*Copyright (c) 2013 Brandon McQuilkin
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
@@ -75,25 +75,25 @@
 {
     //Set own background color
     self.backgroundColor = [UIColor clearColor];
-    
+
     //Set default colors
     self.primaryColor = [UIColor colorWithRed:0 green:122/255.0 blue:1.0 alpha:1.0];
     self.secondaryColor = [UIColor colorWithRed:181/255.0 green:182/255.0 blue:183/255.0 alpha:1.0];
     _successColor = [UIColor colorWithRed:63.0f/255.0f green:226.0f/255.0f blue:80.0f/255.0f alpha:1];
     _failureColor = [UIColor colorWithRed:249.0f/255.0f green:37.0f/255.0f blue:0 alpha:1];
-    
+
     //ProgressLayer
     _segmentsLayer = [CAShapeLayer layer];
     _segmentsLayer.frame = self.bounds;
     [self.layer addSublayer:_segmentsLayer];
-    
+
     //Set defauts
     self.animationDuration = .3;
     _progressDirection = M13ProgressViewSegmentedBarProgressDirectionLeftToRight;
     self.numberOfSegments = 16;
     _segmentSeparation = 10.0;
     _cornerRadius = 2.0;
-    
+
     //Layout
     [self layoutSubviews];
 }
@@ -146,7 +146,7 @@
     }
     //Reset the colors for the segements
     [self resetColorsForSegments];
-    
+
     [self setNeedsDisplay];
 }
 
@@ -181,7 +181,7 @@
     if (animated == NO) {
         if (_displayLink) {
             //Kill running animations
-            [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+            [_displayLink invalidate];
             _displayLink = nil;
         }
         [super setProgress:progress animated:NO];
@@ -192,7 +192,7 @@
         _animationToValue = progress;
         if (!_displayLink) {
             //Create and setup the display link
-            [self.displayLink removeFromRunLoop:NSRunLoop.mainRunLoop forMode:NSRunLoopCommonModes];
+            [self.displayLink invalidate];
             self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(animateProgress:)];
             [self.displayLink addToRunLoop:NSRunLoop.mainRunLoop forMode:NSRunLoopCommonModes];
         } /*else {
@@ -207,17 +207,17 @@
         CGFloat dt = (displayLink.timestamp - _animationStartTime) / self.animationDuration;
         if (dt >= 1.0) {
             //Order is important! Otherwise concurrency will cause errors, because setProgress: will detect an animation in progress and try to stop it by itself. Once over one, set to actual progress amount. Animation is over.
-            [self.displayLink removeFromRunLoop:NSRunLoop.mainRunLoop forMode:NSRunLoopCommonModes];
+            [self.displayLink invalidate];
             self.displayLink = nil;
             [super setProgress:_animationToValue animated:NO];
             [self setNeedsDisplay];
             return;
         }
-        
+
         //Set progress
         [super setProgress:_animationFromValue + dt * (_animationToValue - _animationFromValue) animated:YES];
         [self setNeedsDisplay];
-        
+
     });
 }
 
@@ -228,7 +228,7 @@
         [self setNeedsDisplay];
         [CATransaction begin];
         for (int i = 0; i < _numberOfSegments; i++) {
-            CAShapeLayer *layer = _segmentsLayer.sublayers[i];
+            CAShapeLayer *layer = (CAShapeLayer *) _segmentsLayer.sublayers[i];
             CABasicAnimation *barAnimation = [self barColorAnimation];
             barAnimation.fromValue = (id)layer.fillColor;
             barAnimation.toValue = (id)[self colorForSegment:i].CGColor;
@@ -240,7 +240,7 @@
         [self setNeedsDisplay];
         [CATransaction begin];
         for (int i = 0; i < _numberOfSegments; i++) {
-            CAShapeLayer *layer = _segmentsLayer.sublayers[i];
+            CAShapeLayer *layer = (CAShapeLayer *) _segmentsLayer.sublayers[i];
             CABasicAnimation *barAnimation = [self barColorAnimation];
             barAnimation.fromValue = (id)layer.fillColor;
             barAnimation.toValue = (id)_successColor.CGColor;
@@ -252,7 +252,7 @@
         [self setNeedsDisplay];
         [CATransaction begin];
         for (int i = 0; i < _numberOfSegments; i++) {
-            CAShapeLayer *layer = _segmentsLayer.sublayers[i];
+            CAShapeLayer *layer = (CAShapeLayer *) _segmentsLayer.sublayers[i];
             CABasicAnimation *barAnimation = [self barColorAnimation];
             barAnimation.fromValue = (id)layer.fillColor;
             barAnimation.toValue = (id)_failureColor.CGColor;
@@ -276,7 +276,7 @@
 - (void)setIndeterminate:(BOOL)indeterminate
 {
     [super setIndeterminate:indeterminate];
-    
+
     if (indeterminate) {
         indeterminateTimer = [NSTimer timerWithTimeInterval:(1.5 / (float)_numberOfSegments) target:self selector:@selector(drawIndeterminate) userInfo:Nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:indeterminateTimer forMode:NSRunLoopCommonModes];
@@ -291,9 +291,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+
     _segmentsLayer.frame = self.bounds;
-    
+
     for (CAShapeLayer *layer in _segmentsLayer.sublayers) {
         layer.frame = self.bounds;
     }
@@ -319,7 +319,7 @@
     if (_numberOfSegments == _primaryColors.count) {
         segmentColorsPrimary = _primaryColors;
     }
-    
+
     if (_numberOfSegments != _primaryColors.count && _primaryColors.count != 0) {
         NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:_numberOfSegments];
         for (int i = 0; i < _numberOfSegments; i++) {
@@ -331,7 +331,7 @@
         }
         segmentColorsPrimary = tempArray.copy;
     }
-    
+
     if (_secondaryColors == nil) {
         NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:_numberOfSegments];
         for (int i = 0; i < _numberOfSegments; i++) {
@@ -339,7 +339,7 @@
         }
         segmentColorsBackground = tempArray.copy;
     }
-    
+
     if (_numberOfSegments == _secondaryColors.count) {
         segmentColorsBackground = _secondaryColors;
     }
@@ -395,7 +395,7 @@
     } else if (_segmentShape == M13ProgressViewSegmentedBarSegmentShapeCircle) {
         cornerRadius = floorf(self.bounds.size.height < segmentWidth ? self.bounds.size.height / 2.0 : segmentWidth / 2.0);
     }
-    
+
     //Iterate through all the segments that are full.
     for (int i = 0; i < _numberOfSegments; i++) {
         UIBezierPath *path = [UIBezierPath bezierPath];
@@ -411,7 +411,7 @@
                 CGRect rect = CGRectMake(i * (segmentWidth + _segmentSeparation), (self.bounds.size.height - (2 * cornerRadius)) / 2, 2 * cornerRadius, 2 * cornerRadius);
                 path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
             }
-            
+
         } else if (_progressDirection == M13ProgressViewSegmentedBarProgressDirectionRightToLeft) {
             if (_segmentShape == M13ProgressViewSegmentedBarSegmentShapeRectangle) {
                 CGRect rect = CGRectMake(self.bounds.size.width - (i * (segmentWidth + _segmentSeparation)) - segmentWidth, 0, segmentWidth, self.bounds.size.height);
@@ -423,7 +423,7 @@
                 CGRect rect = CGRectMake(self.bounds.size.width - (i * (segmentWidth + _segmentSeparation)) - segmentWidth, (self.bounds.size.height - (2 * cornerRadius)) / 2, 2 * cornerRadius, 2 * cornerRadius);
                 path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
             }
-            
+
         } else if (_progressDirection == M13ProgressViewSegmentedBarProgressDirectionBottomToTop) {
             if (_segmentShape == M13ProgressViewSegmentedBarSegmentShapeRectangle) {
                 CGRect rect = CGRectMake(0, self.bounds.size.height - (i * (segmentWidth + _segmentSeparation)) - segmentWidth, self.bounds.size.width, segmentWidth);
@@ -435,7 +435,7 @@
                 CGRect rect = CGRectMake((self.bounds.size.width - (2 * cornerRadius)) / 2, self.bounds.size.height - (i * (segmentWidth + _segmentSeparation)) - segmentWidth, 2 * cornerRadius, 2 * cornerRadius);
                 path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
             }
-            
+
         } else if (_progressDirection == M13ProgressViewSegmentedBarProgressDirectionTopToBottom) {
             if (_segmentShape == M13ProgressViewSegmentedBarSegmentShapeRectangle) {
                 CGRect rect = CGRectMake(0, (i * (segmentWidth + _segmentSeparation)), self.bounds.size.width, segmentWidth);
@@ -448,9 +448,9 @@
                 path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
             }
         }
-        
+
         //Add segment to the proper layer, and color it
-        CAShapeLayer *layer = _segmentsLayer.sublayers[i];
+        CAShapeLayer *layer = (CAShapeLayer *) _segmentsLayer.sublayers[i];
         layer.path = path.CGPath;
         layer.fillColor = [self colorForSegment:i].CGColor;
     }
@@ -474,7 +474,7 @@
     }
     //What index will the segments be colored from.
     NSInteger numberOfSegmentsToBeColored = _numberOfSegments / 4;
-    
+
     //Iterate through all the segments that are full.
     for (int i = 0; i < _numberOfSegments; i++) {
         UIBezierPath *path = [UIBezierPath bezierPath];
@@ -490,7 +490,7 @@
                 CGRect rect = CGRectMake(i * (segmentWidth + _segmentSeparation), (self.bounds.size.height - (2 * cornerRadius)) / 2, 2 * cornerRadius, 2 * cornerRadius);
                 path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
             }
-            
+
         } else if (_progressDirection == M13ProgressViewSegmentedBarProgressDirectionRightToLeft) {
             if (_segmentShape == M13ProgressViewSegmentedBarSegmentShapeRectangle) {
                 CGRect rect = CGRectMake(self.bounds.size.width - (i * (segmentWidth + _segmentSeparation)) - segmentWidth, 0, segmentWidth, self.bounds.size.height);
@@ -502,7 +502,7 @@
                 CGRect rect = CGRectMake(self.bounds.size.width - (i * (segmentWidth + _segmentSeparation)) - segmentWidth, (self.bounds.size.height - (2 * cornerRadius)) / 2, 2 * cornerRadius, 2 * cornerRadius);
                 path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
             }
-            
+
         } else if (_progressDirection == M13ProgressViewSegmentedBarProgressDirectionBottomToTop) {
             if (_segmentShape == M13ProgressViewSegmentedBarSegmentShapeRectangle) {
                 CGRect rect = CGRectMake(0, self.bounds.size.height - (i * (segmentWidth + _segmentSeparation)) - segmentWidth, self.bounds.size.width, segmentWidth);
@@ -514,7 +514,7 @@
                 CGRect rect = CGRectMake((self.bounds.size.width - (2 * cornerRadius)) / 2, self.bounds.size.height - (i * (segmentWidth + _segmentSeparation)) - segmentWidth, 2 * cornerRadius, 2 * cornerRadius);
                 path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
             }
-            
+
         } else if (_progressDirection == M13ProgressViewSegmentedBarProgressDirectionTopToBottom) {
             if (_segmentShape == M13ProgressViewSegmentedBarSegmentShapeRectangle) {
                 CGRect rect = CGRectMake(0, (i * (segmentWidth + _segmentSeparation)), self.bounds.size.width, segmentWidth);
@@ -527,18 +527,18 @@
                 path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
             }
         }
-        
+
         //Add the segment to the proper path //Add segment to the proper layer, and color it
-        CAShapeLayer *layer = _segmentsLayer.sublayers[i];
+        CAShapeLayer *layer = (CAShapeLayer *) _segmentsLayer.sublayers[i];
         layer.path = path.CGPath;
         if (i >= indeterminateIndex && i < indeterminateIndex + numberOfSegmentsToBeColored) {
             layer.fillColor = ((UIColor *)segmentColorsPrimary[i]).CGColor;
         } else {
             layer.fillColor = ((UIColor *)segmentColorsBackground[i]).CGColor;
         }
-        
+
     }
-    
+
     //increase the index by one for movement
     indeterminateIndex += 1;
     if (indeterminateIndex == numberOfSegmentsToBeColored + _numberOfSegments) {
