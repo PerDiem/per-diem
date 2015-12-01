@@ -24,6 +24,9 @@
 - (void)calendarPeriodViewController:(CalendarPeriodViewController *)periodViewController
    calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)innerPeriodViewController
                      navigateToMonth:(DTTimePeriod *)timePeriod;
+- (void)calendarPeriodViewController:(CalendarPeriodViewController *)periodViewController
+   calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
+                         updateTitle:(NSString *)title;
 
 @end
 

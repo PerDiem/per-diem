@@ -11,7 +11,6 @@
 
 @interface CalendarInnerPeriodViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -23,8 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self updateLabel];
     
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+//    self.automaticallyAdjustsScrollViewInsets = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -68,19 +68,21 @@
 - (void)setDate:(NSDate *)date {
     _date = date;
     [self.tableView reloadData];
-    [self updateLabel];
 }
 
 - (void)setTimePeriod:(DTTimePeriod *)timePeriod {
     _timePeriod = timePeriod;
     [self.tableView reloadData];
-    [self updateLabel];
 }
 
-- (void)updateLabel {
+- (void)updateTitle {
     NSString *from = [[self.timePeriod StartDate] formattedDateWithStyle:NSDateFormatterFullStyle];
     NSString *to = [[self.timePeriod EndDate] formattedDateWithStyle:NSDateFormatterFullStyle];
-    self.label.text = [NSString stringWithFormat:@"%@ to %@", from, to];
+    
+    if ([self.delegate respondsToSelector:@selector(calendarInnerPeriodViewController:updateTitle:)]) {
+        [self.delegate calendarInnerPeriodViewController:self
+                                             updateTitle:[NSString stringWithFormat:@"%@ to %@", from, to]];
+    }
 }
 
 - (DTTimePeriod *)periodAtIndex:(NSIndexPath *)indexPath {

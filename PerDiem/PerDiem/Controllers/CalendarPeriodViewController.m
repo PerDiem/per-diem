@@ -68,6 +68,7 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
     self.selectedController = self.pendingController;
+    [self.selectedController updateTitle];
     self.pendingController = nil;
 }
 
@@ -96,6 +97,15 @@
 - (void)calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
                           navigateToMonth:(DTTimePeriod *)timePeriod {
     // NOOP - Might be useful if we need navigation from day / week view to month view somehow. Otherwise trash this.
+}
+
+- (void)calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
+                              updateTitle:(NSString *)title {
+    if ([self.delegate respondsToSelector:@selector(calendarPeriodViewController:calendarInnerPeriodViewController:updateTitle:)]) {
+        [self.delegate calendarPeriodViewController:self
+                  calendarInnerPeriodViewController:controller
+                                        updateTitle:title];
+    }
 }
 
 

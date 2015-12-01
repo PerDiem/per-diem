@@ -45,6 +45,7 @@
     self.days.date = self.date;
     self.controllers = @[self.months, self.weeks, self.days];
     self.selectedController = self.days;
+    self.selectedController.delegate = self;
 
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationVertical
@@ -68,6 +69,7 @@
     
     self.addButtonView.delegate = self;
     [self.view bringSubviewToFront:self.addButtonView];
+    [self.selectedController.selectedController updateTitle];
 }
 
 
@@ -108,6 +110,7 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
     self.selectedController = self.pendingController;
+    [self.selectedController.selectedController updateTitle];
     self.pendingController = nil;
 }
 
@@ -166,6 +169,12 @@
                                                      direction:UIPageViewControllerNavigationDirectionForward
                                                       animated:NO
                                                     completion:completionBlock];
+}
+
+- (void)calendarPeriodViewController:(CalendarPeriodViewController *)periodViewController
+   calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
+                         updateTitle:(NSString *)title {
+    self.navigationItem.title = title;
 }
 
 
