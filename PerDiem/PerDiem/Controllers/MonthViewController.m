@@ -11,8 +11,6 @@
 
 @interface MonthViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
-
 @end
 
 @implementation MonthViewController
@@ -56,8 +54,11 @@
                                             startingAt:startOfMonth];
 }
 
-- (void)updateLabel {
-    self.label.text = [self.date formattedDateWithFormat:@"LLLL u"];
+- (void)updateTitle {
+    if ([self.delegate respondsToSelector:@selector(calendarInnerPeriodViewController:updateTitle:)]) {
+        [self.delegate calendarInnerPeriodViewController:self
+                                             updateTitle:[self.date formattedDateWithFormat:@"LLLL u"]];
+    }
 }
 
 - (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {

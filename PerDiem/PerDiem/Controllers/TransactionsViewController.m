@@ -36,10 +36,10 @@
     [self setupTableView];
 
     if (self.budget) {
-        self.title = self.budget.name;
+        self.navigationItem.title = self.budget.name;
         self.transactionList = self.budget.transactionList;
     } else {
-        self.title = @"All Transactions";
+        self.navigationItem.title = @"All Transactions";
         [self fetchTransactions];
     }
     [self setupRefreshControl];

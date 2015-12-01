@@ -15,7 +15,6 @@
 
 @interface WeekViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -47,8 +46,12 @@
     [[self.timePeriod EndDate] dateBySubtractingSeconds:1];
 }
 
-- (void)updateLabel {
-    self.label.text = [NSString stringWithFormat:@"%@ to %@", [[self.timePeriod StartDate] formattedDateWithFormat:@"LLL d"], [[self.timePeriod EndDate] formattedDateWithFormat:@"LLL d"]];
+- (void)updateTitle {
+    if ([self.delegate respondsToSelector:@selector(calendarInnerPeriodViewController:updateTitle:)]) {
+        NSString *title = [NSString stringWithFormat:@"%@ to %@", [[self.timePeriod StartDate] formattedDateWithFormat:@"LLL d"], [[self.timePeriod EndDate] formattedDateWithFormat:@"LLL d"]];
+        [self.delegate calendarInnerPeriodViewController:self
+                                             updateTitle:title];
+    }
 }
 
 - (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {

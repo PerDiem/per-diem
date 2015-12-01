@@ -23,6 +23,8 @@
                            navigateToWeek:(DTTimePeriod *)timePeriod;
 - (void)calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
                           navigateToMonth:(DTTimePeriod *)timePeriod;
+- (void)calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
+                              updateTitle:(NSString *)title;
 
 @end
 
@@ -36,5 +38,6 @@
 
 - (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period;
 - (DTTimePeriod *)periodAtIndex:(NSIndexPath *)indexPath;
+- (void)updateTitle;
 
 @end
