@@ -17,7 +17,6 @@
 
 @interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) TransactionList *transactionList;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
@@ -31,11 +30,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self setupNavigationBar];
     [self setupTableView];
 
-    if (self.budget) {
+    if (self.budget != nil) {
         self.navigationItem.title = self.budget.name;
         self.transactionList = self.budget.transactionList;
     } else {
@@ -48,7 +46,7 @@
 #pragma mark - Model Interaction Methods
 
 - (void)fetchTransactions {
-    if (self.budget) {
+    if (self.budget != nil) {
         [Budget budgetNamedWithTransaction:self.budget.name completion:^(Budget *budget, NSError *error) {
             if (budget) {
                 self.transactionList = budget.transactionList;
@@ -59,6 +57,17 @@
             [self.refreshControl endRefreshing];
         }];
 
+    } else if (self.period != nil) {
+        [Transaction transactionsWithinPeriod:self.period
+                                   completion:^(TransactionList *transactions, NSError *error) {
+                                       if (transactions) {
+                                           self.transactionList = transactions;
+                                           [self.tableView reloadData];
+                                       } else {
+                                           NSLog(@"Error: %@", error);
+                                       }
+                                       [self.refreshControl endRefreshing];
+                                   }];
     } else {
         [Transaction transactions:^(TransactionList *transactions, NSError *error) {
             if (transactions) {
@@ -78,6 +87,14 @@
     self = [super init];
     if (self) {
         _budget = budget;
+    }
+    return self;
+}
+
+- (id)initWithTimePeriod:(DTTimePeriod *)period {
+    self = [super init];
+    if (self) {
+        _period = period;
     }
     return self;
 }
@@ -117,7 +134,7 @@
 
     int count = 0;
     count += self.transactionList.transactions.count;
-    if (self.budget) {
+    if (self.budget != nil) {
         count++;
     }
     return count;
@@ -130,7 +147,7 @@
         return cell;
     } else {
         TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
-        if (self.budget) {
+        if (self.budget != nil) {
             cell.transaction = self.transactionList.transactions[indexPath.row - 1];
         } else {
             cell.transaction = self.transactionList.transactions[indexPath.row];

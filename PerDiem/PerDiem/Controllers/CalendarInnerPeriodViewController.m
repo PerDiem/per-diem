@@ -7,11 +7,15 @@
 //
 
 #import "CalendarInnerPeriodViewController.h"
+#import "TransactionsViewController.h"
 #import "DayViewTableViewCell.h"
 
 @interface CalendarInnerPeriodViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *transactionsView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *budgetsHeightContraint;
+@property (strong, nonatomic) TransactionsViewController *transactionsViewController;
 
 @end
 
@@ -22,13 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    self.edgesForExtendedLayout = UIRectEdgeNone;
-//    self.automaticallyAdjustsScrollViewInsets = YES;
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 30.0;
     self.tableView.scrollEnabled = NO;
     [self.tableView registerNib:[UINib nibWithNibName:@"DayViewTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"cell"];
@@ -41,8 +42,13 @@
                                    [Budget budgets:^(NSArray *budgets, NSError *error) {
                                        self.budgets = budgets;
                                        [self.tableView reloadData];
+                                       [self adjustHeightOfTableview];
                                    }];
                                }];
+    [self adjustHeightOfTableview];
+    
+    self.transactionsViewController = [[TransactionsViewController alloc] initWithTimePeriod:self.timePeriod];
+    [self.transactionsView addSubview:self.transactionsViewController.view];
 }
 
 
@@ -93,6 +99,18 @@
 
 - (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {
     return @"";
+}
+
+- (void)adjustHeightOfTableview {
+    CGFloat height = self.tableView.contentSize.height;
+    CGFloat maxHeight = self.tableView.superview.frame.size.height - self.tableView.frame.origin.y;
+    
+    if (height > maxHeight) {
+        height = maxHeight;
+    }
+
+    self.budgetsHeightContraint.constant = height;
+    [self.tableView setNeedsUpdateConstraints];
 }
 
 @end
