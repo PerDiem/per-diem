@@ -16,10 +16,11 @@
 #import "FiltersFormViewController.h"
 #import <SWTableViewCell.h>
 
-@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate>
+@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate>
 
 @property (strong, nonatomic) TransactionList *transactionList;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSDictionary *filters;
 
 @end
 
@@ -215,10 +216,19 @@
     [self.tableView endUpdates];
 }
 
+#pragma mark - FiltersFormViewDelegate
+
+- (void)filtersFormViewController:(FiltersFormViewController *)filtersFormViewController didChangeFilters:(NSDictionary *)filters {
+    self.filters = filters;
+}
+
 #pragma mark - User interactions
 
 - (void)onFilters {
-    [self.navigationController pushViewController:[[FiltersFormViewController alloc] init] animated:YES];
+    FiltersFormViewController *vc = [[FiltersFormViewController alloc] init];
+    vc.delegate = self;
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc animated:YES completion:nil];
 }
 
 #pragma mark - TabBarViewController

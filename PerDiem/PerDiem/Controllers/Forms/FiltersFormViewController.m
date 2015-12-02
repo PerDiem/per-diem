@@ -8,58 +8,144 @@
 
 #import "FiltersFormViewController.h"
 #import "XLForm.h"
+#import "Budget.h"
+#import "PaymentType.h"
 
 NSString *const kFutures = @"futures";
+NSString *const kBudgets = @"budgets";
 
 @interface FiltersFormViewController ()
 
 @property (strong, nonatomic) NSDictionary *defaults;
+@property (strong, nonatomic) NSArray *budgets;
+@property (strong, nonatomic) XLFormSectionDescriptor *budgetsSection;
+@property (strong, nonatomic) XLFormSectionDescriptor *paymentTypeSection;
 
 @end
 
 @implementation FiltersFormViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (id)init {
+    self = [super init];
+    [self setupDefaults];
+    if (self) {
+        [self initializeForm];
+        [self fetchBudgets];
+        [self fetchPaymentTypes];
+    }
+    return self;
 }
 
-- (id)init {
-    [self setupDefaults];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupNavigationBar];
+}
 
-    XLFormDescriptor * formDescriptor = [XLFormDescriptor formDescriptorWithTitle:@"Budget"];
+
+#pragma mark - Setup
+
+- (void)setupNavigationBar {
+    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel)];
+    self.navigationItem.leftBarButtonItem = cancel;
+
+    UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(onFilter)];
+    self.navigationItem.rightBarButtonItem = filter;
+}
+
+#pragma mark - Navigation Actions
+
+- (void)onFilter {
+    [self.delegate filtersFormViewController:self didChangeFilters:self.formValues];
+    NSLog(@"Filters: %@", self.formValues);
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)onCancel {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Form Setup Methods
+
+- (void)initializeForm {
+    XLFormDescriptor * formDescriptor = [XLFormDescriptor formDescriptorWithTitle:@"Filters"];
     XLFormSectionDescriptor * section;
     XLFormRowDescriptor * row;
     formDescriptor.assignFirstResponderOnShow = YES;
 
-    section = [XLFormSectionDescriptor formSectionWithTitle:@"Futures"];
-    [formDescriptor addFormSection:section];
+    // ---- Transaction Types ---- //
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"Transaction Type"];
 
-    // Summary
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kFutures rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Include Futures"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kFutures rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Show Future Transactions"];
     row.value = self.defaults[kFutures];
     [section addFormRow:row];
+    [formDescriptor addFormSection:section];
 
-    return [super initWithForm:formDescriptor];
+    // ---- Payment Type Section Holder ---- //
+    self.paymentTypeSection = [XLFormSectionDescriptor formSectionWithTitle:@"Payment Type"];
+    [formDescriptor addFormSection:self.paymentTypeSection];
+
+    // ---- Budgets Section Holder ---- //
+    self.budgetsSection = [XLFormSectionDescriptor formSectionWithTitle:@"Budgets"];
+    [formDescriptor addFormSection:self.budgetsSection];
+
+    self.form = formDescriptor;
+}
+
+- (void)addBudgetsToForm:(NSArray *) budgets {
+    XLFormRowDescriptor * row;
+
+    if (budgets.count > 0) {
+        for (Budget *budget in budgets) {
+            row = [XLFormRowDescriptor formRowDescriptorWithTag:budget.name rowType:XLFormRowDescriptorTypeBooleanCheck title:budget.name];
+            // change to use nsuser defaults?
+            // row.value = self.defaults[kBudgets][budget.name];
+            row.value = @YES;
+            [self.budgetsSection addFormRow:row];
+        }
+    }
+}
+
+- (void)addPaymentTypesToForm:(NSArray *) paymentTypes {
+    XLFormRowDescriptor * row;
+
+    if (paymentTypes.count > 0) {
+        NSMutableArray *selectorOptions = [@[] mutableCopy];
+
+        for (PaymentType *paymentType in paymentTypes) {
+            [selectorOptions addObject:[XLFormOptionsObject formOptionsObjectWithValue:paymentType.objectId displayText:paymentType.name]];
+        }
+
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:@"paymentType" rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Payment Type"];
+
+        row.selectorOptions = selectorOptions;
+        [self.paymentTypeSection addFormRow:row];
+    }
+}
+
+#pragma mark - Model Methods
+
+- (void)fetchBudgets {
+    [Budget budgets:^(NSArray *budgets, NSError *error) {
+        if (budgets) {
+            [self addBudgetsToForm:budgets];
+        } else if (error) {
+            NSLog(@"Error fetching budgets");
+        }
+    }];
+}
+
+- (void)fetchPaymentTypes {
+    [PaymentType paymentTypes:^(NSArray *paymentTypes, NSError *error) {
+        if (paymentTypes) {
+            [self addPaymentTypesToForm:paymentTypes];
+            NSLog(@"%@", paymentTypes);
+        }
+    }];
 }
 
 - (void)setupDefaults {
     self.defaults = @{kFutures:@YES};
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
