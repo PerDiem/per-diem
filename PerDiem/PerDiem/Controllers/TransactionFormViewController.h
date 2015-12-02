@@ -10,7 +10,17 @@
 
 @class Transaction;
 
+@protocol TransactionFormActionDelegate <NSObject>
+
+@optional
+-(void)transactionCreated:(Transaction*) transaction;
+-(void)transactionUpdated:(Transaction*) transaction;
+
+@end
+
 @interface TransactionFormViewController : XLFormViewController
+
+@property (weak, nonatomic) id<TransactionFormActionDelegate> delegator;
 
 -(id) initWithTransaction: (Transaction*) transaction;
 

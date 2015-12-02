@@ -11,18 +11,9 @@
 
 @interface DayViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
-
 @end
 
 @implementation DayViewController
-
-
-#pragma mark - UIViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
 
 
 #pragma mark - Private
@@ -36,8 +27,15 @@
     [[self.timePeriod EndDate] dateBySubtractingSeconds:1];
 }
 
-- (void)updateLabel {
-    self.label.text = [self.date formattedDateWithFormat:@"cccc, LLL d"];
+- (void)updateTitle {
+    if ([self.delegate respondsToSelector:@selector(calendarInnerPeriodViewController:updateTitle:)]) {
+        [self.delegate calendarInnerPeriodViewController:self
+                                             updateTitle:[self.date formattedDateWithFormat:@"cccc, LLL d"]];
+    }
+}
+
+- (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {
+    return @"";
 }
 
 @end

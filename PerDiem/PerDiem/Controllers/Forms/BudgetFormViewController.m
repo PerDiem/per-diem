@@ -58,6 +58,16 @@ NSString *const kBudgetAmount = @"amount";
     self.budget.organization = user.organization;
     self.budget.name = values[kName];
     self.budget.amount = values[kBudgetAmount];
+
+    if (self.budget.objectId) {
+        if ([self.delegator respondsToSelector:@selector(budgetUpdated:)]) {
+            [self.delegator budgetUpdated:self.budget];
+        }
+    } else {
+        if ([self.delegator respondsToSelector:@selector(budgetCreated:)]) {
+            [self.delegator budgetCreated:self.budget];
+        }
+    }
     [self.budget saveInBackground];
 
     [self.navigationController popViewControllerAnimated:YES];

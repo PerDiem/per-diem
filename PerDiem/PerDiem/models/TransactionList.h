@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DateTools.h"
+#import "Transaction.h"
 
 @interface TransactionList : NSObject
 
-@property (strong, nonatomic) NSArray *transactions;
+@property (strong, nonatomic) NSArray<Transaction *>*transactions;
 @property (strong, nonatomic) NSNumber *sum;
 
-- (id) initWithTransactions: (NSArray*) transactions;
+- (id)initWithTransactions:(NSArray*)transactions;
++ (id)transactionListWithTransactionList:(TransactionList *)transactionList
+                        filterWithPeriod:(DTTimePeriod *)timePeriod;
 
 @end

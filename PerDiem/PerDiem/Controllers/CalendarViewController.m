@@ -7,17 +7,21 @@
 //
 
 #import "CalendarViewController.h"
+#import "NavigationViewController.h"
 #import "MonthsViewController.h"
 #import "WeeksViewController.h"
 #import "DaysViewController.h"
+#import "AddButtonView.h"
+#import "TransactionFormViewController.h"
 
-@interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, CalendarPeriodViewControllerDelegate, AddTransactionButtonDelegate>
 
-@property (strong, nonatomic) MonthsViewController *monthsController;
-@property (strong, nonatomic) WeeksViewController *weeksController;
-@property (strong, nonatomic) DaysViewController *daysController;
+@property (strong, nonatomic) MonthsViewController *months;
+@property (strong, nonatomic) WeeksViewController *weeks;
+@property (strong, nonatomic) DaysViewController *days;
 @property (strong, nonatomic) UIPageViewController *pageController;
 @property (strong, nonatomic) NSArray *controllers;
+@property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
 
 @end
 
@@ -33,14 +37,15 @@
     // http://stackoverflow.com/a/19989136/237637
     self.automaticallyAdjustsScrollViewInsets = false;
     
-    MonthsViewController *months = [[MonthsViewController alloc] initWithNibName:@"MonthsViewController" bundle:nil];
-    WeeksViewController *weeks = [[WeeksViewController alloc] initWithNibName:@"WeeksViewController" bundle:nil];
-    DaysViewController *days = [[DaysViewController alloc] initWithNibName:@"DaysViewController" bundle:nil];
-    months.date = self.date;
-    weeks.date = self.date;
-    days.date = self.date;
-    self.controllers = @[months, weeks, days];
-    self.selectedController = days;
+    self.months = [[MonthsViewController alloc] initWithNibName:@"CalendarPeriodViewController" bundle:nil];
+    self.weeks = [[WeeksViewController alloc] initWithNibName:@"CalendarPeriodViewController" bundle:nil];
+    self.days = [[DaysViewController alloc] initWithNibName:@"CalendarPeriodViewController" bundle:nil];
+    self.months.date = self.date;
+    self.weeks.date = self.date;
+    self.days.date = self.date;
+    self.controllers = @[self.months, self.weeks, self.days];
+    self.selectedController = self.days;
+    self.selectedController.delegate = self;
 
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationVertical
@@ -56,6 +61,15 @@
     [self addChildViewController:self.pageController];
     [self.view addSubview:self.pageController.view];
     [self.pageController didMoveToParentViewController:self];
+    
+    
+    UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(onTodayButton)];
+    
+    self.navigationItem.leftBarButtonItem = todayButton;
+    
+    self.addButtonView.delegate = self;
+    [self.view bringSubviewToFront:self.addButtonView];
+    [self.selectedController.selectedController updateTitle];
 }
 
 
@@ -68,7 +82,7 @@
 
 #pragma mark - UIPageViewControllerDataSource
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(CalendarSubViewController *)viewController {
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(CalendarPeriodViewController *)viewController {
     NSUInteger index = [self.controllers indexOfObject:viewController];
     if (index == 0) {
         return nil;
@@ -76,7 +90,7 @@
     return self.controllers[index - 1];    
 }
 
-- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(CalendarSubViewController *)viewController {
+- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(CalendarPeriodViewController *)viewController {
     NSUInteger index = [self.controllers indexOfObject:viewController];
     
     if (index == [self.controllers count] - 1) {
@@ -89,15 +103,90 @@
 #pragma mark - UIPageViewControllerDelegate
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
-    self.pendingController = (CalendarSubViewController *)pendingViewControllers[0];
+    self.pendingController = (CalendarPeriodViewController *)pendingViewControllers[0];
+    self.pendingController.delegate = self;
     self.pendingController.selectedController.date = self.selectedController.selectedController.date;
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
     self.selectedController = self.pendingController;
+    [self.selectedController.selectedController updateTitle];
     self.pendingController = nil;
 }
 
+
+#pragma mark - CalendarPeriodViewControllerDelegate
+
+- (void)calendarPeriodViewController:(CalendarPeriodViewController *)periodViewController
+   calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)innerPeriodViewController
+                       navigateToDay:(DTTimePeriod *)timePeriod {
+    
+    self.selectedController = self.days;
+    CalendarInnerPeriodViewController *selectedDayViewController = [self.days viewControllerWithDate:[timePeriod StartDate]];
+
+    void (^completionBlock)(BOOL finished) = ^void(BOOL finished) {
+        [self.pageController setViewControllers:@[self.selectedController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
+    };
+    [self.selectedController.pageController setViewControllers:@[selectedDayViewController]
+                                                     direction:UIPageViewControllerNavigationDirectionForward
+                                                      animated:NO
+                                                    completion:completionBlock];
+}
+
+- (void)calendarPeriodViewController:(CalendarPeriodViewController *)periodViewController
+   calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)innerPeriodViewController
+                      navigateToWeek:(DTTimePeriod *)timePeriod {
+    self.selectedController = self.weeks;
+    CalendarInnerPeriodViewController *selectedWeekViewController = [self.weeks viewControllerWithDate:[timePeriod StartDate]];
+
+    void (^completionBlock)(BOOL finished) = ^void(BOOL finished) {
+        [self.pageController setViewControllers:@[self.selectedController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
+    };
+    [self.selectedController.pageController setViewControllers:@[selectedWeekViewController]
+                                                     direction:UIPageViewControllerNavigationDirectionForward
+                                                      animated:NO
+                                                    completion:completionBlock];
+}
+
+- (void)calendarPeriodViewController:(CalendarPeriodViewController *)periodViewController
+   calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)innerPeriodViewController
+                     navigateToMonth:(DTTimePeriod *)timePeriod {
+    self.selectedController = self.months;
+    CalendarInnerPeriodViewController *selectedMonthViewController = [self.days viewControllerWithDate:[timePeriod StartDate]];
+    void (^completionBlock)(BOOL finished) = ^void(BOOL finished) {
+        [self.pageController setViewControllers:@[self.selectedController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
+    };
+    [self.selectedController.pageController setViewControllers:@[selectedMonthViewController]
+                                                     direction:UIPageViewControllerNavigationDirectionForward
+                                                      animated:NO
+                                                    completion:completionBlock];
+}
+
+- (void)calendarPeriodViewController:(CalendarPeriodViewController *)periodViewController
+   calendarInnerPeriodViewController:(CalendarInnerPeriodViewController *)controller
+                         updateTitle:(NSString *)title {
+    self.navigationItem.title = title;
+}
+
+
+#pragma mark - AddTransactionButtonDelegate
+
+- (void)addButtonView:(UIView *)view onButtonTap:(UIButton *)button {
+    TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                           completion:nil];
+}
 
 #pragma mark - Private
 
@@ -106,6 +195,22 @@
         _date = [[NSDate alloc] init];
     }
     return _date;
+}
+
+- (void)onTodayButton {
+    self.selectedController = self.days;
+    CalendarInnerPeriodViewController *selectedDayViewController = [self.days viewControllerWithDate:[[NSDate alloc] init]];
+    
+    void (^completionBlock)(BOOL finished) = ^void(BOOL finished) {
+        [self.pageController setViewControllers:@[self.selectedController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
+    };
+    [self.selectedController.pageController setViewControllers:@[selectedDayViewController]
+                                                     direction:UIPageViewControllerNavigationDirectionForward
+                                                      animated:NO
+                                                    completion:completionBlock];
 }
 
 @end

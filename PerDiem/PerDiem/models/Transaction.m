@@ -13,7 +13,7 @@
 #import "TransactionList.h"
 
 @implementation Transaction
-@dynamic amount, transactionDate, summary, note, user, budget,  paymentType, organization;
+@dynamic amount, transactionDate, summary, future, note, user, budget,  paymentType, organization;
 
 + (void)load {
     [self registerSubclass];
@@ -28,6 +28,7 @@
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"organization"];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
             completion(nil, error);
@@ -44,6 +45,7 @@
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"organization"];
     [query includeKey:@"budget"];
+    [query includeKey:@"paymentType"];
     [query whereKey:@"transactionDate" greaterThanOrEqualTo:[timePeriod StartDate]];
     [query whereKey:@"transactionDate" lessThanOrEqualTo:[timePeriod EndDate]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {

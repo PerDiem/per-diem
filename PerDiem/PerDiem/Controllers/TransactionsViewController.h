@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "TabBarViewController.h"
+#import <DateTools/DateTools.h>
 
 @class Budget;
 
 @interface TransactionsViewController : TabBarViewController
 
-- (id) initWithBudget: (Budget*) budget;
-@property (strong, nonatomic) Budget* budget;
+@property (strong, nonatomic) Budget *budget;
+@property (strong, nonatomic) DTTimePeriod *period;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+- (id)initWithBudget:(Budget *)budget;
+- (id)initWithTimePeriod:(DTTimePeriod *)period;
 
 @end

@@ -17,6 +17,7 @@ NSString *const kAmount = @"amount";
 NSString *const kDate = @"transactionDate";
 NSString *const kDescription = @"description";
 NSString *const kBudget = @"selectorPush";
+NSString *const kFuture = @"future";
 
 
 @interface TransactionFormViewController ()
@@ -87,7 +88,7 @@ NSString *const kBudget = @"selectorPush";
 
     // TODO: Maybe we should put a default budget?
     if (transaction.budget) {
-        row.value = [XLFormOptionsObject formOptionsObjectWithValue:transaction.budget displayText:transaction.budget.name];
+        budgetRow.value = [XLFormOptionsObject formOptionsObjectWithValue:transaction.budget displayText:transaction.budget.name];
     }
     [section addFormRow:budgetRow];
 
@@ -100,6 +101,16 @@ NSString *const kBudget = @"selectorPush";
     }
 
     [section addFormRow:row];
+
+    // Future
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kFuture rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Future Transaction"];
+    row.required = NO;
+    if (transaction.future) {
+        row.value = transaction.future;
+    } else {
+        row.value = @0;
+    }
+    [section addFormRow: row];
 
     //Description
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kDescription rowType:XLFormRowDescriptorTypeTextView title:@"Description"];
@@ -114,11 +125,14 @@ NSString *const kBudget = @"selectorPush";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([self isModal]) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
 
 }
--(void)savePressed:(UIBarButtonItem * __unused)button
-{
+
+- (void)savePressed:(UIBarButtonItem *)button {
     NSArray * validationErrors = [self formValidationErrors];
     if (validationErrors.count > 0){
         [self showFormValidationError:[validationErrors firstObject]];
@@ -137,10 +151,41 @@ NSString *const kBudget = @"selectorPush";
     }
     self.transaction.note = values[kDescription];
     self.transaction.transactionDate = values[kDate];
+    self.transaction.future = [NSNumber numberWithBool:(![values[kFuture] isEqual: @0])];
     [self.transaction saveInBackground];
 
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.transaction.objectId) {
+        if ([self.delegator respondsToSelector:@selector(transactionUpdated:)]) {
+            [self.delegator transactionUpdated:self.transaction];
+        }
+    } else {
+        if ([self.delegator respondsToSelector:@selector(transactionCreated:)]) {
+            [self.delegator transactionCreated:self.transaction];
+        }
+    }
 
+    [self.navigationController dismissViewControllerAnimated:YES
+                                                  completion:nil];
+
+}
+
+// http://stackoverflow.com/questions/23620276/check-if-view-controller-is-presented-modally-or-pushed-on-a-navigation-stack
+- (BOOL)isModal {
+    if([self presentingViewController])
+        return YES;
+    if([[self presentingViewController] presentedViewController] == self)
+        return YES;
+    if([[[self navigationController] presentingViewController] presentedViewController] == [self navigationController])
+        return YES;
+    if([[[self tabBarController] presentingViewController] isKindOfClass:[UITabBarController class]])
+        return YES;
+
+    return NO;
+}
+
+- (void)cancelPressed:(UIBarButtonItem *)button {
+    [self.navigationController dismissViewControllerAnimated:YES
+                                                  completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

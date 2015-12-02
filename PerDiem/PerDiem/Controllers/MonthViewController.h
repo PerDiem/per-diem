@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CalendarSubSubViewController.h"
+#import "CalendarInnerPeriodViewController.h"
 
-@interface MonthViewController : CalendarSubSubViewController
+@interface MonthViewController : CalendarInnerPeriodViewController
 
 @end

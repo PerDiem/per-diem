@@ -9,6 +9,7 @@
 #import "TransactionCell.h"
 #import "Budget.h"
 #import "PaymentType.h"
+#import "UIColor+PerDiem.h"
 
 @interface TransactionCell ()
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -32,10 +33,33 @@
     self.dateLabel.text = [self formatDate:self.transaction.transactionDate];
     self.budgetLabel.text = self.transaction.budget.name;
 
-    // @todo - this was making the app crash due to the paymentType.name being nil. Revisit.
-    // self.paymentTypeLabel.text = self.transaction.paymentType.name;
+    if (transaction.paymentType) {
+        self.paymentTypeLabel.text = self.transaction.paymentType.name;
+    }
     self.summaryLabel.text = self.transaction.summary;
     self.amountLabel.text = [self.amountFormatter stringFromNumber:self.transaction.amount];
+
+    if ([self.transaction.future boolValue]) {
+        [self styleFutureCell];
+    } else {
+        [self styleDefaultCell];
+    }
+}
+
+- (void)styleFutureCell {
+    self.summaryLabel.font = [UIFont italicSystemFontOfSize:15];
+    self.amountLabel.font = [UIFont italicSystemFontOfSize:15];
+    self.summaryLabel.textColor = [UIColor darkBlueColor];
+    self.amountLabel.textColor = [UIColor darkBlueColor];
+    [self setBackgroundColor:[UIColor lightBlueColorWithAlpha:.3]];
+}
+
+- (void)styleDefaultCell {
+    self.summaryLabel.font = [UIFont systemFontOfSize:15];
+    self.amountLabel.font = [UIFont systemFontOfSize:15];
+    self.summaryLabel.textColor = [UIColor darkBlueColor];
+    self.amountLabel.textColor = [UIColor darkBlueColor];
+    [self setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (NSString *)formatDate:(NSDate *)date {

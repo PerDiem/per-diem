@@ -12,11 +12,13 @@
 #import "TransactionsViewController.h"
 #import "BudgetCell.h"
 #import "Budget.h"
+#import <SWTableViewCell.h>
 
-@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate>
 
 @property(strong, nonatomic) NSArray* budgets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -29,25 +31,9 @@
     [super viewDidLoad];
 
     [self setupNavBar];
-
-    [Budget budgets:^(NSArray *budgets, NSError *error) {
-        NSMutableSet *list = [NSMutableSet setWithArray:self.budgets];
-        [list addObjectsFromArray:budgets];
-        self.budgets = [list allObjects];
-        [self.tableView reloadData];
-    }];
-
-    [Budget budgetsWithTransaction:^(NSArray *budgets, NSError *error) {
-        NSSet *oldBudgets = [NSSet setWithArray:self.budgets];
-        NSMutableSet *newBudgets = [NSMutableSet setWithArray:budgets];
-        [newBudgets unionSet:oldBudgets];
-
-        self.budgets = [newBudgets allObjects];
-        [self.tableView reloadData];
-    }];
-
+    [self setupRefreshControl];
     [self setupTableView];
-
+    [self fetchBudgets];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,9 +58,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BudgetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BudgetCell"];
     cell.budget = self.budgets[indexPath.row];
+    cell.rightUtilityButtons = [self rightButtons];
+    cell.delegate = self;
     return cell;
 }
 
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
+                                                title:@"Edit"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"Delete"];
+    return rightUtilityButtons;
+}
 
 #pragma mark - TabBarViewController
 
@@ -82,14 +81,100 @@
     [self setupBarItemWithImageNamed:@"budgets"];
 }
 
+#pragma mark - Setup
+
+- (void) fetchBudgets {
+    [Budget budgets:^(NSArray *budgets, NSError *error) {
+        NSMutableSet *list = [NSMutableSet setWithArray:self.budgets];
+        [list addObjectsFromArray:budgets];
+        self.budgets = [list allObjects];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
+
+    [Budget budgetsWithTransaction:^(NSArray *budgets, NSError *error) {
+        NSSet *oldBudgets = [NSSet setWithArray:self.budgets];
+        NSMutableSet *newBudgets = [NSMutableSet setWithArray:budgets];
+        [newBudgets unionSet:oldBudgets];
+
+        self.budgets = [newBudgets allObjects];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+- (void)setupRefreshControl {
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self
+                            action:@selector(fetchBudgets)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex: 0];
+}
+
 - (void)setupTableView {
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"BudgetCell" bundle:nil] forCellReuseIdentifier:@"BudgetCell"];
-    self.tableView.estimatedRowHeight = 60;
+    self.tableView.estimatedRowHeight = 80;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
+#pragma mark - SWTableViewDelegate
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    switch (index) {
+        case 0:
+        {
+            BudgetFormViewController *vc = [[BudgetFormViewController alloc] initWithBudget:self.budgets[indexPath.row]];
+            vc.delegator = self;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 1:
+        {
+            // Delete from Parse
+            [self.budgets[indexPath.row] deleteBudget];
+
+            // Delete from model
+            NSMutableArray *budgets = [self.budgets mutableCopy];
+            [budgets removeObjectAtIndex:indexPath.row];
+            self.budgets = budgets;
+
+            // Delete from tableView
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+#pragma mark - BudgetFormActionDelegate
+
+-(void)budgetCreated:(Budget*) budget {
+    [self.tableView beginUpdates];
+
+    NSMutableArray *budgets = [self.budgets mutableCopy];
+    [budgets addObject:budget];
+    self.budgets = budgets;
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(budgets.count -1) inSection:0];
+
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+-(void)budgetUpdated:(Budget*) budget {
+    [self.tableView beginUpdates];
+
+    NSUInteger index = [self.budgets indexOfObject:budget];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
 
 #pragma mark - NavBar Controller
 
@@ -101,12 +186,16 @@
     self.navigationItem.rightBarButtonItem = transactionButton;
     self.navigationItem.leftBarButtonItem = budgetButton;
 }
+
+#pragma mark Actions
 - (void) onNewTransaction {
     [self.navigationController pushViewController:[[TransactionFormViewController alloc] init] animated:YES];
 }
 
 - (void) onNewBudget {
-    [self.navigationController pushViewController:[[BudgetFormViewController alloc] init] animated:YES];
+    BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
+    vc.delegator = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
