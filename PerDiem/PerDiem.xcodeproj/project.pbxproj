@@ -45,6 +45,7 @@
 		BF8ADB5C1C04CBF500AEEBFE /* BudgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8ADB5A1C04CBF500AEEBFE /* BudgetCell.m */; };
 		BF8ADB5D1C04CBF500AEEBFE /* BudgetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8ADB5B1C04CBF500AEEBFE /* BudgetCell.xib */; };
 		BF8ADB651C05712D00AEEBFE /* BudgetFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8ADB641C05712D00AEEBFE /* BudgetFormViewController.m */; };
+		BF8ADB681C0D6DB100AEEBFE /* PerDiem.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8ADB671C0D6DB100AEEBFE /* PerDiem.m */; };
 		BFE4324E1C0028F800809F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4324D1C0028F800809F7E /* User.m */; };
 		BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432511C0033FB00809F7E /* LoginViewController.m */; };
 		BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE432521C0033FB00809F7E /* LoginViewController.xib */; };
@@ -122,6 +123,8 @@
 		BF8ADB5B1C04CBF500AEEBFE /* BudgetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BudgetCell.xib; path = Views/BudgetCell.xib; sourceTree = "<group>"; };
 		BF8ADB631C05712D00AEEBFE /* BudgetFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BudgetFormViewController.h; path = Controllers/Forms/BudgetFormViewController.h; sourceTree = "<group>"; };
 		BF8ADB641C05712D00AEEBFE /* BudgetFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BudgetFormViewController.m; path = Controllers/Forms/BudgetFormViewController.m; sourceTree = "<group>"; };
+		BF8ADB661C0D6DB100AEEBFE /* PerDiem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PerDiem.h; path = models/PerDiem.h; sourceTree = "<group>"; };
+		BF8ADB671C0D6DB100AEEBFE /* PerDiem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PerDiem.m; path = models/PerDiem.m; sourceTree = "<group>"; };
 		BFE4324C1C0028F800809F7E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = models/User.h; sourceTree = "<group>"; };
 		BFE4324D1C0028F800809F7E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = models/User.m; sourceTree = "<group>"; };
 		BFE432501C0033FB00809F7E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Controllers/LoginViewController.h; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 				BFE432611C006A6D00809F7E /* Organization.m */,
 				BF6D073C1C010E5A00B61276 /* TransactionList.h */,
 				BF6D073D1C010E5A00B61276 /* TransactionList.m */,
+				BF8ADB661C0D6DB100AEEBFE /* PerDiem.h */,
+				BF8ADB671C0D6DB100AEEBFE /* PerDiem.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -487,6 +492,7 @@
 				4AEB60EE1C01186800679DAF /* NavigationViewController.m in Sources */,
 				BFE4325C1C003D4700809F7E /* Budget.m in Sources */,
 				4AA1AB4B1C0142C000BF3604 /* WeekViewController.m in Sources */,
+				BF8ADB681C0D6DB100AEEBFE /* PerDiem.m in Sources */,
 				4AA1AB601C01556100BF3604 /* DaysViewController.m in Sources */,
 				BFE432621C006A6D00809F7E /* Organization.m in Sources */,
 				4AEB60DA1C010A6600679DAF /* DayViewController.m in Sources */,
