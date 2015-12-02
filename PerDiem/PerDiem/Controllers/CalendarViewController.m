@@ -29,8 +29,6 @@
     
     UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToToday)];
     self.navigationItem.leftBarButtonItem = todayButton;
-    self.addButtonView.delegate = self;
-    [self.view bringSubviewToFront:self.addButtonView];
     
     self.selectedController = [self viewControllerWithDate:[[NSDate alloc] init]];
     [self.selectedController updateTitle];
@@ -39,11 +37,7 @@
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                         options:nil];
     self.pageController.delegate = self;
-    // Prevent content being pushed by navigation controller
-    // http://stackoverflow.com/a/19989136/237637
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.pageController.automaticallyAdjustsScrollViewInsets = NO;
-    [self.pageController.view setFrame:self.view.bounds];
+    [self.pageController.view setFrame:self.view.frame];
     [self.pageController setViewControllers:@[self.selectedController]
                                   direction:UIPageViewControllerNavigationDirectionForward
                                    animated:YES
@@ -51,6 +45,10 @@
     [self addChildViewController:self.pageController];
     [self.view addSubview:self.pageController.view];
     [self.pageController didMoveToParentViewController:self];
+    
+    self.addButtonView.delegate = self;
+    [self.view bringSubviewToFront:self.addButtonView];
+    
     [self navigateToToday];
 }
 
