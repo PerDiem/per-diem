@@ -12,6 +12,9 @@
 @interface PerDiem : NSObject
 
 + (void)perDiemsForPeriod:(DTTimePeriod *)period
+          relatedToPeriod:(DTTimePeriod *)relatedPeriod
+               completion:(void (^)(NSArray<PerDiem *>*, NSError *error))completion;
++ (void)perDiemsForPeriod:(DTTimePeriod *)period
                completion:(void (^)(NSArray<PerDiem *>*, NSError *error))completion;
 + (void)perDiemsForDate:(NSDate *)date
              completion:(void (^)(PerDiem *, NSError *error))completion;
