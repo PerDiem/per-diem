@@ -7,6 +7,7 @@
 //
 
 #import "PaymentType.h"
+#import "User.h"
 
 @implementation PaymentType
 @dynamic name, organization;
@@ -17,6 +18,19 @@
 
 + (NSString *)parseClassName {
     return @"PaymentType";
+}
+
++ (void) paymentTypes:(void (^)(NSArray *paymentTypes, NSError *error)) completion {
+    PFQuery *query = [PFQuery queryWithClassName:@"PaymentType"];
+    [query whereKey:@"organization" equalTo:[User currentUser].organization];
+    [query includeKey:@"organization"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *paymentTypes, NSError * _Nullable error) {
+        if(error) {
+            completion(nil, error);
+        } else {
+            completion(paymentTypes, nil);
+        }
+    }];
 }
 
 @end

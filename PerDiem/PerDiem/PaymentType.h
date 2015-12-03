@@ -17,4 +17,6 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) Organization *organization;
 
++ (void) paymentTypes:(void (^)(NSArray *paymentTypes, NSError *error)) completion;
+
 @end

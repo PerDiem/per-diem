@@ -33,7 +33,7 @@
     self.dateLabel.text = [self formatDate:self.transaction.transactionDate];
     self.budgetLabel.text = self.transaction.budget.name;
 
-    if (transaction.paymentType) {
+    if (self.transaction.paymentType) {
         self.paymentTypeLabel.text = self.transaction.paymentType.name;
     }
     self.summaryLabel.text = self.transaction.summary;

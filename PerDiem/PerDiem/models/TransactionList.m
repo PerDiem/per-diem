@@ -8,6 +8,8 @@
 
 #import "TransactionList.h"
 #import "Transaction.h"
+#import "Budget.h"
+#import "PaymentType.h"
 
 @implementation TransactionList
 
@@ -34,6 +36,27 @@
             [transactions addObject:transaction];
         }
     }
+    return [[TransactionList alloc] initWithTransactions:transactions];
+}
+
++ (id)transactionListWithTransactionList:(TransactionList *)transactionList
+                        filterWithFilter:(Filter *)filter {
+    NSMutableArray *transactions = [transactionList.transactions mutableCopy];
+    for (Transaction *transaction in transactionList.transactions) {
+        if (!filter.futures && [transaction.future boolValue]) {
+            [transactions removeObject:transaction];
+            continue;
+        }
+        if (![filter.paymentTypes containsObject:transaction.paymentType.objectId]) {
+            [transactions removeObject:transaction];
+            continue;
+        }
+        if (![filter.budgets containsObject:transaction.budget.objectId]) {
+            [transactions removeObject:transaction];
+            continue;
+        }
+    }
+
     return [[TransactionList alloc] initWithTransactions:transactions];
 }
 

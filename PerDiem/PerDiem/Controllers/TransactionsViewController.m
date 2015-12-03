@@ -13,12 +13,15 @@
 #import "Transaction.h"
 #import "TransactionList.h"
 #import "Budget.h"
+#import "FiltersFormViewController.h"
+#import "Filter.h"
 #import <SWTableViewCell.h>
 
-@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate>
+@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate>
 
 @property (strong, nonatomic) TransactionList *transactionList;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) Filter *filters;
 
 @end
 
@@ -214,10 +217,31 @@
     [self.tableView endUpdates];
 }
 
+#pragma mark - FiltersFormViewDelegate
+
+- (void)filtersFormViewController:(FiltersFormViewController *)filtersFormViewController didChangeFilters:(NSDictionary *)filters {
+    [self.refreshControl beginRefreshing];
+    self.filters = [[Filter alloc] initWithFormFilters:filters];
+
+    [Transaction transactions:^(TransactionList *transactions, NSError *error) {
+        if (transactions) {
+            self.transactionList = [TransactionList transactionListWithTransactionList:transactions
+                                                                      filterWithFilter:self.filters];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error: %@", error);
+        }
+        [self.refreshControl endRefreshing];
+    }];
+}
+
 #pragma mark - User interactions
 
 - (void)onFilters {
-    NSLog(@"Filters Tapped");
+    FiltersFormViewController *vc = [[FiltersFormViewController alloc] init];
+    vc.delegate = self;
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc animated:YES completion:nil];
 }
 
 #pragma mark - TabBarViewController
