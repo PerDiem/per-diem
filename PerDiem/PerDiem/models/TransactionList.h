@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DateTools.h"
 #import "Transaction.h"
+#import "Filter.h"
 
 @interface TransactionList : NSObject
 
@@ -18,5 +19,8 @@
 - (id)initWithTransactions:(NSArray*)transactions;
 + (id)transactionListWithTransactionList:(TransactionList *)transactionList
                         filterWithPeriod:(DTTimePeriod *)timePeriod;
+
++ (id)transactionListWithTransactionList:(TransactionList *)transactionList
+                        filterWithFilter:(Filter *)filter;
 
 @end
