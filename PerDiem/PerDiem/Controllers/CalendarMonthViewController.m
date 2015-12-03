@@ -17,7 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) DTTimePeriod *timePeriod;
-@property (strong, nonatomic) TransactionList *transactionList;
 @property (strong, nonatomic) NSArray<PerDiem *> *perDiems;
 
 @end
@@ -31,6 +30,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:[UINib nibWithNibName:@"DayViewTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"cell"];

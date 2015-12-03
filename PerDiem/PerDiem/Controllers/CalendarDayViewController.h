@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <DateTools/DateTools.h>
+#import "PerDiem.h"
 
 @interface CalendarDayViewController : UIViewController
 
 @property (strong, nonatomic) DTTimePeriod *timePeriod;
+@property (strong, nonatomic) PerDiem *perDiem;
 
 @end
