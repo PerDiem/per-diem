@@ -59,10 +59,10 @@
             </tableViewCellContentView>
             <animations/>
             <connections>
-                <outlet property="budgetsAmountLabel" destination="boh-Pw-rfN" id="OXK-8u-OcJ"/>
-                <outlet property="mainLabel" destination="OIV-f8-95l" id="kf3-xC-rTu"/>
+                <outlet property="budgetLabel" destination="boh-Pw-rfN" id="uRc-XZ-oR7"/>
+                <outlet property="dayLabel" destination="OIV-f8-95l" id="x0b-cP-mOW"/>
                 <outlet property="progressBarView" destination="ofS-Gy-9Zf" id="i39-bD-M2o"/>
-                <outlet property="transactionsAmountLabel" destination="wcU-GS-g3m" id="2hJ-Js-bHh"/>
+                <outlet property="spentLabel" destination="wcU-GS-g3m" id="cSb-bb-KrP"/>
                 <outlet property="widthConstraint" destination="Cik-WY-won" id="VqZ-LQ-Kn6"/>
             </connections>
             <point key="canvasLocation" x="139" y="260.5"/>

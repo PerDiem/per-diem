@@ -12,15 +12,13 @@
 #import <UIKit/UIKit.h>
 #import "NSDate+DateTools.h"
 #import "DayViewTableViewCell.h"
-#import "TransactionList.h"
-#import "Budget.h"
 
 @interface CalendarMonthViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) DTTimePeriod *timePeriod;
 @property (strong, nonatomic) TransactionList *transactionList;
-@property (strong, nonatomic) NSArray<Budget *> *budgets;
+@property (strong, nonatomic) NSArray<PerDiem *> *perDiems;
 
 @end
 
@@ -37,16 +35,11 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"DayViewTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"cell"];
     
-    [Transaction transactionsWithinPeriod:self.timePeriod
-                               completion:^(TransactionList *transactionList, NSError *error) {
-                                   self.transactionList = transactionList;
-                                   
-                                   // This call should be parallelized with the previous one, probably...
-                                   [Budget budgets:^(NSArray *budgets, NSError *error) {
-                                       self.budgets = budgets;
-                                       [self.tableView reloadData];
-                                   }];
-                               }];
+    [PerDiem perDiemsForPeriod:self.timePeriod
+                    completion:^(NSArray<PerDiem *> *perDiems, NSError *error) {
+                        self.perDiems = perDiems;
+                        [self.tableView reloadData];
+                    }];
 }
 
 
@@ -58,11 +51,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DayViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    DTTimePeriod *period = [self periodAtIndex:indexPath];
-    cell.mainLabel.text = [self innerPeriodLabelWithPeriod:period];
-    cell.transactionList = [TransactionList transactionListWithTransactionList:self.transactionList
-                                                              filterWithPeriod:period];
-    cell.budgets = self.budgets;
+    cell.perDiem = [self.perDiems objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -91,10 +80,6 @@
 - (void)setTimePeriod:(DTTimePeriod *)timePeriod {
     _timePeriod = timePeriod;
     [self.tableView reloadData];
-}
-
-- (NSString *)innerPeriodLabelWithPeriod:(DTTimePeriod *)period {
-    return [[period StartDate] formattedDateWithFormat:@"ccc d"];
 }
 
 - (DTTimePeriod *)periodAtIndex:(NSIndexPath *)indexPath {
