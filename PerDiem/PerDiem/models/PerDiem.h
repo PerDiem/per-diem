@@ -11,9 +11,13 @@
 
 @interface PerDiem : NSObject
 
-+ (void) PerDiemOnDay: (NSDate*) day completion: (void (^)(PerDiem *perDiem, NSError *error)) completion;
++ (void)perDiemsForPeriod:(DTTimePeriod *)period
+               completion:(void (^)(NSArray<PerDiem *>*, NSError *error))completion;
++ (void)perDiemsForDate:(NSDate *)date
+             completion:(void (^)(PerDiem *, NSError *error))completion;
 
 @property (strong, nonatomic) NSNumber *budget;
 @property (strong, nonatomic) NSNumber *spent;
+@property (strong, nonatomic) NSDate *date;
 
 @end

@@ -1,16 +1,17 @@
 //
-//  DayViewTableViewCell.h
+//  PerDiemView.h
 //  PerDiem
 //
-//  Created by Florent Bonomo on 11/27/15.
+//  Created by Florent Bonomo on 12/2/15.
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "PerDiem.h"
 
-@interface DayViewTableViewCell : UITableViewCell
+@interface PerDiemView : UIView
 
+@property (strong, nonatomic) IBOutlet UIView *view;
 @property (nonatomic, strong) PerDiem *perDiem;
 
 @end
