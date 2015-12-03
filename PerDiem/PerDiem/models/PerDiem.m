@@ -16,6 +16,7 @@
 @implementation PerDiem
 
 + (void)perDiemsForPeriod:(DTTimePeriod *)period
+          relatedToPeriod:(DTTimePeriod *)relatedPeriod
                completion:(void (^)(NSArray<PerDiem *>*, NSError *error))completion {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -35,8 +36,8 @@
             [query includeKey:@"organization"];
             [query includeKey:@"budget"];
             [query includeKey:@"paymentType"];
-            [query whereKey:@"transactionDate" greaterThanOrEqualTo:[period StartDate]];
-            [query whereKey:@"transactionDate" lessThanOrEqualTo:[period EndDate]];
+            [query whereKey:@"transactionDate" greaterThanOrEqualTo:[relatedPeriod StartDate]];
+            [query whereKey:@"transactionDate" lessThanOrEqualTo:[relatedPeriod EndDate]];
             transactions = [query findObjects];
         });
 
@@ -79,11 +80,23 @@
     });
 }
 
++ (void)perDiemsForPeriod:(DTTimePeriod *)period
+               completion:(void (^)(NSArray<PerDiem *>*, NSError *error))completion {
+    [[self class] perDiemsForPeriod:period
+                    relatedToPeriod:period
+                         completion:completion];
+}
+
 + (void)perDiemsForDate:(NSDate *)date
              completion:(void (^)(PerDiem *, NSError *error))completion {
     DTTimePeriod *period = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeDay
                                                  startingAt:[[NSCalendar currentCalendar] startOfDayForDate:date]];
+    DTTimePeriod *relatedPeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeMonth
+                                                        startingAt:[NSDate dateWithYear:date.year
+                                                                                  month:date.month
+                                                                                    day:1]];
     [[self class] perDiemsForPeriod:period
+                    relatedToPeriod:relatedPeriod
                          completion:^(NSArray<PerDiem *> *perDiems, NSError *error) {
                              if (!error) {
                                  PerDiem *perDiem = perDiems[0];
