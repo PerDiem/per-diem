@@ -96,9 +96,8 @@ NSString *const kBudgets = @"budgets";
 
     if (budgets.count > 0) {
         for (Budget *budget in budgets) {
-            row = [XLFormRowDescriptor formRowDescriptorWithTag:budget.name rowType:XLFormRowDescriptorTypeBooleanCheck title:budget.name];
-            // change to use nsuser defaults?
-            // row.value = self.defaults[kBudgets][budget.name];
+            NSString *tag = [NSString stringWithFormat:@"budget_%@", budget.objectId];
+            row = [XLFormRowDescriptor formRowDescriptorWithTag:tag rowType:XLFormRowDescriptorTypeBooleanCheck title:budget.name];
             row.value = @YES;
             [self.budgetsSection addFormRow:row];
         }
@@ -109,16 +108,12 @@ NSString *const kBudgets = @"budgets";
     XLFormRowDescriptor * row;
 
     if (paymentTypes.count > 0) {
-        NSMutableArray *selectorOptions = [@[] mutableCopy];
-
         for (PaymentType *paymentType in paymentTypes) {
-            [selectorOptions addObject:[XLFormOptionsObject formOptionsObjectWithValue:paymentType.objectId displayText:paymentType.name]];
+            NSString *tag = [NSString stringWithFormat:@"paymentType_%@", paymentType.objectId];
+            row = [XLFormRowDescriptor formRowDescriptorWithTag:tag rowType:XLFormRowDescriptorTypeBooleanCheck title:paymentType.name];
+            row.value = @YES;
+            [self.paymentTypeSection addFormRow:row];
         }
-
-        row = [XLFormRowDescriptor formRowDescriptorWithTag:@"paymentType" rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Payment Type"];
-
-        row.selectorOptions = selectorOptions;
-        [self.paymentTypeSection addFormRow:row];
     }
 }
 
