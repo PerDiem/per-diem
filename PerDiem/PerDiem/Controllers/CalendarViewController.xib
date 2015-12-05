@@ -31,6 +31,7 @@
                 <constraint firstAttribute="bottom" secondItem="jzM-Mc-jWN" secondAttribute="bottom" constant="60" id="c5L-Uh-E3r"/>
                 <constraint firstAttribute="trailing" secondItem="jzM-Mc-jWN" secondAttribute="trailing" constant="20" id="g4c-Zn-Sus"/>
             </constraints>
+            <nil key="simulatedTopBarMetrics"/>
             <point key="canvasLocation" x="252" y="378"/>
         </view>
     </objects>

@@ -25,9 +25,9 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ue3-bJ-NZV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3Rd-g9-mNr"/>
                 <constraint firstAttribute="trailing" secondItem="ue3-bJ-NZV" secondAttribute="trailing" id="EIP-Bs-zbH"/>
                 <constraint firstItem="ue3-bJ-NZV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dht-zc-21U"/>
+                <constraint firstItem="ue3-bJ-NZV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qUP-ac-Cny"/>
                 <constraint firstAttribute="bottom" secondItem="ue3-bJ-NZV" secondAttribute="bottom" id="xwm-5r-v8f"/>
             </constraints>
             <point key="canvasLocation" x="391" y="264"/>

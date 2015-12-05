@@ -8,6 +8,7 @@
 
 #import "CalendarViewController.h"
 #import "NavigationViewController.h"
+#import "PageViewController.h"
 #import "AddButtonView.h"
 #import "TransactionFormViewController.h"
 #import "CalendarTransition.h"
@@ -29,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.delegate = self;
     
     UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToToday)];
@@ -37,11 +39,11 @@
     self.selectedController = [self viewControllerWithDate:[[NSDate alloc] init]];
     [self.selectedController updateTitle];
 
-    self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
-                                                          navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                                        options:nil];
+    self.pageController = [[PageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+                                                        navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                                      options:nil];
     self.pageController.delegate = self;
-    [self.pageController.view setFrame:self.view.frame];
+    [self.pageController.view setFrame:self.view.bounds];
     [self.pageController setViewControllers:@[self.selectedController]
                                   direction:UIPageViewControllerNavigationDirectionForward
                                    animated:YES

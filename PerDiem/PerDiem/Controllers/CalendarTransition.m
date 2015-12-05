@@ -38,32 +38,30 @@
 
         // Add target view to hierarchy
         [[transitionContext containerView] addSubview:to.view];
+        [[transitionContext containerView] bringSubviewToFront:from.view];
+        from.view.backgroundColor = [UIColor clearColor];
     
         // Get position of Per Diem view in month tableview, relative to screen
         UIView *targetView = [to.selectedController viewForPerDiem:from.perDiemView.perDiem];
         CGPoint targetViewInScreen = [targetView.superview convertPoint:targetView.frame.origin toView:nil];
-        CGRect perDiemViewFrame = CGRectMake(targetViewInScreen.x, targetViewInScreen.y, targetView.frame.size.width, targetView.frame.size.height);
+        CGRect perDiemViewFrame = CGRectMake(targetViewInScreen.x, targetViewInScreen.y - 20, targetView.frame.size.width, targetView.frame.size.height);
         
         // Animate!
         to.view.alpha = 0.0;
+        targetView.alpha = 0;
         from.transactionsView.alpha = 1;
+        
         [UIView animateWithDuration:1 animations:^{
             from.transactionsView.alpha = 0;
             [from.perDiemView.view setFrame:perDiemViewFrame];
             [from.view layoutIfNeeded];
+            to.view.alpha = 1.0;
         } completion:^(BOOL finished) {
-            if ([transitionContext transitionWasCancelled]) {
-                [transitionContext completeTransition:NO];
-            } else {
-                [UIView animateWithDuration:.6 animations:^{
-                    to.view.alpha = 1.0;
-                } completion:^(BOOL finished) {
-                    [transitionContext completeTransition:YES];
-                }];
-            }
+            targetView.alpha = 1.0;
+            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
 
-    } else {                    // Transition from Month to Day
+    } else {    // Transition from Month to Day
 
         CalendarViewController *from = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         CalendarDayViewController *to = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
