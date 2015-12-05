@@ -13,7 +13,9 @@
 
 @property (weak, nonatomic) IBOutlet UIView *progressBarBackgroundView;
 @property (weak, nonatomic) IBOutlet UIView *progressBarView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressBarWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressBarBackgroundHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressBarBackgroundWidthConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *spentLabel;
 
@@ -50,6 +52,25 @@
     [self updateUI];
 }
 
+- (void)addRoundedCorners {
+    [self.progressBarBackgroundView setNeedsLayout];
+    [self.progressBarBackgroundView layoutIfNeeded];
+
+    [self.progressBarBackgroundView.layer setCornerRadius:5.0f];
+    [self.progressBarBackgroundView.layer setMasksToBounds:YES];
+
+    CGFloat height = self.bounds.size.height - 6;
+    CGFloat width = self.bounds.size.width -12;
+
+    CAShapeLayer *shape = [[CAShapeLayer alloc] init];
+    NSLog(@"Width: %f", width);
+    NSLog(@"Height: %f", height);
+    shape.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, width, height)
+                                       byRoundingCorners:UIRectCornerBottomRight|UIRectCornerTopRight
+                                             cornerRadii:CGSizeMake(height / 2, height / 2)].CGPath;
+    self.progressBarBackgroundView.layer.mask = shape;
+}
+
 - (void)updateUI {
     NSNumberFormatter *amountFormatter = [[NSNumberFormatter alloc] init];
     [amountFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
@@ -63,10 +84,12 @@
     if (self.perDiem.budget > 0) {
         percentage = [self.perDiem.spent integerValue] * 100 / [self.perDiem.budget integerValue];
     }
-    
+
     self.progressBarView.backgroundColor = [UIColor colorWithBudgetProgress:percentage alpha:1];
+    self.progressBarBackgroundWidthConstraint.constant = self.frame.size.width - 12;
     self.progressBarBackgroundView.backgroundColor = [UIColor colorWithBudgetProgress:percentage alpha:.4];
-    self.widthConstraint.constant = percentage * (self.frame.size.width / 100);
+    self.progressBarWidthConstraint.constant = percentage * (self.frame.size.width / 100);
+    [self addRoundedCorners];
 }
 
 
