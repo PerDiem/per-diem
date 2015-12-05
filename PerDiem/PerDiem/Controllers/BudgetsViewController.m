@@ -92,7 +92,14 @@
         [self.refreshControl endRefreshing];
     }];
 
-    [Budget budgetsWithTransaction:^(NSArray *budgets, NSError *error) {
+    NSDate *today = [NSDate date];
+    NSDate *startOfDay = [[NSCalendar currentCalendar] startOfDayForDate:today];
+    NSInteger monthStartedDaysAgo = startOfDay.day - 1;
+    NSDate *startOfMonth = [startOfDay dateBySubtractingDays:monthStartedDaysAgo];
+    DTTimePeriod *timePeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeMonth
+                                            startingAt:startOfMonth];
+
+    [Budget budgetsWithTransactionWithinPeriod:timePeriod completion:^(NSArray *budgets, NSError *error) {
         NSSet *oldBudgets = [NSSet setWithArray:self.budgets];
         NSMutableSet *newBudgets = [NSMutableSet setWithArray:budgets];
         [newBudgets unionSet:oldBudgets];
