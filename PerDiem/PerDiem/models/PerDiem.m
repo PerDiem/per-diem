@@ -56,7 +56,7 @@
             CGFloat totalSpentSoFar = 0;
             CGFloat spentOnThatDay = 0;
             for (Transaction *transaction in transactions) {
-                if ([transaction.transactionDate earlierDate:day]) {
+                if ([transaction.transactionDate earlierDate:day] || [self souldUsePendingTransaction: transaction day: day]) {
                     totalSpentSoFar += [transaction.amount floatValue];
                 }
                 if([transaction.transactionDate isSameDay:day]) {
@@ -105,6 +105,15 @@
                                  completion(nil, error);
                              }
                         }];
+}
+
++ (BOOL) souldUsePendingTransaction: (Transaction*) transaction  day:(NSDate*) day {
+    NSDate *startOfDay = [[NSCalendar currentCalendar] startOfDayForDate:day];
+    NSDate *nextDay = [startOfDay dateByAddingDays:1];
+
+    return [transaction.future boolValue] && ([transaction.createdAt earlierDate:day] ||
+    [transaction.createdAt isSameDay:day] ||
+    [transaction.transactionDate isLaterThanOrEqualTo:nextDay]);
 }
 
 @end
