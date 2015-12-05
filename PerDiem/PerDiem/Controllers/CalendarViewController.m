@@ -10,12 +10,14 @@
 #import "NavigationViewController.h"
 #import "AddButtonView.h"
 #import "TransactionFormViewController.h"
+#import "CalendarTransition.h"
 
-@interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddTransactionButtonDelegate, CalendarMonthViewControllerDelegate>
+@interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddTransactionButtonDelegate, CalendarMonthViewControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageController;
 @property (strong, nonatomic) NSArray *controllers;
 @property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
+@property (strong, nonatomic) CalendarTransition *transitionHelper;
 
 @end
 
@@ -26,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationController.delegate = self;
     
     UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToToday)];
     self.navigationItem.leftBarButtonItem = todayButton;
@@ -49,7 +53,7 @@
     self.addButtonView.delegate = self;
     [self.view bringSubviewToFront:self.addButtonView];
     
-    [self navigateToToday];
+//    [self navigateToToday];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,6 +63,24 @@
     self.pageController.dataSource = self;
 }
 
+
+#pragma mark - UINavigationControllerDelegate
+
+- (CalendarTransition *)navigationController:(UINavigationController *)navigationController
+             animationControllerForOperation:(UINavigationControllerOperation)operation
+                          fromViewController:(UIViewController *)fromVC
+                            toViewController:(UIViewController *)toVC {
+    return self.transitionHelper;
+}
+
+- (CalendarTransition *)navigationController:(UINavigationController *)navigationController
+ interactionControllerForAnimationController:(CalendarTransition *)animationController {
+    if (animationController.usingGesture) {
+        return animationController;
+    } else {
+        return nil;
+    }
+}
 
 #pragma mark - UIPageViewControllerDataSource
 
@@ -107,7 +129,7 @@
     NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc
                                             animated:YES
-                                           completion:nil];
+                                          completion:nil];
 }
 
 
@@ -118,15 +140,31 @@
     self.navigationItem.title = title;
 }
 
+- (void)calendarMonthViewController:(CalendarMonthViewController *)monthController
+           navigateToDayWithPerDiem:(PerDiem *)perDiem
+                           animated:(BOOL)animated {
+    [self navigateToDayWithPerDiem:perDiem animated:animated];
+}
+
 #pragma mark - Private
 
+- (void)navigateToDayWithPerDiem:(PerDiem *)perDiem
+                        animated:(BOOL)animated {
+    CalendarDayViewController *controller = [[CalendarDayViewController alloc] initWithNibName:@"CalendarDayViewController"
+                                                                                        bundle:nil];
+    controller.perDiem = perDiem;
+    controller.transitionHelper = self.transitionHelper;
+    [self.navigationController pushViewController:controller
+                                         animated:animated];
+}
+
 - (void)navigateToToday {
-    NSDate *startOfDay = [[NSCalendar currentCalendar] startOfDayForDate:[[NSDate alloc] init]];
-    DTTimePeriod *timePeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeDay
-                                                     startingAt:startOfDay];
-    [[timePeriod EndDate] dateBySubtractingSeconds:1];
-    [self.selectedController navigateToDayWithTimePeriod:timePeriod
-                                                animated:NO];
+    [PerDiem perDiemsForDate:[NSDate new]
+                  completion:^(PerDiem *perDiem, NSError *error) {
+                      if (!error) {
+                          [self navigateToDayWithPerDiem:perDiem animated:NO];
+                      }
+                  }];
 }
 
 - (CalendarMonthViewController *)viewControllerWithDate:(NSDate *)date {
@@ -135,6 +173,13 @@
     controller.date = date;
     controller.delegate = self;
     return controller;
+}
+
+- (CalendarTransition *)transitionHelper {
+    if (!_transitionHelper) {
+        _transitionHelper = [[CalendarTransition alloc] initWithTransitioningController:self];
+    }
+    return _transitionHelper;
 }
 
 @end

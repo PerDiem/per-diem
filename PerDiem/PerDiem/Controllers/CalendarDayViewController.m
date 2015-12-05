@@ -7,13 +7,11 @@
 //
 
 #import "CalendarDayViewController.h"
-#import "PerDiemView.h"
 #import "TransactionsViewController.h"
+#import "UIColor+PerDiem.h"
 
 @interface CalendarDayViewController ()
 
-@property (weak, nonatomic) IBOutlet PerDiemView *perDiemView;
-@property (weak, nonatomic) IBOutlet UIView *transactionsView;
 @property (strong, nonatomic) TransactionsViewController *transactionsViewController;
 
 @end
@@ -22,15 +20,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.transactionsViewController = [[TransactionsViewController alloc] initWithTimePeriod:self.timePeriod];
-    [self.transactionsView addSubview:self.transactionsViewController.view];
+    NSDate *startOfDay = [[NSCalendar currentCalendar] startOfDayForDate:self.perDiem.date];
+    DTTimePeriod *timePeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeDay startingAt:startOfDay];
+    [[timePeriod EndDate] dateBySubtractingSeconds:1];
     
-    [PerDiem perDiemsForDate:[self.timePeriod StartDate]
-                  completion:^(PerDiem *perDiem, NSError *error) {
-                      if (!error) {
-                          self.perDiemView.perDiem = perDiem;
-                      }
-                  }];
+    self.transactionsViewController = [[TransactionsViewController alloc] initWithTimePeriod:timePeriod];
+    [self.transactionsView addSubview:self.transactionsViewController.view];
+    self.perDiemView.perDiem = self.perDiem;
+    [self.view sendSubviewToBack:self.transactionsView];
+    self.view.backgroundColor = [UIColor backgroundColor];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
+- (IBAction)onPerDiemPanGesture:(UIPanGestureRecognizer *)sender {
+    if (self.transitionHelper) {
+        [self.transitionHelper onPanGesture:sender];
+    }
 }
 
 @end

@@ -69,7 +69,7 @@
     [nvc3 setViewControllers:@[vc3]];
     
     TabBarController *tbc = [[TabBarController alloc] init];
-    tbc.viewControllers = @[nvc1, nvc2, nvc3];
+    tbc.viewControllers = @[/*nvc1, */nvc2, nvc3];
     
     self.window.rootViewController = tbc;
 }

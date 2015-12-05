@@ -16,6 +16,7 @@
 #import "FiltersFormViewController.h"
 #import "Filter.h"
 #import <SWTableViewCell.h>
+#import "UIColor+PerDiem.h"
 
 @interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate>
 
@@ -32,6 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor backgroundColor];
 
     [self setupNavigationBar];
     [self setupTableView];
@@ -105,6 +107,8 @@
 #pragma mark - Setup methods
 
 - (void)setupTableView {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;

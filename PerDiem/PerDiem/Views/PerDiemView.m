@@ -11,11 +11,11 @@
 
 @interface PerDiemView ()
 
+@property (weak, nonatomic) IBOutlet UIView *progressBarBackgroundView;
 @property (weak, nonatomic) IBOutlet UIView *progressBarView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *spentLabel;
-@property (weak, nonatomic) IBOutlet UILabel *budgetLabel;
 
 @end
 
@@ -41,6 +41,7 @@
     UINib *nib = [UINib nibWithNibName:@"PerDiemView" bundle:nil];
     [nib instantiateWithOwner:self options:nil];
     self.view.frame = [self bounds];
+    self.view.backgroundColor = [UIColor backgroundColor];
     [self addSubview:self.view];
 }
 
@@ -53,22 +54,18 @@
     NSNumberFormatter *amountFormatter = [[NSNumberFormatter alloc] init];
     [amountFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
     
-    self.dayLabel.text = [self.perDiem.date formattedDateWithFormat:@"ccc d"];
+    self.dayLabel.text = [[self.perDiem.date formattedDateWithFormat:@"ccc d"] uppercaseString];
     
     NSString *budgetAmountString = [amountFormatter stringFromNumber:self.perDiem.budget];
-    self.budgetLabel.text = [NSString stringWithFormat:@"%@ total", budgetAmountString];
-    
     NSString *spentAmountString = [amountFormatter stringFromNumber:self.perDiem.spent];
-    self.spentLabel.text = [NSString stringWithFormat:@"%@", spentAmountString];
-    
-    
+    self.spentLabel.text = [NSString stringWithFormat:@"Spent %@ of %@", spentAmountString, budgetAmountString];
     NSInteger percentage = 0;
     if (self.perDiem.budget > 0) {
         percentage = [self.perDiem.spent integerValue] * 100 / [self.perDiem.budget integerValue];
     }
     
-    self.progressBarView.backgroundColor = [UIColor colorWithBudgetProgress:percentage alpha:.3];
-    self.view.backgroundColor = [UIColor colorWithBudgetProgress:percentage alpha:.1];
+    self.progressBarView.backgroundColor = [UIColor colorWithBudgetProgress:percentage alpha:1];
+    self.progressBarBackgroundView.backgroundColor = [UIColor colorWithBudgetProgress:percentage alpha:.4];
     self.widthConstraint.constant = percentage * (self.frame.size.width / 100);
 }
 

@@ -61,8 +61,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self navigateToDayWithTimePeriod:[self periodAtIndex:indexPath]
-                             animated:YES];
+    if ([self.delegate respondsToSelector:@selector(calendarMonthViewController:navigateToDayWithPerDiem:animated:)]) {
+        [self.delegate calendarMonthViewController:self
+                          navigateToDayWithPerDiem:[self.perDiems objectAtIndex:indexPath.row]
+                                          animated:YES];
+    }
 }
 
 
@@ -101,13 +104,11 @@
     }
 }
 
-- (void)navigateToDayWithTimePeriod:(DTTimePeriod *)timePeriod
-                           animated:(BOOL)animated {
-    CalendarDayViewController *controller = [[CalendarDayViewController alloc] initWithNibName:@"CalendarDayViewController"
-                                                                                        bundle:nil];
-    controller.timePeriod = timePeriod;
-    [self.navigationController pushViewController:controller
-                                         animated:animated];
+- (UITableViewCell *)viewForPerDiem:(PerDiem *)perDiem {
+    NSInteger perDiemIndex = [self.perDiems indexOfObject:perDiem];
+    NSIndexPath *viewIndexPath = [NSIndexPath indexPathForRow:perDiemIndex inSection:0];
+    return [self.tableView cellForRowAtIndexPath:viewIndexPath];
 }
+
 
 @end

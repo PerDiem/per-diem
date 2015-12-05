@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NSDate+DateTools.h"
 #import <DateTools/DateTools.h>
+#import "PerDiem.h"
 
 @class CalendarMonthViewController;
 
@@ -16,6 +17,9 @@
 
 - (void)calendarMonthViewController:(CalendarMonthViewController *)controller
                         updateTitle:(NSString *)title;
+- (void)calendarMonthViewController:(CalendarMonthViewController *)controller
+           navigateToDayWithPerDiem:(PerDiem *)perDiem
+                           animated:(BOOL)animated;
 
 @end
 
@@ -26,7 +30,6 @@
 
 - (void)updateTitle;
 - (void)updateTitleWithTitle:(NSString *)title;
-- (void)navigateToDayWithTimePeriod:(DTTimePeriod *)timePeriod
-                           animated:(BOOL)animated;
+- (UIView *)viewForPerDiem:(PerDiem *)perDiem;
 
 @end
