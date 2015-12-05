@@ -44,6 +44,10 @@
     } else {
         [self styleDefaultCell];
     }
+    
+    self.backgroundColor = [UIColor transactionColor];
+//    self.backgroundView = [UIView new];
+//    self.selectedBackgroundView = [UIView new];
 }
 
 - (void)styleFutureCell {

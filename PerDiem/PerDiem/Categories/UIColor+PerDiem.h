@@ -10,6 +10,8 @@
 
 @interface UIColor (PerDiemColors)
 
++ (UIColor *)backgroundColor;
++ (UIColor *)transactionColor;
 + (UIColor *)darkGreyColor;
 + (UIColor *)darkGreyColorWithAlpha:(CGFloat)alpha;
 + (UIColor *)darkBlueColor;

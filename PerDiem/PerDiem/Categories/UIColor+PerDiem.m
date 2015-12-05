@@ -17,6 +17,16 @@
 // Light Grey: #EFEFEF [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0];
 // RedHighlight: #E74C3C [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:1.0];
 
+// Background Color
++ (UIColor *)backgroundColor {
+    return [UIColor colorWithRed:0.17 green:0.23 blue:0.26 alpha:1.0];
+}
+
+// Transaction Color
++ (UIColor *)transactionColor {
+    return [UIColor colorWithRed:0.22 green:0.30 blue:0.35 alpha:1.0];
+}
+
 // Dark Grey
 + (UIColor *)darkGreyColorWithAlpha:(CGFloat)alpha {
     return [UIColor colorWithRed:0.17 green:0.23 blue:0.26 alpha:alpha];

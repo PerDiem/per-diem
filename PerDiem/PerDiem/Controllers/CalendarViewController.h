@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TabBarViewController.h"
 #import "CalendarMonthViewController.h"
+#import "CalendarDayViewController.h"
 
 @interface CalendarViewController : TabBarViewController
 
