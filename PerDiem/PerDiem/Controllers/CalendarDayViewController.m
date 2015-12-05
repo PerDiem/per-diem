@@ -36,7 +36,7 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
 }
 
 - (IBAction)onPerDiemPanGesture:(UIPanGestureRecognizer *)sender {

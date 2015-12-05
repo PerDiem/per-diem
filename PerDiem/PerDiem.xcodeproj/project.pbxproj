@@ -15,6 +15,9 @@
 		4A44F8871C0E9572005DFB79 /* CalendarMonthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A44F8851C0E9572005DFB79 /* CalendarMonthViewController.xib */; };
 		4A44F8901C0E959D005DFB79 /* CalendarDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44F88E1C0E959D005DFB79 /* CalendarDayViewController.m */; };
 		4A44F8911C0E959D005DFB79 /* CalendarDayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A44F88F1C0E959D005DFB79 /* CalendarDayViewController.xib */; };
+		4A92D6241C13A3BF00BE6452 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A92D6221C13A3BF00BE6452 /* PageViewController.m */; };
+		4A92D6251C13A3BF00BE6452 /* PageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A92D6231C13A3BF00BE6452 /* PageViewController.xib */; };
+		4A92D6281C13AA0400BE6452 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A92D6271C13AA0400BE6452 /* UINavigationBar+CustomHeight.m */; };
 		4AA1AB3F1C012EDF00BF3604 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */; };
 		4AA1AB461C01374100BF3604 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1AB441C01374100BF3604 /* CalendarViewController.m */; };
 		4AA1AB471C01374100BF3604 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA1AB451C01374100BF3604 /* CalendarViewController.xib */; };
@@ -66,6 +69,11 @@
 		4A44F88D1C0E959D005DFB79 /* CalendarDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarDayViewController.h; path = Controllers/CalendarDayViewController.h; sourceTree = "<group>"; };
 		4A44F88E1C0E959D005DFB79 /* CalendarDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarDayViewController.m; path = Controllers/CalendarDayViewController.m; sourceTree = "<group>"; };
 		4A44F88F1C0E959D005DFB79 /* CalendarDayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarDayViewController.xib; path = Controllers/CalendarDayViewController.xib; sourceTree = "<group>"; };
+		4A92D6211C13A3BF00BE6452 /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageViewController.h; path = Controllers/PageViewController.h; sourceTree = "<group>"; };
+		4A92D6221C13A3BF00BE6452 /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PageViewController.m; path = Controllers/PageViewController.m; sourceTree = "<group>"; };
+		4A92D6231C13A3BF00BE6452 /* PageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PageViewController.xib; path = Controllers/PageViewController.xib; sourceTree = "<group>"; };
+		4A92D6261C13AA0400BE6452 /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+CustomHeight.h"; path = "Categories/UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
+		4A92D6271C13AA0400BE6452 /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+CustomHeight.m"; path = "Categories/UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
 		4AA1AB3D1C012EDF00BF3604 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarViewController.h; path = Controllers/TabBarViewController.h; sourceTree = "<group>"; };
 		4AA1AB3E1C012EDF00BF3604 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarViewController.m; path = Controllers/TabBarViewController.m; sourceTree = "<group>"; };
 		4AA1AB431C01374100BF3604 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarViewController.h; path = Controllers/CalendarViewController.h; sourceTree = "<group>"; };
@@ -162,6 +170,9 @@
 				4A44F88F1C0E959D005DFB79 /* CalendarDayViewController.xib */,
 				4A038AFC1C114E6C00ED955D /* CalendarTransition.h */,
 				4A038AFD1C114E6C00ED955D /* CalendarTransition.m */,
+				4A92D6211C13A3BF00BE6452 /* PageViewController.h */,
+				4A92D6221C13A3BF00BE6452 /* PageViewController.m */,
+				4A92D6231C13A3BF00BE6452 /* PageViewController.xib */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -252,6 +263,8 @@
 		8EC0E1491C06DED70004207B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4A92D6261C13AA0400BE6452 /* UINavigationBar+CustomHeight.h */,
+				4A92D6271C13AA0400BE6452 /* UINavigationBar+CustomHeight.m */,
 				8EC0E14A1C06DEEC0004207B /* UIColor+PerDiem.h */,
 				8EC0E14B1C06DEEC0004207B /* UIColor+PerDiem.m */,
 			);
@@ -399,6 +412,7 @@
 				BF8ADB5D1C04CBF500AEEBFE /* BudgetCell.xib in Resources */,
 				4A44F8871C0E9572005DFB79 /* CalendarMonthViewController.xib in Resources */,
 				4A038AF61C100C1500ED955D /* PerDiemView.xib in Resources */,
+				4A92D6251C13A3BF00BE6452 /* PageViewController.xib in Resources */,
 				4AAA3FB71C0944F9004CE620 /* DayViewTableViewCell.xib in Resources */,
 				8E9DA2D11BF561690016ECC2 /* Assets.xcassets in Resources */,
 				4AEB60E51C010AA800679DAF /* TransactionsViewController.xib in Resources */,
@@ -472,11 +486,13 @@
 				BFE4325C1C003D4700809F7E /* Budget.m in Sources */,
 				BF8ADB681C0D6DB100AEEBFE /* PerDiem.m in Sources */,
 				BFE432621C006A6D00809F7E /* Organization.m in Sources */,
+				4A92D6241C13A3BF00BE6452 /* PageViewController.m in Sources */,
 				4A44F8861C0E9572005DFB79 /* CalendarMonthViewController.m in Sources */,
 				BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */,
 				8E9DA2C91BF561690016ECC2 /* AppDelegate.m in Sources */,
 				4AEB60DF1C010A7400679DAF /* BudgetsViewController.m in Sources */,
 				4AAA3FB61C0944F9004CE620 /* DayViewTableViewCell.m in Sources */,
+				4A92D6281C13AA0400BE6452 /* UINavigationBar+CustomHeight.m in Sources */,
 				4AEB60D01C01086100679DAF /* TabBarController.m in Sources */,
 				4AA1AB3F1C012EDF00BF3604 /* TabBarViewController.m in Sources */,
 				4A038AFE1C114E6C00ED955D /* CalendarTransition.m in Sources */,

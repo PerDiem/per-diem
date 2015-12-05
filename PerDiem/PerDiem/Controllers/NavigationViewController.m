@@ -7,6 +7,8 @@
 //
 
 #import "NavigationViewController.h"
+#import "UINavigationBar+CustomHeight.h"
+#import "UIColor+PerDiem.h"
 
 @interface NavigationViewController ()
 
@@ -16,6 +18,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationBar setHeight:35.0f];
+    self.navigationBar.tintColor = [UIColor backgroundColor];
+    self.navigationBar.barTintColor = [UIColor backgroundColor];
+    self.navigationBar.translucent = NO;
+    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
+                                      forBarPosition:UIBarPositionAny
+                                          barMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
 }
 
 @end
