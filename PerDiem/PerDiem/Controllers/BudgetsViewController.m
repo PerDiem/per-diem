@@ -6,20 +6,23 @@
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
+#import "NavigationViewController.h"
 #import "BudgetsViewController.h"
 #import "TransactionFormViewController.h"
 #import "BudgetFormViewController.h"
 #import "TransactionsViewController.h"
 #import "BudgetCell.h"
 #import "Budget.h"
+#import "AddButtonView.h"
 #import "UIColor+PerDiem.h"
 #import <SWTableViewCell.h>
 
-@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate>
+@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate, AddTransactionButtonDelegate>
 
 @property(strong, nonatomic) NSArray* budgets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
 
 @end
 
@@ -31,10 +34,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setupNavBar];
+    self.title = @"Budgets";
     [self setupRefreshControl];
     [self setupTableView];
     [self fetchBudgets];
+
+    self.addButtonView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -185,26 +190,28 @@
     [self.tableView endUpdates];
 }
 
-#pragma mark - NavBar Controller
+#pragma mark - AddTransactionButtonDelegate
 
-- (void) setupNavBar {
-    UIBarButtonItem *transactionButton = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction" style:UIBarButtonItemStylePlain target:self action:@selector(onNewTransaction)];
-
-    UIBarButtonItem *budgetButton = [[UIBarButtonItem alloc] initWithTitle:@"New Budget" style:UIBarButtonItemStylePlain target:self action:@selector(onNewBudget)];
-
-    self.navigationItem.rightBarButtonItem = transactionButton;
-    self.navigationItem.leftBarButtonItem = budgetButton;
+- (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
+    [self.navigationController presentViewController:alert
+                                            animated:YES
+                                          completion:nil];
 }
 
-#pragma mark Actions
-- (void) onNewTransaction {
-    [self.navigationController pushViewController:[[TransactionFormViewController alloc] init] animated:YES];
-}
-
-- (void) onNewBudget {
+- (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert {
     BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
-    vc.delegator = self;
-    [self.navigationController pushViewController:vc animated:YES];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
+    TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
 }
 
 @end
