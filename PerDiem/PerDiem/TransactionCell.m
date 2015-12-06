@@ -36,7 +36,7 @@
         self.dateLabel.text = [self formatDate:self.transaction.transactionDate];
     }
     
-    self.budgetLabel.text = self.transaction.budget.name;
+    self.budgetLabel.text = [self.transaction.budget.name uppercaseString];
 
     if (self.transaction.paymentType) {
         self.paymentTypeLabel.text = self.transaction.paymentType.name;
