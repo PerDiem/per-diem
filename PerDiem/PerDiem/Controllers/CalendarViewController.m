@@ -11,6 +11,7 @@
 #import "PageViewController.h"
 #import "AddButtonView.h"
 #import "TransactionFormViewController.h"
+#import "BudgetFormViewController.h"
 #import "CalendarTransition.h"
 
 @interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddTransactionButtonDelegate, CalendarMonthViewControllerDelegate, UINavigationControllerDelegate>
@@ -125,8 +126,21 @@
 
 #pragma mark - AddTransactionButtonDelegate
 
-- (void)addButtonView:(UIView *)view
-          onButtonTap:(UIButton *)button {
+- (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
+    [self.navigationController presentViewController:alert
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert {
+    BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
     TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
     NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc

@@ -12,7 +12,10 @@
 
 @protocol AddTransactionButtonDelegate <NSObject>
 
-- (void)addButtonView:(AddButtonView *)view onButtonTap:(UIButton *)button;
+- (void)addButtonView:(AddButtonView *)view presentAlertController:(UIAlertController *)alert;
+- (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert;
+- (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert;
+
 
 @end
 
