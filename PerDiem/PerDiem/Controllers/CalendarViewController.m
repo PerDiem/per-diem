@@ -8,8 +8,10 @@
 
 #import "CalendarViewController.h"
 #import "NavigationViewController.h"
+#import "PageViewController.h"
 #import "AddButtonView.h"
 #import "TransactionFormViewController.h"
+#import "BudgetFormViewController.h"
 #import "CalendarTransition.h"
 
 @interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddTransactionButtonDelegate, CalendarMonthViewControllerDelegate, UINavigationControllerDelegate>
@@ -29,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.delegate = self;
     
     UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToToday)];
@@ -37,11 +40,11 @@
     self.selectedController = [self viewControllerWithDate:[[NSDate alloc] init]];
     [self.selectedController updateTitle];
 
-    self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
-                                                          navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                                        options:nil];
+    self.pageController = [[PageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+                                                        navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                                      options:nil];
     self.pageController.delegate = self;
-    [self.pageController.view setFrame:self.view.frame];
+    [self.pageController.view setFrame:self.view.bounds];
     [self.pageController setViewControllers:@[self.selectedController]
                                   direction:UIPageViewControllerNavigationDirectionForward
                                    animated:YES
@@ -75,7 +78,7 @@
 
 - (CalendarTransition *)navigationController:(UINavigationController *)navigationController
  interactionControllerForAnimationController:(CalendarTransition *)animationController {
-    if (animationController.usingGesture) {
+    if (!animationController.isPresenting) {
         return animationController;
     } else {
         return nil;
@@ -117,14 +120,27 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"calendar"];
+    [self setupBarItemWithImageNamed:@"calendar" title:@"This Month"];
 }
 
 
 #pragma mark - AddTransactionButtonDelegate
 
-- (void)addButtonView:(UIView *)view
-          onButtonTap:(UIButton *)button {
+- (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
+    [self.navigationController presentViewController:alert
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert {
+    BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
     TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
     NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc
@@ -154,6 +170,7 @@
                                                                                         bundle:nil];
     controller.perDiem = perDiem;
     controller.transitionHelper = self.transitionHelper;
+    self.transitionHelper.isPresenting = YES;
     [self.navigationController pushViewController:controller
                                          animated:animated];
 }

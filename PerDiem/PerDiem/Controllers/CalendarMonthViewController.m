@@ -12,6 +12,7 @@
 #import <UIKit/UIKit.h>
 #import "NSDate+DateTools.h"
 #import "DayViewTableViewCell.h"
+#import "UIColor+PerDiem.h"
 
 @interface CalendarMonthViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -28,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.backgroundColor = [UIColor backgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.estimatedRowHeight = 100;
@@ -62,7 +64,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if ([self.delegate respondsToSelector:@selector(calendarMonthViewController:navigateToDayWithPerDiem:animated:)]) {
         [self.delegate calendarMonthViewController:self
                           navigateToDayWithPerDiem:[self.perDiems objectAtIndex:indexPath.row]

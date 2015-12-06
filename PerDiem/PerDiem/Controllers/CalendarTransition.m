@@ -32,38 +32,41 @@
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     
-    if (self.usingGesture) {    // Transition from Day to Month
+    if (!self.isPresenting) {    // Transition from Day to Month
         CalendarDayViewController *from = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         CalendarViewController *to = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 
         // Add target view to hierarchy
         [[transitionContext containerView] addSubview:to.view];
+        [[transitionContext containerView] bringSubviewToFront:from.view];
+        from.view.backgroundColor = [UIColor clearColor];
     
         // Get position of Per Diem view in month tableview, relative to screen
         UIView *targetView = [to.selectedController viewForPerDiem:from.perDiemView.perDiem];
         CGPoint targetViewInScreen = [targetView.superview convertPoint:targetView.frame.origin toView:nil];
-        CGRect perDiemViewFrame = CGRectMake(targetViewInScreen.x, targetViewInScreen.y, targetView.frame.size.width, targetView.frame.size.height);
+        CGRect perDiemViewFrame = CGRectMake(targetViewInScreen.x, targetViewInScreen.y - 20, targetView.frame.size.width, targetView.frame.size.height);
         
         // Animate!
         to.view.alpha = 0.0;
+        targetView.alpha = 0;
         from.transactionsView.alpha = 1;
+        
         [UIView animateWithDuration:1 animations:^{
             from.transactionsView.alpha = 0;
+            to.navigationController.navigationBar.alpha = 1;
             [from.perDiemView.view setFrame:perDiemViewFrame];
             [from.view layoutIfNeeded];
+            to.view.alpha = 1.0;
         } completion:^(BOOL finished) {
-            if ([transitionContext transitionWasCancelled]) {
-                [transitionContext completeTransition:NO];
-            } else {
-                [UIView animateWithDuration:.6 animations:^{
-                    to.view.alpha = 1.0;
-                } completion:^(BOOL finished) {
-                    [transitionContext completeTransition:YES];
-                }];
+            targetView.alpha = 1.0;
+            BOOL wasCompleted = ![transitionContext transitionWasCancelled];
+            [transitionContext completeTransition:wasCompleted];
+            if (!wasCompleted) {
+                [from viewWillAppear:NO];
             }
         }];
 
-    } else {                    // Transition from Month to Day
+    } else {    // Transition from Month to Day
 
         CalendarViewController *from = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         CalendarDayViewController *to = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
@@ -94,43 +97,14 @@
             [UIView animateWithDuration:.2 animations:^{
                 to.transactionsView.alpha = 1;
             } completion:^(BOOL finished) {
-               [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+                BOOL wasCompleted = ![transitionContext transitionWasCancelled];
+                [transitionContext completeTransition:wasCompleted];
+                self.isPresenting = !wasCompleted;
             }];
         }];
     }
 
 }
-
-- (void)updateInteractiveTransition:(CGFloat)percentComplete {
-//    NSLog(@"%f", percentComplete);
-    [super updateInteractiveTransition:percentComplete];
-}
-    //    CGPoint translation = [sender translationInView:self.view];
-//    self.view.center = CGPointMake(self.viewOriginalCenter.x,
-//                                   self.viewOriginalCenter.y + 300 * percentComplete);
-//
-    
-    //    } else if (sender.state == UIGestureRecognizerStateEnded) {
-    //        if ([sender velocityInView:self.view].y > 0) {
-    //            NSLog(@"FOO");
-    //            //            //hide
-    //            //            CGPoint center = self.trayView.center;
-    //            //            center.y = [self lowerLimit] + self.trayView.frame.size.height/2;
-    //            //            self.trayView.center = center;
-    //        } else {
-    //            NSLog(@"BAR");
-    //            //            CGPoint center = self.trayView.center;
-    //            //            center.y = [self upperLimit] + self.trayView.frame.size.height/2;
-    //            //            self.trayView.center = center;
-    //            //            //show
-    //        }
-    //    }
-
-//}
-
-//- (void)finishInteractiveTransition {
-//    
-//}
 
 - (void)onPanGesture:(UIPanGestureRecognizer *)sender {
     CGPoint point = [sender locationInView:self.transitioningController.view];
@@ -138,7 +112,6 @@
     
     switch (sender.state) {
         case UIGestureRecognizerStateBegan:
-            self.usingGesture = YES;
             [self.transitioningController.navigationController popViewControllerAnimated:YES];
             
         case UIGestureRecognizerStateChanged:
@@ -152,7 +125,6 @@
             } else {
                 [self cancelInteractiveTransition];
             }
-            self.usingGesture = NO;
             
         default:
             break;

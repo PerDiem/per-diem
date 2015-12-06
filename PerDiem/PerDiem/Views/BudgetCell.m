@@ -6,20 +6,24 @@
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "BudgetCell.h"
 #import "TransactionList.h"
 #import "Budget.h"
-#import <M13ProgressSuite/M13ProgressViewBorderedBar.h>
+#import "UIColor+PerDiem.h"
 
 @interface BudgetCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *budgetNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *baseBudgetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountSpentBudgetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountBadgetLabel;
-@property (weak, nonatomic) IBOutlet UIView *charView;
 @property (strong, nonatomic) NSNumberFormatter *amountFormatter;
+@property (weak, nonatomic) IBOutlet UIView *progressBarView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
+@property (weak, nonatomic) IBOutlet UIView *progressBarBackgroundView;
+@property (assign, nonatomic) float percentage;
 
+@property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @end
 
 @implementation BudgetCell
@@ -37,44 +41,28 @@
     self.budgetNameLabel.text = budget.name;
 
     self.amountBadgetLabel.text = [self.amountFormatter stringFromNumber:budget.amount];
-    M13ProgressViewBorderedBar *progress = [[M13ProgressViewBorderedBar alloc] initWithFrame: CGRectMake(0, 0, 300, 20)];
-    progress.cornerType = M13ProgressViewBorderedBarCornerTypeCircle;
-    progress.progressDirection = M13ProgressViewBorderedBarProgressDirectionLeftToRight;
 
-    progress.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.charView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    [self.charView removeConstraints:self.charView.constraints];
-    [self.charView addSubview:progress];
-    NSDictionary *views = NSDictionaryOfVariableBindings(progress);
-    [self.charView addConstraints:[NSLayoutConstraint
-                                   constraintsWithVisualFormat:@"H:|[progress]|"
-                                   options:0
-                                   metrics:nil
-                                   views:views]];
-    [self.charView addConstraints:[NSLayoutConstraint
-                                   constraintsWithVisualFormat:@"V:|[progress(20)]|"
-                                   options:0
-                                   metrics:nil
-                                   views:views]];
-
-
+    self.percentage = 0;
     if (budget.transactionList) {
         self.amountSpentBudgetLabel.text = [self.amountFormatter stringFromNumber:budget.transactionList.sum];
         if (budget.transactionList.sum > budget.amount) {
-            [progress performAction:M13ProgressViewActionFailure animated:NO];
-            [progress setProgress:1 animated:YES];
         } else {
-            [progress performAction:M13ProgressViewActionSuccess animated:NO];
-
-            float spent = [budget.transactionList.sum floatValue] / [budget.amount floatValue];
-            [progress setProgress:spent animated:YES];
+            self.percentage = [budget.transactionList.sum floatValue] / [budget.amount floatValue];
         }
 
     } else {
         self.amountSpentBudgetLabel.text = [self.amountFormatter stringFromNumber:@(0)];
     }
+    self.mainContentView.backgroundColor = [UIColor backgroundColor];
+    self.progressBarBackgroundView.backgroundColor = [UIColor colorWithBudgetProgress:self.percentage alpha:.4];
+    self.progressBarView.backgroundColor = [UIColor colorWithBudgetProgress:self.percentage alpha:1];
+//    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.widthConstraint.constant = self.percentage * self.mainContentView.frame.size.width;
+}
 - (NSNumberFormatter *)amountFormatter {
     if (!_amountFormatter) {
         _amountFormatter = [[NSNumberFormatter alloc] init];

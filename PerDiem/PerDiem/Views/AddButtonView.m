@@ -43,8 +43,39 @@
 }
 
 - (IBAction)buttonTapped:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(addButtonView:onButtonTap:)]) {
-        [self.delegate addButtonView:self onButtonTap:sender];
+    if ([self.delegate respondsToSelector:@selector(addButtonView:presentAlertController:)]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add New Item" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+
+        UIAlertAction *newBudget = [UIAlertAction
+                                 actionWithTitle:@"New Budget"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action) {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                     if ([self.delegate respondsToSelector:@selector(addButtonView:alertControllerForNewBudget:)]) {
+                                         [self.delegate addButtonView:self alertControllerForNewBudget:alert];
+                                     }
+                                 }];
+        UIAlertAction *newTransaction = [UIAlertAction
+                                         actionWithTitle:@"New Transaction"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action) {
+                                             [alert dismissViewControllerAnimated:YES completion:nil];
+                                             if ([self.delegate respondsToSelector:@selector(addButtonView:alertControllerForNewTransaction:)]) {
+                                                 [self.delegate addButtonView:self alertControllerForNewTransaction:alert];
+                                             }
+                                         }];
+        UIAlertAction* cancel = [UIAlertAction
+                                 actionWithTitle:@"Cancel"
+                                 style:UIAlertActionStyleCancel
+                                 handler:^(UIAlertAction * action) {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+        
+        [alert addAction:newBudget];
+        [alert addAction:newTransaction];
+        [alert addAction:cancel];
+        
+        [self.delegate addButtonView:self presentAlertController:alert];
     }
 }
 
