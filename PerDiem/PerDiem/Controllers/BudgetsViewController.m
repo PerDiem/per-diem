@@ -12,6 +12,7 @@
 #import "TransactionsViewController.h"
 #import "BudgetCell.h"
 #import "Budget.h"
+#import "UIColor+PerDiem.h"
 #import <SWTableViewCell.h>
 
 @interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate>
@@ -78,7 +79,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"budgets"];
+    [self setupBarItemWithImageNamed:@"budgets" title:@"Budgets"];
 }
 
 #pragma mark - Setup
@@ -119,6 +120,7 @@
 }
 
 - (void)setupTableView {
+    self.tableView.backgroundColor = [UIColor backgroundColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"BudgetCell" bundle:nil] forCellReuseIdentifier:@"BudgetCell"];

@@ -36,6 +36,9 @@ NSString *const kBudgetAmount = @"amount";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([self isModal]) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
 }
 
@@ -99,6 +102,25 @@ NSString *const kBudgetAmount = @"amount";
     [section addFormRow:row];
 
     return [super initWithForm:formDescriptor];
+}
+
+// http://stackoverflow.com/questions/23620276/check-if-view-controller-is-presented-modally-or-pushed-on-a-navigation-stack
+- (BOOL)isModal {
+    if([self presentingViewController])
+        return YES;
+    if([[self presentingViewController] presentedViewController] == self)
+        return YES;
+    if([[[self navigationController] presentingViewController] presentedViewController] == [self navigationController])
+        return YES;
+    if([[[self tabBarController] presentingViewController] isKindOfClass:[UITabBarController class]])
+        return YES;
+    
+    return NO;
+}
+
+- (void)cancelPressed:(UIBarButtonItem *)button {
+    [self.navigationController dismissViewControllerAnimated:YES
+                                                  completion:nil];
 }
 
 @end

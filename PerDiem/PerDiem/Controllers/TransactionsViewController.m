@@ -251,7 +251,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"transactions"];
+    [self setupBarItemWithImageNamed:@"transactions" title:@"All Transactions"];
 }
 
 @end
