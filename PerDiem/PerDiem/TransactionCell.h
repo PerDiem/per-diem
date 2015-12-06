@@ -13,5 +13,6 @@
 @interface TransactionCell : SWTableViewCell
 
 @property (strong, nonatomic) Transaction *transaction;
+@property (assign, nonatomic) BOOL hideDate;
 
 @end

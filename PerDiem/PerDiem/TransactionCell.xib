@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="KGk-i7-Jjw" customClass="TransactionCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="64" id="KGk-i7-Jjw" customClass="TransactionCell">
             <rect key="frame" x="0.0" y="0.0" width="480" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -16,45 +16,45 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11/11" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjF-hc-tcd">
-                        <rect key="frame" x="446" y="30" width="26" height="14.5"/>
+                        <rect key="frame" x="442" y="33" width="30" height="17"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                        <color key="textColor" red="0.18823529410000001" green="0.27058823529999998" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                        <color key="textColor" red="0.74901960784313726" green="0.76862745098039209" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TeZ-bM-a4P">
-                        <rect key="frame" x="8" y="30" width="40.5" height="14.5"/>
+                        <rect key="frame" x="8" y="33" width="48" height="17"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                        <color key="textColor" red="0.18823529410000001" green="0.27058823529999998" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <color key="textColor" red="0.74901960784313726" green="0.76862745098039209" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Chase Credit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9g-Xo-cxE">
-                        <rect key="frame" x="68" y="30.5" width="73" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chase Credit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9g-Xo-cxE">
+                        <rect key="frame" x="76" y="33" width="83" height="17"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                        <color key="textColor" red="0.18823529410000001" green="0.27058823529999998" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                        <color key="textColor" red="0.74901960784313726" green="0.76862745098039209" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhI-Bn-BdY">
-                        <rect key="frame" x="56" y="30.5" width="4" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhI-Bn-BdY">
+                        <rect key="frame" x="64" y="34" width="4" height="15"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                        <color key="textColor" red="0.18823529410000001" green="0.27058823529999998" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.74901960784313726" green="0.76862745098039209" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uber to La Palma" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsF-1q-ird">
-                        <rect key="frame" x="8" y="12" width="117.5" height="18"/>
+                        <rect key="frame" x="8" y="12" width="136" height="21"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.12549019610000001" green="0.17254901959999999" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="$23.43" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecd-fb-q2V">
-                        <rect key="frame" x="422" y="12" width="49.5" height="18"/>
+                        <rect key="frame" x="413" y="12" width="59" height="21"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.12549019610000001" green="0.17254901959999999" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -63,42 +63,18 @@
                     <constraint firstItem="RhI-Bn-BdY" firstAttribute="centerY" secondItem="TeZ-bM-a4P" secondAttribute="centerY" id="2ty-qW-xSs"/>
                     <constraint firstItem="BsF-1q-ird" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="5ce-Jr-k9q"/>
                     <constraint firstItem="ecd-fb-q2V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="5pi-4M-O6X"/>
-                    <constraint firstItem="YjF-hc-tcd" firstAttribute="top" secondItem="BsF-1q-ird" secondAttribute="bottom" constant="4" id="BA0-dk-raz"/>
                     <constraint firstItem="ecd-fb-q2V" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BsF-1q-ird" secondAttribute="trailing" constant="8" id="DLk-Xw-Axf"/>
                     <constraint firstItem="Y9g-Xo-cxE" firstAttribute="leading" secondItem="RhI-Bn-BdY" secondAttribute="trailing" constant="8" id="FuD-Bg-84y"/>
                     <constraint firstItem="BsF-1q-ird" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="IAZ-oB-6up"/>
-                    <constraint firstItem="BsF-1q-ird" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="J1b-Re-ade"/>
-                    <constraint firstItem="YjF-hc-tcd" firstAttribute="top" secondItem="BsF-1q-ird" secondAttribute="bottom" id="M1Z-38-Ese"/>
-                    <constraint firstItem="BsF-1q-ird" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="O8p-er-HrN"/>
-                    <constraint firstItem="Y9g-Xo-cxE" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Pz9-CB-9vz"/>
                     <constraint firstItem="TeZ-bM-a4P" firstAttribute="top" secondItem="BsF-1q-ird" secondAttribute="bottom" id="Q1o-sV-QQl"/>
-                    <constraint firstItem="YjF-hc-tcd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="RPp-f8-4a3"/>
                     <constraint firstItem="YjF-hc-tcd" firstAttribute="trailing" secondItem="ecd-fb-q2V" secondAttribute="trailing" id="RhG-ED-AGU"/>
                     <constraint firstItem="RhI-Bn-BdY" firstAttribute="leading" secondItem="TeZ-bM-a4P" secondAttribute="trailing" constant="8" id="Sdy-oK-k3t"/>
                     <constraint firstItem="YjF-hc-tcd" firstAttribute="centerY" secondItem="TeZ-bM-a4P" secondAttribute="centerY" id="VDl-qI-4eP"/>
-                    <constraint firstItem="TeZ-bM-a4P" firstAttribute="centerY" secondItem="YjF-hc-tcd" secondAttribute="centerY" id="a3a-e3-pLA"/>
                     <constraint firstItem="TeZ-bM-a4P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="cDZ-uQ-GUO"/>
                     <constraint firstItem="Y9g-Xo-cxE" firstAttribute="centerY" secondItem="TeZ-bM-a4P" secondAttribute="centerY" id="cbU-2I-oT5"/>
-                    <constraint firstItem="Y9g-Xo-cxE" firstAttribute="leading" secondItem="TeZ-bM-a4P" secondAttribute="trailing" constant="8" id="fIi-FI-Mvo"/>
-                    <constraint firstItem="TeZ-bM-a4P" firstAttribute="leading" secondItem="YjF-hc-tcd" secondAttribute="trailing" constant="8" id="hGb-Ta-MMw"/>
                     <constraint firstItem="ecd-fb-q2V" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="olB-ee-3mv"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="TeZ-bM-a4P" secondAttribute="bottom" constant="4" id="s4O-LN-rKy"/>
-                    <constraint firstItem="Y9g-Xo-cxE" firstAttribute="centerY" secondItem="TeZ-bM-a4P" secondAttribute="centerY" id="xia-ih-UD7"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="J1b-Re-ade"/>
-                        <exclude reference="O8p-er-HrN"/>
-                        <exclude reference="a3a-e3-pLA"/>
-                        <exclude reference="hGb-Ta-MMw"/>
-                        <exclude reference="Pz9-CB-9vz"/>
-                        <exclude reference="fIi-FI-Mvo"/>
-                        <exclude reference="xia-ih-UD7"/>
-                        <exclude reference="BA0-dk-raz"/>
-                        <exclude reference="M1Z-38-Ese"/>
-                        <exclude reference="RPp-f8-4a3"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <animations/>
             <connections>
