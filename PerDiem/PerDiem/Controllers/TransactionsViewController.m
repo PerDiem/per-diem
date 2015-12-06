@@ -6,6 +6,8 @@
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
+#import "NavigationViewController.h"
+#import "BudgetFormViewController.h"
 #import "TransactionsViewController.h"
 #import "TransactionFormViewController.h"
 #import "TransactionCell.h"
@@ -15,14 +17,16 @@
 #import "Budget.h"
 #import "FiltersFormViewController.h"
 #import "Filter.h"
+#import "AddButtonView.h"
 #import <SWTableViewCell.h>
 #import "UIColor+PerDiem.h"
 
-@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate>
+@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate, AddTransactionButtonDelegate>
 
 @property (strong, nonatomic) TransactionList *transactionList;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) Filter *filters;
+@property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
 
 @end
 
@@ -37,6 +41,7 @@
 
     [self setupNavigationBar];
     [self setupTableView];
+    self.addButtonView.delegate = self;
 
     if (self.budget != nil) {
         self.navigationItem.title = self.budget.name;
@@ -237,6 +242,30 @@
         }
         [self.refreshControl endRefreshing];
     }];
+}
+
+#pragma mark - AddTransactionButtonDelegate
+
+- (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
+    [self.navigationController presentViewController:alert
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert {
+    BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
+    TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
 }
 
 #pragma mark - User interactions
