@@ -26,4 +26,9 @@
     self.perDiemView.perDiem = perDiem;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self.perDiemView updateUI];
+}
+
 @end
