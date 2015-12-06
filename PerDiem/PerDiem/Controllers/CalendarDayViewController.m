@@ -32,11 +32,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.alpha = 0;
 }
 
 - (IBAction)onPerDiemPanGesture:(UIPanGestureRecognizer *)sender {

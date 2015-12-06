@@ -53,12 +53,17 @@
         
         [UIView animateWithDuration:1 animations:^{
             from.transactionsView.alpha = 0;
+            to.navigationController.navigationBar.alpha = 1;
             [from.perDiemView.view setFrame:perDiemViewFrame];
             [from.view layoutIfNeeded];
             to.view.alpha = 1.0;
         } completion:^(BOOL finished) {
             targetView.alpha = 1.0;
-            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+            BOOL wasCompleted = ![transitionContext transitionWasCancelled];
+            [transitionContext completeTransition:wasCompleted];
+            if (!wasCompleted) {
+                [from viewWillAppear:NO];
+            }
         }];
 
     } else {    // Transition from Month to Day
