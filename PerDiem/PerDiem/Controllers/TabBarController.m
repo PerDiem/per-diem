@@ -7,11 +7,23 @@
 //
 
 #import "TabBarController.h"
+#import "UIColor+PerDiem.h"
 
 @interface TabBarController ()
 
 @end
 
 @implementation TabBarController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor backgroundColor];
+    self.tabBar.tintColor = [UIColor whiteColor];
+
+    CGRect frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, 49);
+    UIView *v = [[UIView alloc] initWithFrame:frame];
+    [v setBackgroundColor:[UIColor blackColor]];
+    [[self tabBar] addSubview:v];
+}
 
 @end

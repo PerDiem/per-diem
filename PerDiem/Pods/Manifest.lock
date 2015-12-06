@@ -23,6 +23,7 @@ PODS:
   - Bolts/Tasks (1.5.0)
   - DateTools (1.7.0)
   - IRLDocumentScanner (0.1.2)
+  - M13ProgressSuite (1.2.7)
   - Parse (1.10.0):
     - Bolts/Tasks (~> 1.5)
   - SWTableViewCell (0.3.7)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - AFNetworking
   - DateTools
   - IRLDocumentScanner
+  - M13ProgressSuite
   - Parse
   - SWTableViewCell
   - TesseractOCRiOS (from `https://github.com/gali8/Tesseract-OCR-iOS.git`, commit
@@ -54,6 +56,7 @@ SPEC CHECKSUMS:
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   IRLDocumentScanner: b452cc6759d557bb37802b3cc779d5388b7d7ebc
+  M13ProgressSuite: 03d194af6359da440641ba758aed5a18b0386a86
   Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   TesseractOCRiOS: 729989db3984bb60ba3addb053569b172d48c409

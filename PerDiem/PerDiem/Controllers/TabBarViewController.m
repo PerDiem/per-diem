@@ -29,9 +29,9 @@
     // NOOP
 }
 
-- (void)setupBarItemWithImageNamed:(NSString *)imageName {
+- (void)setupBarItemWithImageNamed:(NSString *)imageName title:(NSString *)tabTitle {
     UIImage *tabImage = [UIImage imageNamed:imageName];
-    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@""
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:tabTitle
                                                     image:tabImage
                                             selectedImage:tabImage];
 }

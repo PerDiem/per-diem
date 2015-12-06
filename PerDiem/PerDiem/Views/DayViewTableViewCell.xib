@@ -1,71 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="37" id="KGk-i7-Jjw" customClass="DayViewTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="146" id="KGk-i7-Jjw" customClass="DayViewTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="146"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="36.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="145.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofS-Gy-9Zf">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="36.5"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8D2-xB-c3i" customClass="PerDiemView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="145.5"/>
                         <animations/>
-                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="150" id="Cik-WY-won"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu. 27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIV-f8-95l">
-                        <rect key="frame" x="18" y="10" width="52" height="18"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$150 left" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boh-Pw-rfN">
-                        <rect key="frame" x="262" y="18" width="49.5" height="13.5"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$150" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcU-GS-g3m">
-                        <rect key="frame" x="277" y="5" width="35" height="18"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="OIV-f8-95l" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DNR-GG-HTR"/>
-                    <constraint firstItem="ofS-Gy-9Zf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Idw-Eu-s2F"/>
-                    <constraint firstItem="wcU-GS-g3m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="M05-Ud-PJr"/>
-                    <constraint firstItem="OIV-f8-95l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="XYU-oZ-pBe"/>
-                    <constraint firstAttribute="trailing" secondItem="boh-Pw-rfN" secondAttribute="trailing" constant="8" id="bw8-cC-lSE"/>
-                    <constraint firstItem="ofS-Gy-9Zf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="c5k-p0-enz"/>
-                    <constraint firstAttribute="trailing" secondItem="wcU-GS-g3m" secondAttribute="trailing" constant="8" id="p9F-za-9q7"/>
-                    <constraint firstAttribute="bottom" secondItem="boh-Pw-rfN" secondAttribute="bottom" constant="5" id="y99-Ct-zbO"/>
-                    <constraint firstAttribute="bottom" secondItem="ofS-Gy-9Zf" secondAttribute="bottom" id="z54-ne-uqg"/>
+                    <constraint firstAttribute="trailing" secondItem="8D2-xB-c3i" secondAttribute="trailing" id="188-xt-ARN"/>
+                    <constraint firstItem="8D2-xB-c3i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XSD-OT-Kiu"/>
+                    <constraint firstItem="8D2-xB-c3i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hY5-6u-GIZ"/>
+                    <constraint firstAttribute="bottom" secondItem="8D2-xB-c3i" secondAttribute="bottom" id="p1Z-Xs-McS"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>
-                <outlet property="budgetsAmountLabel" destination="boh-Pw-rfN" id="OXK-8u-OcJ"/>
-                <outlet property="mainLabel" destination="OIV-f8-95l" id="kf3-xC-rTu"/>
-                <outlet property="progressBarView" destination="ofS-Gy-9Zf" id="i39-bD-M2o"/>
-                <outlet property="transactionsAmountLabel" destination="wcU-GS-g3m" id="2hJ-Js-bHh"/>
-                <outlet property="widthConstraint" destination="Cik-WY-won" id="VqZ-LQ-Kn6"/>
+                <outlet property="perDiemView" destination="8D2-xB-c3i" id="izO-lu-iGc"/>
             </connections>
-            <point key="canvasLocation" x="139" y="260.5"/>
+            <point key="canvasLocation" x="139" y="315"/>
         </tableViewCell>
     </objects>
 </document>

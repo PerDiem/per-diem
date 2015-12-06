@@ -33,15 +33,21 @@
     self.dateLabel.text = [self formatDate:self.transaction.transactionDate];
     self.budgetLabel.text = self.transaction.budget.name;
 
-    if (transaction.paymentType) {
+    if (self.transaction.paymentType) {
         self.paymentTypeLabel.text = self.transaction.paymentType.name;
     }
     self.summaryLabel.text = self.transaction.summary;
     self.amountLabel.text = [self.amountFormatter stringFromNumber:self.transaction.amount];
 
-    if (self.transaction.future) {
+    if ([self.transaction.future boolValue]) {
         [self styleFutureCell];
+    } else {
+        [self styleDefaultCell];
     }
+    
+    self.backgroundColor = [UIColor transactionColor];
+//    self.backgroundView = [UIView new];
+//    self.selectedBackgroundView = [UIView new];
 }
 
 - (void)styleFutureCell {
@@ -50,6 +56,14 @@
     self.summaryLabel.textColor = [UIColor darkBlueColor];
     self.amountLabel.textColor = [UIColor darkBlueColor];
     [self setBackgroundColor:[UIColor lightBlueColorWithAlpha:.3]];
+}
+
+- (void)styleDefaultCell {
+    self.summaryLabel.font = [UIFont systemFontOfSize:15];
+    self.amountLabel.font = [UIFont systemFontOfSize:15];
+    self.summaryLabel.textColor = [UIColor darkBlueColor];
+    self.amountLabel.textColor = [UIColor darkBlueColor];
+    [self setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (NSString *)formatDate:(NSDate *)date {

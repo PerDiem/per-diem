@@ -9,16 +9,20 @@
 #import "TransactionsViewController.h"
 #import "TransactionFormViewController.h"
 #import "TransactionCell.h"
+#import "BudgetCell.h"
 #import "Transaction.h"
 #import "TransactionList.h"
 #import "Budget.h"
+#import "FiltersFormViewController.h"
+#import "Filter.h"
 #import <SWTableViewCell.h>
+#import "UIColor+PerDiem.h"
 
-@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate>
+@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) TransactionList *transactionList;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) Filter *filters;
 
 @end
 
@@ -29,16 +33,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor backgroundColor];
 
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self setupNavigationBar];
     [self setupTableView];
 
-    if (self.budget) {
-        self.title = self.budget.name;
+    if (self.budget != nil) {
+        self.navigationItem.title = self.budget.name;
         self.transactionList = self.budget.transactionList;
     } else {
-        self.title = @"All Transactions";
+        self.navigationItem.title = @"All Transactions";
         [self fetchTransactions];
     }
     [self setupRefreshControl];
@@ -47,7 +51,7 @@
 #pragma mark - Model Interaction Methods
 
 - (void)fetchTransactions {
-    if (self.budget) {
+    if (self.budget != nil) {
         [Budget budgetNamedWithTransaction:self.budget.name completion:^(Budget *budget, NSError *error) {
             if (budget) {
                 self.transactionList = budget.transactionList;
@@ -58,6 +62,17 @@
             [self.refreshControl endRefreshing];
         }];
 
+    } else if (self.period != nil) {
+        [Transaction transactionsWithinPeriod:self.period
+                                   completion:^(TransactionList *transactions, NSError *error) {
+                                       if (transactions) {
+                                           self.transactionList = transactions;
+                                           [self.tableView reloadData];
+                                       } else {
+                                           NSLog(@"Error: %@", error);
+                                       }
+                                       [self.refreshControl endRefreshing];
+                                   }];
     } else {
         [Transaction transactions:^(TransactionList *transactions, NSError *error) {
             if (transactions) {
@@ -81,14 +96,25 @@
     return self;
 }
 
+- (id)initWithTimePeriod:(DTTimePeriod *)period {
+    self = [super init];
+    if (self) {
+        _period = period;
+    }
+    return self;
+}
+
 #pragma mark - Setup methods
 
 - (void)setupTableView {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     [self.tableView registerNib:[UINib nibWithNibName:@"TransactionCell" bundle:nil] forCellReuseIdentifier:@"transactionCell"];
-    self.tableView.estimatedRowHeight = 60;
+    [self.tableView registerNib:[UINib nibWithNibName:@"BudgetCell" bundle:nil] forCellReuseIdentifier:@"budgetCell"];
+    self.tableView.estimatedRowHeight = 80;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
@@ -112,19 +138,31 @@
 #pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.transactionList.transactions.count > 0) {
-        return self.transactionList.transactions.count;
-    } else {
-        return 0;
+
+    int count = 0;
+    count += self.transactionList.transactions.count;
+    if (self.budget != nil) {
+        count++;
     }
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
-    cell.transaction = self.transactionList.transactions[indexPath.row];
-    cell.rightUtilityButtons = [self rightButtons];
-    cell.delegate = self;
-    return cell;
+    if (indexPath.row == 0 && self.budget) {
+        BudgetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"budgetCell"];
+        cell.budget = self.budget;
+        return cell;
+    } else {
+        TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
+        if (self.budget != nil) {
+            cell.transaction = self.transactionList.transactions[indexPath.row - 1];
+        } else {
+            cell.transaction = self.transactionList.transactions[indexPath.row];
+        }
+        cell.rightUtilityButtons = [self rightButtons];
+        cell.delegate = self;
+        return cell;
+    }
 }
 - (NSArray *)rightButtons
 {
@@ -183,16 +221,37 @@
     [self.tableView endUpdates];
 }
 
+#pragma mark - FiltersFormViewDelegate
+
+- (void)filtersFormViewController:(FiltersFormViewController *)filtersFormViewController didChangeFilters:(NSDictionary *)filters {
+    [self.refreshControl beginRefreshing];
+    self.filters = [[Filter alloc] initWithFormFilters:filters];
+
+    [Transaction transactions:^(TransactionList *transactions, NSError *error) {
+        if (transactions) {
+            self.transactionList = [TransactionList transactionListWithTransactionList:transactions
+                                                                      filterWithFilter:self.filters];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error: %@", error);
+        }
+        [self.refreshControl endRefreshing];
+    }];
+}
+
 #pragma mark - User interactions
 
 - (void)onFilters {
-    NSLog(@"Filters Tapped");
+    FiltersFormViewController *vc = [[FiltersFormViewController alloc] init];
+    vc.delegate = self;
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc animated:YES completion:nil];
 }
 
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"transactions"];
+    [self setupBarItemWithImageNamed:@"transactions" title:@"All Transactions"];
 }
 
 @end

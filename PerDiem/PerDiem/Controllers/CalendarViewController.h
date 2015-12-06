@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "TabBarViewController.h"
-#import "CalendarPeriodViewController.h"
-#import "NSDate+DateTools.h"
+#import "CalendarMonthViewController.h"
+#import "CalendarDayViewController.h"
 
 @interface CalendarViewController : TabBarViewController
 
-@property (nonatomic, strong) CalendarPeriodViewController *pendingController;
-@property (nonatomic, strong) CalendarPeriodViewController *selectedController;
-@property (strong, nonatomic) NSDate *date;
+@property (nonatomic, strong) CalendarMonthViewController *pendingController;
+@property (nonatomic, strong) CalendarMonthViewController *selectedController;
 
 @end

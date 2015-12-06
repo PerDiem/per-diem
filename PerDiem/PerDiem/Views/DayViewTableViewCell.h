@@ -7,13 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TransactionList.h"
-#import "Budget.h"
+#import "PerDiem.h"
 
 @interface DayViewTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *mainLabel;
-@property (nonatomic, strong) TransactionList *transactionList;
-@property (nonatomic, strong) NSArray<Budget *> *budgets;
+@property (nonatomic, strong) PerDiem *perDiem;
 
 @end

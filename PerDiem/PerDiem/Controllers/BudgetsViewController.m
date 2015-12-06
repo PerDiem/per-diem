@@ -13,6 +13,7 @@
 #import "TransactionsViewController.h"
 #import "BudgetCell.h"
 #import "Budget.h"
+#import "UIColor+PerDiem.h"
 #import <SWTableViewCell.h>
 
 @interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate>
@@ -79,7 +80,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"budgets"];
+    [self setupBarItemWithImageNamed:@"budgets" title:@"Budgets"];
 }
 
 #pragma mark - Setup
@@ -93,7 +94,14 @@
         [self.refreshControl endRefreshing];
     }];
 
-    [Budget budgetsWithTransaction:^(NSArray *budgets, NSError *error) {
+    NSDate *today = [NSDate date];
+    NSDate *startOfDay = [[NSCalendar currentCalendar] startOfDayForDate:today];
+    NSInteger monthStartedDaysAgo = startOfDay.day - 1;
+    NSDate *startOfMonth = [startOfDay dateBySubtractingDays:monthStartedDaysAgo];
+    DTTimePeriod *timePeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeMonth
+                                            startingAt:startOfMonth];
+
+    [Budget budgetsWithTransactionWithinPeriod:timePeriod completion:^(NSArray *budgets, NSError *error) {
         NSSet *oldBudgets = [NSSet setWithArray:self.budgets];
         NSMutableSet *newBudgets = [NSMutableSet setWithArray:budgets];
         [newBudgets unionSet:oldBudgets];
@@ -113,10 +121,11 @@
 }
 
 - (void)setupTableView {
+    self.tableView.backgroundColor = [UIColor backgroundColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"BudgetCell" bundle:nil] forCellReuseIdentifier:@"BudgetCell"];
-    self.tableView.estimatedRowHeight = 60;
+    self.tableView.estimatedRowHeight = 80;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 

@@ -12,6 +12,8 @@
 
 @interface SnapReceiptViewController () <IRLScannerViewControllerDelegate, G8TesseractDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *scanImageView;
+
 @end
 
 @implementation SnapReceiptViewController
@@ -47,6 +49,13 @@
         NSArray *paragraphs = [tesseract recognizedBlocksByIteratorLevel:G8PageIteratorLevelParagraph];
         NSArray *characterChoices = tesseract.characterChoices;
         UIImage *imageWithBlocks = [tesseract imageWithBlocks:characterBoxes drawText:YES thresholded:NO];
+        self.scanImageView.image = tesseract.image;
+        for (G8RecognizedBlock *characterBox in characterBoxes) {
+            UIView *box = [[UIView alloc] initWithFrame:characterBox.boundingBox];
+            box.backgroundColor = [UIColor blueColor];
+            box.alpha = .3;
+            [self.view addSubview:box];
+        }
     }];
 }
 
