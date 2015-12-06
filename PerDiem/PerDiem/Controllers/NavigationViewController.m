@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationBar setHeight:35.0f];
+    [self.navigationBar setHeight:40.0f];
     self.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationBar.barTintColor = [UIColor backgroundColor];
     self.navigationBar.barStyle = UIBarStyleBlackTranslucent;

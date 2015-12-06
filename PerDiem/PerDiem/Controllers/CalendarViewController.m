@@ -77,7 +77,7 @@
 
 - (CalendarTransition *)navigationController:(UINavigationController *)navigationController
  interactionControllerForAnimationController:(CalendarTransition *)animationController {
-    if (animationController.usingGesture) {
+    if (!animationController.isPresenting) {
         return animationController;
     } else {
         return nil;
@@ -156,6 +156,7 @@
                                                                                         bundle:nil];
     controller.perDiem = perDiem;
     controller.transitionHelper = self.transitionHelper;
+    self.transitionHelper.isPresenting = YES;
     [self.navigationController pushViewController:controller
                                          animated:animated];
 }

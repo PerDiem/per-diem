@@ -41,6 +41,7 @@
 
 - (IBAction)onPerDiemPanGesture:(UIPanGestureRecognizer *)sender {
     if (self.transitionHelper) {
+        self.transitionHelper.isPresenting = NO;
         [self.transitionHelper onPanGesture:sender];
     }
 }

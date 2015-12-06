@@ -11,7 +11,7 @@
 
 @interface CalendarTransition : UIPercentDrivenInteractiveTransition <UIViewControllerAnimatedTransitioning>
 
-@property (nonatomic, assign) BOOL usingGesture;
+@property (nonatomic, assign) BOOL isPresenting;
 
 - (instancetype)initWithTransitioningController:(UIViewController *)transitioningController;
 - (void)onPanGesture:(UIPanGestureRecognizer *)sender;
