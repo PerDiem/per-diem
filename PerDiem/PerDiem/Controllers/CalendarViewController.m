@@ -13,6 +13,7 @@
 #import "TransactionFormViewController.h"
 #import "BudgetFormViewController.h"
 #import "CalendarTransition.h"
+#import "NSDate+DateTools.h"
 
 @interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddTransactionButtonDelegate, CalendarMonthViewControllerDelegate, UINavigationControllerDelegate>
 
@@ -37,18 +38,12 @@
     UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToToday)];
     self.navigationItem.leftBarButtonItem = todayButton;
     
-    self.selectedController = [self viewControllerWithDate:[[NSDate alloc] init]];
-    [self.selectedController updateTitle];
-
     self.pageController = [[PageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                         navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                       options:nil];
     self.pageController.delegate = self;
     [self.pageController.view setFrame:self.view.bounds];
-    [self.pageController setViewControllers:@[self.selectedController]
-                                  direction:UIPageViewControllerNavigationDirectionForward
-                                   animated:YES
-                                 completion:nil];
+    [self navigateToCurrentMonth];
     [self addChildViewController:self.pageController];
     [self.view addSubview:self.pageController.view];
     [self.pageController didMoveToParentViewController:self];
@@ -164,6 +159,25 @@
 
 #pragma mark - Private
 
+- (void)navigateToCurrentMonth {
+    [self navigateToCurrentMonthWithCompletion:nil animated:YES];
+}
+
+- (void)navigateToCurrentMonthWithCompletion:(void(^)(NSArray<PerDiem *> *))completionHandler animated:(BOOL)animated {
+    NSDate *currentMonth = [NSDate date];
+    self.selectedController = [self viewControllerWithDate:currentMonth
+                                                completion:^(NSArray<PerDiem *> *perDiems) {
+                                                    if (completionHandler != nil) {
+                                                        completionHandler(perDiems);
+                                                    }
+    }];
+    [self.selectedController updateTitle];
+    [self.pageController setViewControllers:@[self.selectedController]
+                                  direction:UIPageViewControllerNavigationDirectionForward
+                                   animated:animated
+                                 completion:nil];
+}
+
 - (void)navigateToDayWithPerDiem:(PerDiem *)perDiem
                         animated:(BOOL)animated {
     CalendarDayViewController *controller = [[CalendarDayViewController alloc] initWithNibName:@"CalendarDayViewController"
@@ -176,21 +190,35 @@
 }
 
 - (void)navigateToToday {
-    [PerDiem perDiemsForDate:[NSDate new]
-                  completion:^(PerDiem *perDiem, NSError *error) {
-                      if (!error) {
-                          [self navigateToDayWithPerDiem:perDiem animated:NO];
-                      }
-                  }];
+    NSDate *today = [NSDate date];
+    
+    void (^navigateToToday)(NSArray<PerDiem *> *perDiems) = ^void(NSArray<PerDiem *> *perDiems) {
+        PerDiem *perDiem = [perDiems objectAtIndex:today.day - 1];
+        [self navigateToDayWithPerDiem:perDiem animated:YES];
+    };
+    
+    if ([self.selectedController.timePeriod containsDate:today interval:DTTimePeriodIntervalOpen]) {
+        navigateToToday(self.selectedController.perDiems);
+    } else {
+        [self navigateToCurrentMonthWithCompletion:navigateToToday animated:YES];
+    }
 }
 
 - (CalendarMonthViewController *)viewControllerWithDate:(NSDate *)date {
-    CalendarMonthViewController *controller = [[CalendarMonthViewController alloc] initWithNibName:@"CalendarMonthViewController"
-                                                                                            bundle:nil];
-    controller.date = date;
+    return [self viewControllerWithDate:date completion:nil];
+}
+
+- (CalendarMonthViewController *)viewControllerWithDate:(NSDate *)date completion:(void(^)(NSArray<PerDiem *>*))completionHandler {
+    CalendarMonthViewController *controller = [[CalendarMonthViewController alloc] initWithDate:date
+                                                                                     completion:^(NSArray<PerDiem *> *perDiems) {
+                                                                                         if (completionHandler != nil) {
+                                                                                             completionHandler(perDiems);
+                                                                                         }
+                                                                                     }];
     controller.delegate = self;
     return controller;
 }
+
 
 - (CalendarTransition *)transitionHelper {
     if (!_transitionHelper) {

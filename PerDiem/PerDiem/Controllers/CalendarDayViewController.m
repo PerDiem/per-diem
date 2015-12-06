@@ -28,7 +28,7 @@
     [self.transactionsView addSubview:self.transactionsViewController.view];
     self.perDiemView.perDiem = self.perDiem;
     [self.view sendSubviewToBack:self.transactionsView];
-    self.view.backgroundColor = [UIColor backgroundColor];
+    self.view.backgroundColor = [UIColor clearColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

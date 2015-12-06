@@ -32,78 +32,107 @@
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     
-    if (!self.isPresenting) {    // Transition from Day to Month
-        CalendarDayViewController *from = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-        CalendarViewController *to = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    CalendarDayViewController *dayVc;
+    CalendarViewController *monthVc;
+    
+    if (!self.isPresenting) {
+        dayVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+        monthVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+
+    } else {
+        dayVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        monthVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    }
+    
+    UIView *monthView = monthVc.view;
+    UIView *dayView = [monthVc.selectedController viewForPerDiem:dayVc.perDiemView.perDiem];
+    UIView *detailedDayView = dayVc.view;
+    UIView *transactionsView = dayVc.transactionsView;
+    UIView *perDiemView = dayVc.perDiemView.view;
+    
+    typedef void (^PrepareAnimation)();
+    typedef void (^Animation)();
+    typedef void (^CompleteAnimation)(BOOL);
+    
+    PrepareAnimation preparation;
+    Animation animations;
+    CompleteAnimation completion;
+
+    if (!self.isPresenting) {
 
         // Add target view to hierarchy
-        [[transitionContext containerView] addSubview:to.view];
-        [[transitionContext containerView] bringSubviewToFront:from.view];
-        from.view.backgroundColor = [UIColor clearColor];
-    
+        [[transitionContext containerView] addSubview:monthView];
+        [[transitionContext containerView] bringSubviewToFront:detailedDayView];
+        
         // Get position of Per Diem view in month tableview, relative to screen
-        UIView *targetView = [to.selectedController viewForPerDiem:from.perDiemView.perDiem];
-        CGPoint targetViewInScreen = [targetView.superview convertPoint:targetView.frame.origin toView:nil];
-        CGRect perDiemViewFrame = CGRectMake(targetViewInScreen.x, targetViewInScreen.y - 20, targetView.frame.size.width, targetView.frame.size.height);
+        CGPoint position = [dayView.superview convertPoint:dayView.frame.origin toView:nil];
+        CGRect dayViewFrame = CGRectMake(position.x, position.y - 20, dayView.frame.size.width, dayView.frame.size.height);
         
         // Animate!
-        to.view.alpha = 0.0;
-        targetView.alpha = 0;
-        from.transactionsView.alpha = 1;
+        preparation = ^void() {
+            dayView.alpha = 0;
+            monthView.alpha = 0;
+            transactionsView.alpha = 1;
+        };
         
-        [UIView animateWithDuration:1 animations:^{
-            from.transactionsView.alpha = 0;
-            to.navigationController.navigationBar.alpha = 1;
-            [from.perDiemView.view setFrame:perDiemViewFrame];
-            [from.view layoutIfNeeded];
-            to.view.alpha = 1.0;
-        } completion:^(BOOL finished) {
-            targetView.alpha = 1.0;
+        animations = ^void() {
+            monthVc.navigationController.navigationBar.alpha = 1;
+            monthView.alpha = 1;
+            transactionsView.alpha = 0;
+            [perDiemView setFrame:dayViewFrame];
+            [detailedDayView layoutIfNeeded];
+        };
+        
+        completion = ^void(BOOL finished) {
+            dayView.alpha = 1;
+            
             BOOL wasCompleted = ![transitionContext transitionWasCancelled];
             [transitionContext completeTransition:wasCompleted];
             if (!wasCompleted) {
-                [from viewWillAppear:NO];
+                [dayVc viewWillAppear:NO];
             }
-        }];
-
-    } else {    // Transition from Month to Day
-
-        CalendarViewController *from = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-        CalendarDayViewController *to = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        };
         
-        // Some bug apparently mess up the frame after the transition
-        // This prevents it
-        [to.view setFrame:[[UIScreen mainScreen] bounds]];
-
-
+    } else {
         // Add target view to hierarchy
-        [[transitionContext containerView] addSubview:to.view];
+        [[transitionContext containerView] addSubview:detailedDayView];
         
-        // Get position of Per Diem view in day tableview, relative to screen
-        CGRect originalFrame = to.perDiemView.frame;
-        UIView *targetView = [from.selectedController viewForPerDiem:to.perDiemView.perDiem];
-        CGPoint targetViewInScreen = [targetView.superview convertPoint:targetView.frame.origin toView:nil];
-        CGRect perDiemViewFrame = CGRectMake(targetViewInScreen.x, targetViewInScreen.y, targetView.frame.size.width, targetView.frame.size.height);
+        // Get position of Per Diem view in month tableview, relative to screen
+        CGPoint position = [dayView.superview convertPoint:dayView.frame.origin toView:nil];
+        CGRect dayViewFrame = CGRectMake(position.x, position.y, dayView.frame.size.width, dayView.frame.size.height);
+        CGRect perDiemOriginalFrame = perDiemView.frame;
         
-        // Position it over its matching cell in month view
-        [to.perDiemView setFrame:perDiemViewFrame];
+        // Animate!
+        preparation = ^void() {
+            detailedDayView.alpha = 0;
+            transactionsView.alpha = 0;
+            [perDiemView setFrame:dayViewFrame];
+            [detailedDayView layoutIfNeeded];
+        };
         
-        to.transactionsView.alpha = 0;
-        to.view.alpha = 1.0;
-        [UIView animateWithDuration:.3 animations:^{
-            to.view.alpha = 1.0;
-            [to.perDiemView setFrame:originalFrame];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:.2 animations:^{
-                to.transactionsView.alpha = 1;
-            } completion:^(BOOL finished) {
-                BOOL wasCompleted = ![transitionContext transitionWasCancelled];
-                [transitionContext completeTransition:wasCompleted];
-                self.isPresenting = !wasCompleted;
-            }];
-        }];
+        animations = ^void() {
+            monthView.alpha = 0;
+            detailedDayView.alpha = 1;
+            transactionsView.alpha = 1;
+            [perDiemView setFrame:perDiemOriginalFrame];
+            [detailedDayView layoutIfNeeded];
+        };
+        
+        completion = ^void(BOOL finished) {
+            dayView.alpha = 1;
+            
+            BOOL wasCompleted = ![transitionContext transitionWasCancelled];
+            [transitionContext completeTransition:wasCompleted];
+            if (!wasCompleted) {
+                [monthVc viewWillAppear:NO];
+            }
+        };
     }
-
+    
+    preparation();
+    [UIView animateWithDuration:.8
+                     animations:animations
+                     completion:completion];
 }
 
 - (void)onPanGesture:(UIPanGestureRecognizer *)sender {
