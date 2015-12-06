@@ -119,7 +119,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"calendar"];
+    [self setupBarItemWithImageNamed:@"calendar" title:@"This Month"];
 }
 
 

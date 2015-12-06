@@ -45,10 +45,6 @@
                     }];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
-}
-
 
 #pragma mark - UITableViewDataSource
 
