@@ -17,14 +17,26 @@
 @interface CalendarMonthViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) DTTimePeriod *timePeriod;
-@property (strong, nonatomic) NSArray<PerDiem *> *perDiems;
 
 @end
 
 @implementation CalendarMonthViewController
 
 #pragma mark - UIViewController
+
+- (instancetype)initWithDate:(NSDate *)date
+                  completion:(void(^)(NSArray<PerDiem *>*))completionHandler {
+    if (self = [super initWithNibName:@"CalendarMonthViewController" bundle:nil]) {
+        self.date = date;
+        [self fetchPerDiemsWithCompletion:^(NSArray<PerDiem *> *perDiems) {
+             [self.tableView reloadData];
+            if (completionHandler != nil) {
+                completionHandler(perDiems);
+            }
+        }];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,12 +49,6 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:[UINib nibWithNibName:@"DayViewTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"cell"];
-    
-    [PerDiem perDiemsForPeriod:self.timePeriod
-                    completion:^(NSArray<PerDiem *> *perDiems, NSError *error) {
-                        self.perDiems = perDiems;
-                        [self.tableView reloadData];
-                    }];
 }
 
 
@@ -74,6 +80,17 @@
 
 
 #pragma mark - Private
+
+- (void)fetchPerDiemsWithCompletion:(void(^)(NSArray<PerDiem *>*))completionHandler {
+    [PerDiem perDiemsForPeriod:self.timePeriod
+                    completion:^void(NSArray<PerDiem *> *perDiems, NSError *error) {
+                        self.perDiems = perDiems;
+                        [self.tableView reloadData];
+                        if (completionHandler != nil) {
+                            completionHandler(perDiems);
+                        }
+                    }];
+}
 
 - (void)setDate:(NSDate *)date {
     _date = date;
