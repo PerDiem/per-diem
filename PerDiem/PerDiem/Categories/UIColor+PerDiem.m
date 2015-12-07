@@ -65,4 +65,10 @@
     return [[self class] colorWithProgress:perDiemProgress alpha:1];
 }
 
+// Perdiem Input
++ (UIColor *)inputColor {
+    return [[self class] emptyColorWithAlpha:1];
+}
+
+
 @end
