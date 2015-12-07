@@ -20,7 +20,7 @@
 
 @interface TransactionFormViewController : XLFormViewController
 
-@property (weak, nonatomic) id<TransactionFormActionDelegate> delegator;
+@property (weak, nonatomic) id<TransactionFormActionDelegate> delegate;
 
 -(id) initWithTransaction: (Transaction*) transaction;
 

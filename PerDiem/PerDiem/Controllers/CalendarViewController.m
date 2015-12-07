@@ -14,8 +14,10 @@
 #import "BudgetFormViewController.h"
 #import "CalendarTransition.h"
 #import "NSDate+DateTools.h"
+#import "TransactionFormViewController.h"
+#import "Transaction.h"
 
-@interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddTransactionButtonDelegate, CalendarMonthViewControllerDelegate, UINavigationControllerDelegate>
+@interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddButtonDelegate, CalendarMonthViewControllerDelegate, UINavigationControllerDelegate, TransactionFormActionDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageController;
 @property (strong, nonatomic) NSArray *controllers;
@@ -119,7 +121,7 @@
 }
 
 
-#pragma mark - AddTransactionButtonDelegate
+#pragma mark - AddButtonDelegate
 
 - (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
     [self.navigationController presentViewController:alert
@@ -137,6 +139,7 @@
 
 - (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
     TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    vc.delegate = self;
     NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc
                                             animated:YES
@@ -156,6 +159,16 @@
                            animated:(BOOL)animated {
     [self navigateToDayWithPerDiem:perDiem animated:animated];
 }
+
+
+#pragma mark - TransactionFormActionDelegate
+
+- (void)transactionCreated:(Transaction *)transaction {
+    PerDiem *perDiem = [self.selectedController.perDiems objectAtIndex:transaction.transactionDate.day - 1];
+    perDiem.spent = [NSNumber numberWithFloat:([perDiem.spent floatValue] + [transaction.amount floatValue])];
+    [self.selectedController.tableView reloadData];
+}
+
 
 #pragma mark - Private
 

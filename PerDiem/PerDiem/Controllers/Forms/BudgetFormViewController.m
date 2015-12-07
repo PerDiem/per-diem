@@ -63,12 +63,12 @@ NSString *const kBudgetAmount = @"amount";
     self.budget.amount = values[kBudgetAmount];
 
     if (self.budget.objectId) {
-        if ([self.delegator respondsToSelector:@selector(budgetUpdated:)]) {
-            [self.delegator budgetUpdated:self.budget];
+        if ([self.delegate respondsToSelector:@selector(budgetUpdated:)]) {
+            [self.delegate budgetUpdated:self.budget];
         }
     } else {
-        if ([self.delegator respondsToSelector:@selector(budgetCreated:)]) {
-            [self.delegator budgetCreated:self.budget];
+        if ([self.delegate respondsToSelector:@selector(budgetCreated:)]) {
+            [self.delegate budgetCreated:self.budget];
         }
     }
     [self.budget saveInBackground];

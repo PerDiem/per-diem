@@ -13,7 +13,6 @@
 #import "TransactionCell.h"
 #import "BudgetCell.h"
 #import "Transaction.h"
-#import "TransactionList.h"
 #import "Budget.h"
 #import "FiltersFormViewController.h"
 #import "Filter.h"
@@ -21,9 +20,8 @@
 #import <SWTableViewCell.h>
 #import "UIColor+PerDiem.h"
 
-@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate, AddTransactionButtonDelegate>
+@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate, AddButtonDelegate>
 
-@property (strong, nonatomic) TransactionList *transactionList;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) Filter *filters;
 @property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
@@ -192,7 +190,7 @@
         case 0:
         {
             TransactionFormViewController *vc = [[TransactionFormViewController alloc] initWithTransaction:self.transactionList.transactions[indexPath.row]];
-            vc.delegator = self;
+            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -247,7 +245,7 @@
     }];
 }
 
-#pragma mark - AddTransactionButtonDelegate
+#pragma mark - AddButtonDelegate
 
 - (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
     [self.navigationController presentViewController:alert

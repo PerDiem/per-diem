@@ -17,7 +17,7 @@
 
 + (void)perDiemsForPeriod:(DTTimePeriod *)period
           relatedToPeriod:(DTTimePeriod *)relatedPeriod
-               completion:(void (^)(NSArray<PerDiem *>*, NSError *error))completion {
+               completion:(void (^)(NSMutableArray<PerDiem *>*, NSError *error))completion {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -81,7 +81,7 @@
 }
 
 + (void)perDiemsForPeriod:(DTTimePeriod *)period
-               completion:(void (^)(NSArray<PerDiem *>*, NSError *error))completion {
+               completion:(void (^)(NSMutableArray<PerDiem *>*, NSError *error))completion {
     [[self class] perDiemsForPeriod:period
                     relatedToPeriod:period
                          completion:completion];

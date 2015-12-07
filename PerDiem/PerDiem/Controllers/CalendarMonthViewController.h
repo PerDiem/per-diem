@@ -28,7 +28,8 @@
 @property (nonatomic, assign) id<CalendarMonthViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSDate *date;
 @property (strong, nonatomic) DTTimePeriod *timePeriod;
-@property (strong, nonatomic) NSArray<PerDiem *> *perDiems;
+@property (strong, nonatomic) NSMutableArray<PerDiem *> *perDiems;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 - (instancetype)initWithDate:(NSDate *)date
                   completion:(void(^)(NSArray<PerDiem *>*))completionHandler;
