@@ -9,6 +9,7 @@
 #import "CalendarTransition.h"
 #import "CalendarViewController.h"
 #import "CalendarDayViewController.h"
+#import "PerDiemView.h"
 
 @interface CalendarTransition ()
 
@@ -99,28 +100,66 @@
         
         // Get position of Per Diem view in month tableview, relative to screen
         CGPoint position = [dayView.superview convertPoint:dayView.frame.origin toView:nil];
-        CGRect dayViewFrame = CGRectMake(position.x, position.y, dayView.frame.size.width, dayView.frame.size.height);
+        CGRect dayViewFrame = CGRectMake(position.x, position.y - 20, dayView.frame.size.width, dayView.frame.size.height);
+
+        // Get position and size of Per Diem view in day view, relative to Screen
+//        CGPoint newPosition = [detailedDayView.superview convertPoint:dayVc.perDiemView.frame.origin toView:nil];
 
         // Without these three lines, the frame is 320 width no matter the screen size
         // https://forums.developer.apple.com/thread/13221
         dayVc.view.frame = [transitionContext finalFrameForViewController:dayVc];
         [dayVc.view layoutSubviews];
         [dayVc.perDiemView updateUI];
-        
+
         CGRect perDiemOriginalFrame = perDiemView.frame;
         
         // Animate!
         preparation = ^void() {
-            detailedDayView.alpha = 0;
+            detailedDayView.alpha = 1;
             transactionsView.alpha = 0;
+
             [perDiemView setFrame:dayViewFrame];
             [detailedDayView layoutIfNeeded];
         };
         
         animations = ^void() {
+
+            // -------------------
+            // Radius Animation Attempt...
+            // http://stackoverflow.com/questions/11463438/cabasicanimation-with-calayer-path-doesnt-animate
+            CGFloat newHeight = 180.0f; // should get these from new view
+            CGFloat oldHeight = 60.0f;
+            CGFloat newWidth = dayVc.perDiemView.progressBarBackgroundView.frame.size.width;
+
+            UIRectCorner corners = UIRectCornerBottomRight|UIRectCornerTopRight;
+
+            UIBezierPath* newPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, newWidth, newHeight)
+                                                          byRoundingCorners:corners
+                                                                cornerRadii:CGSizeMake(newHeight/2, newHeight/2)];
+            UIBezierPath* oldPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, newWidth, oldHeight)
+                                                          byRoundingCorners:corners
+                                                                cornerRadii:CGSizeMake(oldHeight/2, oldHeight/2)];
+
+            CAShapeLayer *layer = [CAShapeLayer layer];
+            layer.frame = monthVc.selectedController.view.bounds;
+            layer.path = oldPath.CGPath;
+            dayVc.perDiemView.progressBarBackgroundView.layer.mask = layer;
+
+            CABasicAnimation *animateRadius = [CABasicAnimation animationWithKeyPath:@"path"];
+
+            [animateRadius setDuration:0.8];
+            [animateRadius setFromValue:(id)oldPath];
+            [animateRadius setToValue:(id)newPath];
+
+            layer.path = newPath.CGPath;
+
+            [layer addAnimation:animateRadius forKey:@"path"];
+            //----------------------
+
             monthView.alpha = 0;
             detailedDayView.alpha = 1;
             transactionsView.alpha = 1;
+
             [perDiemView setFrame:perDiemOriginalFrame];
             [detailedDayView layoutIfNeeded];
         };

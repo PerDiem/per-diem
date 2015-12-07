@@ -11,11 +11,6 @@
 
 @interface PerDiemView ()
 
-@property (weak, nonatomic) IBOutlet UIView *progressBarBackgroundView;
-@property (weak, nonatomic) IBOutlet UIView *progressBarView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressBarWidthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressBarBackgroundHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressBarBackgroundWidthConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *spentLabel;
 
