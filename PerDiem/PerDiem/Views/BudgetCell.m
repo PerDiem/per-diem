@@ -45,17 +45,13 @@
     self.percentage = 0;
     if (budget.transactionList) {
         self.amountSpentBudgetLabel.text = [self.amountFormatter stringFromNumber:budget.transactionList.sum];
-        if (budget.transactionList.sum > budget.amount) {
-        } else {
-            self.percentage = [budget.transactionList.sum floatValue] / [budget.amount floatValue];
-        }
-
+        self.percentage = [budget.transactionList.sum floatValue] / [budget.amount floatValue] * 100;
     } else {
         self.amountSpentBudgetLabel.text = [self.amountFormatter stringFromNumber:@(0)];
     }
     self.mainContentView.backgroundColor = [UIColor backgroundColor];
-    self.progressBarBackgroundView.backgroundColor = [UIColor colorWithBudgetProgress:self.percentage alpha:.4];
-    self.progressBarView.backgroundColor = [UIColor colorWithBudgetProgress:self.percentage alpha:1];
+    self.progressBarBackgroundView.backgroundColor = [UIColor colorWithProgress:self.percentage alpha:.4];
+    self.progressBarView.backgroundColor = [UIColor colorWithProgress:self.percentage alpha:1];
 //    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 

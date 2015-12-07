@@ -17,7 +17,7 @@
 #import "UIColor+PerDiem.h"
 #import <SWTableViewCell.h>
 
-@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate, AddTransactionButtonDelegate>
+@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate, AddButtonDelegate>
 
 @property(strong, nonatomic) NSArray* budgets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -125,7 +125,8 @@
 }
 
 - (void)setupTableView {
-    self.tableView.backgroundColor = [UIColor backgroundColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"BudgetCell" bundle:nil] forCellReuseIdentifier:@"BudgetCell"];
@@ -141,7 +142,7 @@
         case 0:
         {
             BudgetFormViewController *vc = [[BudgetFormViewController alloc] initWithBudget:self.budgets[indexPath.row]];
-            vc.delegator = self;
+            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -190,7 +191,7 @@
     [self.tableView endUpdates];
 }
 
-#pragma mark - AddTransactionButtonDelegate
+#pragma mark - AddButtonDelegate
 
 - (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
     [self.navigationController presentViewController:alert

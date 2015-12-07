@@ -12,9 +12,9 @@
                 <outlet property="progressBarBackgroundView" destination="bxh-7u-GMO" id="Xxz-Rp-FOj"/>
                 <outlet property="progressBarBackgroundWidthConstraint" destination="qIy-Yx-KXo" id="Tsq-HV-gkq"/>
                 <outlet property="progressBarView" destination="jK1-0g-yst" id="eyf-Rl-9CL"/>
-                <outlet property="progressBarWidthConstraint" destination="RQ2-s7-kkf" id="Nce-iF-C7r"/>
                 <outlet property="spentLabel" destination="d0j-8k-Xlt" id="bjq-Kl-Z9u"/>
                 <outlet property="view" destination="iN0-l3-epB" id="LDH-nv-fg8"/>
+                <outlet property="widthConstraint" destination="RQ2-s7-kkf" id="DTJ-XT-95e"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

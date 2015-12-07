@@ -60,6 +60,8 @@
     CompleteAnimation completion;
 
     if (!self.isPresenting) {
+        
+        [monthVc.selectedController.tableView reloadData];
 
         // Add target view to hierarchy
         [[transitionContext containerView] addSubview:monthView];
