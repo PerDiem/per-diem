@@ -79,6 +79,7 @@ NSString *const kBudgets = @"budgets";
 
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kFutures rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Show Future Transactions"];
     [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
     [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
 
     row.value = self.defaults[kFutures];
@@ -105,6 +106,7 @@ NSString *const kBudgets = @"budgets";
             row = [XLFormRowDescriptor formRowDescriptorWithTag:tag rowType:XLFormRowDescriptorTypeBooleanCheck title:budget.name];
             row.value = @YES;
             [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+            [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
             [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
 
             [self.budgetsSection addFormRow:row];
@@ -121,6 +123,7 @@ NSString *const kBudgets = @"budgets";
             row = [XLFormRowDescriptor formRowDescriptorWithTag:tag rowType:XLFormRowDescriptorTypeBooleanCheck title:paymentType.name];
             row.value = @YES;
             [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+            [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
             [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
 
             [self.paymentTypeSection addFormRow:row];

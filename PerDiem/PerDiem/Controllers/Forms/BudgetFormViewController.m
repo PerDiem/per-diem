@@ -101,6 +101,7 @@ NSString *const kBudgetAmount = @"amount";
     row.required = YES;
     row.value = budget.name;
     [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
     [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
     [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textField.textColor"];
 
@@ -111,6 +112,7 @@ NSString *const kBudgetAmount = @"amount";
     row.required = YES;
     row.value = budget.amount;
     [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
     [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
     [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textField.textColor"];
 
