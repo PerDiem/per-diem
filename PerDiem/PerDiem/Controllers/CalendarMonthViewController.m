@@ -11,7 +11,6 @@
 #import <DateTools/DateTools.h>
 #import <UIKit/UIKit.h>
 #import "NSDate+DateTools.h"
-#import "DayViewTableViewCell.h"
 #import "UIColor+PerDiem.h"
 
 @interface CalendarMonthViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -59,6 +58,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DayViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.perDiem = [self.perDiems objectAtIndex:indexPath.row];
+    [cell layoutSubviews];
     return cell;
 }
 
@@ -121,11 +121,15 @@
     }
 }
 
-- (UITableViewCell *)viewForPerDiem:(PerDiem *)perDiem {
-    NSInteger perDiemIndex = [self.perDiems indexOfObject:perDiem];
-    NSIndexPath *viewIndexPath = [NSIndexPath indexPathForRow:perDiemIndex inSection:0];
-    return [self.tableView cellForRowAtIndexPath:viewIndexPath];
+- (DayViewTableViewCell *)viewForPerDiem:(PerDiem *)perDiem {
+    NSArray *cells = [self.tableView visibleCells];
+    for (DayViewTableViewCell *cell in cells)
+    {
+        if (cell.perDiem == perDiem) {
+            return cell;
+        }
+    }
+    return nil;
 }
-
 
 @end
