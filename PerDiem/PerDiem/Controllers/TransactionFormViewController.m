@@ -7,6 +7,8 @@
 //
 
 #import "TransactionFormViewController.h"
+#import "FormOptionsViewController.h"
+#import "UIColor+PerDiem.h"
 #import "XLForm.h"
 #import "User.h"
 #import "Budget.h"
@@ -42,6 +44,7 @@ NSString *const kPaymentType = @"paymentType";
 
 -(id) setup: (Transaction*) transaction {
     XLFormDescriptor * formDescriptor = [XLFormDescriptor formDescriptorWithTitle:@"Transaction"];
+
     XLFormSectionDescriptor * section;
     XLFormRowDescriptor * row;
     formDescriptor.assignFirstResponderOnShow = YES;
@@ -56,19 +59,33 @@ NSString *const kPaymentType = @"paymentType";
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kSummary rowType:XLFormRowDescriptorTypeText title:@"Summary"];
     row.required = YES;
     row.value = transaction.summary;
+    [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textField.textColor"];
     [section addFormRow:row];
 
     // Number
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kAmount rowType:XLFormRowDescriptorTypeDecimal title:@"Amount"];
     row.required = YES;
     row.value = transaction.amount;
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textField.textColor"];
+
     [section addFormRow:row];
 
 
     // Selector Push
     XLFormRowDescriptor *budgetRow = [XLFormRowDescriptor formRowDescriptorWithTag:kBudget rowType:XLFormRowDescriptorTypeSelectorPush title:@"Budget"];
+    [budgetRow.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [budgetRow.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
+    [budgetRow.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+    [budgetRow.cellConfig setObject:[UIColor whiteColor] forKey:@"detailTextLabel.textColor"];
+    budgetRow.action.viewControllerClass = [FormOptionsViewController class];
     budgetRow.required = YES;
-    budgetRow.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:nil displayText:@"asdsada"]];
+    budgetRow.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:nil displayText:@""]];
     [[User currentUser] budgets:^(NSArray *budgets, NSError *error) {
         NSMutableArray *options = [NSMutableArray array];
         for (Budget *budget in budgets) {
@@ -100,6 +117,13 @@ NSString *const kPaymentType = @"paymentType";
     XLFormRowDescriptor *paymentTypeRow = [XLFormRowDescriptor formRowDescriptorWithTag:kPaymentType rowType:XLFormRowDescriptorTypeSelectorPush title:@"Payment Method"];
     paymentTypeRow.required = YES;
     paymentTypeRow.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:nil displayText:@"Account"]];
+    [paymentTypeRow.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
+    [paymentTypeRow.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [paymentTypeRow.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+    [paymentTypeRow.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"detailTextLabel.textColor"];
+    paymentTypeRow.action.viewControllerClass = [FormOptionsViewController class];
+
+
     [PaymentType paymentTypes:^(NSArray *paymentTypes, NSError *error) {
         NSMutableArray *options = [NSMutableArray array];
         for (PaymentType *paymentType in paymentTypes) {
@@ -128,6 +152,11 @@ NSString *const kPaymentType = @"paymentType";
 
     // Date
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kDate rowType:XLFormRowDescriptorTypeDateInline title:@"Date"];
+    [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+    [row.cellConfig setObject:[UIColor inputColor] forKey:@"datePicker.backgroundColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"detailTextLabel.textColor"];
     if ( transaction.transactionDate) {
         row.value = transaction.transactionDate;
     } else {
@@ -139,6 +168,11 @@ NSString *const kPaymentType = @"paymentType";
     // Future
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kFuture rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Future Transaction"];
     row.required = NO;
+    [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+
+//    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textField.textColor"];
     if (transaction.future) {
         row.value = transaction.future;
     } else {
@@ -148,6 +182,12 @@ NSString *const kPaymentType = @"paymentType";
 
     //Description
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kDescription rowType:XLFormRowDescriptorTypeTextView title:@"Description"];
+    [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textView.textColor"];
+    [row.cellConfig setObject:[UIColor inputColor] forKey:@"textView.backgroundColor"];
+
     if (transaction.note) {
         row.value = transaction.note;
     }
@@ -163,6 +203,8 @@ NSString *const kPaymentType = @"paymentType";
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
+
+    [self customizeAppearance];
 
 }
 
@@ -229,5 +271,21 @@ NSString *const kPaymentType = @"paymentType";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    // Text Color
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    [header.textLabel setTextColor:[UIColor whiteColor]];
+}
+
+-(void)customizeAppearance
+{
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor backgroundColor];
+}
+
+
 
 @end

@@ -21,5 +21,5 @@
 + (UIColor *)alertColor;
 + (UIColor *)colorWithProgress:(CGFloat)perDiemProgress alpha:(CGFloat)alpha;
 + (UIColor *)colorWithProgress:(CGFloat)perDiemProgress;
-
++ (UIColor *)inputColor;
 @end
