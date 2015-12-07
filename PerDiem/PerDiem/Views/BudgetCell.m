@@ -45,11 +45,7 @@
     self.percentage = 0;
     if (budget.transactionList) {
         self.amountSpentBudgetLabel.text = [self.amountFormatter stringFromNumber:budget.transactionList.sum];
-        if (budget.transactionList.sum > budget.amount) {
-        } else {
-            self.percentage = [budget.transactionList.sum floatValue] / [budget.amount floatValue];
-        }
-
+        self.percentage = [budget.transactionList.sum floatValue] / [budget.amount floatValue] * 100;
     } else {
         self.amountSpentBudgetLabel.text = [self.amountFormatter stringFromNumber:@(0)];
     }
