@@ -19,7 +19,7 @@
 
 @interface BudgetFormViewController : XLFormViewController
 
-@property (weak, nonatomic) id<BudgetFormActionDelegate> delegator;
+@property (weak, nonatomic) id<BudgetFormActionDelegate> delegate;
 
 -(id) initWithBudget: (Budget*) budget;
 

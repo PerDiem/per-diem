@@ -16,8 +16,6 @@
 
 @interface CalendarMonthViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @end
 
 @implementation CalendarMonthViewController
@@ -79,9 +77,9 @@
 
 #pragma mark - Private
 
-- (void)fetchPerDiemsWithCompletion:(void(^)(NSArray<PerDiem *>*))completionHandler {
+- (void)fetchPerDiemsWithCompletion:(void(^)(NSMutableArray<PerDiem *>*))completionHandler {
     [PerDiem perDiemsForPeriod:self.timePeriod
-                    completion:^void(NSArray<PerDiem *> *perDiems, NSError *error) {
+                    completion:^void(NSMutableArray<PerDiem *> *perDiems, NSError *error) {
                         self.perDiems = perDiems;
                         [self.tableView reloadData];
                         if (completionHandler != nil) {

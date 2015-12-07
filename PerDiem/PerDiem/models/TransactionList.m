@@ -16,7 +16,7 @@
 - (id)initWithTransactions:(NSArray*)transactions {
     self = [super init];
     if (self) {
-        self.transactions = transactions;
+        self.transactions = [NSMutableArray arrayWithArray:transactions];
         float sum = 0;
 
         for (Transaction *transaction in transactions) {
@@ -25,6 +25,10 @@
         self.sum = [NSNumber numberWithFloat:sum];
     }
     return self;
+}
+
+- (void)addTransaction:(Transaction *)transaction {
+    [self.transactions addObject:transaction];
 }
 
 + (id)transactionListWithTransactionList:(TransactionList *)transactionList

@@ -189,12 +189,12 @@ NSString *const kPaymentType = @"paymentType";
     [self.transaction saveInBackground];
 
     if (self.transaction.objectId) {
-        if ([self.delegator respondsToSelector:@selector(transactionUpdated:)]) {
-            [self.delegator transactionUpdated:self.transaction];
+        if ([self.delegate respondsToSelector:@selector(transactionUpdated:)]) {
+            [self.delegate transactionUpdated:self.transaction];
         }
     } else {
-        if ([self.delegator respondsToSelector:@selector(transactionCreated:)]) {
-            [self.delegator transactionCreated:self.transaction];
+        if ([self.delegate respondsToSelector:@selector(transactionCreated:)]) {
+            [self.delegate transactionCreated:self.transaction];
         }
     }
 
