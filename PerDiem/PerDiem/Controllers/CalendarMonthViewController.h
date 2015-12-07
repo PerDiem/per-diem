@@ -10,6 +10,7 @@
 #import "NSDate+DateTools.h"
 #import <DateTools/DateTools.h>
 #import "PerDiem.h"
+#import "DayViewTableViewCell.h"
 
 @class CalendarMonthViewController;
 
@@ -35,6 +36,6 @@
                   completion:(void(^)(NSArray<PerDiem *>*))completionHandler;
 - (void)updateTitle;
 - (void)updateTitleWithTitle:(NSString *)title;
-- (UIView *)viewForPerDiem:(PerDiem *)perDiem;
+- (DayViewTableViewCell *)viewForPerDiem:(PerDiem *)perDiem;
 
 @end

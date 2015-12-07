@@ -9,6 +9,7 @@
 #import "CalendarTransition.h"
 #import "CalendarViewController.h"
 #import "CalendarDayViewController.h"
+#import "DayViewTableViewCell.h"
 
 @interface CalendarTransition ()
 
@@ -38,6 +39,7 @@
     if (!self.isPresenting) {
         dayVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         monthVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        [monthVc.selectedController.tableView reloadData];
 
     } else {
         dayVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
@@ -45,7 +47,7 @@
     }
     
     UIView *monthView = monthVc.view;
-    UIView *dayView = [monthVc.selectedController viewForPerDiem:dayVc.perDiemView.perDiem];
+    DayViewTableViewCell *dayView = [monthVc.selectedController viewForPerDiem:dayVc.perDiemView.perDiem];
     UIView *detailedDayView = dayVc.view;
     UIView *transactionsView = dayVc.transactionsView;
     UIView *perDiemView = dayVc.perDiemView.view;
@@ -59,8 +61,6 @@
     CompleteAnimation completion;
 
     if (!self.isPresenting) {
-        
-        [monthVc.selectedController.tableView reloadData];
 
         // Add target view to hierarchy
         [[transitionContext containerView] addSubview:monthView];
@@ -86,6 +86,7 @@
         };
         
         completion = ^void(BOOL finished) {
+            [dayView layoutSubviews];
             dayView.alpha = 1;
             
             BOOL wasCompleted = ![transitionContext transitionWasCancelled];
