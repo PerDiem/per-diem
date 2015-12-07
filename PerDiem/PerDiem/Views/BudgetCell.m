@@ -45,7 +45,8 @@
     self.percentage = 0;
     if (budget.transactionList) {
         self.amountSpentBudgetLabel.text = [self.amountFormatter stringFromNumber:budget.transactionList.sum];
-        self.percentage = [budget.transactionList.sum floatValue] / [budget.amount floatValue] * 100;
+
+        self.percentage = MIN(100, [budget.transactionList.sum floatValue] / [budget.amount floatValue] * 100);
     } else {
         self.amountSpentBudgetLabel.text = [self.amountFormatter stringFromNumber:@(0)];
     }
@@ -57,7 +58,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.widthConstraint.constant = self.percentage * self.mainContentView.frame.size.width;
+    self.widthConstraint.constant = self.percentage / 100.0 * self.mainContentView.frame.size.width;
 }
 - (NSNumberFormatter *)amountFormatter {
     if (!_amountFormatter) {
