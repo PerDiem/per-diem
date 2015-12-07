@@ -10,6 +10,7 @@
 #import "XLForm.h"
 #import "Budget.h"
 #import "PaymentType.h"
+#import "UIColor+PerDiem.h"
 
 NSString *const kFutures = @"futures";
 NSString *const kBudgets = @"budgets";
@@ -39,6 +40,7 @@ NSString *const kBudgets = @"budgets";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationBar];
+    [self customizeAppearance];
 }
 
 
@@ -76,6 +78,9 @@ NSString *const kBudgets = @"budgets";
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Transaction Type"];
 
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kFutures rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Show Future Transactions"];
+    [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+
     row.value = self.defaults[kFutures];
     [section addFormRow:row];
     [formDescriptor addFormSection:section];
@@ -99,6 +104,9 @@ NSString *const kBudgets = @"budgets";
             NSString *tag = [NSString stringWithFormat:@"budget_%@", budget.objectId];
             row = [XLFormRowDescriptor formRowDescriptorWithTag:tag rowType:XLFormRowDescriptorTypeBooleanCheck title:budget.name];
             row.value = @YES;
+            [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+            [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+
             [self.budgetsSection addFormRow:row];
         }
     }
@@ -112,6 +120,9 @@ NSString *const kBudgets = @"budgets";
             NSString *tag = [NSString stringWithFormat:@"paymentType_%@", paymentType.objectId];
             row = [XLFormRowDescriptor formRowDescriptorWithTag:tag rowType:XLFormRowDescriptorTypeBooleanCheck title:paymentType.name];
             row.value = @YES;
+            [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+            [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+
             [self.paymentTypeSection addFormRow:row];
         }
     }
@@ -141,6 +152,21 @@ NSString *const kBudgets = @"budgets";
 - (void)setupDefaults {
     self.defaults = @{kFutures:@YES};
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    // Text Color
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    [header.textLabel setTextColor:[UIColor whiteColor]];
+}
+
+-(void)customizeAppearance
+{
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor backgroundColor];
+}
+
 
 
 @end
