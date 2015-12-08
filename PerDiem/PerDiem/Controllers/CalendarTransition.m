@@ -10,6 +10,7 @@
 #import "CalendarViewController.h"
 #import "CalendarDayViewController.h"
 #import "DayViewTableViewCell.h"
+#import "TransactionFormViewController.h"
 
 @interface CalendarTransition ()
 
@@ -35,17 +36,33 @@
     
     CalendarDayViewController *dayVc;
     CalendarViewController *monthVc;
-    
+
+    // This doesn't too nice, and also the transition I made is not consistent with the rest of the system.
+    if ([[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey] isKindOfClass:[TransactionFormViewController class]] ||
+        [[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey] isKindOfClass:[TransactionFormViewController class]]) {
+        UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        [[transitionContext containerView] addSubview:toViewController.view];
+        toViewController.view.alpha = 0.0;
+        [UIView animateWithDuration:0.8 animations:^{
+            toViewController.view.alpha = 1.0;
+            if ([toViewController isKindOfClass:[TransactionFormViewController class]]) {
+                toViewController.navigationController.navigationBar.alpha = 1;
+            }
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        }];
+        return;
+    }
+
     if (!self.isPresenting) {
         dayVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         monthVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         [monthVc.selectedController.tableView reloadData];
-
     } else {
         dayVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         monthVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     }
-    
+
     UIView *monthView = monthVc.view;
     DayViewTableViewCell *dayView = [monthVc.selectedController viewForPerDiem:dayVc.perDiemView.perDiem];
     UIView *detailedDayView = dayVc.view;

@@ -33,6 +33,8 @@
     
     self.transactionsViewController = [[TransactionsViewController alloc] initWithTimePeriod:timePeriod];
     [self.transactionsView addSubview:self.transactionsViewController.view];
+    [self addChildViewController:self.transactionsViewController];
+    [self.transactionsViewController didMoveToParentViewController:self];
     self.perDiemView.perDiem = self.perDiem;
     [self.view sendSubviewToBack:self.transactionsView];
     self.view.backgroundColor = [UIColor clearColor];
