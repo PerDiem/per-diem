@@ -28,6 +28,7 @@
 }
 
 - (void)addTransaction:(Transaction *)transaction {
+    self.sum = [NSNumber numberWithFloat:[self.sum floatValue] + [transaction.amount floatValue]];
     [self.transactions addObject:transaction];
 }
 
