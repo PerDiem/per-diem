@@ -42,20 +42,27 @@
     [nib instantiateWithOwner:self options:nil];
     self.view.frame = [self bounds];
     self.view.backgroundColor = [UIColor backgroundColor];
+    self.widthConstraint.constant = 0;
+    self.hasAnimated = NO;
     [self addSubview:self.view];
 }
 
 - (void)setPerDiem:(PerDiem *)perDiem {
     _perDiem = perDiem;
-    [self updateUI];
+    [self updateUIWithAnimation:YES];
 }
 
 - (void)updateUI {
+    [self updateUIWithAnimation:NO];
+}
+
+
+- (void)updateUIWithAnimation:(BOOL)animation {
     NSNumberFormatter *amountFormatter = [[NSNumberFormatter alloc] init];
     [amountFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    
+
     self.dayLabel.text = [[self.perDiem.date formattedDateWithFormat:@"ccc d"] uppercaseString];
-    
+
     NSString *budgetAmountString = [amountFormatter stringFromNumber:self.perDiem.budget];
     NSString *spentAmountString = [amountFormatter stringFromNumber:self.perDiem.spent];
     self.spentLabel.text = [NSString stringWithFormat:@"Spent %@ of %@", spentAmountString, budgetAmountString];
@@ -64,14 +71,30 @@
         percentage = [self.perDiem.spent integerValue] * 100 / [self.perDiem.budget integerValue];
     }
 
-    self.progressBarView.backgroundColor = [UIColor 
+    self.progressBarView.backgroundColor = [UIColor
                                             colorWithProgress:percentage alpha:1];
     self.progressBarBackgroundView.backgroundColor = [UIColor colorWithProgress:percentage alpha:.4];
     self.widthConstraint.constant = percentage * (self.frame.size.width / 100);
+    if (animation) {
+        [self animateProgressBar:percentage];
+    }
     [self.progressBarBackgroundView.layer setCornerRadius:5.0f];
     [self.progressBarBackgroundView.layer setMasksToBounds:YES];
 
 }
 
-
+- (void)animateProgressBar:(NSInteger)percentage {
+    if (percentage <= 0) {
+        [self.progressBarBackgroundView layoutIfNeeded];
+    } else if (!self.hasAnimated) {
+        [UIView animateWithDuration:.5 delay:0
+             usingSpringWithDamping:.8
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             [self.progressBarBackgroundView layoutIfNeeded];
+                         } completion:nil];
+        self.hasAnimated = YES;
+    }
+}
 @end
