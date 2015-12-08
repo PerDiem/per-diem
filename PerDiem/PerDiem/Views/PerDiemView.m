@@ -47,9 +47,9 @@
     [self addSubview:self.view];
 }
 
-- (void)setPerDiem:(PerDiem *)perDiem {
-    _perDiem = perDiem;
-    [self updateUIWithAnimation:YES];
+- (void)setPerDiem:(PerDiem *)perDiem animated:(BOOL)animated {
+    self.perDiem = perDiem;
+    [self updateUIWithAnimation:animated];
 }
 
 - (void)updateUI {
@@ -74,6 +74,7 @@
     self.progressBarView.backgroundColor = [UIColor
                                             colorWithProgress:percentage alpha:1];
     self.progressBarBackgroundView.backgroundColor = [UIColor colorWithProgress:percentage alpha:.4];
+
     self.widthConstraint.constant = percentage * (self.frame.size.width / 100);
     if (animation) {
         [self animateProgressBar:percentage];
@@ -88,7 +89,7 @@
         [self.progressBarBackgroundView layoutIfNeeded];
     } else if (!self.hasAnimated) {
         [UIView animateWithDuration:.5 delay:0
-             usingSpringWithDamping:.8
+             usingSpringWithDamping:1
               initialSpringVelocity:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{

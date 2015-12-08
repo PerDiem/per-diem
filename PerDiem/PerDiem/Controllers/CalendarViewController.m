@@ -196,6 +196,7 @@
     CalendarDayViewController *controller = [[CalendarDayViewController alloc] initWithNibName:@"CalendarDayViewController"
                                                                                         bundle:nil];
     controller.perDiem = perDiem;
+    [controller.perDiemView setPerDiem:perDiem animated:NO];
     controller.transitionHelper = self.transitionHelper;
     self.transitionHelper.isPresenting = YES;
     [self.navigationController pushViewController:controller

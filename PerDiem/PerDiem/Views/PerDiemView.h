@@ -14,6 +14,8 @@
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (nonatomic, strong) PerDiem *perDiem;
 @property (nonatomic, assign) BOOL hasAnimated;
+- (void)setPerDiem:(PerDiem *)perDiem animated:(BOOL)animated;
+- (void)updateUIWithAnimation:(BOOL)animation;
 - (void)updateUI;
 
 @end

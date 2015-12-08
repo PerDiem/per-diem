@@ -57,7 +57,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DayViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.perDiem = [self.perDiems objectAtIndex:indexPath.row];
+    [cell setPerDiem:[self.perDiems objectAtIndex:indexPath.row] animated:YES];
     [cell layoutSubviews];
     return cell;
 }
