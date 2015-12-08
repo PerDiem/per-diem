@@ -96,6 +96,11 @@
             }
         };
         
+        preparation();
+        [UIView animateWithDuration:.8
+                         animations:animations
+                         completion:completion];
+        
     } else {
         // Add target view to hierarchy
         [[transitionContext containerView] addSubview:detailedDayView];
@@ -121,28 +126,41 @@
         };
         
         animations = ^void() {
-            monthView.alpha = 0;
             detailedDayView.alpha = 1;
-            transactionsView.alpha = 1;
             [perDiemView setFrame:perDiemOriginalFrame];
             [detailedDayView layoutIfNeeded];
         };
         
         completion = ^void(BOOL finished) {
             dayView.alpha = 1;
-            
-            BOOL wasCompleted = ![transitionContext transitionWasCancelled];
-            [transitionContext completeTransition:wasCompleted];
-            if (!wasCompleted) {
-                [monthVc viewWillAppear:NO];
-            }
+            [UIView animateWithDuration:.2
+                             animations:^{
+                                 transactionsView.alpha = 1;
+                             }
+                             completion:^(BOOL finished) {
+                                 BOOL wasCompleted = ![transitionContext transitionWasCancelled];
+                                 [transitionContext completeTransition:wasCompleted];
+                                 if (!wasCompleted) {
+                                     [monthVc viewWillAppear:NO];
+                                 }
+                             }];
         };
+        
+        [perDiemView setFrame:dayViewFrame];
+        detailedDayView.alpha = 1;
+        transactionsView.alpha = 0;
+        [UIView animateWithDuration:.2
+                         animations:^{
+                             monthView.alpha = 0;
+                         }
+                         completion:^(BOOL finished) {
+                             preparation();
+                             [UIView animateWithDuration:.8
+                                              animations:animations
+                                              completion:completion];
+                         }];
+
     }
-    
-    preparation();
-    [UIView animateWithDuration:.8
-                     animations:animations
-                     completion:completion];
 }
 
 - (void)onPanGesture:(UIPanGestureRecognizer *)sender {
