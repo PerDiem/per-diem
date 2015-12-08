@@ -68,6 +68,9 @@
                                             colorWithProgress:percentage alpha:1];
     self.progressBarBackgroundView.backgroundColor = [UIColor colorWithProgress:percentage alpha:.4];
     self.widthConstraint.constant = percentage * (self.frame.size.width / 100);
+    [self.progressBarBackgroundView.layer setCornerRadius:5.0f];
+    [self.progressBarBackgroundView.layer setMasksToBounds:YES];
+
 }
 
 
