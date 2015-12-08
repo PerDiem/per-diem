@@ -14,5 +14,6 @@
 @interface BudgetCell : SWTableViewCell
 
 @property(strong, nonatomic) Budget *budget;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowView;
 
 @end

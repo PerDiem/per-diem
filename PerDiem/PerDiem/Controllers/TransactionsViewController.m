@@ -153,6 +153,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0 && self.budget) {
         BudgetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"budgetCell"];
+        cell.arrowView.hidden = true;
         cell.budget = self.budget;
         return cell;
     } else {
