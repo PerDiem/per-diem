@@ -11,6 +11,7 @@
 		4A038AF41C100BD900ED955D /* PerDiemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A038AF31C100BD900ED955D /* PerDiemView.m */; };
 		4A038AF61C100C1500ED955D /* PerDiemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A038AF51C100C1500ED955D /* PerDiemView.xib */; };
 		4A038AFE1C114E6C00ED955D /* CalendarTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A038AFD1C114E6C00ED955D /* CalendarTransition.m */; };
+		4A130FAC1C179B52002EB814 /* Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A130FAB1C179B52002EB814 /* Title.m */; };
 		4A44F8861C0E9572005DFB79 /* CalendarMonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44F8841C0E9572005DFB79 /* CalendarMonthViewController.m */; };
 		4A44F8871C0E9572005DFB79 /* CalendarMonthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A44F8851C0E9572005DFB79 /* CalendarMonthViewController.xib */; };
 		4A44F8901C0E959D005DFB79 /* CalendarDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44F88E1C0E959D005DFB79 /* CalendarDayViewController.m */; };
@@ -64,6 +65,8 @@
 		4A038AF51C100C1500ED955D /* PerDiemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PerDiemView.xib; path = Views/PerDiemView.xib; sourceTree = "<group>"; };
 		4A038AFC1C114E6C00ED955D /* CalendarTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarTransition.h; path = Controllers/CalendarTransition.h; sourceTree = "<group>"; };
 		4A038AFD1C114E6C00ED955D /* CalendarTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarTransition.m; path = Controllers/CalendarTransition.m; sourceTree = "<group>"; };
+		4A130FAA1C179B52002EB814 /* Title.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Title.h; path = Views/Title.h; sourceTree = "<group>"; };
+		4A130FAB1C179B52002EB814 /* Title.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Title.m; path = Views/Title.m; sourceTree = "<group>"; };
 		4A44F8831C0E9572005DFB79 /* CalendarMonthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarMonthViewController.h; path = Controllers/CalendarMonthViewController.h; sourceTree = "<group>"; };
 		4A44F8841C0E9572005DFB79 /* CalendarMonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarMonthViewController.m; path = Controllers/CalendarMonthViewController.m; sourceTree = "<group>"; };
 		4A44F8851C0E9572005DFB79 /* CalendarMonthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarMonthViewController.xib; path = Controllers/CalendarMonthViewController.xib; sourceTree = "<group>"; };
@@ -215,6 +218,8 @@
 				4A038AF21C100BD900ED955D /* PerDiemView.h */,
 				4A038AF31C100BD900ED955D /* PerDiemView.m */,
 				4A038AF51C100C1500ED955D /* PerDiemView.xib */,
+				4A130FAA1C179B52002EB814 /* Title.h */,
+				4A130FAB1C179B52002EB814 /* Title.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -359,7 +364,6 @@
 				8E9DA2BE1BF561690016ECC2 /* Frameworks */,
 				8E9DA2BF1BF561690016ECC2 /* Resources */,
 				47999060A9B6ADB5A75727E4 /* Copy Pods Resources */,
-				9D92B356F8D71809583550A9 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -443,21 +447,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9D92B356F8D71809583550A9 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D812F6549CC76C0265B9E49F /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -483,6 +472,7 @@
 				BF6D07411C01332D00B61276 /* TransactionFormViewController.m in Sources */,
 				4A038AF41C100BD900ED955D /* PerDiemView.m in Sources */,
 				BF8ADB651C05712D00AEEBFE /* BudgetFormViewController.m in Sources */,
+				4A130FAC1C179B52002EB814 /* Title.m in Sources */,
 				BF8ADB5C1C04CBF500AEEBFE /* BudgetCell.m in Sources */,
 				8EC0E14C1C06DEEC0004207B /* UIColor+PerDiem.m in Sources */,
 				BFE432591C0039BB00809F7E /* Transaction.m in Sources */,

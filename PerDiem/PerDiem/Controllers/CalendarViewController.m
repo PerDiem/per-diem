@@ -16,6 +16,7 @@
 #import "NSDate+DateTools.h"
 #import "TransactionFormViewController.h"
 #import "Transaction.h"
+#import "Title.h"
 
 @interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddButtonDelegate, CalendarMonthViewControllerDelegate, UINavigationControllerDelegate, TransactionFormActionDelegate>
 
@@ -151,7 +152,11 @@
 
 - (void)calendarMonthViewController:(CalendarMonthViewController *)controller
                         updateTitle:(NSString *)title {
-    self.navigationItem.title = title;
+    
+    Title *titleView = [[Title alloc] initWithFrame:CGRectMake(0,0,200,32)];
+    titleView.label.text = title;
+    [titleView loading];
+    self.navigationItem.titleView = titleView;
 }
 
 - (void)calendarMonthViewController:(CalendarMonthViewController *)monthController

@@ -25,6 +25,7 @@ PODS:
   - M13ProgressSuite (1.2.7)
   - Parse (1.10.0):
     - Bolts/Tasks (~> 1.5)
+  - Shimmer (1.0.2)
   - SWTableViewCell (0.3.7)
   - XLForm (3.0.2)
 
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - DateTools
   - M13ProgressSuite
   - Parse
+  - Shimmer
   - SWTableViewCell
   - XLForm
 
@@ -42,7 +44,8 @@ SPEC CHECKSUMS:
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   M13ProgressSuite: 03d194af6359da440641ba758aed5a18b0386a86
   Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
-COCOAPODS: 0.39.0
+COCOAPODS: 0.38.2
