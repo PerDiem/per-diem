@@ -46,6 +46,7 @@
         [UIView animateWithDuration:0.8 animations:^{
             toViewController.view.alpha = 1.0;
             if ([toViewController isKindOfClass:[TransactionFormViewController class]]) {
+                toViewController.navigationController.navigationBar.translucent = NO;
                 toViewController.navigationController.navigationBar.alpha = 1;
             }
         } completion:^(BOOL finished) {
