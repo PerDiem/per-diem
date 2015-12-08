@@ -53,6 +53,9 @@
     self.mainContentView.backgroundColor = [UIColor backgroundColor];
     self.progressBarBackgroundView.backgroundColor = [UIColor colorWithProgress:self.percentage alpha:.4];
     self.progressBarView.backgroundColor = [UIColor colorWithProgress:self.percentage alpha:1];
+    [self.progressBarBackgroundView.layer setCornerRadius:5.0f];
+    [self.progressBarBackgroundView.layer setMasksToBounds:YES];
+
 //    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
