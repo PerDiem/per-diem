@@ -40,6 +40,8 @@
 
     if (self.transaction.paymentType) {
         self.paymentTypeLabel.text = self.transaction.paymentType.name;
+    } else {
+        self.paymentTypeLabel.text = @"";
     }
     self.summaryLabel.text = self.transaction.summary;
     self.amountLabel.text = [self.amountFormatter stringFromNumber:self.transaction.amount];
