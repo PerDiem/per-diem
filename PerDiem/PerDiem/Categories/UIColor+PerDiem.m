@@ -17,7 +17,7 @@
 
 // PerDiem Empty
 + (UIColor *)emptyColorWithAlpha:(CGFloat)alpha {
-    return [UIColor colorWithRed:0.22 green:0.30 blue:0.35 alpha:alpha];
+    return [UIColor colorWithRed:0.22 green:0.30 blue:0.35 alpha:1];
 }
 + (UIColor *)emptyColor {
     return [[self class] emptyColorWithAlpha:1];
