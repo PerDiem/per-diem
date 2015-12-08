@@ -7,7 +7,9 @@
 //
 
 #import "LoginViewController.h"
+#import "UIColor+PerDiem.h"
 #import "KeychainWrapper.h"
+#import <QuartzCore/QuartzCore.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "User.h"
 
@@ -16,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) KeychainWrapper *keychainWrapper;
+@property (weak, nonatomic) IBOutlet UIView *loginView;
 
 @end
 
@@ -26,7 +29,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    self.username.backgroundColor = [UIColor loginInputColor];
+    self.username.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Email" attributes:@{NSForegroundColorAttributeName: [UIColor placeholderInputColor]}];
+
+    self.password.backgroundColor = [UIColor loginInputColor];
+    self.password.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: [UIColor placeholderInputColor]}];
+
+    [self.loginView.layer setCornerRadius:5.0f];
+
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     if ([defaults boolForKey:@"hasLoginKey"]) {
@@ -94,6 +106,9 @@
     }];
 }
 
+- (IBAction)onTap:(id)sender {
+    [self.view endEditing:YES];
+}
 
 #pragma mark - Private
 

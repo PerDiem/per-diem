@@ -274,7 +274,7 @@
 - (void)onFilters {
     FiltersFormViewController *vc = [[FiltersFormViewController alloc] init];
     vc.delegate = self;
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc animated:YES completion:nil];
 }
 

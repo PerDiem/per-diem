@@ -70,5 +70,14 @@
     return [[self class] emptyColorWithAlpha:1];
 }
 
+// Perdiem Input
++ (UIColor *) loginInputColor {
+    return [UIColor colorWithRed:0.25 green:0.31 blue:0.33 alpha:1.0];
+}
+
++ (UIColor *)placeholderInputColor {
+    return [UIColor colorWithRed:0.62 green:0.65 blue:0.67 alpha:1.0];
+}
+
 
 @end

@@ -22,4 +22,6 @@
 + (UIColor *)colorWithProgress:(CGFloat)perDiemProgress alpha:(CGFloat)alpha;
 + (UIColor *)colorWithProgress:(CGFloat)perDiemProgress;
 + (UIColor *)inputColor;
++ (UIColor *)loginInputColor;
++ (UIColor *)placeholderInputColor;
 @end
