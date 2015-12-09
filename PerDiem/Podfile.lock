@@ -26,6 +26,7 @@ PODS:
   - M13ProgressSuite (1.2.7)
   - Parse (1.10.0):
     - Bolts/Tasks (~> 1.5)
+  - Regexer (1.3.1)
   - SWTableViewCell (0.3.7)
   - TesseractOCRiOS (4.0.0)
   - XLForm (3.0.2)
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - IRLDocumentScanner
   - M13ProgressSuite
   - Parse
+  - Regexer
   - SWTableViewCell
   - TesseractOCRiOS (from `https://github.com/gali8/Tesseract-OCR-iOS.git`, commit
     `925cce4c3bcb3d1f98e1a53a4c0ba7c9a0fdb6d7`)
@@ -58,6 +60,7 @@ SPEC CHECKSUMS:
   IRLDocumentScanner: b452cc6759d557bb37802b3cc779d5388b7d7ebc
   M13ProgressSuite: 03d194af6359da440641ba758aed5a18b0386a86
   Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
+  Regexer: c8f2bbfe832a8ec1e728b525e0b9ac814513d827
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   TesseractOCRiOS: 729989db3984bb60ba3addb053569b172d48c409
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883

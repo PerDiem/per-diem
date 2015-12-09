@@ -12,10 +12,10 @@
 #import "AddButtonView.h"
 #import "TransactionFormViewController.h"
 #import "BudgetFormViewController.h"
-#import "SnapReceiptViewController.h"
 #import "CalendarTransition.h"
 #import "NSDate+DateTools.h"
 #import "Transaction.h"
+#import "SnapPresenter.h"
 
 @interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddButtonDelegate, CalendarMonthViewControllerDelegate, UINavigationControllerDelegate, TransactionFormActionDelegate>
 
@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSArray *controllers;
 @property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
 @property (strong, nonatomic) CalendarTransition *transitionHelper;
+@property (strong, nonatomic) SnapPresenter *snapPresenter;
 
 @end
 
@@ -147,9 +148,8 @@
 }
 
 - (void)addButtonView:(UIView *)view alertControllerForScanReceipt:(UIAlertController *)alert {
-    SnapReceiptViewController *vc = [[SnapReceiptViewController alloc] init];
-    [self.navigationController pushViewController:vc
-                                         animated:NO];    
+    self.snapPresenter = [[SnapPresenter alloc] initWithViewController:self];
+    [self.snapPresenter present];
 }
 
 

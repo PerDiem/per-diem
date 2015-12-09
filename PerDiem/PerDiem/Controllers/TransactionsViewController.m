@@ -19,12 +19,14 @@
 #import "AddButtonView.h"
 #import <SWTableViewCell.h>
 #import "UIColor+PerDiem.h"
+#import "SnapPresenter.h"
 
 @interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate, AddButtonDelegate>
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) Filter *filters;
 @property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
+@property (strong, nonatomic) SnapPresenter *snapPresenter;
 
 @end
 
@@ -268,6 +270,11 @@
     [self.navigationController presentViewController:nvc
                                             animated:YES
                                           completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForScanReceipt:(UIAlertController *)alert {
+    self.snapPresenter = [[SnapPresenter alloc] initWithViewController:self];
+    [self.snapPresenter present];
 }
 
 #pragma mark - User interactions

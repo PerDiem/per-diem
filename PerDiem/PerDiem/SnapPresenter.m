@@ -1,12 +1,12 @@
 //
-//  SnapReceiptViewController.m
+//  SnapPresenter.m
 //  PerDiem
 //
-//  Created by Florent Bonomo on 11/27/15.
+//  Created by Florent Bonomo on 12/8/15.
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
-#import "SnapReceiptViewController.h"
+#import "SnapPresenter.h"
 #import <IRLDocumentScanner/IRLScannerViewController.h>
 #import <TesseractOCR/TesseractOCR.h>
 #import "NSString+Regexer.h"
@@ -14,28 +14,32 @@
 #import "Transaction.h"
 #import "NavigationViewController.h"
 
-@interface SnapReceiptViewController () <IRLScannerViewControllerDelegate, G8TesseractDelegate>
+@interface SnapPresenter () <IRLScannerViewControllerDelegate, G8TesseractDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *scanImageView;
+@property (nonatomic, strong) UIViewController *controller;
 
 @end
 
-@implementation SnapReceiptViewController
+@implementation SnapPresenter
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+- (id)initWithViewController:(UIViewController *)controller {
+    if (self = [super init]) {
+        self.controller = controller;
+    }
+    return self;
+}
+
+- (void)present {
     IRLScannerViewController *scanner = [IRLScannerViewController standardCameraViewWithDelegate:self];
     scanner.showControls = YES;
     scanner.showAutoFocusWhiteRectangle = YES;
-    [self presentViewController:scanner animated:YES completion:nil];
+    [self.controller presentViewController:scanner animated:YES completion:nil];
 }
 
 
 #pragma mark - IRLScannerViewControllerDelegate
-
+    
 - (void)pageSnapped:(UIImage *)pageImage from:(UIViewController *)controller {
-
     G8Tesseract *tesseract = [[G8Tesseract alloc] initWithLanguage:@"eng"];
     tesseract.delegate = self;
     tesseract.image = [pageImage g8_grayScale];
@@ -76,11 +80,10 @@
     transaction.summary = storeString;
     transaction.transactionDate = [NSDate dateWithYear:2015 month:11 day:27];
     TransactionFormViewController *transactionFormController = [[TransactionFormViewController alloc] initWithTransaction:transaction];
-    
+    transactionFormController.delegate = self.controller;
     NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:transactionFormController];
-    [controller dismissViewControllerAnimated:NO completion:^{
-        [controller presentViewController:nvc animated:NO completion:nil];
-    }];
+    [self.controller dismissViewControllerAnimated:NO completion:nil];
+    [self.controller presentViewController:nvc animated:NO completion:nil];
 }
 
 - (NSString*)cameraViewWillUpdateTitleLabel:(IRLScannerViewController*)cameraView {
@@ -90,5 +93,6 @@
 - (void)cameraViewCancelRequested:(IRLScannerViewController *)cameraView {
     [cameraView dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 @end

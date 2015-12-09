@@ -13,12 +13,14 @@
 #import "TransactionFormViewController.h"
 #import "TransactionsViewController.h"
 #import "UIColor+PerDiem.h"
+#import "SnapPresenter.h"
 
 @interface CalendarDayViewController () <AddButtonDelegate, TransactionFormActionDelegate>
 
 @property (strong, nonatomic) TransactionsViewController *transactionsViewController;
 
 @property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
+@property (strong, nonatomic) SnapPresenter *snapPresenter;
 
 @end
 
@@ -73,6 +75,11 @@
     [self.navigationController presentViewController:nvc
                                             animated:YES
                                           completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForScanReceipt:(UIAlertController *)alert {
+    self.snapPresenter = [[SnapPresenter alloc] initWithViewController:self];
+    [self.snapPresenter present];
 }
 
 

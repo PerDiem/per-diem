@@ -11,6 +11,7 @@
 		4A038AF41C100BD900ED955D /* PerDiemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A038AF31C100BD900ED955D /* PerDiemView.m */; };
 		4A038AF61C100C1500ED955D /* PerDiemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A038AF51C100C1500ED955D /* PerDiemView.xib */; };
 		4A038AFE1C114E6C00ED955D /* CalendarTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A038AFD1C114E6C00ED955D /* CalendarTransition.m */; };
+		4A130FAF1C17F623002EB814 /* SnapPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A130FAE1C17F623002EB814 /* SnapPresenter.m */; };
 		4A44F8861C0E9572005DFB79 /* CalendarMonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44F8841C0E9572005DFB79 /* CalendarMonthViewController.m */; };
 		4A44F8871C0E9572005DFB79 /* CalendarMonthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A44F8851C0E9572005DFB79 /* CalendarMonthViewController.xib */; };
 		4A44F8901C0E959D005DFB79 /* CalendarDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44F88E1C0E959D005DFB79 /* CalendarDayViewController.m */; };
@@ -68,6 +69,8 @@
 		4A038AF51C100C1500ED955D /* PerDiemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PerDiemView.xib; path = Views/PerDiemView.xib; sourceTree = "<group>"; };
 		4A038AFC1C114E6C00ED955D /* CalendarTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarTransition.h; path = Controllers/CalendarTransition.h; sourceTree = "<group>"; };
 		4A038AFD1C114E6C00ED955D /* CalendarTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarTransition.m; path = Controllers/CalendarTransition.m; sourceTree = "<group>"; };
+		4A130FAD1C17F623002EB814 /* SnapPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapPresenter.h; sourceTree = "<group>"; };
+		4A130FAE1C17F623002EB814 /* SnapPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapPresenter.m; sourceTree = "<group>"; };
 		4A44F8831C0E9572005DFB79 /* CalendarMonthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarMonthViewController.h; path = Controllers/CalendarMonthViewController.h; sourceTree = "<group>"; };
 		4A44F8841C0E9572005DFB79 /* CalendarMonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarMonthViewController.m; path = Controllers/CalendarMonthViewController.m; sourceTree = "<group>"; };
 		4A44F8851C0E9572005DFB79 /* CalendarMonthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarMonthViewController.xib; path = Controllers/CalendarMonthViewController.xib; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 			children = (
 				4AF678261C025F1800DFB75E /* KeychainWrapper.h */,
 				4AF678271C025F1800DFB75E /* KeychainWrapper.m */,
+				4A130FAD1C17F623002EB814 /* SnapPresenter.h */,
+				4A130FAE1C17F623002EB814 /* SnapPresenter.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -513,6 +518,7 @@
 				4A44F8901C0E959D005DFB79 /* CalendarDayViewController.m in Sources */,
 				4AAA3FBC1C0B868A004CE620 /* AddButtonView.m in Sources */,
 				8E42F45F1C0242FE00AE2E37 /* TransactionCell.m in Sources */,
+				4A130FAF1C17F623002EB814 /* SnapPresenter.m in Sources */,
 				BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */,
 				4AEB60E41C010AA800679DAF /* TransactionsViewController.m in Sources */,
 				4AF678281C025F1800DFB75E /* KeychainWrapper.m in Sources */,

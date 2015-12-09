@@ -17,6 +17,7 @@
 #import "AddButtonView.h"
 #import "UIColor+PerDiem.h"
 #import <SWTableViewCell.h>
+#import "SnapPresenter.h"
 
 @interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate, TransactionFormActionDelegate, AddButtonDelegate>
 
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
+@property (strong, nonatomic) SnapPresenter *snapPresenter;
 
 @end
 
@@ -207,14 +209,8 @@
 #pragma mark - NavBar Controller
 
 - (void) setupNavBar {
-    UIBarButtonItem *budgetButton = [[UIBarButtonItem alloc] initWithTitle:@"New Budget" style:UIBarButtonItemStylePlain target:self action:@selector(onNewBudget)];
+}
 
-//    UIBarButtonItem *transactionButton = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction" style:UIBarButtonItemStylePlain target:self action:@selector(onNewTransaction)];
-
-    UIBarButtonItem *transactionButton = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction"
-                                                                          style:UIBarButtonItemStylePlain
-                                                                         target:self
-                                                                         action:@selector(onNewTransactionViaCamera)];
 #pragma mark - AddButtonDelegate
 
 - (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
@@ -239,6 +235,11 @@
     [self.navigationController presentViewController:nvc
                                             animated:YES
                                           completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForScanReceipt:(UIAlertController *)alert {
+    self.snapPresenter = [[SnapPresenter alloc] initWithViewController:self];
+    [self.snapPresenter present];
 }
 
 @end
