@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @property (strong, nonatomic) NSNumberFormatter *amountFormatter;
+@property (weak, nonatomic) IBOutlet UILabel *pipeLabel;
 
 @end
 
@@ -41,6 +42,7 @@
     if (self.transaction.paymentType) {
         self.paymentTypeLabel.text = self.transaction.paymentType.name;
     } else {
+        self.pipeLabel.hidden = YES;
         self.paymentTypeLabel.text = @"";
     }
     self.summaryLabel.text = self.transaction.summary;
