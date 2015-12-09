@@ -11,6 +11,6 @@
 @interface TabBarViewController : UIViewController
 
 - (void)setupUI;
-- (void)setupBarItemWithImageNamed:(NSString *)imageName title:(NSString *)tabTitle;
+- (void)setupBarItemWithImageNamed:(NSString *)imageName selectedImageName: (NSString*) selectedImageName title:(NSString *)tabTitle;
 
 @end

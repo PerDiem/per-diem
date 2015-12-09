@@ -84,7 +84,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"budgets" title:@"Budgets"];
+    [self setupBarItemWithImageNamed:@"ic-pie" selectedImageName:@"ic-pie-selected" title:@"Budgets"];
 }
 
 #pragma mark - Setup
