@@ -8,6 +8,7 @@
 
 #import "BudgetFormViewController.h"
 #import "XLForm.h"
+#import "UIColor+PerDiem.h"
 #import "User.h"
 #import "Budget.h"
 #import "Transaction.h"
@@ -40,6 +41,7 @@ NSString *const kBudgetAmount = @"amount";
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
+    [self customizeAppearance];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,17 +65,22 @@ NSString *const kBudgetAmount = @"amount";
     self.budget.amount = values[kBudgetAmount];
 
     if (self.budget.objectId) {
-        if ([self.delegator respondsToSelector:@selector(budgetUpdated:)]) {
-            [self.delegator budgetUpdated:self.budget];
+        if ([self.delegate respondsToSelector:@selector(budgetUpdated:)]) {
+            [self.delegate budgetUpdated:self.budget];
         }
     } else {
-        if ([self.delegator respondsToSelector:@selector(budgetCreated:)]) {
-            [self.delegator budgetCreated:self.budget];
+        if ([self.delegate respondsToSelector:@selector(budgetCreated:)]) {
+            [self.delegate budgetCreated:self.budget];
         }
     }
     [self.budget saveInBackground];
 
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self isModal]) {
+        [self.navigationController dismissViewControllerAnimated:YES
+                                                      completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - Form Setup
@@ -93,12 +100,22 @@ NSString *const kBudgetAmount = @"amount";
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kName rowType:XLFormRowDescriptorTypeText title:@"Name"];
     row.required = YES;
     row.value = budget.name;
+    [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textField.textColor"];
+
     [section addFormRow:row];
 
     // Number
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kBudgetAmount rowType:XLFormRowDescriptorTypeDecimal title:@"Amount"];
     row.required = YES;
     row.value = budget.amount;
+    [row.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
+    [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textField.textColor"];
+
     [section addFormRow:row];
 
     return [super initWithForm:formDescriptor];
@@ -122,5 +139,21 @@ NSString *const kBudgetAmount = @"amount";
     [self.navigationController dismissViewControllerAnimated:YES
                                                   completion:nil];
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    // Text Color
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    [header.textLabel setTextColor:[UIColor whiteColor]];
+}
+
+
+-(void)customizeAppearance
+{
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor backgroundColor];
+}
+
 
 @end

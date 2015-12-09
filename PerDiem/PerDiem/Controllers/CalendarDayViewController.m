@@ -7,12 +7,18 @@
 //
 
 #import "CalendarDayViewController.h"
+#import "AddButtonView.h"
+#import "BudgetFormViewController.h"
+#import "NavigationViewController.h"
+#import "TransactionFormViewController.h"
 #import "TransactionsViewController.h"
 #import "UIColor+PerDiem.h"
 
-@interface CalendarDayViewController ()
+@interface CalendarDayViewController () <AddButtonDelegate, TransactionFormActionDelegate>
 
 @property (strong, nonatomic) TransactionsViewController *transactionsViewController;
+
+@property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
 
 @end
 
@@ -28,7 +34,8 @@
     [self.transactionsView addSubview:self.transactionsViewController.view];
     self.perDiemView.perDiem = self.perDiem;
     [self.view sendSubviewToBack:self.transactionsView];
-    self.view.backgroundColor = [UIColor backgroundColor];
+    self.view.backgroundColor = [UIColor clearColor];
+    self.addButtonView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -40,6 +47,46 @@
         self.transitionHelper.isPresenting = NO;
         [self.transitionHelper onPanGesture:sender];
     }
+}
+
+
+#pragma mark - AddButtonDelegate
+
+- (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
+    [self.navigationController presentViewController:alert
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert {
+    BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
+    TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    vc.delegate = self;
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
+}
+
+
+#pragma mark - TransactionFormActionDelegate
+
+- (void)transactionCreated:(Transaction *)transaction {
+    [self.transactionsViewController.transactionList addTransaction:transaction];
+    [self.transactionsViewController.tableView reloadData];
+    self.perDiem.spent = [NSNumber numberWithFloat:([self.perDiem.spent floatValue] + [transaction.amount floatValue])];
+    [self.perDiemView updateUI];
+}
+
+- (void)transactionUpdated:(Transaction *)transaction {
+    [self.transactionsViewController.tableView reloadData];
 }
 
 @end

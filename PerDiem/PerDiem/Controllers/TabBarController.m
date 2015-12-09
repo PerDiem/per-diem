@@ -19,6 +19,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor backgroundColor];
     self.tabBar.tintColor = [UIColor whiteColor];
+    self.tabBar.translucent = NO;
 
     CGRect frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, 49);
     UIView *v = [[UIView alloc] initWithFrame:frame];

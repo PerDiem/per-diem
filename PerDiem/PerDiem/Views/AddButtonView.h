@@ -10,7 +10,7 @@
 
 @class AddButtonView;
 
-@protocol AddTransactionButtonDelegate <NSObject>
+@protocol AddButtonDelegate <NSObject>
 
 - (void)addButtonView:(AddButtonView *)view presentAlertController:(UIAlertController *)alert;
 - (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert;
@@ -21,6 +21,6 @@
 
 @interface AddButtonView : UIView
 
-@property (nonatomic, assign) id<AddTransactionButtonDelegate> delegate;
+@property (nonatomic, assign) id<AddButtonDelegate> delegate;
 
 @end

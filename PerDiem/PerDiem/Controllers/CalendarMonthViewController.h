@@ -10,6 +10,7 @@
 #import "NSDate+DateTools.h"
 #import <DateTools/DateTools.h>
 #import "PerDiem.h"
+#import "DayViewTableViewCell.h"
 
 @class CalendarMonthViewController;
 
@@ -27,9 +28,14 @@
 
 @property (nonatomic, assign) id<CalendarMonthViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSDate *date;
+@property (strong, nonatomic) DTTimePeriod *timePeriod;
+@property (strong, nonatomic) NSMutableArray<PerDiem *> *perDiems;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+- (instancetype)initWithDate:(NSDate *)date
+                  completion:(void(^)(NSArray<PerDiem *>*))completionHandler;
 - (void)updateTitle;
 - (void)updateTitleWithTitle:(NSString *)title;
-- (UIView *)viewForPerDiem:(PerDiem *)perDiem;
+- (DayViewTableViewCell *)viewForPerDiem:(PerDiem *)perDiem;
 
 @end

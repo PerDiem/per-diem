@@ -17,7 +17,7 @@
 
 + (void)perDiemsForPeriod:(DTTimePeriod *)period
           relatedToPeriod:(DTTimePeriod *)relatedPeriod
-               completion:(void (^)(NSArray<PerDiem *>*, NSError *error))completion {
+               completion:(void (^)(NSMutableArray<PerDiem *>*, NSError *error))completion {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -56,7 +56,7 @@
             CGFloat totalSpentSoFar = 0;
             CGFloat spentOnThatDay = 0;
             for (Transaction *transaction in transactions) {
-                if ([transaction.transactionDate earlierDate:day]) {
+                if ([transaction.transactionDate isEarlierThan:day] || [self souldUsePendingTransaction: transaction day: day]) {
                     totalSpentSoFar += [transaction.amount floatValue];
                 }
                 if([transaction.transactionDate isSameDay:day]) {
@@ -81,7 +81,7 @@
 }
 
 + (void)perDiemsForPeriod:(DTTimePeriod *)period
-               completion:(void (^)(NSArray<PerDiem *>*, NSError *error))completion {
+               completion:(void (^)(NSMutableArray<PerDiem *>*, NSError *error))completion {
     [[self class] perDiemsForPeriod:period
                     relatedToPeriod:period
                          completion:completion];
@@ -105,6 +105,11 @@
                                  completion(nil, error);
                              }
                         }];
+}
+
++ (BOOL) souldUsePendingTransaction: (Transaction*) transaction  day:(NSDate*) day {
+    return [transaction.future boolValue] && ([transaction.createdAt isEarlierThan:day] ||
+    [transaction.createdAt isSameDay:day]);
 }
 
 @end

@@ -10,92 +10,74 @@
 
 @implementation UIColor (PerDiemColors)
 
-// Colors from: https://color.adobe.com/Rise-color-theme-3648332/
-// Dark Grey: #2B3A42 [UIColor colorWithRed:0.17 green:0.23 blue:0.26 alpha:1.0];
-// Dark Blue: #3F5765 [UIColor colorWithRed:0.25 green:0.34 blue:0.40 alpha:1.0];
-// Light Blue: #BDD4DE [UIColor colorWithRed:0.74 green:0.83 blue:0.87 alpha:1.0];
-// Light Grey: #EFEFEF [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0];
-// RedHighlight: #E74C3C [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:1.0];
-
 // Background Color
 + (UIColor *)backgroundColor {
     return [UIColor colorWithRed:0.17 green:0.23 blue:0.26 alpha:1.0];
 }
 
-// Transaction Color
-+ (UIColor *)transactionColor {
-    return [UIColor colorWithRed:0.22 green:0.30 blue:0.35 alpha:1.0];
+// PerDiem Empty
++ (UIColor *)emptyColorWithAlpha:(CGFloat)alpha {
+    return [UIColor colorWithRed:0.22 green:0.30 blue:0.35 alpha:1];
+}
++ (UIColor *)emptyColor {
+    return [[self class] emptyColorWithAlpha:1];
 }
 
-// Dark Grey
-+ (UIColor *)darkGreyColorWithAlpha:(CGFloat)alpha {
-    return [UIColor colorWithRed:0.17 green:0.23 blue:0.26 alpha:alpha];
-}
-+ (UIColor *)darkGreyColor {
-    return [[self class] darkGreyColorWithAlpha:1];
-}
-
-// Dark Blue
-+ (UIColor *)darkBlueColorWithAlpha:(CGFloat)alpha {
-    return [UIColor colorWithRed:0.25 green:0.34 blue:0.40 alpha:alpha];
-}
-+ (UIColor *)darkBlueColor {
-    return [[self class] darkBlueColorWithAlpha:1];
-}
-
-// Light Blue
-+ (UIColor *)lightBlueColorWithAlpha:(CGFloat)alpha {
-    return [UIColor colorWithRed:0.74 green:0.83 blue:0.87 alpha:alpha];
-}
-+ (UIColor *)lightBlueColor {
-    return [[self class] lightBlueColorWithAlpha:1];
-}
-
-// Light Grey
-+ (UIColor *)lightGreyColorWithAlpha:(CGFloat)alpha {
-    return [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:alpha];
-}
-+ (UIColor *)lightGreyColor {
-    return [[self class] lightGreyColorWithAlpha:1];
-}
-
-// Red Highlight
-+ (UIColor *)redHighlightColorWithAlpha:(CGFloat)alpha {
-    return [UIColor colorWithRed:0.91 green:0.29 blue:0.21 alpha:alpha];
-}
-+ (UIColor *)redHighlightColor {
-    return [[self class] redHighlightColorWithAlpha:1];
-}
-
-// Green Highlight
-+ (UIColor *)greenHighlightColorWithAlpha:(CGFloat)alpha {
+// PerDiem OK
++ (UIColor *)okColorWithAlpha:(CGFloat)alpha {
     return [UIColor colorWithRed:0.35 green:0.68 blue:0.28 alpha:alpha];
 }
-+ (UIColor *)greenHighlightColor {
-    return [[self class] greenHighlightColorWithAlpha:1];
++ (UIColor *)okColor {
+    return [[self class] okColorWithAlpha:1];
 }
 
-// Yellow Highlight
-+ (UIColor *)yellowHighlightColorWithAlpha:(CGFloat)alpha {
+// PerDiem Warning
++ (UIColor *)warningColorWithAlpha:(CGFloat)alpha {
     return [UIColor colorWithRed:1.00 green:0.78 blue:0.00 alpha:alpha];
 }
-+ (UIColor *)yellowHighlightColor {
-    return [[self class] yellowHighlightColorWithAlpha:1];
++ (UIColor *)warningColor {
+    return [[self class] warningColorWithAlpha:1];
 }
 
-// Budget Progress
-+ (UIColor *)colorWithBudgetProgress:(CGFloat)budgetProgress alpha:(CGFloat)alpha {
-    UIColor *color = [[self class] greenHighlightColorWithAlpha:alpha];
-    if (budgetProgress >= 60) {
-        color = [[self class] yellowHighlightColorWithAlpha:alpha];
+// PerDiem Alert
++ (UIColor *)alertColorWithAlpha:(CGFloat)alpha {
+    return [UIColor colorWithRed:0.91 green:0.29 blue:0.21 alpha:alpha];
+}
++ (UIColor *)alertColor {
+    return [[self class] alertColorWithAlpha:1];
+}
+
+// PerDiem Progress
++ (UIColor *)colorWithProgress:(CGFloat)perDiemProgress alpha:(CGFloat)alpha {
+    UIColor *color = [[self class] emptyColorWithAlpha:alpha];
+    if (perDiemProgress > 0) {
+        color = [[self class] okColorWithAlpha:alpha];
     }
-    if (budgetProgress >= 100) {
-        color = [[self class] redHighlightColorWithAlpha:alpha];
+    if (perDiemProgress >= 60) {
+        color = [[self class] warningColorWithAlpha:alpha];
+    }
+    if (perDiemProgress >= 100) {
+        color = [[self class] alertColorWithAlpha:alpha];
     }
     return color;
 }
-+ (UIColor *)colorWithBudgetProgress:(CGFloat)budgetProgress {
-    return [[self class] colorWithBudgetProgress:budgetProgress alpha:1];
++ (UIColor *)colorWithProgress:(CGFloat)perDiemProgress {
+    return [[self class] colorWithProgress:perDiemProgress alpha:1];
 }
+
+// Perdiem Input
++ (UIColor *)inputColor {
+    return [[self class] emptyColorWithAlpha:1];
+}
+
+// Perdiem Input
++ (UIColor *) loginInputColor {
+    return [UIColor colorWithRed:0.25 green:0.31 blue:0.33 alpha:1.0];
+}
+
++ (UIColor *)placeholderInputColor {
+    return [UIColor colorWithRed:0.62 green:0.65 blue:0.67 alpha:1.0];
+}
+
 
 @end

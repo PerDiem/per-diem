@@ -6,23 +6,25 @@
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
+#import "NavigationViewController.h"
+#import "BudgetFormViewController.h"
 #import "TransactionsViewController.h"
 #import "TransactionFormViewController.h"
 #import "TransactionCell.h"
 #import "BudgetCell.h"
 #import "Transaction.h"
-#import "TransactionList.h"
 #import "Budget.h"
 #import "FiltersFormViewController.h"
 #import "Filter.h"
+#import "AddButtonView.h"
 #import <SWTableViewCell.h>
 #import "UIColor+PerDiem.h"
 
-@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate>
+@interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate, AddButtonDelegate>
 
-@property (strong, nonatomic) TransactionList *transactionList;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) Filter *filters;
+@property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
 
 @end
 
@@ -37,6 +39,7 @@
 
     [self setupNavigationBar];
     [self setupTableView];
+    self.addButtonView.delegate = self;
 
     if (self.budget != nil) {
         self.navigationItem.title = self.budget.name;
@@ -119,7 +122,7 @@
 }
 
 - (void)setupNavigationBar {
-    UIBarButtonItem *filters = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filters_icon"]
+    UIBarButtonItem *filters = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic-filter"]
                                                                 style:UIBarButtonItemStylePlain
                                                                target:self action:@selector(onFilters)];
 
@@ -150,10 +153,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0 && self.budget) {
         BudgetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"budgetCell"];
+        cell.arrowView.hidden = true;
         cell.budget = self.budget;
         return cell;
     } else {
         TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
+        if ([self.period durationInDays] <= 1) {
+            cell.hideDate = YES;
+        }
         if (self.budget != nil) {
             cell.transaction = self.transactionList.transactions[indexPath.row - 1];
         } else {
@@ -184,7 +191,7 @@
         case 0:
         {
             TransactionFormViewController *vc = [[TransactionFormViewController alloc] initWithTransaction:self.transactionList.transactions[indexPath.row]];
-            vc.delegator = self;
+            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -239,19 +246,43 @@
     }];
 }
 
+#pragma mark - AddButtonDelegate
+
+- (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
+    [self.navigationController presentViewController:alert
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert {
+    BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
+    TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
+}
+
 #pragma mark - User interactions
 
 - (void)onFilters {
     FiltersFormViewController *vc = [[FiltersFormViewController alloc] init];
     vc.delegate = self;
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc animated:YES completion:nil];
 }
 
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"transactions" title:@"All Transactions"];
+    [self setupBarItemWithImageNamed:@"ic-listview" selectedImageName:@"ic-listview-selected" title:@"All Transactions"];
 }
 
 @end

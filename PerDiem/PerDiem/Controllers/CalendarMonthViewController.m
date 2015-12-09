@@ -11,20 +11,29 @@
 #import <DateTools/DateTools.h>
 #import <UIKit/UIKit.h>
 #import "NSDate+DateTools.h"
-#import "DayViewTableViewCell.h"
 #import "UIColor+PerDiem.h"
 
 @interface CalendarMonthViewController () <UITableViewDataSource, UITableViewDelegate>
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) DTTimePeriod *timePeriod;
-@property (strong, nonatomic) NSArray<PerDiem *> *perDiems;
 
 @end
 
 @implementation CalendarMonthViewController
 
 #pragma mark - UIViewController
+
+- (instancetype)initWithDate:(NSDate *)date
+                  completion:(void(^)(NSArray<PerDiem *>*))completionHandler {
+    if (self = [super initWithNibName:@"CalendarMonthViewController" bundle:nil]) {
+        self.date = date;
+        [self fetchPerDiemsWithCompletion:^(NSArray<PerDiem *> *perDiems) {
+             [self.tableView reloadData];
+            if (completionHandler != nil) {
+                completionHandler(perDiems);
+            }
+        }];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,12 +46,6 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:[UINib nibWithNibName:@"DayViewTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"cell"];
-    
-    [PerDiem perDiemsForPeriod:self.timePeriod
-                    completion:^(NSArray<PerDiem *> *perDiems, NSError *error) {
-                        self.perDiems = perDiems;
-                        [self.tableView reloadData];
-                    }];
 }
 
 
@@ -55,6 +58,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DayViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.perDiem = [self.perDiems objectAtIndex:indexPath.row];
+    [cell layoutSubviews];
     return cell;
 }
 
@@ -72,6 +76,17 @@
 
 
 #pragma mark - Private
+
+- (void)fetchPerDiemsWithCompletion:(void(^)(NSMutableArray<PerDiem *>*))completionHandler {
+    [PerDiem perDiemsForPeriod:self.timePeriod
+                    completion:^void(NSMutableArray<PerDiem *> *perDiems, NSError *error) {
+                        self.perDiems = perDiems;
+                        [self.tableView reloadData];
+                        if (completionHandler != nil) {
+                            completionHandler(perDiems);
+                        }
+                    }];
+}
 
 - (void)setDate:(NSDate *)date {
     _date = date;
@@ -106,11 +121,15 @@
     }
 }
 
-- (UITableViewCell *)viewForPerDiem:(PerDiem *)perDiem {
-    NSInteger perDiemIndex = [self.perDiems indexOfObject:perDiem];
-    NSIndexPath *viewIndexPath = [NSIndexPath indexPathForRow:perDiemIndex inSection:0];
-    return [self.tableView cellForRowAtIndexPath:viewIndexPath];
+- (DayViewTableViewCell *)viewForPerDiem:(PerDiem *)perDiem {
+    NSArray *cells = [self.tableView visibleCells];
+    for (DayViewTableViewCell *cell in cells)
+    {
+        if (cell.perDiem == perDiem) {
+            return cell;
+        }
+    }
+    return nil;
 }
-
 
 @end

@@ -16,19 +16,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jzM-Mc-jWN" customClass="AddButtonView">
-                    <rect key="frame" x="260" y="468" width="40" height="40"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jzM-Mc-jWN" customClass="AddButtonView">
+                    <rect key="frame" x="230" y="478" width="70" height="70"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="40" id="DGh-bG-5zL"/>
-                        <constraint firstAttribute="height" constant="40" id="csa-Rm-KR9"/>
+                        <constraint firstAttribute="width" constant="70" id="DGh-bG-5zL"/>
+                        <constraint firstAttribute="height" constant="70" id="csa-Rm-KR9"/>
                     </constraints>
                 </view>
             </subviews>
             <animations/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="jzM-Mc-jWN" secondAttribute="bottom" constant="60" id="c5L-Uh-E3r"/>
+                <constraint firstAttribute="bottom" secondItem="jzM-Mc-jWN" secondAttribute="bottom" constant="20" id="c5L-Uh-E3r"/>
                 <constraint firstAttribute="trailing" secondItem="jzM-Mc-jWN" secondAttribute="trailing" constant="20" id="g4c-Zn-Sus"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>

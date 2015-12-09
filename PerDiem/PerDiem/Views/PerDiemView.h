@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (nonatomic, strong) PerDiem *perDiem;
+- (void)updateUI;
 
 @end

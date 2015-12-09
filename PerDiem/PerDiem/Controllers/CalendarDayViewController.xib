@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalendarDayViewController">
             <connections>
+                <outlet property="addButtonView" destination="bgd-S7-Eeo" id="sdU-h8-C9I"/>
                 <outlet property="perDiemView" destination="Uwd-dx-Pg8" id="O0b-Zd-d4X"/>
                 <outlet property="transactionsView" destination="irN-ij-2bK" id="vCg-Ub-K0z"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -33,17 +34,28 @@
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgd-S7-Eeo" customClass="AddButtonView">
+                    <rect key="frame" x="230" y="478" width="70" height="70"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="bz5-BK-dD8"/>
+                        <constraint firstAttribute="width" constant="70" id="h9J-aV-Rhf"/>
+                    </constraints>
+                </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="irN-ij-2bK" secondAttribute="bottom" id="4aT-gQ-dop"/>
+                <constraint firstAttribute="bottom" secondItem="bgd-S7-Eeo" secondAttribute="bottom" constant="20" id="FKQ-qt-DEf"/>
                 <constraint firstAttribute="trailing" secondItem="irN-ij-2bK" secondAttribute="trailing" id="JI3-Sb-ZKt"/>
                 <constraint firstAttribute="trailing" secondItem="Uwd-dx-Pg8" secondAttribute="trailing" id="JOf-HB-xCi"/>
                 <constraint firstItem="irN-ij-2bK" firstAttribute="top" secondItem="Uwd-dx-Pg8" secondAttribute="bottom" id="hHz-aG-0mO"/>
                 <constraint firstItem="Uwd-dx-Pg8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kj4-uJ-8HT"/>
                 <constraint firstItem="Uwd-dx-Pg8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="lK7-DO-KWu"/>
                 <constraint firstItem="irN-ij-2bK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oCZ-EI-Spk"/>
+                <constraint firstAttribute="trailing" secondItem="bgd-S7-Eeo" secondAttribute="trailing" constant="20" id="qeE-AO-B3V"/>
             </constraints>
             <point key="canvasLocation" x="357" y="264"/>
         </view>

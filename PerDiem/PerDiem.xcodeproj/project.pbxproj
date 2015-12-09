@@ -52,6 +52,7 @@
 		BF8ADB5D1C04CBF500AEEBFE /* BudgetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8ADB5B1C04CBF500AEEBFE /* BudgetCell.xib */; };
 		BF8ADB651C05712D00AEEBFE /* BudgetFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8ADB641C05712D00AEEBFE /* BudgetFormViewController.m */; };
 		BF8ADB681C0D6DB100AEEBFE /* PerDiem.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8ADB671C0D6DB100AEEBFE /* PerDiem.m */; };
+		BF8BF7A51C160F9100FF5F21 /* FormOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8BF7A41C160F9100FF5F21 /* FormOptionsViewController.m */; };
 		BFE4324E1C0028F800809F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4324D1C0028F800809F7E /* User.m */; };
 		BFE432531C0033FB00809F7E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE432511C0033FB00809F7E /* LoginViewController.m */; };
 		BFE432541C0033FB00809F7E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE432521C0033FB00809F7E /* LoginViewController.xib */; };
@@ -138,6 +139,8 @@
 		BF8ADB641C05712D00AEEBFE /* BudgetFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BudgetFormViewController.m; path = Controllers/Forms/BudgetFormViewController.m; sourceTree = "<group>"; };
 		BF8ADB661C0D6DB100AEEBFE /* PerDiem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PerDiem.h; path = models/PerDiem.h; sourceTree = "<group>"; };
 		BF8ADB671C0D6DB100AEEBFE /* PerDiem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PerDiem.m; path = models/PerDiem.m; sourceTree = "<group>"; };
+		BF8BF7A31C160F9100FF5F21 /* FormOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormOptionsViewController.h; path = Controllers/Forms/FormOptionsViewController.h; sourceTree = "<group>"; };
+		BF8BF7A41C160F9100FF5F21 /* FormOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormOptionsViewController.m; path = Controllers/Forms/FormOptionsViewController.m; sourceTree = "<group>"; };
 		BFE4324C1C0028F800809F7E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = models/User.h; sourceTree = "<group>"; };
 		BFE4324D1C0028F800809F7E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = models/User.m; sourceTree = "<group>"; };
 		BFE432501C0033FB00809F7E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Controllers/LoginViewController.h; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 				BF6D07401C01332D00B61276 /* TransactionFormViewController.m */,
 				8EF0E8541C0598DF001022B5 /* FiltersFormViewController.h */,
 				8EF0E8551C0598DF001022B5 /* FiltersFormViewController.m */,
+				BF8BF7A31C160F9100FF5F21 /* FormOptionsViewController.h */,
+				BF8BF7A41C160F9100FF5F21 /* FormOptionsViewController.m */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 				4AA46D8A1C09252F00C4B980 /* SnapReceiptViewController.m in Sources */,
 				BF8ADB681C0D6DB100AEEBFE /* PerDiem.m in Sources */,
 				BFE432621C006A6D00809F7E /* Organization.m in Sources */,
+				BF8BF7A51C160F9100FF5F21 /* FormOptionsViewController.m in Sources */,
 				4A92D6241C13A3BF00BE6452 /* PageViewController.m in Sources */,
 				4A44F8861C0E9572005DFB79 /* CalendarMonthViewController.m in Sources */,
 				BFE4325F1C003DA300809F7E /* PDCategory.m in Sources */,
@@ -618,7 +624,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PerDiem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.perdiem.Per-Diem";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.per-diem.perdiem";
 				PRODUCT_NAME = PerDiem;
 				PROVISIONING_PROFILE = "";
 			};
@@ -633,7 +639,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PerDiem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.perdiem.Per-Diem";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.per-diem.perdiem";
 				PRODUCT_NAME = PerDiem;
 				PROVISIONING_PROFILE = "";
 			};

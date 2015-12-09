@@ -63,10 +63,14 @@
     if (self.perDiem.budget > 0) {
         percentage = [self.perDiem.spent integerValue] * 100 / [self.perDiem.budget integerValue];
     }
-    
-    self.progressBarView.backgroundColor = [UIColor colorWithBudgetProgress:percentage alpha:1];
-    self.progressBarBackgroundView.backgroundColor = [UIColor colorWithBudgetProgress:percentage alpha:.4];
+
+    self.progressBarView.backgroundColor = [UIColor 
+                                            colorWithProgress:percentage alpha:1];
+    self.progressBarBackgroundView.backgroundColor = [UIColor colorWithProgress:percentage alpha:.4];
     self.widthConstraint.constant = percentage * (self.frame.size.width / 100);
+    [self.progressBarBackgroundView.layer setCornerRadius:5.0f];
+    [self.progressBarBackgroundView.layer setMasksToBounds:YES];
+
 }
 
 

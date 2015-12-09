@@ -6,6 +6,7 @@
 //  Copyright © 2015 PerDiem. All rights reserved.
 //
 
+#import "NavigationViewController.h"
 #import "BudgetsViewController.h"
 #import "SnapReceiptViewController.h"
 #import "TransactionFormViewController.h"
@@ -13,14 +14,16 @@
 #import "TransactionsViewController.h"
 #import "BudgetCell.h"
 #import "Budget.h"
+#import "AddButtonView.h"
 #import "UIColor+PerDiem.h"
 #import <SWTableViewCell.h>
 
-@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate>
+@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate, TransactionFormActionDelegate, AddButtonDelegate>
 
 @property(strong, nonatomic) NSArray* budgets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
 
 @end
 
@@ -32,10 +35,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setupNavBar];
+    self.title = @"Budgets";
     [self setupRefreshControl];
     [self setupTableView];
     [self fetchBudgets];
+
+    self.addButtonView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -80,7 +85,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"budgets" title:@"Budgets"];
+    [self setupBarItemWithImageNamed:@"ic-pie" selectedImageName:@"ic-pie-selected" title:@"Budgets"];
 }
 
 #pragma mark - Setup
@@ -121,7 +126,8 @@
 }
 
 - (void)setupTableView {
-    self.tableView.backgroundColor = [UIColor backgroundColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"BudgetCell" bundle:nil] forCellReuseIdentifier:@"BudgetCell"];
@@ -137,7 +143,7 @@
         case 0:
         {
             BudgetFormViewController *vc = [[BudgetFormViewController alloc] initWithBudget:self.budgets[indexPath.row]];
-            vc.delegator = self;
+            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -160,6 +166,18 @@
         default:
             break;
     }
+}
+
+#pragma mark - TransactionFormActionDelegate
+-(void)transactionCreated:(Transaction*) transaction {
+    [self.tableView beginUpdates];
+    NSUInteger index = [self.budgets indexOfObject:transaction.budget];
+    Budget *budget = self.budgets[index];
+    [budget addTransaction: transaction];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+
 }
 
 #pragma mark - BudgetFormActionDelegate
@@ -190,31 +208,37 @@
 
 - (void) setupNavBar {
     UIBarButtonItem *budgetButton = [[UIBarButtonItem alloc] initWithTitle:@"New Budget" style:UIBarButtonItemStylePlain target:self action:@selector(onNewBudget)];
-    
+
 //    UIBarButtonItem *transactionButton = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction" style:UIBarButtonItemStylePlain target:self action:@selector(onNewTransaction)];
-    
+
     UIBarButtonItem *transactionButton = [[UIBarButtonItem alloc] initWithTitle:@"New Transaction"
                                                                           style:UIBarButtonItemStylePlain
                                                                          target:self
                                                                          action:@selector(onNewTransactionViaCamera)];
+#pragma mark - AddButtonDelegate
 
-    self.navigationItem.rightBarButtonItem = transactionButton;
-    self.navigationItem.leftBarButtonItem = budgetButton;
+- (void)addButtonView:(UIView *)view presentAlertController:(UIAlertController *)alert {
+    [self.navigationController presentViewController:alert
+                                            animated:YES
+                                          completion:nil];
 }
 
-#pragma mark Actions
-- (void) onNewTransaction {
-    [self.navigationController pushViewController:[[TransactionFormViewController alloc] init] animated:YES];
-}
-
-- (void)onNewTransactionViaCamera {
-    [self.navigationController pushViewController:[[SnapReceiptViewController alloc] init] animated:NO];
-}
-
-- (void) onNewBudget {
+- (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert {
     BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
-    vc.delegator = self;
-    [self.navigationController pushViewController:vc animated:YES];
+    vc.delegate = self;
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
+}
+
+- (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
+    TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    vc.delegate = self;
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc
+                                            animated:YES
+                                          completion:nil];
 }
 
 @end
