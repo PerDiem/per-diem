@@ -122,7 +122,7 @@
 }
 
 - (void)setupNavigationBar {
-    UIBarButtonItem *filters = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filters_icon"]
+    UIBarButtonItem *filters = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic-filter"]
                                                                 style:UIBarButtonItemStylePlain
                                                                target:self action:@selector(onFilters)];
 
@@ -282,7 +282,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"transactions" title:@"All Transactions"];
+    [self setupBarItemWithImageNamed:@"ic-listview" selectedImageName:@"ic-listview-selected" title:@"All Transactions"];
 }
 
 @end
