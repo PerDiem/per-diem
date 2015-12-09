@@ -11,6 +11,7 @@
 
 @class Organization;
 @class TransactionList;
+@class Transaction;
 @interface Budget : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
 
@@ -21,6 +22,7 @@
 +(void) budgetNamedWithTransaction: (NSString*) name completion: (void (^)(Budget *budget, NSError *error)) completion;
 
 -(void) deleteBudget;
+-(void) addTransaction: (Transaction*) transaction;
 
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, strong) NSString *name;

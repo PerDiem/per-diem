@@ -124,6 +124,10 @@
     return [self.objectId hash];
 }
 
+-(void) addTransaction: (Transaction*) transaction {
+    [self.transactionList addTransaction:transaction];
+}
+
 - (TransactionList*) transactionList {
     return _transactionList;
 }
