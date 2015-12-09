@@ -158,7 +158,7 @@
         return cell;
     } else {
         TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
-        if ([self.period durationInDays] <= 1) {
+        if ([self.period durationInDays] <= 1 && self.period) {
             cell.hideDate = YES;
         }
         if (self.budget != nil) {
