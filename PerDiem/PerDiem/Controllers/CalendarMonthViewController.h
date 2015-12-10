@@ -32,6 +32,7 @@
 @property (strong, nonatomic) NSMutableArray<PerDiem *> *perDiems;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+- (void)updatePerDiems;
 - (instancetype)initWithDate:(NSDate *)date
                   completion:(void(^)(NSArray<PerDiem *>*))completionHandler;
 - (void)updateTitle;

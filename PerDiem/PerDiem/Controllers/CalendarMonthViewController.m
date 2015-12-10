@@ -14,6 +14,7 @@
 #import "UIColor+PerDiem.h"
 
 @interface CalendarMonthViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -46,8 +47,16 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:[UINib nibWithNibName:@"DayViewTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"cell"];
+    [self setupRefreshControl];
 }
 
+- (void)setupRefreshControl {
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self
+                            action:@selector(updatePerDiems)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex: 0];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -93,6 +102,13 @@
                             completionHandler(perDiems);
                         }
                     }];
+}
+
+- (void)updatePerDiems {
+    [self fetchPerDiemsWithCompletion:^(NSArray<PerDiem *> *perDiems) {
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 - (void)setDate:(NSDate *)date {
