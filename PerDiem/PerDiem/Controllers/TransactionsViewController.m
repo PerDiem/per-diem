@@ -19,6 +19,7 @@
 #import "AddButtonView.h"
 #import <SWTableViewCell.h>
 #import "UIColor+PerDiem.h"
+#import "JTProgressHUD.h"
 
 @interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate, AddButtonDelegate>
 
@@ -66,12 +67,20 @@
 
 - (void)fetchTransactions {
     if (self.budget != nil) {
+        [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                              style:JTProgressHUDStyleGradient
+                         transition:JTProgressHUDTransitionFade
+                    backgroundAlpha:.5];
+        [self.refreshControl endRefreshing];
         [Budget budgetNamedWithTransaction:self.budget.name completion:^(Budget *budget, NSError *error) {
             if (budget) {
                 self.transactionList = budget.transactionList;
                 [self.tableView reloadData];
             } else {
                 NSLog(@"Error: %@", error);
+            }
+            if ([JTProgressHUD isVisible]) {
+                [JTProgressHUD hide];
             }
             [self.refreshControl endRefreshing];
         }];
@@ -85,15 +94,26 @@
                                        } else {
                                            NSLog(@"Error: %@", error);
                                        }
+                                       if ([JTProgressHUD isVisible]) {
+                                           [JTProgressHUD hide];
+                                       }
                                        [self.refreshControl endRefreshing];
                                    }];
     } else {
+        [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                              style:JTProgressHUDStyleGradient
+                         transition:JTProgressHUDTransitionFade
+                    backgroundAlpha:.5];
+        [self.refreshControl endRefreshing];
         [Transaction transactions:^(TransactionList *transactions, NSError *error) {
             if (transactions) {
                 self.transactionList = transactions;
                 [self.tableView reloadData];
             } else {
                 NSLog(@"Error: %@", error);
+            }
+            if ([JTProgressHUD isVisible]) {
+                [JTProgressHUD hide];
             }
             [self.refreshControl endRefreshing];
         }];
@@ -204,10 +224,14 @@
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSInteger indexPathNumber = indexPath.row;
+    if (self.budget || self.period) {
+        indexPathNumber = indexPath.row - 1;
+    }
     switch (index) {
         case 0:
         {
-            TransactionFormViewController *vc = [[TransactionFormViewController alloc] initWithTransaction:self.transactionList.transactions[indexPath.row]];
+            TransactionFormViewController *vc = [[TransactionFormViewController alloc] initWithTransaction:self.transactionList.transactions[indexPathNumber]];
             vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -215,11 +239,11 @@
         case 1:
         {
             // Delete from Parse
-            [self.transactionList.transactions[indexPath.row] deleteTransaction];
+            [self.transactionList.transactions[indexPathNumber] deleteTransaction];
 
             // Delete from model
             NSMutableArray *transactions = [self.transactionList.transactions mutableCopy];
-            [transactions removeObjectAtIndex:indexPath.row];
+            [transactions removeObjectAtIndex:indexPathNumber];
             self.transactionList.transactions = transactions;
 
             // Delete from tableView
@@ -231,6 +255,18 @@
         default:
             break;
     }
+}
+
+-(void)transactionCreated:(Transaction *)transaction {
+    [self.tableView beginUpdates];
+
+    NSMutableArray *transactions = self.transactionList.transactions;
+    [transactions insertObject:transaction atIndex:0];
+    self.transactionList = [[TransactionList alloc] initWithTransactions:transactions];
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
 }
 
 #pragma mark - TranscationFormActionDelegate
@@ -248,7 +284,11 @@
 #pragma mark - FiltersFormViewDelegate
 
 - (void)filtersFormViewController:(FiltersFormViewController *)filtersFormViewController didChangeFilters:(NSDictionary *)filters {
-    [self.refreshControl beginRefreshing];
+    [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                          style:JTProgressHUDStyleGradient
+                     transition:JTProgressHUDTransitionFade
+                backgroundAlpha:.5];
+
     self.filters = [[Filter alloc] initWithFormFilters:filters];
 
     [Transaction transactions:^(TransactionList *transactions, NSError *error) {
@@ -256,10 +296,15 @@
             self.transactionList = [TransactionList transactionListWithTransactionList:transactions
                                                                       filterWithFilter:self.filters];
             [self.tableView reloadData];
+            if ([JTProgressHUD isVisible]) {
+                [JTProgressHUD hide];
+            }
         } else {
             NSLog(@"Error: %@", error);
+            if ([JTProgressHUD isVisible]) {
+                [JTProgressHUD hide];
+            }
         }
-        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -281,6 +326,7 @@
 
 - (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
     TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    vc.delegate = self;
     NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc
                                             animated:YES

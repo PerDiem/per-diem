@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "User.h"
+#import "JTProgressHUD.h"
 
 @interface LoginViewController ()
 
@@ -78,12 +79,22 @@
 #pragma mark - Actions
 
 - (IBAction)onLogin:(id)sender {
+    [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                          style:JTProgressHUDStyleGradient
+                     transition:JTProgressHUDTransitionFade
+                backgroundAlpha:.5];
     [PFUser logInWithUsernameInBackground:self.username.text
                                  password:self.password.text
                                     block:^void(PFUser *user, NSError *error) {
                                         if (user) {
                                             [self userCompletedAuthentication];
+                                            if ([JTProgressHUD isVisible]) {
+                                                [JTProgressHUD hide];
+                                            }
                                         } else {
+                                            if ([JTProgressHUD isVisible]) {
+                                                [JTProgressHUD hide];
+                                            }
                                             [self alertWithTitle:@"Login Error"
                                                          message:[NSString stringWithFormat:@"%@", error]];
                                         }

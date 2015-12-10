@@ -71,8 +71,8 @@
                                      [alert dismissViewControllerAnimated:YES completion:nil];
                                  }];
         
-        [alert addAction:newBudget];
         [alert addAction:newTransaction];
+        [alert addAction:newBudget];
         [alert addAction:cancel];
         
         [self.delegate addButtonView:self presentAlertController:alert];

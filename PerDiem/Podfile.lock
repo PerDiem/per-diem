@@ -22,6 +22,7 @@ PODS:
     - AFNetworking/NSURLSession
   - Bolts/Tasks (1.5.0)
   - DateTools (1.7.0)
+  - JTProgressHUD (1.0.3)
   - M13ProgressSuite (1.2.7)
   - Parse (1.10.0):
     - Bolts/Tasks (~> 1.5)
@@ -31,6 +32,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - DateTools
+  - JTProgressHUD
   - M13ProgressSuite
   - Parse
   - SWTableViewCell
@@ -40,6 +42,7 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
+  JTProgressHUD: d2519c41e664acb554932aac12f5a94b47d88a69
   M13ProgressSuite: 03d194af6359da440641ba758aed5a18b0386a86
   Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
