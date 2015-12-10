@@ -41,14 +41,25 @@
     [self setupTableView];
     self.addButtonView.delegate = self;
 
+    [self updateTitle];
     if (self.budget != nil) {
-        self.navigationItem.title = self.budget.name;
         self.transactionList = self.budget.transactionList;
     } else {
-        self.navigationItem.title = @"All Transactions";
         [self fetchTransactions];
     }
     [self setupRefreshControl];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateTitle];
+}
+
+- (void)updateTitle {
+    if (self.budget != nil) {
+        self.navigationItem.title = self.budget.name;
+    } else {
+        self.navigationItem.title = (self.filters) ? @"Filtered Transactions" : @"All Transactions";
+    }
 }
 
 #pragma mark - Model Interaction Methods
@@ -122,7 +133,7 @@
 }
 
 - (void)setupNavigationBar {
-    UIBarButtonItem *filters = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filters_icon"]
+    UIBarButtonItem *filters = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic-filter"]
                                                                 style:UIBarButtonItemStylePlain
                                                                target:self action:@selector(onFilters)];
 
@@ -132,9 +143,15 @@
 - (void)setupRefreshControl {
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self
-                            action:@selector(fetchTransactions)
+                            action:@selector(fetchTransactionsAndClearFilters)
                   forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex: 0];
+}
+
+- (void)fetchTransactionsAndClearFilters {
+    [self fetchTransactions];
+    self.filters = nil;
+    [self updateTitle];
 }
 
 
@@ -153,11 +170,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0 && self.budget) {
         BudgetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"budgetCell"];
+        cell.arrowView.hidden = true;
         cell.budget = self.budget;
         return cell;
     } else {
         TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"transactionCell"];
-        if ([self.period durationInDays] <= 1) {
+        if ([self.period durationInDays] <= 1 && self.period) {
             cell.hideDate = YES;
         }
         if (self.budget != nil) {
@@ -274,14 +292,14 @@
 - (void)onFilters {
     FiltersFormViewController *vc = [[FiltersFormViewController alloc] init];
     vc.delegate = self;
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc animated:YES completion:nil];
 }
 
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"transactions" title:@"All Transactions"];
+    [self setupBarItemWithImageNamed:@"ic-listview" selectedImageName:@"ic-listview-selected" title:@"All Transactions"];
 }
 
 @end

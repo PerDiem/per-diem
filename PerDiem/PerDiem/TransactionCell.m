@@ -18,6 +18,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @property (strong, nonatomic) NSNumberFormatter *amountFormatter;
+@property (weak, nonatomic) IBOutlet UILabel *pipeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusViewWidthConstraint;
+
 
 @end
 
@@ -40,9 +44,25 @@
 
     if (self.transaction.paymentType) {
         self.paymentTypeLabel.text = self.transaction.paymentType.name;
+        self.pipeLabel.hidden = NO;
+    } else {
+        self.pipeLabel.hidden = YES;
+        self.paymentTypeLabel.text = @"";
     }
     self.summaryLabel.text = self.transaction.summary;
     self.amountLabel.text = [self.amountFormatter stringFromNumber:self.transaction.amount];
+    [self updateStatusIcon];
+}
+
+- (void)updateStatusIcon {
+    if ([self.transaction.future boolValue]) {
+        NSString *imageName = [self.transaction.transactionDate isEarlierThan:[NSDate date]] ? @"question_invoice" : @"clock";
+        [self.statusImageView setImage:[UIImage imageNamed:imageName]];
+        self.statusViewWidthConstraint.constant = 20;
+    } else {
+        [self.statusImageView setImage:nil];
+        self.statusViewWidthConstraint.constant = 0;
+    }
 }
 
 - (NSString *)formatDate:(NSDate *)date {

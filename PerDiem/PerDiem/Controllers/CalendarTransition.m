@@ -120,7 +120,7 @@
         
         // Get position of Per Diem view in month tableview, relative to screen
         CGPoint position = [dayView.superview convertPoint:dayView.frame.origin toView:nil];
-        CGRect dayViewFrame = CGRectMake(position.x, position.y, dayView.frame.size.width, dayView.frame.size.height);
+        CGRect dayViewFrame = CGRectMake(position.x, position.y - 20, dayView.frame.size.width, dayView.frame.size.height);
 
         // Without these three lines, the frame is 320 width no matter the screen size
         // https://forums.developer.apple.com/thread/13221
@@ -132,7 +132,7 @@
         
         // Animate!
         preparation = ^void() {
-            detailedDayView.alpha = 0;
+            detailedDayView.alpha = 1;
             transactionsView.alpha = 0;
             [perDiemView setFrame:dayViewFrame];
             [detailedDayView layoutIfNeeded];
