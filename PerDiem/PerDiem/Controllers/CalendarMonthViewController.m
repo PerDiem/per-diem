@@ -106,7 +106,6 @@
 
 - (void)updatePerDiems {
     [self fetchPerDiemsWithCompletion:^(NSArray<PerDiem *> *perDiems) {
-        [self.tableView reloadData];
         [self.refreshControl endRefreshing];
     }];
 }
