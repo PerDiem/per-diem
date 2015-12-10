@@ -12,6 +12,7 @@
 #import <UIKit/UIKit.h>
 #import "NSDate+DateTools.h"
 #import "UIColor+PerDiem.h"
+#import "JTProgressHUD.h"
 
 @interface CalendarMonthViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -94,8 +95,16 @@
 #pragma mark - Private
 
 - (void)fetchPerDiemsWithCompletion:(void(^)(NSMutableArray<PerDiem *>*))completionHandler {
+    [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                          style:JTProgressHUDStyleGradient
+                     transition:JTProgressHUDTransitionFade
+                backgroundAlpha:.5];
+    [JTProgressHUD showWithTransition:JTProgressHUDTransitionFade];
     [PerDiem perDiemsForPeriod:self.timePeriod
                     completion:^void(NSMutableArray<PerDiem *> *perDiems, NSError *error) {
+                        if ([JTProgressHUD isVisible]) {
+                            [JTProgressHUD hide];
+                        }
                         self.perDiems = perDiems;
                         [self.tableView reloadData];
                         if (completionHandler != nil) {
