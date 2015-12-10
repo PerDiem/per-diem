@@ -33,7 +33,7 @@
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
-    
+
     CalendarDayViewController *dayVc;
     CalendarViewController *monthVc;
 
@@ -42,13 +42,11 @@
         [[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey] isKindOfClass:[TransactionFormViewController class]]) {
         UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         [[transitionContext containerView] addSubview:toViewController.view];
-        toViewController.view.alpha = 0.0;
-        [UIView animateWithDuration:0.8 animations:^{
+
+        toViewController.view.frame = [transitionContext finalFrameForViewController:toViewController];
+
+        [UIView animateWithDuration:0. animations:^{
             toViewController.view.alpha = 1.0;
-            if ([toViewController isKindOfClass:[TransactionFormViewController class]]) {
-                toViewController.navigationController.navigationBar.translucent = NO;
-                toViewController.navigationController.navigationBar.alpha = 1;
-            }
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
@@ -69,11 +67,11 @@
     UIView *detailedDayView = dayVc.view;
     UIView *transactionsView = dayVc.transactionsView;
     UIView *perDiemView = dayVc.perDiemView.view;
-    
+
     typedef void (^PrepareAnimation)();
     typedef void (^Animation)();
     typedef void (^CompleteAnimation)(BOOL);
-    
+
     PrepareAnimation preparation;
     Animation animations;
     CompleteAnimation completion;
@@ -83,7 +81,7 @@
         // Add target view to hierarchy
         [[transitionContext containerView] addSubview:monthView];
         [[transitionContext containerView] bringSubviewToFront:detailedDayView];
-        
+
         // Get position of Per Diem view in month tableview, relative to screen
         CGPoint position = [dayView.superview convertPoint:dayView.frame.origin toView:nil];
         CGRect dayViewFrame = CGRectMake(position.x, position.y - 20, dayView.frame.size.width, dayView.frame.size.height);
