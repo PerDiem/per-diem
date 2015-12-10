@@ -233,6 +233,18 @@
     }
 }
 
+-(void)transactionCreated:(Transaction *)transaction {
+    [self.tableView beginUpdates];
+
+    NSMutableArray *transactions = self.transactionList.transactions;
+    [transactions insertObject:transaction atIndex:0];
+    self.transactionList = [[TransactionList alloc] initWithTransactions:transactions];
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
 #pragma mark - TranscationFormActionDelegate
 
 -(void)transactionUpdated:(Transaction *)transaction {
@@ -281,6 +293,7 @@
 
 - (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
     TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    vc.delegate = self;
     NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc
                                             animated:YES
