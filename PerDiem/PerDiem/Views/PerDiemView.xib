@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -14,6 +14,10 @@
                 <outlet property="spentLabel" destination="d0j-8k-Xlt" id="bjq-Kl-Z9u"/>
                 <outlet property="view" destination="iN0-l3-epB" id="LDH-nv-fg8"/>
                 <outlet property="widthConstraint" destination="RQ2-s7-kkf" id="lKN-no-SR5"/>
+                <outletCollection property="cellUIViews" destination="jK1-0g-yst" id="jdz-Ey-LST"/>
+                <outletCollection property="cellUIViews" destination="bxh-7u-GMO" id="Fre-gE-7EE"/>
+                <outletCollection property="cellUIViews" destination="D2f-dk-KiE" id="WQ0-Ds-KhU"/>
+                <outletCollection property="cellUIViews" destination="d0j-8k-Xlt" id="PEo-qm-tdg"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

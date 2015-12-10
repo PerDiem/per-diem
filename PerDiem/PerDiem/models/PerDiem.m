@@ -26,6 +26,7 @@
         __block NSArray *budgets = nil;
         dispatch_group_async(group, queue, ^{
             PFQuery *queryBudgets = [PFQuery queryWithClassName:@"Budget"];
+            [queryBudgets whereKey:@"organization" equalTo:[User currentUser].organization];
             budgets = [queryBudgets findObjects];
         });
 
@@ -64,7 +65,7 @@
                 }
             }
             
-            CGFloat dailyBudget = (totalBudget - totalSpentSoFar) / [day daysInMonth];
+            CGFloat dailyBudget = (totalBudget - totalSpentSoFar) / -[day daysFrom:[period EndDate]];
             PerDiem *perDiem = [[PerDiem alloc] init];
             perDiem.budget = @(dailyBudget);
             perDiem.spent = @(spentOnThatDay);

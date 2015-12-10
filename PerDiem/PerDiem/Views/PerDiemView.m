@@ -8,8 +8,10 @@
 
 #import "PerDiemView.h"
 #import "UIColor+PerDiem.h"
+#import "DateTools.h"
 
 @interface PerDiemView ()
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *cellUIViews;
 
 @property (weak, nonatomic) IBOutlet UIView *progressBarBackgroundView;
 @property (weak, nonatomic) IBOutlet UIView *progressBarView;
@@ -64,8 +66,16 @@
         percentage = [self.perDiem.spent integerValue] * 100 / [self.perDiem.budget integerValue];
     }
 
-    self.progressBarView.backgroundColor = [UIColor 
-                                            colorWithProgress:percentage alpha:1];
+    if ([self.perDiem.date isLaterThan:[NSDate date]]) {
+        for (UIView *view in self.cellUIViews) {
+            view.alpha = .6;
+        }
+    } else {
+        for (UIView *view in self.cellUIViews) {
+            view.alpha = 1;
+        }
+    }
+    self.progressBarView.backgroundColor = [UIColor colorWithProgress:percentage alpha:1];
     self.progressBarBackgroundView.backgroundColor = [UIColor colorWithProgress:percentage alpha:.4];
     self.widthConstraint.constant = percentage * (self.frame.size.width / 100);
     [self.progressBarBackgroundView.layer setCornerRadius:5.0f];
