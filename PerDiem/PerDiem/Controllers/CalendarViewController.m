@@ -14,7 +14,6 @@
 #import "BudgetFormViewController.h"
 #import "CalendarTransition.h"
 #import "NSDate+DateTools.h"
-#import "TransactionFormViewController.h"
 #import "Transaction.h"
 #import "Title.h"
 
@@ -100,7 +99,7 @@
 
 #pragma mark - UIPageViewControllerDelegate
 
--       (void)pageViewController:(UIPageViewController *)pageViewController
+- (void)pageViewController:(UIPageViewController *)pageViewController
  willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
     self.pendingController = (CalendarMonthViewController *)pendingViewControllers[0];
 }
@@ -118,7 +117,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"calendar" title:@"This Month"];
+    [self setupBarItemWithImageNamed:@"ic-calendar" selectedImageName:@"ic-calendar-selected" title:@"This Month"];
 }
 
 

@@ -76,7 +76,6 @@ NSString *const kPaymentType = @"paymentType";
 
     [section addFormRow:row];
 
-
     // Selector Push
     XLFormRowDescriptor *budgetRow = [XLFormRowDescriptor formRowDescriptorWithTag:kBudget rowType:XLFormRowDescriptorTypeSelectorPush title:@"Budget"];
     [budgetRow.cellConfigAtConfigure setObject:[UIColor inputColor] forKey:@"backgroundColor"];
@@ -106,7 +105,6 @@ NSString *const kPaymentType = @"paymentType";
         [self reloadFormRow:budgetRow];
     }];
 
-
     // TODO: Maybe we should put a default budget?
     if (transaction.budget) {
         budgetRow.value = [XLFormOptionsObject formOptionsObjectWithValue:transaction.budget displayText:transaction.budget.name];
@@ -122,7 +120,6 @@ NSString *const kPaymentType = @"paymentType";
     [paymentTypeRow.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
     [paymentTypeRow.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"detailTextLabel.textColor"];
     paymentTypeRow.action.viewControllerClass = [FormOptionsViewController class];
-
 
     [PaymentType paymentTypes:^(NSArray *paymentTypes, NSError *error) {
         NSMutableArray *options = [NSMutableArray array];
@@ -157,6 +154,7 @@ NSString *const kPaymentType = @"paymentType";
     [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
     [row.cellConfig setObject:[UIColor inputColor] forKey:@"datePicker.backgroundColor"];
     [row.cellConfig setObject:[UIColor whiteColor] forKey:@"detailTextLabel.textColor"];
+
     if ( transaction.transactionDate) {
         row.value = transaction.transactionDate;
     } else {
@@ -172,7 +170,6 @@ NSString *const kPaymentType = @"paymentType";
     [row.cellConfigAtConfigure setObject:[UIColor whiteColor] forKey:@"tintColor"];
     [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.textColor"];
 
-//    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textField.textColor"];
     if (transaction.future) {
         row.value = transaction.future;
     } else {
@@ -203,9 +200,7 @@ NSString *const kPaymentType = @"paymentType";
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
-
     [self customizeAppearance];
-
 }
 
 - (void)savePressed:(UIBarButtonItem *)button {
@@ -224,6 +219,9 @@ NSString *const kPaymentType = @"paymentType";
     self.transaction.amount = values[kAmount];
     if (values[kBudget]) {
         self.transaction.budget = [values[kBudget] formValue];
+    }
+    if (values[kPaymentType]) {
+        self.transaction.paymentType = [values[kPaymentType] formValue];
     }
     self.transaction.note = values[kDescription];
     self.transaction.transactionDate = values[kDate];

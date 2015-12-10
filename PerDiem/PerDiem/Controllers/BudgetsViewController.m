@@ -17,7 +17,7 @@
 #import "UIColor+PerDiem.h"
 #import <SWTableViewCell.h>
 
-@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate, AddButtonDelegate>
+@interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate, TransactionFormActionDelegate, AddButtonDelegate>
 
 @property(strong, nonatomic) NSArray* budgets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -84,7 +84,7 @@
 #pragma mark - TabBarViewController
 
 - (void)setupUI {
-    [self setupBarItemWithImageNamed:@"budgets" title:@"Budgets"];
+    [self setupBarItemWithImageNamed:@"ic-pie" selectedImageName:@"ic-pie-selected" title:@"Budgets"];
 }
 
 #pragma mark - Setup
@@ -167,6 +167,18 @@
     }
 }
 
+#pragma mark - TransactionFormActionDelegate
+-(void)transactionCreated:(Transaction*) transaction {
+    [self.tableView beginUpdates];
+    NSUInteger index = [self.budgets indexOfObject:transaction.budget];
+    Budget *budget = self.budgets[index];
+    [budget addTransaction: transaction];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+
+}
+
 #pragma mark - BudgetFormActionDelegate
 
 -(void)budgetCreated:(Budget*) budget {
@@ -201,6 +213,7 @@
 
 - (void)addButtonView:(UIView *)view alertControllerForNewBudget:(UIAlertController *)alert {
     BudgetFormViewController *vc = [[BudgetFormViewController alloc] init];
+    vc.delegate = self;
     NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc
                                             animated:YES
@@ -209,6 +222,7 @@
 
 - (void)addButtonView:(UIView *)view alertControllerForNewTransaction:(UIAlertController *)alert {
     TransactionFormViewController *vc = [[TransactionFormViewController alloc] init];
+    vc.delegate = self;
     NavigationViewController *nvc = [[NavigationViewController alloc] initWithRootViewController:vc];
     [self.navigationController presentViewController:nvc
                                             animated:YES

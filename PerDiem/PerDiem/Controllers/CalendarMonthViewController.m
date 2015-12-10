@@ -67,9 +67,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    PerDiem *cellPerDiem = [self.perDiems objectAtIndex:indexPath.row];
+
+    // Don't allow cells with $0 spent to be opened.
+    if ([cellPerDiem.spent integerValue] == 0) {
+        return;
+    }
+
     if ([self.delegate respondsToSelector:@selector(calendarMonthViewController:navigateToDayWithPerDiem:animated:)]) {
         [self.delegate calendarMonthViewController:self
-                          navigateToDayWithPerDiem:[self.perDiems objectAtIndex:indexPath.row]
+                          navigateToDayWithPerDiem:cellPerDiem
                                           animated:YES];
     }
 }

@@ -385,7 +385,7 @@
 				TargetAttributes = {
 					8E9DA2C01BF561690016ECC2 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 56WVAU5YA6;
+						DevelopmentTeam = ZVH48BDM73;
 					};
 				};
 			};
@@ -607,12 +607,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 55F7737C83DD7B11920DD92A /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-PD";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PerDiem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.per-diem.perdiem";
+				PRODUCT_BUNDLE_IDENTIFIER = com.perdiem.perdiem;
 				PRODUCT_NAME = PerDiem;
 				PROVISIONING_PROFILE = "";
 			};
@@ -622,12 +622,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 71F1C22EBB40723904EA25D0 /* Pods.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-PD";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PerDiem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.per-diem.perdiem";
+				PRODUCT_BUNDLE_IDENTIFIER = com.perdiem.perdiem;
 				PRODUCT_NAME = PerDiem;
 				PROVISIONING_PROFILE = "";
 			};
