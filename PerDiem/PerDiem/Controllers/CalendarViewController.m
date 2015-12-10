@@ -15,6 +15,7 @@
 #import "CalendarTransition.h"
 #import "NSDate+DateTools.h"
 #import "Transaction.h"
+#import "Title.h"
 
 @interface CalendarViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, AddButtonDelegate, CalendarMonthViewControllerDelegate, UINavigationControllerDelegate, TransactionFormActionDelegate>
 
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) NSArray *controllers;
 @property (weak, nonatomic) IBOutlet AddButtonView *addButtonView;
 @property (strong, nonatomic) CalendarTransition *transitionHelper;
+@property (strong, nonatomic) Title *titleView;
 
 @end
 
@@ -150,13 +152,19 @@
 
 - (void)calendarMonthViewController:(CalendarMonthViewController *)controller
                         updateTitle:(NSString *)title {
-    self.navigationItem.title = title;
+    
+    self.titleView.label.text = title;
 }
 
 - (void)calendarMonthViewController:(CalendarMonthViewController *)monthController
            navigateToDayWithPerDiem:(PerDiem *)perDiem
                            animated:(BOOL)animated {
     [self navigateToDayWithPerDiem:perDiem animated:animated];
+}
+
+- (void)calendarMonthViewController:(CalendarMonthViewController *)controller
+                            loading:(BOOL)loading {
+    [self.titleView loading:loading];
 }
 
 
@@ -169,6 +177,14 @@
 }
 
 #pragma mark - Private
+
+- (Title *)titleView {
+    if (!_titleView) {
+        _titleView = [[Title alloc] initWithFrame:CGRectMake(50,0,100,32)];
+        self.navigationItem.titleView = _titleView;
+    }
+    return _titleView;
+}
 
 - (void)navigateToCurrentMonth {
     [self navigateToCurrentMonthWithCompletion:nil animated:YES];

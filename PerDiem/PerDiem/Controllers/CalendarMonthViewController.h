@@ -21,6 +21,8 @@
 - (void)calendarMonthViewController:(CalendarMonthViewController *)controller
            navigateToDayWithPerDiem:(PerDiem *)perDiem
                            animated:(BOOL)animated;
+- (void)calendarMonthViewController:(CalendarMonthViewController *)controller
+                            loading:(BOOL)loading;
 
 @end
 

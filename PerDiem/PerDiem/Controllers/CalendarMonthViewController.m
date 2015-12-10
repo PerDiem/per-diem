@@ -95,15 +95,13 @@
 #pragma mark - Private
 
 - (void)fetchPerDiemsWithCompletion:(void(^)(NSMutableArray<PerDiem *>*))completionHandler {
-    [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
-                          style:JTProgressHUDStyleGradient
-                     transition:JTProgressHUDTransitionFade
-                backgroundAlpha:.5];
-    [JTProgressHUD showWithTransition:JTProgressHUDTransitionFade];
+    if ([self.delegate respondsToSelector:@selector(calendarMonthViewController:loading:)]) {
+        [self.delegate calendarMonthViewController:self loading:YES];
+    }
     [PerDiem perDiemsForPeriod:self.timePeriod
                     completion:^void(NSMutableArray<PerDiem *> *perDiems, NSError *error) {
-                        if ([JTProgressHUD isVisible]) {
-                            [JTProgressHUD hide];
+                        if ([self.delegate respondsToSelector:@selector(calendarMonthViewController:loading:)]) {
+                            [self.delegate calendarMonthViewController:self loading:NO];
                         }
                         self.perDiems = perDiems;
                         [self.tableView reloadData];
