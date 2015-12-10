@@ -22,9 +22,8 @@
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gP2-Tt-nBu" customClass="AddButtonView">
-                    <rect key="frame" x="510" y="510" width="70" height="70"/>
-                    <color key="backgroundColor" red="0.16862745100000001" green="0.23137254900000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gP2-Tt-nBu" customClass="AddButtonView">
+                    <rect key="frame" x="230" y="478" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="SZS-Fj-c37"/>
                         <constraint firstAttribute="width" constant="70" id="TF6-Kt-8U5"/>
