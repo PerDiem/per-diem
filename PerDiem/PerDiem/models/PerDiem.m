@@ -65,7 +65,7 @@
                 }
             }
             
-            CGFloat dailyBudget = (totalBudget - totalSpentSoFar) / [day daysInMonth];
+            CGFloat dailyBudget = (totalBudget - totalSpentSoFar) / -[day daysFrom:[period EndDate]];
             PerDiem *perDiem = [[PerDiem alloc] init];
             perDiem.budget = @(dailyBudget);
             perDiem.spent = @(spentOnThatDay);
