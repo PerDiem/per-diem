@@ -16,6 +16,7 @@
 #import "AddButtonView.h"
 #import "UIColor+PerDiem.h"
 #import <SWTableViewCell.h>
+#import "JTProgressHUD.h"
 
 @interface BudgetsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, BudgetFormActionDelegate, TransactionFormActionDelegate, AddButtonDelegate>
 
@@ -90,6 +91,10 @@
 #pragma mark - Setup
 
 - (void) fetchBudgets {
+    [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                          style:JTProgressHUDStyleGradient
+                     transition:JTProgressHUDTransitionFade
+                backgroundAlpha:.5];
     [Budget budgets:^(NSArray *budgets, NSError *error) {
         NSMutableSet *list = [NSMutableSet setWithArray:self.budgets];
         [list addObjectsFromArray:budgets];
@@ -109,7 +114,9 @@
         NSSet *oldBudgets = [NSSet setWithArray:self.budgets];
         NSMutableSet *newBudgets = [NSMutableSet setWithArray:budgets];
         [newBudgets unionSet:oldBudgets];
-
+        if ([JTProgressHUD isVisible]) {
+            [JTProgressHUD hide];
+        }
         self.budgets = [newBudgets allObjects];
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];

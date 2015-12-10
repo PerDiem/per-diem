@@ -19,6 +19,7 @@
 #import "AddButtonView.h"
 #import <SWTableViewCell.h>
 #import "UIColor+PerDiem.h"
+#import "JTProgressHUD.h"
 
 @interface TransactionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, TransactionFormActionDelegate, FiltersFormViewControllerDelegate, AddButtonDelegate>
 
@@ -66,12 +67,20 @@
 
 - (void)fetchTransactions {
     if (self.budget != nil) {
+        [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                              style:JTProgressHUDStyleGradient
+                         transition:JTProgressHUDTransitionFade
+                    backgroundAlpha:.5];
+        [self.refreshControl endRefreshing];
         [Budget budgetNamedWithTransaction:self.budget.name completion:^(Budget *budget, NSError *error) {
             if (budget) {
                 self.transactionList = budget.transactionList;
                 [self.tableView reloadData];
             } else {
                 NSLog(@"Error: %@", error);
+            }
+            if ([JTProgressHUD isVisible]) {
+                [JTProgressHUD hide];
             }
             [self.refreshControl endRefreshing];
         }];
@@ -85,15 +94,26 @@
                                        } else {
                                            NSLog(@"Error: %@", error);
                                        }
+                                       if ([JTProgressHUD isVisible]) {
+                                           [JTProgressHUD hide];
+                                       }
                                        [self.refreshControl endRefreshing];
                                    }];
     } else {
+        [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                              style:JTProgressHUDStyleGradient
+                         transition:JTProgressHUDTransitionFade
+                    backgroundAlpha:.5];
+        [self.refreshControl endRefreshing];
         [Transaction transactions:^(TransactionList *transactions, NSError *error) {
             if (transactions) {
                 self.transactionList = transactions;
                 [self.tableView reloadData];
             } else {
                 NSLog(@"Error: %@", error);
+            }
+            if ([JTProgressHUD isVisible]) {
+                [JTProgressHUD hide];
             }
             [self.refreshControl endRefreshing];
         }];
@@ -248,7 +268,11 @@
 #pragma mark - FiltersFormViewDelegate
 
 - (void)filtersFormViewController:(FiltersFormViewController *)filtersFormViewController didChangeFilters:(NSDictionary *)filters {
-    [self.refreshControl beginRefreshing];
+    [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                          style:JTProgressHUDStyleGradient
+                     transition:JTProgressHUDTransitionFade
+                backgroundAlpha:.5];
+
     self.filters = [[Filter alloc] initWithFormFilters:filters];
 
     [Transaction transactions:^(TransactionList *transactions, NSError *error) {
@@ -256,10 +280,15 @@
             self.transactionList = [TransactionList transactionListWithTransactionList:transactions
                                                                       filterWithFilter:self.filters];
             [self.tableView reloadData];
+            if ([JTProgressHUD isVisible]) {
+                [JTProgressHUD hide];
+            }
         } else {
             NSLog(@"Error: %@", error);
+            if ([JTProgressHUD isVisible]) {
+                [JTProgressHUD hide];
+            }
         }
-        [self.refreshControl endRefreshing];
     }];
 }
 
