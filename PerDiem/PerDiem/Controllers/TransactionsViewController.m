@@ -224,10 +224,14 @@
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSInteger indexPathNumber = indexPath.row;
+    if (self.budget || self.period) {
+        indexPathNumber = indexPath.row - 1;
+    }
     switch (index) {
         case 0:
         {
-            TransactionFormViewController *vc = [[TransactionFormViewController alloc] initWithTransaction:self.transactionList.transactions[indexPath.row]];
+            TransactionFormViewController *vc = [[TransactionFormViewController alloc] initWithTransaction:self.transactionList.transactions[indexPathNumber]];
             vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -235,11 +239,11 @@
         case 1:
         {
             // Delete from Parse
-            [self.transactionList.transactions[indexPath.row] deleteTransaction];
+            [self.transactionList.transactions[indexPathNumber] deleteTransaction];
 
             // Delete from model
             NSMutableArray *transactions = [self.transactionList.transactions mutableCopy];
-            [transactions removeObjectAtIndex:indexPath.row];
+            [transactions removeObjectAtIndex:indexPathNumber];
             self.transactionList.transactions = transactions;
 
             // Delete from tableView
