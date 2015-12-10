@@ -26,6 +26,7 @@
         __block NSArray *budgets = nil;
         dispatch_group_async(group, queue, ^{
             PFQuery *queryBudgets = [PFQuery queryWithClassName:@"Budget"];
+            [queryBudgets whereKey:@"organization" equalTo:[User currentUser].organization];
             budgets = [queryBudgets findObjects];
         });
 
