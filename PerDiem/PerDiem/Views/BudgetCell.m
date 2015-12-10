@@ -59,9 +59,25 @@
 //    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
+- (void)animateProgressBar:(NSInteger)percentage {
+    if (percentage <= 0) {
+        [self.progressBarBackgroundView layoutIfNeeded];
+    } else {
+        [UIView animateWithDuration:.5 delay:0
+             usingSpringWithDamping:1
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             [self.progressBarBackgroundView layoutIfNeeded];
+                         } completion:nil];
+    }
+}
+
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.widthConstraint.constant = self.percentage / 100.0 * self.mainContentView.frame.size.width;
+    [self animateProgressBar:self.percentage];
 }
 - (NSNumberFormatter *)amountFormatter {
     if (!_amountFormatter) {

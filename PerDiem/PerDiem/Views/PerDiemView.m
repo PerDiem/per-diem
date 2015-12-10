@@ -8,8 +8,10 @@
 
 #import "PerDiemView.h"
 #import "UIColor+PerDiem.h"
+#import "DateTools.h"
 
 @interface PerDiemView ()
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *cellUIViews;
 
 @property (weak, nonatomic) IBOutlet UIView *progressBarBackgroundView;
 @property (weak, nonatomic) IBOutlet UIView *progressBarView;
@@ -62,17 +64,37 @@
     [amountFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
 
     self.dayLabel.text = [[self.perDiem.date formattedDateWithFormat:@"ccc d"] uppercaseString];
+    
+    CGFloat budget = [self.perDiem.budget floatValue];
+    CGFloat spent = [self.perDiem.spent floatValue];
 
-    NSString *budgetAmountString = [amountFormatter stringFromNumber:self.perDiem.budget];
-    NSString *spentAmountString = [amountFormatter stringFromNumber:self.perDiem.spent];
-    self.spentLabel.text = [NSString stringWithFormat:@"Spent %@ of %@", spentAmountString, budgetAmountString];
     NSInteger percentage = 0;
-    if (self.perDiem.budget > 0) {
-        percentage = [self.perDiem.spent integerValue] * 100 / [self.perDiem.budget integerValue];
+    if (budget <= 0) {
+        budget = 0;
+        if (spent > 0) {
+            percentage = 100;
+        } else {
+            percentage = 0;
+        }
+    } else {
+        percentage = spent * 100 / budget;
     }
 
-    self.progressBarView.backgroundColor = [UIColor
-                                            colorWithProgress:percentage alpha:1];
+    NSString *budgetAmountString = [amountFormatter stringFromNumber:@(budget)];
+    NSString *spentAmountString = [amountFormatter stringFromNumber:@(spent)];
+    self.spentLabel.text = [NSString stringWithFormat:@"Spent %@ of %@", spentAmountString, budgetAmountString];
+    
+    if ([self.perDiem.date isLaterThan:[NSDate date]]) {
+        for (UIView *view in self.cellUIViews) {
+            view.alpha = .6;
+        }
+    } else {
+        for (UIView *view in self.cellUIViews) {
+            view.alpha = 1;
+        }
+    }
+    self.progressBarView.backgroundColor = [UIColor colorWithProgress:percentage alpha:1];
+
     self.progressBarBackgroundView.backgroundColor = [UIColor colorWithProgress:percentage alpha:.4];
 
     self.widthConstraint.constant = percentage * (self.frame.size.width / 100);
@@ -81,7 +103,7 @@
     }
     [self.progressBarBackgroundView.layer setCornerRadius:5.0f];
     [self.progressBarBackgroundView.layer setMasksToBounds:YES];
-
+    
 }
 
 - (void)animateProgressBar:(NSInteger)percentage {

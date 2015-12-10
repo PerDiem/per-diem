@@ -165,9 +165,8 @@
 - (void)transactionCreated:(Transaction *)transaction {
     PerDiem *perDiem = [self.selectedController.perDiems objectAtIndex:transaction.transactionDate.day - 1];
     perDiem.spent = [NSNumber numberWithFloat:([perDiem.spent floatValue] + [transaction.amount floatValue])];
-    [self.selectedController.tableView reloadData];
+    [self.selectedController updatePerDiems];
 }
-
 
 #pragma mark - Private
 

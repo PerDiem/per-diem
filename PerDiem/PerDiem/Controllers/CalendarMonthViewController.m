@@ -12,8 +12,10 @@
 #import <UIKit/UIKit.h>
 #import "NSDate+DateTools.h"
 #import "UIColor+PerDiem.h"
+#import "JTProgressHUD.h"
 
 @interface CalendarMonthViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -46,8 +48,16 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:[UINib nibWithNibName:@"DayViewTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"cell"];
+    [self setupRefreshControl];
 }
 
+- (void)setupRefreshControl {
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self
+                            action:@selector(updatePerDiems)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex: 0];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -67,9 +77,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    PerDiem *cellPerDiem = [self.perDiems objectAtIndex:indexPath.row];
+
+    // Don't allow cells with $0 spent to be opened.
+    if ([cellPerDiem.spent integerValue] == 0) {
+        return;
+    }
+
     if ([self.delegate respondsToSelector:@selector(calendarMonthViewController:navigateToDayWithPerDiem:animated:)]) {
         [self.delegate calendarMonthViewController:self
-                          navigateToDayWithPerDiem:[self.perDiems objectAtIndex:indexPath.row]
+                          navigateToDayWithPerDiem:cellPerDiem
                                           animated:YES];
     }
 }
@@ -78,14 +95,28 @@
 #pragma mark - Private
 
 - (void)fetchPerDiemsWithCompletion:(void(^)(NSMutableArray<PerDiem *>*))completionHandler {
+    [JTProgressHUD showWithView:JTProgressHUDViewBuiltIn
+                          style:JTProgressHUDStyleGradient
+                     transition:JTProgressHUDTransitionFade
+                backgroundAlpha:.5];
+    [JTProgressHUD showWithTransition:JTProgressHUDTransitionFade];
     [PerDiem perDiemsForPeriod:self.timePeriod
                     completion:^void(NSMutableArray<PerDiem *> *perDiems, NSError *error) {
+                        if ([JTProgressHUD isVisible]) {
+                            [JTProgressHUD hide];
+                        }
                         self.perDiems = perDiems;
                         [self.tableView reloadData];
                         if (completionHandler != nil) {
                             completionHandler(perDiems);
                         }
                     }];
+}
+
+- (void)updatePerDiems {
+    [self fetchPerDiemsWithCompletion:^(NSArray<PerDiem *> *perDiems) {
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 - (void)setDate:(NSDate *)date {
