@@ -82,6 +82,7 @@
                 <constraint firstAttribute="trailing" secondItem="HYz-Bz-aTG" secondAttribute="trailing" id="94u-Ot-k3y"/>
                 <constraint firstAttribute="trailing" secondItem="bxh-7u-GMO" secondAttribute="trailing" constant="6" id="Qgl-dU-TJG"/>
                 <constraint firstItem="HYz-Bz-aTG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="g6t-5t-eqE"/>
+                <constraint firstAttribute="bottom" secondItem="bxh-7u-GMO" secondAttribute="bottom" constant="2" id="i9M-0m-IeZ"/>
                 <constraint firstAttribute="bottom" secondItem="bxh-7u-GMO" secondAttribute="bottom" constant="2" id="llP-Ug-B3a"/>
                 <constraint firstItem="bxh-7u-GMO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="nnZ-MJ-idv"/>
                 <constraint firstAttribute="bottom" secondItem="HYz-Bz-aTG" secondAttribute="bottom" id="oTo-EA-ktv"/>
@@ -91,6 +92,11 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="llP-Ug-B3a"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="239" y="-2"/>
         </view>
     </objects>
