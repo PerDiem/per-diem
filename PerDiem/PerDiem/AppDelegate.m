@@ -74,9 +74,9 @@
     self.window.rootViewController = tbc;
 }
 
-// Uncomment to enable login everytime the app launch
-//- (void)applicationDidEnterBackground:(UIApplication *)application {
-//    [User logOut];
-//}
+// Comment to avoid login everytime the app launch
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [User logOut];
+}
 
 @end
