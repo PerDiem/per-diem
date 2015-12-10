@@ -200,6 +200,9 @@ NSString *const kPaymentType = @"paymentType";
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.alpha = 1;
+
     [self customizeAppearance];
 }
 

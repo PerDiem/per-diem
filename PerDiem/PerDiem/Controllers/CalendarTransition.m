@@ -42,10 +42,11 @@
         [[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey] isKindOfClass:[TransactionFormViewController class]]) {
         UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         [[transitionContext containerView] addSubview:toViewController.view];
+        toViewController.view.alpha = 0.0;
 
         toViewController.view.frame = [transitionContext finalFrameForViewController:toViewController];
 
-        [UIView animateWithDuration:0. animations:^{
+        [UIView animateWithDuration:0.8 animations:^{
             toViewController.view.alpha = 1.0;
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
