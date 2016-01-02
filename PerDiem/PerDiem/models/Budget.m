@@ -29,6 +29,7 @@
 +(void) budgets:(void (^)(NSArray *budgets, NSError *error)) completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Budget"];
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
+    [query orderByAscending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *budgets, NSError * _Nullable error) {
         if(error) {
             completion(nil, error);
@@ -54,6 +55,7 @@
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
     [query includeKey:@"paymentType"];
+    [query orderByAscending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {
         if(error) {
             completion(nil, error);
@@ -68,6 +70,7 @@
     [query whereKey:@"organization" equalTo:[User currentUser].organization];
     [query includeKey:@"budget"];
     [query includeKey:@"paymentType"];
+    [query orderByAscending:@"createdAt"];
     [query whereKey:@"transactionDate" greaterThanOrEqualTo:[timePeriod StartDate]];
     [query whereKey:@"transactionDate" lessThanOrEqualTo:[timePeriod EndDate]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *transactions, NSError * _Nullable error) {

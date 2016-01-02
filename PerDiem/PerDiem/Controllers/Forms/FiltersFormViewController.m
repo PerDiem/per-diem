@@ -58,7 +58,6 @@ NSString *const kBudgets = @"budgets";
 
 - (void)onFilter {
     [self.delegate filtersFormViewController:self didChangeFilters:self.formValues];
-    NSLog(@"Filters: %@", self.formValues);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -147,7 +146,6 @@ NSString *const kBudgets = @"budgets";
     [PaymentType paymentTypes:^(NSArray *paymentTypes, NSError *error) {
         if (paymentTypes) {
             [self addPaymentTypesToForm:paymentTypes];
-            NSLog(@"%@", paymentTypes);
         }
     }];
 }

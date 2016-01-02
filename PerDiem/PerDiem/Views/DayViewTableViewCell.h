@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "PerDiem.h"
+#import "PerDiemView.h"
 
 @interface DayViewTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) PerDiem *perDiem;
+@property (weak, nonatomic) IBOutlet PerDiemView *perDiemView;
+- (void)setPerDiem:(PerDiem *)perDiem animated:(BOOL)animated;
 
 @end

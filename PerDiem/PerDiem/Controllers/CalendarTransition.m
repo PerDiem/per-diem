@@ -103,9 +103,11 @@
         };
         
         completion = ^void(BOOL finished) {
-            [dayView layoutSubviews];
             dayView.alpha = 1;
-            
+
+            [monthVc.view layoutIfNeeded];
+            [dayView.perDiemView updateUIWithAnimation:NO];
+
             BOOL wasCompleted = ![transitionContext transitionWasCancelled];
             [transitionContext completeTransition:wasCompleted];
             if (!wasCompleted) {

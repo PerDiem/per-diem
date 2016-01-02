@@ -11,8 +11,6 @@
 
 @interface DayViewTableViewCell ()
 
-@property (weak, nonatomic) IBOutlet PerDiemView *perDiemView;
-
 @end
 
 @implementation DayViewTableViewCell
@@ -21,9 +19,9 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void)setPerDiem:(PerDiem *)perDiem {
-    _perDiem = perDiem;
-    self.perDiemView.perDiem = perDiem;
+- (void)setPerDiem:(PerDiem *)perDiem animated:(BOOL)animated {
+    self.perDiem = perDiem;
+    [self.perDiemView setPerDiem:perDiem animated:animated];
 }
 
 - (void)layoutSubviews {
