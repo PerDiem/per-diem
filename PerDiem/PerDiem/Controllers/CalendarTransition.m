@@ -10,6 +10,7 @@
 #import "CalendarViewController.h"
 #import "CalendarDayViewController.h"
 #import "DayViewTableViewCell.h"
+#import "TransactionFormViewController.h"
 
 @interface CalendarTransition ()
 
@@ -32,30 +33,46 @@
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
-    
+
     CalendarDayViewController *dayVc;
     CalendarViewController *monthVc;
-    
+
+    // This doesn't too nice, and also the transition I made is not consistent with the rest of the system.
+    if ([[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey] isKindOfClass:[TransactionFormViewController class]] ||
+        [[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey] isKindOfClass:[TransactionFormViewController class]]) {
+        UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        [[transitionContext containerView] addSubview:toViewController.view];
+        toViewController.view.alpha = 0.0;
+
+        toViewController.view.frame = [transitionContext finalFrameForViewController:toViewController];
+
+        [UIView animateWithDuration:0.8 animations:^{
+            toViewController.view.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        }];
+        return;
+    }
+
     if (!self.isPresenting) {
         dayVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         monthVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         [monthVc.selectedController.tableView reloadData];
-
     } else {
         dayVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         monthVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     }
-    
+
     UIView *monthView = monthVc.view;
     DayViewTableViewCell *dayView = [monthVc.selectedController viewForPerDiem:dayVc.perDiemView.perDiem];
     UIView *detailedDayView = dayVc.view;
     UIView *transactionsView = dayVc.transactionsView;
     UIView *perDiemView = dayVc.perDiemView.view;
-    
+
     typedef void (^PrepareAnimation)();
     typedef void (^Animation)();
     typedef void (^CompleteAnimation)(BOOL);
-    
+
     PrepareAnimation preparation;
     Animation animations;
     CompleteAnimation completion;
@@ -65,7 +82,7 @@
         // Add target view to hierarchy
         [[transitionContext containerView] addSubview:monthView];
         [[transitionContext containerView] bringSubviewToFront:detailedDayView];
-        
+
         // Get position of Per Diem view in month tableview, relative to screen
         CGPoint position = [dayView.superview convertPoint:dayView.frame.origin toView:nil];
         CGRect dayViewFrame = CGRectMake(position.x, position.y - 20, dayView.frame.size.width, dayView.frame.size.height);

@@ -225,7 +225,7 @@
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     NSInteger indexPathNumber = indexPath.row;
-    if (self.budget || self.period) {
+    if (self.budget) {
         indexPathNumber = indexPath.row - 1;
     }
     switch (index) {
